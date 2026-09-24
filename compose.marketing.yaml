@@ -1,0 +1,37 @@
+name: marketing-v2-agent
+services:
+  api:
+    build:
+      context: .
+      dockerfile: marketing/Dockerfile
+    environment:
+      MARKETING_RUNTIME: ${MARKETING_RUNTIME:-demo}
+      MARKETING_API_KEY: ${MARKETING_API_KEY:-}
+      MARKETING_MODEL: ${MARKETING_MODEL:-glm-5}
+      MARKETING_BASE_URL: ${MARKETING_BASE_URL:-https://open.bigmodel.cn/api/paas/v4/}
+      MARKETING_RECURSION_LIMIT: ${MARKETING_RECURSION_LIMIT:-80}
+      MARKETING_DATA_DIR: /data/marketing
+      DEER_FLOW_PROJECT_ROOT: /app
+      DEER_FLOW_HOME: /data/deerflow
+      DEER_FLOW_CONFIG_PATH: /app/config.marketing.yaml
+    volumes:
+      - marketing_data:/data
+      - ./marketing/marketing_agent:/app/marketing/marketing_agent:ro
+      - ./config.marketing.yaml:/app/config.marketing.yaml:ro
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    stop_grace_period: 30s
+  web:
+    build: ./marketing/frontend
+    ports:
+      - "127.0.0.1:${MARKETING_PORT:-18080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  marketing_data:

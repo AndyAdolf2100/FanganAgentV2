@@ -60,3 +60,11 @@ config.yaml.bak
 /frontend/playwright-report/
 .gstack/
 .worktrees
+
+# Marketing local-only state and credentials
+.env.marketing
+.marketing-data/
+marketing/.venv/
+marketing/.pytest_cache/
+marketing/frontend/dist/
+marketing/frontend/node_modules/

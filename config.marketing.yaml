@@ -1,0 +1,43 @@
+config_version: 14
+log_level: info
+models:
+  - name: marketing
+    display_name: Marketing GLM
+    use: langchain_openai:ChatOpenAI
+    model: $MARKETING_MODEL
+    base_url: $MARKETING_BASE_URL
+    api_key: $MARKETING_API_KEY
+    max_tokens: 12000
+    timeout: 180
+    max_retries: 2
+    supports_thinking: false
+    supports_vision: false
+    when_thinking_disabled:
+      extra_body:
+        thinking:
+          type: disabled
+tool_groups:
+  - name: web
+tools:
+  - name: web_search
+    group: web
+    use: deerflow.community.ddg_search.tools:web_search_tool
+    max_results: 5
+  - name: web_fetch
+    group: web
+    use: deerflow.community.jina_ai.tools:web_fetch_tool
+    timeout: 20
+sandbox:
+  use: deerflow.sandbox.local:LocalSandboxProvider
+  allow_host_bash: false
+memory:
+  enabled: false
+  injection_enabled: false
+  token_counting: char
+title:
+  enabled: false
+summarization:
+  enabled: true
+skills:
+  path: marketing/empty-skills
+  container_path: /mnt/skills

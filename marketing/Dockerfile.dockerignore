@@ -1,0 +1,13 @@
+**
+!backend/
+!backend/packages/
+!backend/packages/harness/
+!backend/packages/harness/**
+!marketing/
+!marketing/pyproject.toml
+!marketing/uv.lock
+!marketing/marketing_agent/
+!marketing/marketing_agent/**
+!config.marketing.yaml
+**/__pycache__
+**/*.pyc
