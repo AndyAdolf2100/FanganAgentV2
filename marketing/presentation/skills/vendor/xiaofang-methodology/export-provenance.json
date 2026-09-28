@@ -1,0 +1,397 @@
+{
+  "event": 818989,
+  "files": [
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-01.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/29c84d69284c2586aab47009c99740de.jpeg",
+      "sha256": "29c84d69284c2586aab47009c99740dec53e2eef7f0e19fe5bbe305c737572f6",
+      "bytes": 31527,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-02.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/390466980d98da97439898388dbd75cd.jpeg",
+      "sha256": "390466980d98da97439898388dbd75cda3bc38e15cadd094da550b7490696aad",
+      "bytes": 90243,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-03.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/6774e8895b55102698c7032d898453c8.jpeg",
+      "sha256": "6774e8895b55102698c7032d898453c81bb20992c45096b62b48f312dae5b0d9",
+      "bytes": 39879,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-04.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/89f7cc7c1d325bcd91bd67f053bd963a.jpeg",
+      "sha256": "89f7cc7c1d325bcd91bd67f053bd963ab8dc125f4889066ffd1cd41e01bf4a82",
+      "bytes": 76870,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-06.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/dc0062da93fcc85b9e8daf67229626e0.jpeg",
+      "sha256": "dc0062da93fcc85b9e8daf67229626e0456dfbff9caf827a2fc649e4f917a4a9",
+      "bytes": 147561,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-07.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/a5ef5810e8aaf4a501fa5430d0c79579.jpeg",
+      "sha256": "a5ef5810e8aaf4a501fa5430d0c7957930c1cef9672b1ff6421510007fd457d3",
+      "bytes": 35476,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-08.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/3377d90138d1c7749ce1a8f1320280f3.jpeg",
+      "sha256": "3377d90138d1c7749ce1a8f1320280f3fb3c086cbe71ae6dad12665d9c0fd18b",
+      "bytes": 127257,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-09.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/1e2f0002e1ea5deb8f5d41ec9860afae.jpeg",
+      "sha256": "1e2f0002e1ea5deb8f5d41ec9860afae52cee1ab60c38131eb0aee39bc96e7dd",
+      "bytes": 32818,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-10.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/716c9a83c9c24290efb9a85b632b6d1c.jpeg",
+      "sha256": "716c9a83c9c24290efb9a85b632b6d1cb23e72419a6a2544843c489b8cfdf077",
+      "bytes": 53435,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-11.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/d244aa6f7ff844880ff599ba78aee40d.jpeg",
+      "sha256": "d244aa6f7ff844880ff599ba78aee40d3fbf4eef975940ac1d14549379ca0d28",
+      "bytes": 38565,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-12.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/d90c5e7f70c3cf74e830206e4d2917f2.jpeg",
+      "sha256": "d90c5e7f70c3cf74e830206e4d2917f230500d9ff5152473cc4071601cea3468",
+      "bytes": 121533,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-13.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/a7f776dd5f1e8644d2cb51dfce150b47.jpeg",
+      "sha256": "a7f776dd5f1e8644d2cb51dfce150b475c9abbb3ae3f49de466a82e2bdbedb66",
+      "bytes": 102921,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-14.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/6b04d894cbc2f5319236d57f14097960.jpeg",
+      "sha256": "6b04d894cbc2f5319236d57f140979600be02b6e164f100d3f945664145d027f",
+      "bytes": 69973,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-15.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/f03dd606e0fc8245d8c3737dcca5a08a.jpeg",
+      "sha256": "f03dd606e0fc8245d8c3737dcca5a08a240ea7d25e9d6409da3239709f6c0c7f",
+      "bytes": 37091,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-16.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/c14d07dceb643369dc2fed7e454d717f.jpeg",
+      "sha256": "c14d07dceb643369dc2fed7e454d717f6778cafdf2953adcb1b9244cfd6b35ad",
+      "bytes": 82650,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-17.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/8cf8a0515b9ef2eca5521f1f325842ec.jpeg",
+      "sha256": "8cf8a0515b9ef2eca5521f1f325842ec399584723f8defd11d35d764aabbb17c",
+      "bytes": 16905,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-18.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/49c2f76a7b5931fee174cc8923a7f399.jpeg",
+      "sha256": "49c2f76a7b5931fee174cc8923a7f3996813272a95d674d9e945794b7e6fcd68",
+      "bytes": 31830,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-19.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/12393a1d644653bd52b11da8e4f84ae1.jpeg",
+      "sha256": "12393a1d644653bd52b11da8e4f84ae14690879e1e4b30264577ea31a1aa8865",
+      "bytes": 32443,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-20.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/4ba4541d3912018821845488decb00a1.jpeg",
+      "sha256": "4ba4541d3912018821845488decb00a1c3ae641103508f754661a97f67bfb1c3",
+      "bytes": 44706,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-21.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/e590abb3744e8153baaf0979a0519600.jpeg",
+      "sha256": "e590abb3744e8153baaf0979a05196003ab615197725b19ddada210e66e9e923",
+      "bytes": 54878,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-22.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/d193055f777c8b3a3e1002ea960e88a7.jpeg",
+      "sha256": "d193055f777c8b3a3e1002ea960e88a783757c160e1f33d477c98680033b725e",
+      "bytes": 68590,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-23.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/4fab857375e155772afba0e808b7afec.jpeg",
+      "sha256": "4fab857375e155772afba0e808b7afecbdeb214671f2d5a7e5d04bdead9c2b10",
+      "bytes": 74493,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-24.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/043b952142f67021f681ec7ffbb0fa4b.jpeg",
+      "sha256": "043b952142f67021f681ec7ffbb0fa4ba21e6748047c28c036bfcfc11b68e94a",
+      "bytes": 84964,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-25.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/57087f3fb9b585fcb1aba2f66f0cb51b.jpeg",
+      "sha256": "57087f3fb9b585fcb1aba2f66f0cb51b1397e3c3dc90ac9ae67c315f92d2b1c9",
+      "bytes": 54288,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-26.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/89c2090fb80fed9cd20381985721cd0a.jpeg",
+      "sha256": "89c2090fb80fed9cd20381985721cd0ac2420b101e0c59e0dd8ec4c057ddf25b",
+      "bytes": 77226,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-27.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/93066e2e1cc1d6025779cdcce1ad7562.jpeg",
+      "sha256": "93066e2e1cc1d6025779cdcce1ad756249f1220c3c6ed5ae3a7127d07487c041",
+      "bytes": 64437,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-28.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/4559279865b76163967a944c960013ac.jpeg",
+      "sha256": "4559279865b76163967a944c960013ac3c931278bbfd804b6c36f05f7f55602a",
+      "bytes": 152508,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-29.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/ba69ae0b4e495879f9df5945b0e1e1bc.jpeg",
+      "sha256": "ba69ae0b4e495879f9df5945b0e1e1bc33f2c43260a09665239076a3057a1cb4",
+      "bytes": 92561,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-30.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/a544dae938e486c6ea66b3f15d9a29f0.jpeg",
+      "sha256": "a544dae938e486c6ea66b3f15d9a29f0e7f6f59fc0497e7bff8c5acea4ebc2ed",
+      "bytes": 67890,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-31.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/1ee2e8adb227d1135fd39a1137ec99b7.jpeg",
+      "sha256": "1ee2e8adb227d1135fd39a1137ec99b7a646b518c6bd9bd7c4488b489f4c85ed",
+      "bytes": 71262,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-32.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/d701aed5b34c227e1aacb419ccc73bfc.jpeg",
+      "sha256": "d701aed5b34c227e1aacb419ccc73bfcbe7eb3b8b8cc490f196beb5182a0a50c",
+      "bytes": 65508,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-33.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/399801f6831d217f91951e2a32a2dfd8.jpeg",
+      "sha256": "399801f6831d217f91951e2a32a2dfd8701df6023b978408904a1a426d30430e",
+      "bytes": 46589,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-34.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/bb21d52172d0b7bc98fdf568e6e43f68.jpeg",
+      "sha256": "bb21d52172d0b7bc98fdf568e6e43f689d4833ed8998dca84aa79a6adffab1d7",
+      "bytes": 80811,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-35.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/6221d53475ba42a0639c9f9394d210da.jpeg",
+      "sha256": "6221d53475ba42a0639c9f9394d210dab5a9a727ba700089c999cc034b49f05f",
+      "bytes": 52626,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-36.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/7dd910211d6654c7b1e14500dbbe7dee.jpeg",
+      "sha256": "7dd910211d6654c7b1e14500dbbe7dee48467b803daa84fced47557da6dc2761",
+      "bytes": 128164,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-37.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/e87606cfe06e45a5a933146da8d5f7a5.jpeg",
+      "sha256": "e87606cfe06e45a5a933146da8d5f7a5870497cc0f5f9127ab1c0305f2708618",
+      "bytes": 101544,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-38.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/e1f8fb387e718ff34ba28ea8562a89ef.jpeg",
+      "sha256": "e1f8fb387e718ff34ba28ea8562a89ef582ed9a311a1db6a1a1cf31ac89dd261",
+      "bytes": 66600,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-39.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/aefed6fec190cf4e192e15ce85d938b5.jpeg",
+      "sha256": "aefed6fec190cf4e192e15ce85d938b521d7a27b445c3d4171ea8231d14299ce",
+      "bytes": 113909,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-40.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/e72dfacceb99aa4e48792dc470d09fff.jpeg",
+      "sha256": "e72dfacceb99aa4e48792dc470d09fffb42c471d40c7eed4d84d5cf7f6423c5e",
+      "bytes": 68806,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-41.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/09ae88513481d86df4cc1e127d4d9bbc.jpeg",
+      "sha256": "09ae88513481d86df4cc1e127d4d9bbc16c274967be877a42628126306214c5e",
+      "bytes": 53348,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-42.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/cfc0ff2491f9190406801e7785a14950.jpeg",
+      "sha256": "cfc0ff2491f9190406801e7785a14950c9475ecef92ce3c59106281c30e67f96",
+      "bytes": 33845,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-43.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/e797648504ae55ed80ae44cd16c45257.jpeg",
+      "sha256": "e797648504ae55ed80ae44cd16c452574fd08bfe6ff102a6eb9690d9f0dc28fe",
+      "bytes": 12545,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-44.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/c458414675e6a9c34819860faf0a82bb.jpeg",
+      "sha256": "c458414675e6a9c34819860faf0a82bb5bc0c317d5070957a742466c23777d41",
+      "bytes": 30783,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-45.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/b9e40e036e94f39a21d41fd51f57352f.jpeg",
+      "sha256": "b9e40e036e94f39a21d41fd51f57352f9f3c5e63dd424b17bbfa7fa02985da78",
+      "bytes": 146765,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-46.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/a109bfea6e425f66265506e8cc74d7d8.jpeg",
+      "sha256": "a109bfea6e425f66265506e8cc74d7d8cc73451efb57e39df47cd64b110a9235",
+      "bytes": 44778,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-47.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/5226dd2f6a4231061ae3be72ed7fc337.jpeg",
+      "sha256": "5226dd2f6a4231061ae3be72ed7fc337f7df3d29887b12e835d26b9722ef7482",
+      "bytes": 28639,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-49.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/ca776caf7bbc58da62c0ed5548893ea9.jpeg",
+      "sha256": "ca776caf7bbc58da62c0ed5548893ea91f78deaca89b7eabd143e31597ce88f5",
+      "bytes": 72454,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-51.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/3edfdca302908d3114716a7019aa821a.jpeg",
+      "sha256": "3edfdca302908d3114716a7019aa821a9c4f375fe5b05698b3ad6296e461453e",
+      "bytes": 21196,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-52.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/4e99d595e83f7c8295070aea40312d02.jpeg",
+      "sha256": "4e99d595e83f7c8295070aea40312d02f598b94394e7b75714a09e6fb11d8477",
+      "bytes": 97059,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-53.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/4fbd22939e070796163f3eb13c5022ba.jpeg",
+      "sha256": "4fbd22939e070796163f3eb13c5022ba48a9fafa012933ef18d0feaf249c2560",
+      "bytes": 21555,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-55.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/42f8680a7f99ba89e44ec25876431c10.jpeg",
+      "sha256": "42f8680a7f99ba89e44ec25876431c10a2de7c2344735fb2ca2b0a171c653abf",
+      "bytes": 98165,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-56.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/dd0eedd6ea02d475dc089063fe57c2b8.jpeg",
+      "sha256": "dd0eedd6ea02d475dc089063fe57c2b8d5d2ba900eb8de68494b240b19f6dc9a",
+      "bytes": 89729,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-57.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/16158c70ae400654750b3343a2a30f88.jpeg",
+      "sha256": "16158c70ae400654750b3343a2a30f884d6c7eb314f8b8ca22e369094f85fdf9",
+      "bytes": 77889,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-58.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/cca37766f00cd40bd5574b16a81ec253.jpeg",
+      "sha256": "cca37766f00cd40bd5574b16a81ec2530316e806f572f4497a3593ea0d2b84ad",
+      "bytes": 28230,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-59.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/28ff4f1ed0a83681c7d297c2bcaed0e9.jpeg",
+      "sha256": "28ff4f1ed0a83681c7d297c2bcaed0e924bf1271783b68211153bf5b90ffeceb",
+      "bytes": 46946,
+      "verified_sha256": true
+    },
+    {
+      "path": "skills/xiaofang-methodology/styles/images/style-60.jpeg",
+      "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-41e443ef-abcf-4fff-853a-204e94ad7e92/892ae91cb997ef69c85c753472ee5f72.jpeg",
+      "sha256": "892ae91cb997ef69c85c753472ee5f72055f48ffd88b8d0d6a5f143eb7314459",
+      "bytes": 67146,
+      "verified_sha256": true
+    }
+  ]
+}

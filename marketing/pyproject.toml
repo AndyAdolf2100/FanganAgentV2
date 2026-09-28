@@ -3,7 +3,7 @@ name = "marketing-v2-agent"
 version = "0.1.0"
 description = "Persistent autonomous marketing workflows powered by DeerFlow 2.0"
 requires-python = ">=3.12"
-dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "jinja2>=3.1,<4", "python-dotenv>=1,<2", "pyyaml>=6,<7"]
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "jinja2>=3.1,<4", "python-dotenv>=1,<2", "pyyaml>=6,<7", "pillow>=11,<13"]
 
 [project.optional-dependencies]
 runtime = ["deerflow-harness"]

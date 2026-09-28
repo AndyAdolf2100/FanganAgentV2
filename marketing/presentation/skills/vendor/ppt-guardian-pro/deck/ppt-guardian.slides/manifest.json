@@ -1,0 +1,10 @@
+{
+  "deck_name": "ppt-guardian",
+  "slide_count": 3,
+  "canvas": {"width": 1920, "height": 1080},
+  "slides": [
+    {"file": "01-cover.html", "title": "PPT 质量红线——封面"},
+    {"file": "02-six-requirements.html", "title": "每页完成后的六项自检"},
+    {"file": "03-before-after.html", "title": "改造前后——红线实战示例"}
+  ]
+}

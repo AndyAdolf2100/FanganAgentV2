@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>内容矩阵</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<style>
+  body{margin:0;font-family:"HarmonyOS Sans SC","Source Han Sans SC","Microsoft YaHei","Alibaba PuHuiTi",sans-serif;color:#1F2024;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#FFF8EA;}
+  .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#1F2024 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+  .page-num{position:absolute;left:120px;top:88px;font-weight:900;font-size:20px;letter-spacing:5px;}
+  .page-num span{background:#F06F61;color:#FFF8EA;padding:6px 14px;border-radius:6px;}
+  .head-title{font-weight:900;font-size:42px;line-height:1.25;}
+  .head-title em{font-style:normal;color:#F06F61;}
+  .q-cell{border:3px solid #1F2024;padding:22px 22px;position:relative;box-sizing:border-box;}
+  .q-icon{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:3px solid #1F2024;background:#FFF8EA;font-size:24px;}
+  .q-title{font-weight:900;font-size:24px;margin-top:12px;}
+  .q-task{font-size:19px;color:#243B75;line-height:1.5;margin-top:6px;}
+  .q-metric{margin-top:10px;padding:6px 12px;background:#1F2024;color:#FFF8EA;border-radius:6px;font-size:14px;font-weight:700;display:inline-block;}
+  .axis{font-weight:900;font-size:16px;letter-spacing:2px;color:#1F2024;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="grain"></div>
+
+  <div class="page-num"><span>09 / 16</span> &nbsp; CONTENT MATRIX · 内容矩阵</div>
+
+  <svg style="position:absolute;right:130px;top:80px;" width="200" height="60" viewBox="0 0 200 60">
+    <polyline points="0,50 20,10 40,50 60,10 80,50 100,10 120,50 140,10 160,50 180,10 200,50" stroke="#8068C9" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div style="position:absolute;left:120px;top:180px;width:1500px;">
+    <div class="head-title">
+      不同内容承担<em>不同任务</em>，<br>
+      不能用<em style="color:#8068C9;">同一个指标</em>衡量所有内容。
+    </div>
+  </div>
+
+  <div style="position:absolute;left:220px;top:360px;width:1180px;height:580px;">
+    <div class="axis" style="position:absolute;left:-100px;top:0;writing-mode:vertical-rl;transform:rotate(180deg);height:520px;display:flex;align-items:center;">
+      商业转化价值 &nbsp;·&nbsp; VALUE
+    </div>
+    <div style="position:absolute;left:-24px;top:0;font-size:15px;font-weight:800;">高</div>
+    <div style="position:absolute;left:-24px;bottom:60px;font-size:15px;font-weight:800;">低</div>
+
+    <div class="axis" style="position:absolute;left:0;bottom:-40px;width:1180px;text-align:center;">
+      用户参与深度 &nbsp;·&nbsp; ENGAGEMENT DEPTH
+    </div>
+    <div style="position:absolute;left:20px;bottom:-12px;font-size:15px;font-weight:800;">浅</div>
+    <div style="position:absolute;right:20px;bottom:-12px;font-size:15px;font-weight:800;">深</div>
+
+    <div style="position:absolute;left:0;top:0;width:1180px;height:520px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;">
+      <div class="q-cell" style="background:#F4C9C5;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="q-icon" style="color:#F06F61;"><i class="fas fa-flag"></i></div>
+          <div style="font-family:Inter,Arial,sans-serif;font-weight:900;font-size:36px;color:#F06F61;">A</div>
+        </div>
+        <div class="q-title">品牌内容 · 建立认知</div>
+        <div class="q-task">任务：让用户第一次记住品牌是谁。</div>
+        <div style="margin-top:10px;">
+          <span class="q-metric" style="background:#F06F61;">品牌记忆度</span>
+          <span class="q-metric" style="background:#F06F61;">搜索量</span>
+          <span class="q-metric" style="background:#F06F61;">关键词提及</span>
+        </div>
+      </div>
+      <div class="q-cell" style="background:#8068C9;color:#FFF8EA;position:relative;">
+        <div style="position:absolute;right:-14px;top:-14px;padding:6px 14px;background:#F6C945;border:3px solid #1F2024;border-radius:8px;font-weight:900;font-size:16px;color:#1F2024;transform:rotate(6deg);">重点区</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="q-icon" style="background:#F6C945;color:#1F2024;"><i class="fas fa-shopping-cart"></i></div>
+          <div style="font-family:Inter,Arial,sans-serif;font-weight:900;font-size:36px;color:#F6C945;">D</div>
+        </div>
+        <div class="q-title" style="color:#FFF8EA;">转化内容 · 推动行动</div>
+        <div class="q-task" style="color:#F4C9C5;">任务：促成购买、咨询、报名。</div>
+        <div style="margin-top:10px;">
+          <span class="q-metric" style="background:#F6C945;color:#1F2024;">点击率</span>
+          <span class="q-metric" style="background:#F6C945;color:#1F2024;">咨询率</span>
+          <span class="q-metric" style="background:#F6C945;color:#1F2024;">购买率</span>
+        </div>
+      </div>
+      <div class="q-cell" style="background:#F6C945;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="q-icon" style="color:#243B75;"><i class="fas fa-map-marked-alt"></i></div>
+          <div style="font-family:Inter,Arial,sans-serif;font-weight:900;font-size:36px;color:#243B75;">B</div>
+        </div>
+        <div class="q-title">场景内容 · 连接需求</div>
+        <div class="q-task">任务：在具体生活时刻让用户觉得"这就是我"。</div>
+        <div style="margin-top:10px;">
+          <span class="q-metric" style="background:#243B75;">停留率</span>
+          <span class="q-metric" style="background:#243B75;">收藏率</span>
+          <span class="q-metric" style="background:#243B75;">评论质量</span>
+        </div>
+      </div>
+      <div class="q-cell" style="background:#54C6B1;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="q-icon" style="color:#243B75;"><i class="fas fa-hand-sparkles"></i></div>
+          <div style="font-family:Inter,Arial,sans-serif;font-weight:900;font-size:36px;color:#243B75;">C</div>
+        </div>
+        <div class="q-title">互动内容 · 促进参与</div>
+        <div class="q-task">任务：让用户投稿、共创、玩起来。</div>
+        <div style="margin-top:10px;">
+          <span class="q-metric" style="background:#243B75;">评论</span>
+          <span class="q-metric" style="background:#243B75;">分享</span>
+          <span class="q-metric" style="background:#243B75;">投稿量</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;right:120px;top:380px;width:360px;">
+    <div style="font-weight:900;font-size:22px;margin-bottom:14px;">
+      <span style="background:#1F2024;color:#FFF8EA;padding:6px 14px;border-radius:6px;">四类内容任务</span>
+    </div>
+    <div style="border:3px solid #1F2024;border-radius:14px;padding:20px;background:#FFF8EA;box-shadow:6px 6px 0 #1F2024;">
+      <div style="font-size:20px;line-height:1.9;color:#1F2024;">
+        <div><span style="display:inline-block;width:16px;height:16px;background:#F06F61;border-radius:50%;margin-right:10px;vertical-align:middle;"></span><b>A 品牌内容</b>——记忆</div>
+        <div><span style="display:inline-block;width:16px;height:16px;background:#F6C945;border-radius:50%;margin-right:10px;vertical-align:middle;"></span><b>B 场景内容</b>——共鸣</div>
+        <div><span style="display:inline-block;width:16px;height:16px;background:#54C6B1;border-radius:50%;margin-right:10px;vertical-align:middle;"></span><b>C 互动内容</b>——参与</div>
+        <div><span style="display:inline-block;width:16px;height:16px;background:#8068C9;border-radius:50%;margin-right:10px;vertical-align:middle;"></span><b>D 转化内容</b>——行动</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;position:relative;height:90px;">
+      <svg style="position:absolute;left:0;top:20px;transform:rotate(15deg);" width="80" height="80" viewBox="0 0 80 80">
+        <polygon points="40,4 76,72 4,72" fill="#F06F61"/>
+      </svg>
+      <div style="position:absolute;left:120px;top:30px;width:60px;height:60px;background-image:radial-gradient(#1F2024 2.4px,transparent 2.6px);background-size:16px 16px;"></div>
+      <svg style="position:absolute;left:220px;top:30px;" width="120" height="40" viewBox="0 0 120 40">
+        <path d="M0 20 Q 15 0 30 20 T 60 20 T 90 20 T 120 20" stroke="#8068C9" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:120px;bottom:60px;right:120px;padding:14px 24px;background:#243B75;color:#FFF8EA;border-radius:14px;font-weight:800;font-size:22px;display:flex;align-items:center;gap:16px;">
+    <i class="fas fa-th" style="color:#F6C945;font-size:26px;"></i>
+    <span>右上区（<span style="color:#F6C945;">转化内容</span>）是最强变现点，但需要 A/B/C 的<span style="color:#54C6B1;">前置铺垫</span>才能持续。</span>
+    <span style="margin-left:auto;font-size:14px;opacity:.7;">数据状态：示意数据</span>
+  </div>
+
+</section>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "composition": "audience_bands",
+  "required_text_keys": [
+    "title",
+    "subtitle",
+    "section",
+    "item_0_label",
+    "item_0_text",
+    "item_1_label",
+    "item_1_text",
+    "item_2_label",
+    "item_2_text"
+  ],
+  "requires_scene": false,
+  "body": "<main><section data-role=\"section\" data-ref='section'></section><h1 data-role=\"title\" data-ref='title'></h1><p class=\"sub\" data-role=\"body\" data-ref='subtitle'></p><div class=\"bands\"><div class=\"band b0\"><div class=\"tag\"><span class=\"lv\" data-role=\"label\" data-ref='item_0_label'></span><span class=\"bar\"></span></div><p data-role=\"body\" data-ref='item_0_text'></p></div><div class=\"band b1\"><div class=\"tag\"><span class=\"lv\" data-role=\"label\" data-ref='item_1_label'></span><span class=\"bar\"></span></div><p data-role=\"body\" data-ref='item_1_text'></p></div><div class=\"band b2\"><div class=\"tag\"><span class=\"lv\" data-role=\"label\" data-ref='item_2_label'></span><span class=\"bar\"></span></div><p data-role=\"body\" data-ref='item_2_text'></p></div></div></main>",
+  "css": "main{width:1280px;height:720px;background:var(--bg);color:var(--ink);font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;position:relative;padding:64px 72px 0;box-sizing:border-box}.sub,.band p,.lv,section,h1{margin:0}section[data-role=section]{font-size:17px;letter-spacing:6px;color:var(--muted);border-top:1px solid var(--ink);padding-top:10px}h1{font-size:52px;font-weight:700;margin-top:22px;line-height:1.25}.sub{font-size:28px;color:var(--muted);margin-top:12px}.bands{margin-top:38px;display:flex;flex-direction:column;gap:26px}.band{display:flex;align-items:flex-start;gap:28px}.tag{width:220px;flex:none;position:relative}.lv{font-size:32px;font-weight:700;display:block;padding-top:10px}.bar{display:block;height:8px;margin-top:10px;width:220px}.b0 .bar{background:var(--accent)}.b1 .bar{background:var(--ink);width:150px}.b2 .bar{background:var(--muted);width:90px}.b0 .lv{color:var(--ink)}.b1 .lv{color:var(--ink)}.b2 .lv{color:var(--muted)}.band p{font-size:28px;line-height:1.55;white-space:pre-line;max-width:880px;border-left:1px solid var(--ink);padding-left:28px}.b2 p{border-left-color:var(--muted)}\nmain{padding:0}section[data-role=section]{position:absolute;left:64px;top:42px;padding:0;border:0;line-height:24px;letter-spacing:4px}h1{position:absolute;left:64px;top:88px;font-size:46px;margin:0;line-height:1.28}.sub{position:absolute;left:64px;top:164px;margin:0;line-height:1.4}.bands{position:absolute;left:64px;top:242px;width:1152px;margin:0;gap:24px}.b0 .bar,.b1 .bar,.b2 .bar{width:200px;height:4px}.tag{width:228px}.band p{line-height:1.45}.lv{font-size:30px}",
+  "provenance": {
+    "kind": "locally_authored_and_reviewed",
+    "source_page": 15,
+    "native_review_version": "2.3",
+    "note": "Geometry adapted from local review; source brand copy replaced with text IDs. Not an original 118 template."
+  }
+}

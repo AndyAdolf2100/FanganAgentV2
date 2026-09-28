@@ -68,3 +68,9 @@ marketing/.venv/
 marketing/.pytest_cache/
 marketing/frontend/dist/
 marketing/frontend/node_modules/
+.local/
+marketing/presentation/node_modules/
+
+# Local export bundles duplicate source, skills, and generated presentations
+/docs/ppt-workflow-and-118-comparison-2026-09-28/
+/docs/ppt-workflow-and-118-comparison-2026-09-28.zip

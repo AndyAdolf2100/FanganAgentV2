@@ -40,9 +40,13 @@ class Store:
                "outputs": {}, "history": [], "feedback": {}, "gate": None,
                "selected_theme": "", "creative_input": "", "plan": {},
                "error": None, "revision": 0, "created": time.time()}
+        imported = request.get('source_type') == 'manuscript'
+        if imported:
+            from .workflow import STAGES
+            run.update(status='completed', index=len(STAGES), outputs={'assembly': run.pop('manuscript')})
         with self.connect() as db:
             db.execute("INSERT INTO runs VALUES (?, ?)", (run["id"], json.dumps(run, ensure_ascii=False)))
-            self._event(db, run["id"], "created", {"status": "ready"})
+            self._event(db, run["id"], "manuscript_imported" if imported else "created", {"status": run['status']})
         return run
 
     def get(self, run_id: str) -> dict:

@@ -2,7 +2,7 @@ FROM node:22-alpine AS build
 WORKDIR /web
 COPY package*.json ./
 RUN npm ci
-COPY index.html src.js style.css vite.config.js ./
+COPY index.html src.js style.css presentation.css vite.config.js ./
 RUN npm run build
 FROM nginx:1.27-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf

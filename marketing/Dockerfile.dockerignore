@@ -8,6 +8,10 @@
 !marketing/uv.lock
 !marketing/marketing_agent/
 !marketing/marketing_agent/**
+!marketing/presentation/
+!marketing/presentation/**
 !config.marketing.yaml
 **/__pycache__
 **/*.pyc
+marketing/presentation/node_modules
+.local

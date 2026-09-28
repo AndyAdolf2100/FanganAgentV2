@@ -2311,6 +2311,7 @@ source = { editable = "." }
 dependencies = [
     { name = "fastapi" },
     { name = "jinja2" },
+    { name = "pillow" },
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "uvicorn" },
@@ -2331,6 +2332,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115,<1" },
     { name = "httpx", marker = "extra == 'test'", specifier = ">=0.28,<1" },
     { name = "jinja2", specifier = ">=3.1,<4" },
+    { name = "pillow", specifier = ">=11,<13" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8,<10" },
     { name = "python-dotenv", specifier = ">=1,<2" },
     { name = "pyyaml", specifier = ">=6,<7" },

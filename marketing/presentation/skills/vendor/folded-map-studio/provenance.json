@@ -1,0 +1,66 @@
+{
+  "market_id": "05179bd735604136babf7b344525d578",
+  "source": "118 public skill market API",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/SKILL.md",
+      "sha256": "ae624d5581dd181cf0038d011290fdbf6c2aee842aa3b207f241e89c95f04556"
+    },
+    {
+      "path": "deck/folded-map-studio.slides/manifest.json",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/deck/folded-map-studio.slides/manifest.json",
+      "sha256": "d7d3b11b3e25fa6d2e4f43ccf3f9cea9683eb37a6231debcf0b863f946fa2d6a"
+    },
+    {
+      "path": "deck/folded-map-studio.slides/slides/01-cover.html",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/deck/folded-map-studio.slides/slides/01-cover.html",
+      "sha256": "9c14d4214ff154886dcd0d779c8359ae7371ae2b5ab17cc72057b8c352712470"
+    },
+    {
+      "path": "deck/folded-map-studio.slides/slides/02-experience.html",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/deck/folded-map-studio.slides/slides/02-experience.html",
+      "sha256": "39191d6481ce54062b640dd34865e45650a984838c7404b9cdac4488884e0c94"
+    },
+    {
+      "path": "deck/folded-map-studio.slides/slides/03-pilot.html",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/deck/folded-map-studio.slides/slides/03-pilot.html",
+      "sha256": "2c8c95da01554f3317ab3f3e9a4021fd23bb995e7ea8692c7dfbaa52127ceaee"
+    },
+    {
+      "path": "previews/01-cover.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/previews/01-cover.png",
+      "sha256": "a7a738510bef0edae5e735083343cf7a3c02851041e979a650e301606bee05d0"
+    },
+    {
+      "path": "previews/02-experience.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/previews/02-experience.png",
+      "sha256": "9aff21784b5106a615c8cfa370144a6b2f6065bacbef8bb31b2c0ffb8da74d4f"
+    },
+    {
+      "path": "previews/03-pilot.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/previews/03-pilot.png",
+      "sha256": "9fb895a30fa737056f8d83ab09290b224bf7371903f42259b0ebde8e393bd4d1"
+    },
+    {
+      "path": "references/agent-runtime.md",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/references/agent-runtime.md",
+      "sha256": "754deca1338a6687405d0af41744ef79f26e031c0c44e135586ef0af811a64f3"
+    },
+    {
+      "path": "thumbnails/01-cover.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/thumbnails/01-cover.png",
+      "sha256": "53404ac6568142de602a2bc467705c0e3e437d94238e845258b7d08d8b580f7d"
+    },
+    {
+      "path": "thumbnails/02-experience.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/thumbnails/02-experience.png",
+      "sha256": "a6ffc6d5cd124cb4946aea9a60179b3c0384598c78a3bc3ac69b35533850a574"
+    },
+    {
+      "path": "thumbnails/03-pilot.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/05179bd735604136babf7b344525d578/thumbnails/03-pilot.png",
+      "sha256": "2d8b3dc06490cc966ef3b4e0936873b7a13fdf3142e016b249b345779ef54038"
+    }
+  ]
+}

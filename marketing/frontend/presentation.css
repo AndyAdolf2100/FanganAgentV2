@@ -1,0 +1,38 @@
+.ppt-panel{margin-top:24px;padding:22px 26px;border:1px solid #dce3d2;border-radius:12px;background:#fff}
+.ppt-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.ppt-toolbar p{margin:8px 0 0;font-size:12px}
+.ppt-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ppt-actions button{font-size:12px}
+.ppt-viewer{margin-top:22px}
+.ppt-viewer>img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#f7f6ef;border:1px solid #e1e6da}
+.ppt-navigation{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:15px;font-size:12px}
+.ppt-navigation input{width:58px;padding:7px;border:1px solid #c9d4bd;border-radius:4px}
+.ppt-navigation button{padding:9px 15px;font-size:12px}
+@media(max-width:1000px){.ppt-toolbar{align-items:flex-start;flex-direction:column}.ppt-panel{padding:18px}}
+.entry-switch{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.entry-switch button{text-align:left;background:#edf1e8;color:#52644c;border:1px solid transparent;padding:17px 20px;font-weight:600}
+.entry-switch button.selected{background:#fff;border-color:#528364;color:#205742;box-shadow:0 0 0 1px #528364}
+.entry-switch span{display:block;font-size:11px;font-weight:400;margin-top:7px;color:#697663}
+.import-steps{display:flex;gap:14px;align-items:center;font-size:11px;color:#8a9485;border-bottom:1px solid #e7ece2;padding-bottom:20px;margin-bottom:25px;flex-wrap:wrap}
+.import-steps .active{color:#205742;font-weight:700}
+.manuscript-upload{display:flex;align-items:center;flex-direction:column;gap:10px;padding:27px 18px;border:1px dashed #96b08a;border-radius:8px;background:#f8faf4;text-align:center}
+.manuscript-upload strong{font-size:14px;overflow-wrap:anywhere}.manuscript-upload span{font-size:11px;color:#697663}.manuscript-upload input{max-width:100%;font-size:12px}
+.manuscript-label{display:block;font-size:12px;color:#52644c;margin-top:20px}.manuscript-label small{float:right;color:#788273}
+.manuscript-label input{display:block;width:100%;padding:12px;border:1px solid #dfe5dc;border-radius:6px;color:#26392f;margin-top:9px}
+.manuscript-label textarea{margin-top:9px;background:#fafbf7;font-size:13px}.import-notice{font-size:12px;line-height:1.8;color:#6b765f}
+.style-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:24px}
+.style-option{position:relative;cursor:pointer;border:1px solid #dfe5dc;border-radius:9px;padding:10px;background:#fff;min-width:0}
+.style-option.selected{border-color:#205742;box-shadow:0 0 0 2px #205742}
+.style-option:focus-within{outline:2px solid #6b9452;outline-offset:4px}.style-option input{position:absolute;right:18px;top:18px;z-index:1;accent-color:#205742}
+.style-mini{position:relative;aspect-ratio:16/9;background:var(--preview-bg);color:var(--preview-ink);border-radius:5px;padding:18px 20px;overflow:hidden}
+.mini-section{font-size:7px;letter-spacing:1.5px;position:relative;z-index:1}.style-mini strong{display:block;font-size:clamp(18px,2vw,28px);line-height:1.35;position:relative;z-index:1;margin-top:14px}
+.style-mini i{position:absolute;right:-8px;bottom:-18px;width:42%;height:85%;background:var(--preview-accent);border-radius:50% 50% 0 0}
+.style-mini.business i{right:20px;bottom:20px;width:29%;height:55%;border-radius:0;border-top:5px solid var(--preview-ink)}
+.style-mini.editorial i{right:0;bottom:0;width:27%;height:100%;border-radius:0}.style-mini.editorial strong{letter-spacing:-1px}
+.mini-rule{position:absolute;left:20px;right:20px;bottom:14px;border-top:1px solid currentColor;opacity:.3}
+.style-meta{padding:12px 4px 5px}.style-meta strong{display:block;font-size:13px;color:#253a2f}.style-meta span{display:block;font-size:11px;line-height:1.7;color:#697663;margin-top:5px}
+.import-preview article{max-height:330px;overflow:auto;margin-top:18px;padding:12px;background:#fafbf7}
+.ppt-style-select{display:flex;gap:8px;align-items:center;font-size:11px;color:#52644c}.ppt-style-select select{width:115px;font-size:12px;padding:9px}
+.ppt-panel + .detail-grid{margin-top:24px}
+@media(max-width:600px){.entry-switch{grid-template-columns:1fr}.style-grid{gap:12px}.style-mini{padding:12px}.style-mini strong{font-size:18px;margin-top:10px}.mini-section{font-size:6px}.manuscript-card .form-bottom{align-items:stretch;flex-direction:column}.manuscript-card .card-heading{align-items:flex-start;flex-direction:column}}
+@media(max-width:600px){.style-mini{aspect-ratio:4/3;min-height:110px}.style-mini strong{font-size:16px}}

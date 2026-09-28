@@ -1,0 +1,266 @@
+{
+  "market_id": "df8740f9439d46b1971aed30b8bb2e9f",
+  "source": "118 public skill market API",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "8ed0c802ccd0f5c367f675589b801fd0578cf386ce69c266e25f3de0fa111497",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/SKILL.md"
+    },
+    {
+      "path": "assets/ext/7b4c0297445eb53f.png",
+      "sha256": "7a35358f8c09a8909467ae863e1f0e66efad15321afd59b5c5de2ec548e69ac0",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/assets/ext/7b4c0297445eb53f.png"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/manifest.json",
+      "sha256": "1cbec8db61a9334a83565f4a4d8ce12bead43099a758564bf30a6475d00e6930",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/manifest.json"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/01-cover.html",
+      "sha256": "59b71021de03a77c49e4f7242823fef2038af42065a1089be9d48a6fbec2891c",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/01-cover.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/02-core-judgment.html",
+      "sha256": "c43a74cc0e4b7ce31cb24a1d570b37bbb54179ad4055fa534dc7f85852638d4d",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/02-core-judgment.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/03-user-shift.html",
+      "sha256": "f276695379a6d45a87bf827c1a7c6df9d4ae0f0a1b9bd1c72374c4608fce9c21",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/03-user-shift.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/04-brand-problem.html",
+      "sha256": "aa22046509263429a3511eb639ca5da0851200f0bd4d60ae0f240b7518cee3da",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/04-brand-problem.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/05-data-evidence.html",
+      "sha256": "41894205c626eb66ea8877f0eed9e264de67e13d7905a2e32b84c37767b02cb8",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/05-data-evidence.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/06-user-insight.html",
+      "sha256": "d41a1c08ba8797b8e6528141606f5a8de6dafd9bfb84f009fb00bed5bbc371cc",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/06-user-insight.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/07-opportunity-matrix.html",
+      "sha256": "f5a8e18c74bc13198b27e59bcbacba3413b4c32cad103382427a2b76d1e0aba4",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/07-opportunity-matrix.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/08-strategy-framework.html",
+      "sha256": "3d6bb5f811ae0762beea3168ad78b832faad8fe254ea7c661d2951a998caad75",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/08-strategy-framework.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/09-content-matrix.html",
+      "sha256": "8eb494f6182662cfc2d6a1197d2f151715e70774caf5acc51f6a6e26a41a84b0",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/09-content-matrix.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/10-user-journey.html",
+      "sha256": "2fc2b466cb4175dda76aba544628e64c0f1c2ad9f28245c32a6eb044dd09e0bc",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/10-user-journey.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/11-case-study.html",
+      "sha256": "858a4c854848d22397abebcc6b3656a4a2824ec4061e73a58e64c283d2e52184",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/11-case-study.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/12-metrics-system.html",
+      "sha256": "6172726897908bf5438988259e9a3e9ca0283a88fab182298d1149ccd70052e7",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/12-metrics-system.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/13-roadmap.html",
+      "sha256": "f9537f47cba49ff55e2ebe4ecadee1a28e4fd5368009b4ef0128d97e4a363b7f",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/13-roadmap.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/14-resource-allocation.html",
+      "sha256": "14ee7a9224534d7efde7396fad8fd41c216f7c779353a5c4411f5d179645dafa",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/14-resource-allocation.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/15-executive-decision.html",
+      "sha256": "304c8b9bded0a09d7e005029210907fa3ae09439acea89e8f54b39709f9ac794",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/15-executive-decision.html"
+    },
+    {
+      "path": "deck/memphis-youth-brand-growth-deck.slides/slides/16-end-note.html",
+      "sha256": "4c3752a31c476e5463bf7c939bfa9cf2c20f8606aa6cc685b6bd6e55ab51cab4",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/deck/memphis-youth-brand-growth-deck.slides/slides/16-end-note.html"
+    },
+    {
+      "path": "previews/01-cover.png",
+      "sha256": "24b4d7f790b51a94c276da75e619c5b17069d6cd72b97b2b9d2914638702f95b",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/01-cover.png"
+    },
+    {
+      "path": "previews/02-core-judgment.png",
+      "sha256": "d7edd022109ca36eba977ba14607fda85adfef87e3991647ecc5cc3d243ac555",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/02-core-judgment.png"
+    },
+    {
+      "path": "previews/03-user-shift.png",
+      "sha256": "642ba9c5b0b9b3a13d9fb537edea6afb93cf179486ffdca4003935783c11b6cb",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/03-user-shift.png"
+    },
+    {
+      "path": "previews/04-brand-problem.png",
+      "sha256": "3d17b7f9f311fb8a588708082adae474236385b245e27bf10a779ace825db2e5",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/04-brand-problem.png"
+    },
+    {
+      "path": "previews/05-data-evidence.png",
+      "sha256": "f9e463d8381415022b857c64f7e1c1923a45a3cbf72d45dffccb11da97266809",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/05-data-evidence.png"
+    },
+    {
+      "path": "previews/06-user-insight.png",
+      "sha256": "f1b3dae2ff4498c37367cc269bd295211066d7dfae9780f2698231b023012fc6",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/06-user-insight.png"
+    },
+    {
+      "path": "previews/07-opportunity-matrix.png",
+      "sha256": "8b4899198d58e7588211c4f903aad187db0ac0d87fe9c45b66233e8bb7d8f0cd",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/07-opportunity-matrix.png"
+    },
+    {
+      "path": "previews/08-strategy-framework.png",
+      "sha256": "fd359a9c34b922ec8a850bf495a5a2e22e1089798efa6db8916166981d7c329c",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/08-strategy-framework.png"
+    },
+    {
+      "path": "previews/09-content-matrix.png",
+      "sha256": "b0364d638af45e52e7e48087a4477ff524270d256e2b4efac74890ec63d8f3f9",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/09-content-matrix.png"
+    },
+    {
+      "path": "previews/10-user-journey.png",
+      "sha256": "64ab9442485d426a05e47d20bf3d0e297d3083d66bfc8d90ed39932ae4b94fa3",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/10-user-journey.png"
+    },
+    {
+      "path": "previews/11-case-study.png",
+      "sha256": "6346b348f28eb96bbdd7c9d0e541949a66f5ae459859f0ad63960a55e2d02e1c",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/11-case-study.png"
+    },
+    {
+      "path": "previews/12-metrics-system.png",
+      "sha256": "f99643fff8f127f312f08b202c4df46743e5cb0ff447cfaeb6adcd08cba4a6d6",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/12-metrics-system.png"
+    },
+    {
+      "path": "previews/13-roadmap.png",
+      "sha256": "41b578ac5ecff51f180374437a3b9621f999565bf93d453c09f0c3e5faed79ef",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/13-roadmap.png"
+    },
+    {
+      "path": "previews/14-resource-allocation.png",
+      "sha256": "2e7dc4ffb6c5b7fcc9270fddd9a7b740aa1fa27a23acaba3afba6a599f04a538",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/14-resource-allocation.png"
+    },
+    {
+      "path": "previews/15-executive-decision.png",
+      "sha256": "76dfc3d40251d09c68c8a2a68a9d6732c351ccfc5821d10c953013beb26d1be6",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/15-executive-decision.png"
+    },
+    {
+      "path": "previews/16-end-note.png",
+      "sha256": "0806a03415a0990bf6866338e812581cf10cc6b6c7be951677754ae14b0ca9d7",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/previews/16-end-note.png"
+    },
+    {
+      "path": "references/agent-runtime.md",
+      "sha256": "5011d5c48501d23fba3b80f93e53520bb5f86f1b8e81d4919b1c79a2edf7ee20",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/references/agent-runtime.md"
+    },
+    {
+      "path": "thumbnails/01-cover.png",
+      "sha256": "489750ca45ad9966d0ceaf2b133fa813ce001f4019b5ef1755b073b79c587ba6",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/01-cover.png"
+    },
+    {
+      "path": "thumbnails/02-core-judgment.png",
+      "sha256": "993fb7573c0d14748cb7ff8692692bfdc2c49e2bf3b1e4adf1009fd7b00a1ed0",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/02-core-judgment.png"
+    },
+    {
+      "path": "thumbnails/03-user-shift.png",
+      "sha256": "697f89839676c6a6ceb56e63f3a366ea2d4322a2cb5ba0200f8460ea8284cb99",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/03-user-shift.png"
+    },
+    {
+      "path": "thumbnails/04-brand-problem.png",
+      "sha256": "e9048db2a7c8f01085c5ea5cae0ddb73b1dbbb123063a3307074f6b888215bba",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/04-brand-problem.png"
+    },
+    {
+      "path": "thumbnails/05-data-evidence.png",
+      "sha256": "873538ae6e4f41bc19069bd2e7472aa3d687bdbc616e0ff177c6c7f4187e6c2a",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/05-data-evidence.png"
+    },
+    {
+      "path": "thumbnails/06-user-insight.png",
+      "sha256": "be107bd7f691b6dc43ed8bedde53d4b73761bf7547354cd50f9202c3dc61ea92",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/06-user-insight.png"
+    },
+    {
+      "path": "thumbnails/07-opportunity-matrix.png",
+      "sha256": "52867c335dbf6419fe7c932bd238851e014fb8558f8cea9e0dbf1e965194a2e6",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/07-opportunity-matrix.png"
+    },
+    {
+      "path": "thumbnails/08-strategy-framework.png",
+      "sha256": "a8a3ed41634efc0e773cf9a277ab76f49e8afb84ad5377665f4d67ee54145da0",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/08-strategy-framework.png"
+    },
+    {
+      "path": "thumbnails/09-content-matrix.png",
+      "sha256": "0c246788ca8eaa3d33eb0192d376c3d95b863d9bc4a0c8349bb479998408a6da",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/09-content-matrix.png"
+    },
+    {
+      "path": "thumbnails/10-user-journey.png",
+      "sha256": "bad6db20b48a9e1189ef264af520d31ade4a76849700ccc3a9f762a6dfef1a65",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/10-user-journey.png"
+    },
+    {
+      "path": "thumbnails/11-case-study.png",
+      "sha256": "137c747d144bb202abad26a962d9e89dcc57e492ffaebc5d5d53b8c0b06fa96b",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/11-case-study.png"
+    },
+    {
+      "path": "thumbnails/12-metrics-system.png",
+      "sha256": "101fe2124c6eb8a628a00e02cd82acfd4699ec40790f22f076b4b23438c1c9de",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/12-metrics-system.png"
+    },
+    {
+      "path": "thumbnails/13-roadmap.png",
+      "sha256": "adf1fcf7affb6ba9bbd9ce0ca256d3035f02ca24b9606f5d9ee260aa1f4a4715",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/13-roadmap.png"
+    },
+    {
+      "path": "thumbnails/14-resource-allocation.png",
+      "sha256": "812c2370a731b5b28ecd89452f9d02a2a319c43cd81ab84cd8f5f37ea40ecef2",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/14-resource-allocation.png"
+    },
+    {
+      "path": "thumbnails/15-executive-decision.png",
+      "sha256": "4e5b3a075104f01585f813a70f5ee0f636927849fcc19030e80ed30fa59c09c5",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/15-executive-decision.png"
+    },
+    {
+      "path": "thumbnails/16-end-note.png",
+      "sha256": "39b8e92d070ed49ef1987f29a8169c80e337ac63509718f71e41b850c2ae1641",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/df8740f9439d46b1971aed30b8bb2e9f/thumbnails/16-end-note.png"
+    }
+  ]
+}

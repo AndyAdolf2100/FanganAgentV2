@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>资源投入</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<script src="https://agent-resource-test.aippt.cn/lib/chart.umd.js"></script>
+<style>
+  body{margin:0;font-family:"HarmonyOS Sans SC","Source Han Sans SC","Microsoft YaHei","Alibaba PuHuiTi",sans-serif;color:#1F2024;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#FFF8EA;}
+  .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#1F2024 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+  .page-num{position:absolute;left:120px;top:88px;font-weight:900;font-size:20px;letter-spacing:5px;}
+  .page-num span{background:#F06F61;color:#FFF8EA;padding:6px 14px;border-radius:6px;}
+  .head-title{font-weight:900;font-size:42px;line-height:1.25;}
+  .head-title em{font-style:normal;color:#F06F61;}
+  .r-card{border:3px solid #1F2024;border-radius:14px;padding:16px 18px;background:#FFF8EA;box-shadow:4px 4px 0 #1F2024;}
+  .r-name{font-weight:900;font-size:20px;}
+  .r-line{display:flex;justify-content:space-between;margin-top:8px;font-size:15px;color:#243B75;}
+  .r-val{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:22px;color:#1F2024;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="grain"></div>
+
+  <div class="page-num"><span>14 / 16</span> &nbsp; RESOURCE ALLOCATION · 资源投入</div>
+
+  <svg style="position:absolute;right:130px;top:80px;" width="200" height="60" viewBox="0 0 200 60">
+    <polyline points="0,50 20,10 40,50 60,10 80,50 100,10 120,50 140,10 160,50 180,10 200,50" stroke="#54C6B1" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div style="position:absolute;left:120px;top:180px;width:1680px;">
+    <div class="head-title">
+      资源投入要从<em>"做更多内容"</em>，<br>
+      转向<em style="color:#8068C9;">"做更有效的内容"</em>。
+    </div>
+  </div>
+
+  <div style="position:absolute;left:120px;top:370px;width:1080px;height:560px;">
+    <div style="border:3px solid #1F2024;border-radius:20px;padding:16px;background:#FFF8EA;box-shadow:6px 6px 0 #1F2024;height:100%;box-sizing:border-box;position:relative;">
+      <div style="position:absolute;right:26px;top:20px;padding:6px 14px;background:#F06F61;color:#FFF8EA;border:3px solid #1F2024;border-radius:8px;font-weight:900;font-size:16px;transform:rotate(4deg);box-shadow:3px 3px 0 #1F2024;z-index:5;">
+        <i class="fas fa-crosshairs"></i> 重点投入区
+      </div>
+      <canvas id="bubble" width="1000" height="500"></canvas>
+    </div>
+  </div>
+
+  <div style="position:absolute;right:120px;top:370px;width:600px;">
+    <div style="font-weight:900;font-size:22px;margin-bottom:14px;">
+      <span style="background:#1F2024;color:#FFF8EA;padding:6px 14px;border-radius:6px;">四类资源分配</span>
+    </div>
+    <div style="display:grid;gap:12px;">
+      <div class="r-card" style="border-left:10px solid #F06F61;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="r-name">A · 品牌长期内容</div>
+          <div style="display:flex;gap:10px;">
+            <span style="padding:3px 8px;background:#F4C9C5;border-radius:4px;font-size:14px;">投入 30%</span>
+            <span style="padding:3px 8px;background:#F06F61;color:#FFF8EA;border-radius:4px;font-size:14px;">记忆 42%</span>
+          </div>
+        </div>
+        <div class="r-line">
+          <span>长期记忆贡献最高</span>
+          <span class="r-val" style="color:#F06F61;">+12</span>
+        </div>
+      </div>
+      <div class="r-card" style="border-left:10px solid #F6C945;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="r-name">B · 场景解决方案</div>
+          <div style="display:flex;gap:10px;">
+            <span style="padding:3px 8px;background:#F6C945;border-radius:4px;font-size:14px;">投入 25%</span>
+            <span style="padding:3px 8px;background:#243B75;color:#FFF8EA;border-radius:4px;font-size:14px;">互动 36%</span>
+          </div>
+        </div>
+        <div class="r-line">
+          <span>有效互动贡献</span>
+          <span class="r-val" style="color:#F6C945;">+11</span>
+        </div>
+      </div>
+      <div class="r-card" style="border-left:10px solid #54C6B1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="r-name">C · 用户共创内容</div>
+          <div style="display:flex;gap:10px;">
+            <span style="padding:3px 8px;background:#54C6B1;border-radius:4px;font-size:14px;">投入 20%</span>
+            <span style="padding:3px 8px;background:#243B75;color:#FFF8EA;border-radius:4px;font-size:14px;">分享 31%</span>
+          </div>
+        </div>
+        <div class="r-line">
+          <span>分享贡献显著</span>
+          <span class="r-val" style="color:#54C6B1;">+11</span>
+        </div>
+      </div>
+      <div class="r-card" style="border-left:10px solid #8068C9;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div class="r-name">D · 转化承接内容</div>
+          <div style="display:flex;gap:10px;">
+            <span style="padding:3px 8px;background:#8068C9;color:#FFF8EA;border-radius:4px;font-size:14px;">投入 25%</span>
+            <span style="padding:3px 8px;background:#F06F61;color:#FFF8EA;border-radius:4px;font-size:14px;">行动 39%</span>
+          </div>
+        </div>
+        <div class="r-line">
+          <span>直接行动贡献最高</span>
+          <span class="r-val" style="color:#8068C9;">+14</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:14px 18px;background:#243B75;color:#FFF8EA;border-radius:12px;font-size:20px;font-weight:800;line-height:1.5;">
+      <i class="fas fa-lightbulb" style="color:#F6C945;margin-right:8px;"></i>
+      预算按 <span style="color:#F6C945;">"内容贡献"</span> 分配，<br>而非按 <span style="color:#54C6B1;">"曝光规模"</span> 平均分。
+    </div>
+  </div>
+
+  <div style="position:absolute;left:120px;bottom:60px;right:120px;padding:12px 22px;background:#F06F61;color:#FFF8EA;border-radius:12px;font-weight:800;font-size:20px;display:flex;align-items:center;gap:14px;">
+    <i class="fas fa-chart-scatter" style="color:#F6C945;font-size:24px;"></i>
+    <span>右上区域=高投入且高贡献=<span style="color:#F6C945;">下季度重点加码</span>。</span>
+    <span style="margin-left:auto;font-size:13px;opacity:.85;">数据状态：示意数据｜横轴 投入占比%｜纵轴 有效贡献指数</span>
+  </div>
+
+<script>
+window.addEventListener('load', function(){
+  const ctx = document.getElementById('bubble').getContext('2d');
+  new Chart(ctx, {
+    type:'bubble',
+    data:{
+      datasets:[
+        {label:'A 品牌长期内容',data:[{x:30,y:42,r:34}],backgroundColor:'rgba(240,111,97,0.75)',borderColor:'#1F2024',borderWidth:3},
+        {label:'B 场景解决方案',data:[{x:25,y:36,r:28}],backgroundColor:'rgba(246,201,69,0.85)',borderColor:'#1F2024',borderWidth:3},
+        {label:'C 用户共创内容',data:[{x:20,y:31,r:24}],backgroundColor:'rgba(84,198,177,0.85)',borderColor:'#1F2024',borderWidth:3},
+        {label:'D 转化承接内容',data:[{x:25,y:39,r:32}],backgroundColor:'rgba(128,104,201,0.85)',borderColor:'#1F2024',borderWidth:3}
+      ]
+    },
+    options:{
+      responsive:false,maintainAspectRatio:true,
+      plugins:{
+        legend:{position:'bottom',labels:{color:'#1F2024',font:{size:16,weight:'bold'},boxWidth:16,padding:14}},
+        tooltip:{enabled:false}
+      },
+      scales:{
+        x:{min:10,max:40,title:{display:true,text:'投入占比 (%)',color:'#1F2024',font:{size:16,weight:'bold'}},ticks:{color:'#1F2024',font:{size:14}},grid:{color:'rgba(31,32,36,0.1)'}},
+        y:{min:20,max:50,title:{display:true,text:'有效贡献指数',color:'#1F2024',font:{size:16,weight:'bold'}},ticks:{color:'#1F2024',font:{size:14}},grid:{color:'rgba(31,32,36,0.1)'}}
+      },
+      animation:{
+        onComplete:function(){
+          const c = this;
+          const ctx = c.ctx;
+          ctx.font = 'bold 15px Inter, Arial';
+          ctx.fillStyle = '#1F2024';
+          ctx.textAlign = 'center';
+          c.data.datasets.forEach((ds,i)=>{
+            const meta = c.getDatasetMeta(i);
+            const pt = meta.data[0];
+            ctx.fillText(ds.label.substring(0,1), pt.x, pt.y+5);
+          });
+        }
+      }
+    }
+  });
+});
+</script>
+</section>
+</body>
+</html>

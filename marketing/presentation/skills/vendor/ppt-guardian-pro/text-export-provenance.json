@@ -1,0 +1,33 @@
+{
+  "event": 818989,
+  "files": [
+    {
+      "path": "deck/ppt-guardian.slides/manifest.json",
+      "bytes": 361,
+      "sha256": "d8ca101ff52d957d2a1ad725caeb307a57ac5401c5e7590395173cfa1e6c1123",
+      "remote_sha256": "d8ca101ff52d957d2a1ad725caeb307a57ac5401c5e7590395173cfa1e6c1123",
+      "matched": true
+    },
+    {
+      "path": "deck/ppt-guardian.slides/slides/01-cover.html",
+      "bytes": 4673,
+      "sha256": "f4d56fa2432c02510e026e3970716054621a7aeedd2de1df73dd4a89c117ca57",
+      "remote_sha256": "f4d56fa2432c02510e026e3970716054621a7aeedd2de1df73dd4a89c117ca57",
+      "matched": true
+    },
+    {
+      "path": "deck/ppt-guardian.slides/slides/02-six-requirements.html",
+      "bytes": 5259,
+      "sha256": "a54b0470f1fc07c0ddf9f58e5d52230da171d1c1e026998101e310e680d5c159",
+      "remote_sha256": "a54b0470f1fc07c0ddf9f58e5d52230da171d1c1e026998101e310e680d5c159",
+      "matched": true
+    },
+    {
+      "path": "deck/ppt-guardian.slides/slides/03-before-after.html",
+      "bytes": 6714,
+      "sha256": "ed0c421564021acf680f2d8185bd9420b55170b69558d5c8bbfa70fc4c8f0b09",
+      "remote_sha256": "ed0c421564021acf680f2d8185bd9420b55170b69558d5c8bbfa70fc4c8f0b09",
+      "matched": true
+    }
+  ]
+}

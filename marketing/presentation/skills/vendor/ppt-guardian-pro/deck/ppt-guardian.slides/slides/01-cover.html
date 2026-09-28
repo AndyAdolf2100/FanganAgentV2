@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>PPT 质量红线 — 封面</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<style>
+  body{margin:0;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC','Inter','Helvetica Neue',Arial,sans-serif;background:#0b1220;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0b1220 0%,#101a30 55%,#0b1220 100%);color:#f5f7fb;}
+  .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:80px 80px;opacity:.7;}
+  .accent-bar{position:absolute;left:0;top:0;height:100%;width:12px;background:linear-gradient(180deg,#e63946 0%,#f4a261 100%);}
+  .tag{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:1px solid rgba(230,57,70,.55);border-radius:999px;background:rgba(230,57,70,.10);color:#f4a261;font-size:24px;font-weight:500;letter-spacing:.15em;}
+  .headline{font-size:128px;font-weight:800;line-height:1.05;letter-spacing:-.02em;}
+  .sub{font-size:32px;font-weight:400;line-height:1.35;color:rgba(245,247,251,.78);}
+  .pillar{padding:32px 30px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);border-radius:14px;}
+  .pillar-num{font-size:32px;font-weight:700;color:#f4a261;font-family:'JetBrains Mono',monospace;line-height:1;}
+  .pillar-title{font-size:40px;font-weight:600;color:#f5f7fb;margin-top:16px;line-height:1.15;}
+  .meta{position:absolute;bottom:48px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-end;font-size:20px;color:rgba(245,247,251,.55);}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="grid-bg"></div>
+  <div class="accent-bar"></div>
+
+  <!-- 顶部行 -->
+  <div style="position:absolute;top:72px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;">
+    <div class="tag"><i class="fas fa-shield-halved"></i><span>质量红线 · V19</span></div>
+    <div style="font-size:20px;color:rgba(245,247,251,.55);font-family:'JetBrains Mono',monospace;">design-craft / quality-baseline</div>
+  </div>
+
+  <!-- 标题块 -->
+  <div style="position:absolute;top:200px;left:80px;right:80px;">
+    <div class="headline">演示文稿<br><span style="color:#f4a261;">质量红线</span></div>
+    <div class="sub" style="margin-top:32px;max-width:1360px;">每页代码算术自检——分档字号下限、容量计算、填充与占有率、结构性禁止项，以及不可省略的交付记录。</div>
+  </div>
+
+  <!-- 六项支柱：3列×2行 -->
+  <div style="position:absolute;top:660px;left:80px;right:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">字号下限</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">容器容量</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">填充 88%–95%</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-title">占有率 ≥ 60%</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">05</div>
+      <div class="pillar-title">结构扫描</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">06</div>
+      <div class="pillar-title">标注</div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span>画布 1920 × 1080 · 配套文件：references/agent-runtime.md</span>
+    <span>质量下限，非模板——用户要求始终优先。</span>
+  </div>
+</section>
+<!-- 自检 封面页：字号 [headline 128px 展示字体; sub 32px 正文下限 ✓; pillar-title 40px 卡片标题下限 ✓; pillar-num 32px 图表档上调（下限24）✓; tag 24px 图表档下限 ✓; meta 20px 来源/脚注下限 ✓; 同角色同字号：所有pillar-title均为40，所有pillar-num均为32]; 容量 [pillar内部约590×112：num 32×1=32 + 间距16 + title 40×1.15×1行=46 → 94 ×1.15=108 vs ~112 ✓]; 填充 [豁免：封面页，见§6]; 占有率 [豁免：封面页，见§6]; 结构 [无空卡片、无scale、无重叠、无纵向节点-连线图形、无mermaid；accent-bar和grid-bg为装饰性背景层；页脚与pillar行间距符合要求]; 标注 [封面无事实性数字——无需标注]; 未执行渲染后审查。 -->
+</body>
+</html>

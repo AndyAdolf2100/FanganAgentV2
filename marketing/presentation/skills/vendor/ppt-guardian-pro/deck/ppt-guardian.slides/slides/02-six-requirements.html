@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>六项自检要求</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<style>
+  body{margin:0;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC','Inter','Helvetica Neue',Arial,sans-serif;background:#f5f7fb;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#f5f7fb;color:#1a1f2e;}
+  .title{position:absolute;top:80px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1a1f2e;padding-bottom:24px;}
+  .title h1{font-size:64px;font-weight:800;letter-spacing:-.01em;margin:0;line-height:1.05;}
+  .title .kicker{font-size:24px;color:#6b7280;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;}
+  .grid{position:absolute;top:246px;left:80px;right:80px;bottom:88px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:32px;}
+  .card{background:#fff;border:1px solid #e2e6ee;border-radius:12px;padding:32px 30px;position:relative;display:flex;flex-direction:column;}
+  .card .idx{font-size:32px;font-weight:800;color:#e63946;font-family:'JetBrains Mono',monospace;line-height:1;}
+  .card h2{font-size:40px;font-weight:700;margin:12px 0 16px 0;line-height:1.15;color:#1a1f2e;}
+  .card p{font-size:32px;line-height:1.4;color:#374151;margin:0;font-weight:400;}
+  .card .rule{margin-top:auto;padding:14px 18px;background:#f5f7fb;border-left:4px solid #e63946;border-radius:0 8px 8px 0;font-size:24px;color:#1a1f2e;font-weight:500;line-height:1.4;}
+  .card .rule code{font-family:'JetBrains Mono',monospace;font-size:24px;color:#e63946;font-weight:600;}
+  .footer{position:absolute;bottom:24px;left:80px;right:80px;display:flex;justify-content:space-between;font-size:20px;color:#6b7280;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="title">
+    <h1>每页完成后的六项自检</h1>
+    <div class="kicker">§5 · 代码算术自检</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="idx">01</div>
+      <h2>字号</h2>
+      <p>页面上的每个值均满足画布分档下限。</p>
+      <div class="rule">1920 下限：<code>64 / 40 / 32 / 24 / 20</code> px</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">02</div>
+      <h2>容量</h2>
+      <p>估算子元素高度之和在留有余量的情况下适配容器。</p>
+      <div class="rule"><code>Σ 高度 × 1.15 ≤ 容器内部高度</code></div>
+    </div>
+
+    <div class="card">
+      <div class="idx">03</div>
+      <h2>填充与内容宽度</h2>
+      <p>底边落在区间内；行宽和列高已完全分配。</p>
+      <div class="rule">底边 <code>∈ [88%, 95%]</code> 画布高度</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">04</div>
+      <h2>占有率与居中</h2>
+      <p>每个单元块对容器的占有率至少达到 60%。</p>
+      <div class="rule">单元块占有率 <code>≥ 60%</code></div>
+    </div>
+
+    <div class="card">
+      <div class="idx">05</div>
+      <h2>结构扫描</h2>
+      <p>无空卡片、无缩放压缩、无重叠、无纵向节点-连线图形。</p>
+      <div class="rule">还包括：CSS 语法扫描——无效值会被静默丢弃</div>
+    </div>
+
+    <div class="card">
+      <div class="idx">06</div>
+      <h2>标注</h2>
+      <p>每个数字或预测均附有来源或正确的标注标签。</p>
+      <div class="rule"><code>预计 / 假设 / 示例数据 / 待确认</code></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>有项目不通过 → 当场修正；全部六项通过后再写下一页。</span>
+    <span>交付门控：页面末尾的自检注释</span>
+  </div>
+</section>
+<!-- 自检 第2页（详细版）：字号 [h1 64px 标题下限 ✓; card h2 40px 卡片标题下限 ✓; card p 32px 正文下限 ✓; card idx 32px 图表档上调（下限24）✓; card rule + rule code 24px 辅助档下限 ✓; kicker 24px 辅助档下限 ✓; footer 20px 来源档下限 ✓; 同角色同字号：所有h2均40，所有p均32，所有idx均32，所有rule均24]; 容量 [卡片内部宽度≈(1760-64)/3=565，高度≈(746-32)/2=357，减去padding 32+32=64 → 内部501；内容：idx 32×1=32 + 间距12 + h2 40×1.15×1行=46 + 间距16 + p 32×1.4×1行=45 + rule 24×1.4×1行=34 + rule padding 14+14=28 → 合计213，×1.15=245 ≤ 357内部高度 ✓]; 填充 [标题块下边缘≈246；网格下边缘≈1080-88=992 → 992/1080=91.9% 在88-95区间 ✓；footer顶边≈1080-24-20×1=1036；最后内容下边缘992 ≤ footer顶边1036 − G(≈35)=1001 ✓；网格行：3列×565 + 2×32间距=1759≈内容宽度1760 ✓；2行×357 + 32间距=746=可用高度 ✓]; 占有率 [每张卡片内容245/357≈68.6% ≥ 60% ✓；结构性内容组整体顶部对齐，见§2.7]; 结构 [无空卡片；无scale；无重叠；无节点-连线图形；无mermaid；页脚间距44 ≥ G≈35 ✓；CSS：所有冒号和分号完整，单位完整，标签已闭合]; 标注 [rule引用的是规范自身——无外部事实]; 未执行渲染后审查。 -->
+</body>
+</html>
