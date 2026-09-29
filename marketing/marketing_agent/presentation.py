@@ -12,6 +12,7 @@ from pathlib import Path
 
 from . import presentation_images
 from .presentation_styles import get_style, apply_style
+from .presentation_options import PresentationOptions, apply_user_palette, check_page_count
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -140,7 +141,8 @@ class PresentationJobs:
         self.store.event(job['run_id'], 'presentation', {k:job.get(k) for k in ('id','status','stage','page_count','error')})
         return job
 
-    def create(self, run, style_id=None):
+    def create(self, run, style_id=None, options=None):
+        options = PresentationOptions(**(options or {})).requirements()
         if run['status'] != 'completed' or not run['outputs'].get('assembly'):
             raise ValueError('请先完成并确认完整文稿')
         text = run['outputs']['assembly']
@@ -150,11 +152,11 @@ class PresentationJobs:
         with self.lock:
             last = self.latest(run['id'])
             if last and last['status'] in {'queued','running'}:
-                if last.get('style_id', 'auto') != style_id:
-                    raise ValueError('当前 PPT 正在生成，请完成后再切换风格')
+                if last.get('style_id', 'auto') != style_id or last.get('options', {}) != options:
+                    raise ValueError('当前 PPT 正在生成，请完成后再切换风格或页面要求')
                 return last
             retryable=last and (last.get('image_notice') or last.get('visual_status')=='incomplete')
-            if last and not retryable and last['status']=='completed' and last['source_sha256']==fingerprint and last.get('pipeline_version')==PIPELINE_VERSION and last.get('style_id', 'auto')==style_id:
+            if last and not retryable and last['status']=='completed' and last['source_sha256']==fingerprint and last.get('pipeline_version')==PIPELINE_VERSION and last.get('style_id', 'auto')==style_id and last.get('options', {})==options:
                 return last
             job_id = uuid.uuid4().hex
             folder = self.root/job_id
@@ -162,8 +164,8 @@ class PresentationJobs:
             (folder/'manuscript.md').write_text(text)
             job = {'id':job_id,'run_id':run['id'],'status':'queued','stage':'queued','created':time.time(),
                    'source_sha256':fingerprint,'source_runtime':run.get('runtime'),'page_count':0,'error':None,'pipeline_version':PIPELINE_VERSION,
-                   'style_id':style_id,'style_name':style['name']}
-            if last and (retryable or last['status']=='failed' or last.get('pipeline_version')!=PIPELINE_VERSION) and last['source_sha256']==fingerprint and last.get('style_id','auto')==style_id:
+                   'style_id':style_id,'style_name':style['name'],'options':options}
+            if last and (retryable or last['status']=='failed' or last.get('pipeline_version')!=PIPELINE_VERSION) and last['source_sha256']==fingerprint and last.get('style_id','auto')==style_id and last.get('options', {})==options:
                 for name in ('design-response-2.json','design-response-1.json','resumed-response.json'):
                     response=self.root/last['id']/name
                     if response.exists():
@@ -186,8 +188,9 @@ class PresentationJobs:
             plan['source_run_id'] = job['run_id']
             plan['source_runtime'] = job['source_runtime']
             plan['style_id'] = job.get('style_id', 'auto')
+            plan['presentation_options'] = job.get('options', {})
             plan['style'] = get_style(plan['style_id'])
-            plan['theme'] = apply_style(plan['theme'], plan['style_id'])
+            plan['theme'] = apply_user_palette(apply_style(plan['theme'], plan['style_id']), plan['presentation_options'])
             needs_cover=agent.call('prepare_assets',presentation_images.prepare_assets,plan,source,folder,ROOT/'presentation'/'assets')
             if os.getenv('MARKETING_RUNTIME','demo') != 'demo':
                 self.update(job_id,stage='reference_analysis',agent_owner='project_presentation_agent')
@@ -203,6 +206,7 @@ class PresentationJobs:
                             corrections=design.get('corrections',[]))
                 self.update(job_id,correction_count=len(plan['corrections']),
                             warning_count=sum(c['status']=='warning' for c in plan['corrections']),corrections_available=True)
+            check_page_count(len(plan['pages']), plan['presentation_options'])
             self.update(job_id,stage='images')
             agent.call('generate_or_reuse_images',presentation_images.materialize_assets,plan,folder,needs_cover)
             self.update(job_id,image_count=len(plan['assets']),image_notice=plan.get('image_notice'))
@@ -231,6 +235,7 @@ class PresentationJobs:
             if plan.get('design_mode')=='narrative':
                 report['visual_review']={'status':visual['status'],'report':'visual-review.json'}
                 (folder/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+            check_page_count(report['page_count'], plan['presentation_options'])
             if not report['passed']:
                 raise RuntimeError('页面仍有高危排版问题，未发布PPT')
             if plan.get('design_mode')=='narrative':

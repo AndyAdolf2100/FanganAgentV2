@@ -205,6 +205,7 @@ class PageTools:
                'assigned_asset':page.get('asset'),
                'asset_descriptions':self.plan.get('asset_descriptions',{}),
                'reference_analysis':self.plan.get('style_reference',{}),
+               'presentation_options':self.plan.get('presentation_options',{}),
                'layout_brief':page.get('layout_brief','按内容关系确定主焦点、分组、空间比例，不默认等宽三栏'),
                'text_catalog':text_catalog(page),'source_ids':page['source_ids'],
                'visual_dna':self.plan['theme'],'asset_names':list(self.plan['assets']),

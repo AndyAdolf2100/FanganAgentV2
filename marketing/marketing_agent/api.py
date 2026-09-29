@@ -18,6 +18,7 @@ from .runtime import DeerFlowRuntime, DemoRuntime
 from .store import Conflict, Store
 from .workflow import GATE_TITLES, STAGES, TAGS
 from .presentation import PresentationJobs
+from .presentation_options import PresentationOptions
 from .presentation_styles import STYLES, get_style
 from .manuscripts import MAX_FILE_BYTES, MAX_TEXT_LENGTH, extract_manuscript, validate_manuscript
 
@@ -61,14 +62,6 @@ class ImportManuscript(BaseModel):
         get_style(self.style_id)
         return self
 
-
-class PresentationOptions(BaseModel):
-    style_id: str = 'auto'
-
-    @model_validator(mode='after')
-    def validate_style(self):
-        get_style(self.style_id)
-        return self
 
 
 def create_app(data_dir=None, runtime=None):
@@ -128,6 +121,11 @@ def create_app(data_dir=None, runtime=None):
     @app.get("/api/runs")
     def list_runs():
         return [{k: r.get(k) for k in ("id", "brief", "status", "created", "mode", "index")} for r in store.list()]
+
+    @app.get('/api/presentation-capabilities')
+    def presentation_capabilities():
+        return {'detailed_options': not is_demo, 'aspect_ratios': ['16:9'],
+                'min_pages': 3, 'max_pages': 45, 'enterprise_templates': False}
 
     @app.get('/api/presentation-styles')
     def presentation_styles():
@@ -226,7 +224,7 @@ def create_app(data_dir=None, runtime=None):
     @app.post('/api/runs/{run_id}/presentation', status_code=202)
     def create_presentation(run_id: str, body: PresentationOptions | None = None):
         try:
-            return presentations.create(get(run_id), body.style_id if body else None)
+            return presentations.create(get(run_id), body.style_id if body else None, body.requirements() if body else None)
         except ValueError as exc:
             raise HTTPException(409, str(exc))
 

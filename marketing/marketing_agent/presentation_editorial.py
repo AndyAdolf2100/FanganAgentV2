@@ -30,7 +30,8 @@ def refine_design(design, source, folder):
     brief={'pages':[{'index':i+1,**{k:p[k] for k in ('title','subtitle','layout','composition','items','asset') if k in p}}
                     for i,p in enumerate(design['pages'])],
            'assets':source.get('asset_descriptions', {k:k for k in source['assets']}), 'theme':design['visual_dna'],
-           'reference_analysis':source.get('style_reference',{})}
+           'reference_analysis':source.get('style_reference',{}),
+           'presentation_options':source.get('presentation_options',{})}
     digest=hashlib.sha256(json.dumps({'brief':brief,'policy':POLICY,'model':os.getenv('MARKETING_MODEL')},ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     cache=folder.parent/'editorial-cache'/f'{digest}.json'
     try:
