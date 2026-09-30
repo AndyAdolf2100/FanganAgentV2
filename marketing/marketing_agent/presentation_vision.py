@@ -38,7 +38,7 @@ def _trace(folder, tool, **data):
 def reserve_review(root):
     """Conservative 0.10 RMB reservation, counted with images under one cap."""
     from .presentation_budget import reserve
-    reserve(root,'0.10',max(0,min(64,int(os.getenv('MARKETING_VISION_MAX_REQUESTS','16')))))
+    reserve(root,'0.10',max(0,min(1000,int(os.getenv('MARKETING_VISION_MAX_REQUESTS','16')))))
 
 
 def image_part(path, max_width=1000):
@@ -74,6 +74,18 @@ def review_batch(folder, plan, indexes):
         content.extend([{'type':'text','text':f'待审第{i}页'},image_part(folder/'previews'/f'{i}.png')])
     skill=(Path(__file__).resolve().parents[1]/'presentation/skills/marketing-deck/references/screenshot-review.md').read_text()
     _trace(folder,'load_skill',name='marketing-deck/screenshot-review',sha256=hashlib.sha256(skill.encode()).hexdigest())
+    if plan.get('design_mode') == 'enterprise':
+        skill = ('企业模板审查：封面、目录、章节、尾页保持原版式；正文仅页眉、页脚、标题区域与企业品牌固定。'
+                 '正文中央可以重新布局、重建表格和统计图，不要求沿用模板原小框和示例图表。'
+                 '对照原模板参考截图核对固定区域、字体与主题色，同时按正常PPT标准检查主次、留白、信息密度、跨页节奏、文字/表格/图表可读性和数值来源。'
+                 '不能因为采用企业模板就放过明显拥挤或单调排版；不要要求复制示例数据或不相关图片。'
+                 '修复建议应明确正文布局调整；固定区域问题须明确标记，不擅自重新设计。')
+        for template_index in dict.fromkeys(plan['pages'][i-1].get('template_page') for i in indexes):
+            if template_index is None:
+                continue
+            reference = folder/'template-reference'/'previews'/f'{template_index+1}.png'
+            if reference.exists():
+                content.extend([{'type':'text','text':f'企业原模板第{template_index+1}页，仅作风格与固定区域对照，正文示例数据不能复制。'},image_part(reference)])
     payload={'model':model,'messages':[{'role':'system','content':POLICY+'\n'+skill},{'role':'user','content':content}],
              'max_tokens':5000,'temperature':0.1,'thinking':{'type':'disabled'}}
     issue_schema={'type':'object','additionalProperties':False,
@@ -166,7 +178,7 @@ def review_and_repair(folder, render_again, progress=None):
     from .presentation_budget import can_reserve
     report['decisions']=[];report['rounds']=[]
     for round_number in range(1,3):
-        if not can_reserve(folder.parent/'vision-cache','0.10',max(0,min(64,int(os.getenv('MARKETING_VISION_MAX_REQUESTS','16'))))):
+        if not can_reserve(folder.parent/'vision-cache','0.10',max(0,min(1000,int(os.getenv('MARKETING_VISION_MAX_REQUESTS','16'))))):
             report['decisions'].append({'round':round_number,'actions':[],'reason':'没有修版后复核预算，保留已审稿及未完成事项','decided_by':'budget_guard'})
             break
         decision=choose_repairs(folder,plan,report['pages'],report['repairs'],3)

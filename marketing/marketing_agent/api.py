@@ -76,6 +76,7 @@ def create_app(data_dir=None, runtime=None):
         runtime = DemoRuntime() if is_demo else DeerFlowRuntime(PROJECT / "config.marketing.yaml")
     engine = Engine(store, runtime)
     presentations = PresentationJobs(directory, store)
+    from .enterprise.service import router_for
     pool = ThreadPoolExecutor(max_workers=1)  # DeerFlow configuration is process-global.
 
     @asynccontextmanager
@@ -98,6 +99,7 @@ def create_app(data_dir=None, runtime=None):
     app = FastAPI(title="Marketing V2 Agent", lifespan=lifespan)
     app.state.store, app.state.engine = store, engine
     app.state.presentations = presentations
+    app.include_router(router_for(presentations.templates))
 
     def get(run_id):
         try:
@@ -125,7 +127,8 @@ def create_app(data_dir=None, runtime=None):
     @app.get('/api/presentation-capabilities')
     def presentation_capabilities():
         return {'detailed_options': not is_demo, 'aspect_ratios': ['16:9'],
-                'min_pages': 3, 'max_pages': 45, 'enterprise_templates': False}
+                'min_pages': 3, 'max_pages': 45, 'enterprise_templates': True,
+                'enterprise_max_pages': 200, 'enterprise_content_mode': 'full_text'}
 
     @app.get('/api/presentation-styles')
     def presentation_styles():

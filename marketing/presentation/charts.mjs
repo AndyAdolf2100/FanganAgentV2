@@ -11,7 +11,7 @@ export function chartScale(values){
  const min=Math.floor(low/step)*step,max=Math.ceil((high||step)/step)*step;
  return {min,max,step,ticks:Array.from({length:Math.round((max-min)/step)+1},(_,i)=>Number((min+i*step).toPrecision(12)))};
 }
-export function chartPalette(theme){return [theme.text,'7A651E','4C806A','A67553','66828C','8B7394'];}
+export function chartPalette(theme){return theme.chartColors?.length ? Array.from({length:6},(_,i)=>theme.chartColors[i%theme.chartColors.length].replace(/^#/,'')) : [theme.text,'7A651E','4C806A','A67553','66828C','8B7394'];}
 export function chartHTML(p,index,total,theme){
  const c=p.chart,colors=chartPalette(theme),f=CHART_FRAME,scale=chartScale(c.series.flatMap(s=>s.values));
  const svg=[],labels=[];

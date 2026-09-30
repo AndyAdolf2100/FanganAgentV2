@@ -21,10 +21,24 @@ def test_visual_budget_extension_keeps_old_reservations_and_hard_cap(tmp_path,mo
     monkeypatch.setenv('MARKETING_PPT_BUDGET_RMB','20')
     monkeypatch.setenv('MARKETING_VISION_MAX_REQUESTS','16')
     for _ in range(16):reserve_review(tmp_path)
-    monkeypatch.setenv('MARKETING_VISION_MAX_REQUESTS','999')
-    for _ in range(48):reserve_review(tmp_path)
+    monkeypatch.setenv('MARKETING_VISION_MAX_REQUESTS','65')
+    for _ in range(49):reserve_review(tmp_path)
     with pytest.raises(ValueError):reserve_review(tmp_path)
-    assert len(json.loads((tmp_path/'budget.json').read_text())['reservations'])==64
+    assert len(json.loads((tmp_path/'budget.json').read_text())['reservations'])==65
+
+
+@pytest.mark.parametrize('configured',['1000','2000'])
+def test_visual_limit_allows_thousand_and_stops_at_boundary(tmp_path,monkeypatch,configured):
+    monkeypatch.setenv('MARKETING_PPT_BUDGET_RMB','20')
+    monkeypatch.setenv('MARKETING_VISION_MAX_REQUESTS',configured)
+    # Synthetic lower historical reservations isolate the request boundary
+    # from the independent RMB cap; no real ledger or model is touched.
+    previous=[{'reserved_rmb':'0.001'} for _ in range(999)]
+    (tmp_path/'budget.json').write_text(json.dumps({'reservations':previous}))
+    reserve_review(tmp_path)
+    with pytest.raises(ValueError,match='请求次数'):reserve_review(tmp_path)
+    actual=json.loads((tmp_path/'budget.json').read_text())['reservations']
+    assert len(actual)==1000 and actual[:999]==previous
 
 
 def test_project_image_collection_reuse_is_source_and_style_bound(tmp_path,monkeypatch):

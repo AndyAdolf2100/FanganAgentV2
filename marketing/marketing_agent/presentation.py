@@ -97,6 +97,8 @@ class PresentationJobs:
         self.root = Path(directory) / 'presentations'
         self.root.mkdir(exist_ok=True)
         self.store = store
+        from .enterprise.service import TemplateLibrary
+        self.templates = TemplateLibrary(directory)
         self.lock = threading.RLock()
         self.pool = ThreadPoolExecutor(max_workers=1)
 
@@ -149,6 +151,15 @@ class PresentationJobs:
         fingerprint = hashlib.sha256(text.encode()).hexdigest()
         style_id = style_id if style_id is not None else run.get('presentation_style', 'auto')
         style = get_style(style_id)
+        template = None
+        if options.get('template_id'):
+            try:
+                template = self.templates.snapshot(options['template_id'], options['template_revision'])
+            except FileNotFoundError:
+                raise ValueError('企业模板版本不存在，请重新选择') from None
+            style_id = 'auto'
+            style = {'name': template['name'] + ' · v' + str(options['template_revision'])}
+        pipeline_version = PIPELINE_VERSION + ('-enterprise-html-v4' if template else '')
         with self.lock:
             last = self.latest(run['id'])
             if last and last['status'] in {'queued','running'}:
@@ -156,16 +167,18 @@ class PresentationJobs:
                     raise ValueError('当前 PPT 正在生成，请完成后再切换风格或页面要求')
                 return last
             retryable=last and (last.get('image_notice') or last.get('visual_status')=='incomplete')
-            if last and not retryable and last['status']=='completed' and last['source_sha256']==fingerprint and last.get('pipeline_version')==PIPELINE_VERSION and last.get('style_id', 'auto')==style_id and last.get('options', {})==options:
+            if last and not retryable and last['status']=='completed' and last['source_sha256']==fingerprint and last.get('pipeline_version')==pipeline_version and last.get('style_id', 'auto')==style_id and last.get('options', {})==options:
                 return last
             job_id = uuid.uuid4().hex
             folder = self.root/job_id
             folder.mkdir()
             (folder/'manuscript.md').write_text(text)
+            if template:
+                self._write(folder/'template.json', template)
             job = {'id':job_id,'run_id':run['id'],'status':'queued','stage':'queued','created':time.time(),
-                   'source_sha256':fingerprint,'source_runtime':run.get('runtime'),'page_count':0,'error':None,'pipeline_version':PIPELINE_VERSION,
+                   'source_sha256':fingerprint,'source_runtime':run.get('runtime'),'page_count':0,'error':None,'pipeline_version':pipeline_version,
                    'style_id':style_id,'style_name':style['name'],'options':options}
-            if last and (retryable or last['status']=='failed' or last.get('pipeline_version')!=PIPELINE_VERSION) and last['source_sha256']==fingerprint and last.get('style_id','auto')==style_id and last.get('options', {})==options:
+            if last and (retryable or last['status']=='failed' or last.get('pipeline_version')!=pipeline_version) and last['source_sha256']==fingerprint and last.get('style_id','auto')==style_id and last.get('options', {})==options:
                 for name in ('design-response-2.json','design-response-1.json','resumed-response.json'):
                     response=self.root/last['id']/name
                     if response.exists():
@@ -182,6 +195,10 @@ class PresentationJobs:
         agent=PresentationAgent(folder)
         try:
             self.update(job_id,status='running',stage='pagination')
+            if (folder/'template.json').is_file():
+                from .enterprise.workflow import execute
+                execute(self, job_id, agent)
+                return
             source = (folder/'manuscript.md').read_text()
             plan = agent.call('read_manuscript',plan_outline,source)
             job = self.get(job_id)

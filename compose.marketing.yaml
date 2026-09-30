@@ -39,12 +39,31 @@ services:
       timeout: 5s
       retries: 6
     stop_grace_period: 30s
+  preview:
+    image: marketing-v2-agent-api
+    build:
+      context: .
+      dockerfile: marketing/Dockerfile
+    command: [uvicorn, marketing_agent.presentation_preview:app, --host, 0.0.0.0, --port, "8001", --workers, "1"]
+    environment:
+      MARKETING_DATA_DIR: /data/marketing
+    volumes:
+      - marketing_data:/data:ro
+      - ./marketing/marketing_agent:/app/marketing/marketing_agent:ro
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
   web:
     build: ./marketing/frontend
     ports:
       - "127.0.0.1:${MARKETING_PORT:-18080}:80"
     depends_on:
       api:
+        condition: service_healthy
+      preview:
         condition: service_healthy
     restart: unless-stopped
 volumes:

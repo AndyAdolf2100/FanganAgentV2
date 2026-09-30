@@ -8,6 +8,8 @@ from .presentation_styles import get_style
 class PresentationOptions(BaseModel):
     model_config = ConfigDict(extra='forbid')
     style_id: str = 'auto'
+    template_id: str | None = Field(default=None, pattern=r'^[a-f0-9]{64}$')
+    template_revision: int | None = Field(default=None, ge=1, strict=True)
     design_prompt: str = Field(default='', max_length=12000)
     page_prompt: str = Field(default='', max_length=4000)
     aspect_ratio: Literal['16:9'] = '16:9'
@@ -18,6 +20,10 @@ class PresentationOptions(BaseModel):
     @model_validator(mode='after')
     def validate_options(self):
         get_style(self.style_id)
+        if (self.template_id is None) != (self.template_revision is None):
+            raise ValueError('企业模板ID与发布版本必须同时提供')
+        if self.template_id and (self.palette or self.design_prompt or self.page_prompt):
+            raise ValueError('企业模板使用已发布的品牌样式，不接受自由配色或设计提示')
         if (self.page_count_min is None) != (self.page_count_max is None):
             raise ValueError('页数上下限必须同时提供')
         if self.page_count_min is not None and self.page_count_min > self.page_count_max:

@@ -36,3 +36,6 @@
 .ppt-panel + .detail-grid{margin-top:24px}
 @media(max-width:600px){.entry-switch{grid-template-columns:1fr}.style-grid{gap:12px}.style-mini{padding:12px}.style-mini strong{font-size:18px;margin-top:10px}.mini-section{font-size:6px}.manuscript-card .form-bottom{align-items:stretch;flex-direction:column}.manuscript-card .card-heading{align-items:flex-start;flex-direction:column}}
 @media(max-width:600px){.style-mini{aspect-ratio:4/3;min-height:110px}.style-mini strong{font-size:16px}}
+
+.enterprise-choice{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 20px}.enterprise-choice label{display:flex;align-items:center;gap:8px}.enterprise-choice select{padding:10px;max-width:380px}.enterprise-choice p{width:100%;margin:0}
+.sidebar>.secondary{color:#e5efdc;border-color:#8ba895;margin-bottom:20px}
