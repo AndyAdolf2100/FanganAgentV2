@@ -1,0 +1,31 @@
+[project]
+name = "marketing-v2-agent"
+version = "0.1.0"
+description = "Persistent autonomous marketing workflows powered by DeerFlow 2.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.34,<1",
+    "jinja2>=3.1,<4",
+    "python-dotenv>=1,<2",
+    "pyyaml>=6,<7",
+    "pillow>=11,<13",
+    "beautifulsoup4>=4.12,<5",
+]
+
+[project.optional-dependencies]
+runtime = ["deerflow-harness"]
+test = ["pytest>=8,<10", "httpx>=0.28,<1"]
+
+[tool.uv.sources]
+deerflow-harness = { path = "../backend/packages/harness", editable = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["marketing_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

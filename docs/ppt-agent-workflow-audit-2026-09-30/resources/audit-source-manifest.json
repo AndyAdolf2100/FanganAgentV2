@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-09-30T12:43:59+08:00",
+  "git_head": "17239fe027048c3154a92cfd1612bf0e0ec954b0",
+  "worktree_dirty": true,
+  "note": "Hashes refer to the inspected working files, not a claim that the background worker loaded all of them.",
+  "source_sha256": {
+    "marketing/marketing_agent/presentation.py": "0748c58217ab5b67daff3b1a6e721141db7dc6fd8303bd32a33556e51f85e097",
+    "marketing/marketing_agent/enterprise/model_html.py": "b5f44ae5d5630f9630ba0e8a59d647fb614efe3a5b70d3b9d6bd1aa00c74c826",
+    "marketing/marketing_agent/enterprise/workflow.py": "de4b74b71659084aca2afe00a1c62b7b2789c10c4a1824d65a6e579d827da2f0",
+    "marketing/marketing_agent/enterprise/refinement.py": "07164d1b69d50e78d36e39b6727816f920342ccb3f0621795ef10959142ed6af",
+    "marketing/marketing_agent/presentation_agent.py": "1847f5136622c674902370269f769822f6e4f94bde41ccfb030b47bc2b8875e6",
+    "marketing/marketing_agent/presentation_vision.py": "683c62d6496ec6de435a0c073b20440bd6482623ea4afc989ad791963d8ccbf9",
+    "marketing/marketing_agent/presentation_images.py": "b1ccfe6fbdb54485c4f1dcb16e0841133c1385f586b703f1cadd8023746bffb2",
+    "marketing/marketing_agent/presentation_pages.py": "3012f7a8d644a0d2dc932bbf6956cf6e9020278b5c8e12f16657a22fb4d1c16f",
+    "marketing/marketing_agent/presentation_preview.py": "a18c50f5c3e38312ac07615d25f0b039a4dd329e7f77933f48841cfcb2cbfa7d",
+    "marketing/marketing_agent/presentation_charts.py": "fafeb3b46b393401df40d2456530fb9fbacc41114326e286fb02fb3872d33edd",
+    "marketing/marketing_agent/enterprise/adaptive.py": "6fafd4bace6eb2113ac8d6567204757c3ffd9686257249556d5772bdb0d1fa3e",
+    "marketing/presentation/enterprise.mjs": "fe8f448d84dbd65fc677525a7ccf1ca307afb8204b6b53ee26d6e4c76c8688b6",
+    "marketing/presentation/render.mjs": "18d7be33a179ef4ca8e8ff62fff27bda1a0eaab9a6d7f9b9a3f45ea2ec014338",
+    "marketing/presentation/skills/marketing-deck/SKILL.md": "2efa0ff03923e9a8fd6304f3e12adb0772e70070685f7e9e7771280e41e6c49d",
+    "marketing/presentation/skills/enterprise-deck/SKILL.md": "e57e314202588bcd15e0b5fcdbdbc236a372c9aeb7a7f8f20f7ef31c8309e96c"
+  }
+}

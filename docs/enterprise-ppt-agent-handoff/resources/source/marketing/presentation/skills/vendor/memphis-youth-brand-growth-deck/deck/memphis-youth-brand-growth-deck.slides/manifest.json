@@ -1,0 +1,23 @@
+{
+  "deck_name": "memphis-youth-brand-growth-deck",
+  "slide_count": 16,
+  "canvas": {"width": 1920, "height": 1080},
+  "slides": [
+    {"file": "01-cover.html", "title": "封面 · 年轻品牌增长方案"},
+    {"file": "02-core-judgment.html", "title": "核心判断 · 变得更值得被选择"},
+    {"file": "03-user-shift.html", "title": "用户变化 · 从功能到身份"},
+    {"file": "04-brand-problem.html", "title": "品牌问题 · 缺连接而非缺传播"},
+    {"file": "05-data-evidence.html", "title": "数据证据 · 真实有趣可参与"},
+    {"file": "06-user-insight.html", "title": "用户洞察 · 讲用户正在经历什么"},
+    {"file": "07-opportunity-matrix.html", "title": "增长机会 · 高价值×高频"},
+    {"file": "08-strategy-framework.html", "title": "策略框架 · 三位一体协同"},
+    {"file": "09-content-matrix.html", "title": "内容矩阵 · 不同内容不同任务"},
+    {"file": "10-user-journey.html", "title": "用户路径 · 从注意到记忆"},
+    {"file": "11-case-study.html", "title": "内容案例 · 一次有效的内容动作"},
+    {"file": "12-metrics-system.html", "title": "指标体系 · 认知/互动/行动/关系"},
+    {"file": "13-roadmap.html", "title": "执行路线 · 三阶段推进"},
+    {"file": "14-resource-allocation.html", "title": "资源投入 · 更有效而非更多"},
+    {"file": "15-executive-decision.html", "title": "管理层决策 · 三个关键选择"},
+    {"file": "16-end-note.html", "title": "独立尾页 · 用户愿意主动选择的答案"}
+  ]
+}

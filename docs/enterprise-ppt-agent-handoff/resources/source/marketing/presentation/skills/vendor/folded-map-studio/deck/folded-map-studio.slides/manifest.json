@@ -1,0 +1,22 @@
+{
+  "deck_name": "folded-map-studio",
+  "slide_count": 3,
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "slides": [
+    {
+      "file": "01-cover.html",
+      "title": "房间方位册"
+    },
+    {
+      "file": "02-experience.html",
+      "title": "体验流程"
+    },
+    {
+      "file": "03-pilot.html",
+      "title": "试行安排"
+    }
+  ]
+}

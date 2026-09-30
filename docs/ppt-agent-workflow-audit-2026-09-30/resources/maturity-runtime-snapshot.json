@@ -1,0 +1,56 @@
+{
+  "job": {
+    "id": "bc11692a2bdf4a86a10a3540d5a0a88c",
+    "status": "running",
+    "stage": "visual_review",
+    "page_count": 56,
+    "error": null,
+    "quality_status": "needs_review",
+    "ready_for_delivery": false,
+    "page_progress": {
+      "current": 29,
+      "total": 52,
+      "page": 29
+    },
+    "repair_progress": {
+      "group": 29,
+      "attempt": 0,
+      "max_self_repairs": 3,
+      "deck_round": 0
+    },
+    "visual_progress": {
+      "phase": "candidate",
+      "current": 1,
+      "total": 1,
+      "page": 1
+    }
+  },
+  "group_status_counts": {
+    "accepted": 26,
+    "draft_needs_review": 26
+  },
+  "existing_quality_report_checks": {
+    "source_complete": true,
+    "browser_passed": true,
+    "visual_complete": false,
+    "deck_review": "unverified",
+    "assets_complete": false,
+    "export_matches_review": true,
+    "pptx_exported": true
+  },
+  "existing_quality_report_note": "恢复前的整册报告，不代表当前运行已完成终审",
+  "captured_at": "2026-09-30T16:54:56+08:00",
+  "scope": "只读运行状态快照；没有调用模型、生成PPT或部署",
+  "sample_images": [
+    {
+      "file": "maturity-group5.png",
+      "sha256": "ec61018b72d58beeb9ad211d8ee421797e87ff16e2c68d507f46f360f64db27a",
+      "note": "本轮候选版本的页面抽查图，不是全册终审结果"
+    },
+    {
+      "file": "maturity-group12.png",
+      "sha256": "3dcfe4341b4d8117a3c56bca19bb9d386fa35c6cc470c09326da2c97e33057e7",
+      "note": "本轮候选版本的页面抽查图，不是全册终审结果"
+    }
+  ]
+}

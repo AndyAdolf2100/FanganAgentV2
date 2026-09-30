@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>用户洞察</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<style>
+  body{margin:0;font-family:"HarmonyOS Sans SC","Source Han Sans SC","Microsoft YaHei","Alibaba PuHuiTi",sans-serif;color:#1F2024;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#FFF8EA;}
+  .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#1F2024 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+  .page-num{position:absolute;left:120px;top:88px;font-weight:900;font-size:20px;letter-spacing:5px;}
+  .page-num span{background:#8068C9;color:#FFF8EA;padding:6px 14px;border-radius:6px;}
+  .head-title{font-weight:900;font-size:44px;line-height:1.25;}
+  .head-title em{font-style:normal;position:relative;display:inline-block;}
+  .head-title em::before{content:"";position:absolute;left:-4px;right:-4px;top:60%;bottom:10%;background:#F6C945;z-index:-1;border-radius:4px;}
+  .path-card{position:relative;padding:26px 28px;border:3px solid #1F2024;border-radius:20px;box-shadow:6px 6px 0 #1F2024;height:100%;box-sizing:border-box;}
+  .path-num{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:64px;line-height:1;}
+  .path-title{font-weight:900;font-size:28px;margin:8px 0 12px;}
+  .path-q{font-size:22px;line-height:1.55;color:#243B75;margin-bottom:12px;}
+  .path-tag{display:inline-block;padding:4px 12px;background:#1F2024;color:#FFF8EA;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;}
+  .path-scene{font-size:20px;color:#1F2024;line-height:1.55;margin-top:8px;}
+  .conclusion{position:absolute;left:120px;bottom:100px;right:120px;padding:22px 30px;background:#F06F61;color:#FFF8EA;border-radius:16px;font-weight:800;font-size:26px;display:flex;align-items:center;gap:18px;box-shadow:8px 8px 0 #1F2024;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="grain"></div>
+
+  <div class="page-num"><span>06 / 16</span> &nbsp; USER INSIGHT · 用户洞察</div>
+
+  <svg style="position:absolute;right:130px;top:80px;" width="240" height="60" viewBox="0 0 240 60">
+    <path d="M0 30 Q 20 5 40 30 T 80 30 T 120 30 T 160 30 T 200 30 T 240 30" stroke="#F06F61" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div style="position:absolute;right:120px;top:150px;width:34px;height:34px;background:#54C6B1;border-radius:50%;"></div>
+  <i class="fas fa-star" style="position:absolute;right:180px;top:150px;color:#F6C945;font-size:24px;"></i>
+
+  <div style="position:absolute;left:120px;top:180px;width:1680px;">
+    <div class="head-title">
+      品牌必须从<em style="color:#F06F61;">"讲产品"</em>，<br>
+      转向<em style="color:#8068C9;">"讲用户正在经历什么"</em>。
+    </div>
+  </div>
+
+  <div style="position:absolute;left:120px;top:380px;width:1680px;height:490px;">
+
+    <div class="path-card" style="background:#F4C9C5;position:absolute;left:0;top:20px;width:490px;height:440px;transform:rotate(-1deg);">
+      <div class="path-num" style="color:#F06F61;">01</div>
+      <div class="path-title">问题内容</div>
+      <div class="path-tag" style="background:#F06F61;">PROBLEM</div>
+      <div class="path-q" style="margin-top:14px;">用户正在遇到<br>什么麻烦？</div>
+      <div style="margin-top:14px;padding:14px;border:2.5px dashed #1F2024;border-radius:12px;background:#FFF8EA;">
+        <div style="font-size:16px;color:#243B75;font-weight:700;margin-bottom:6px;">场景切片</div>
+        <div class="path-scene">通勤路上信号断续、深夜加班后没胃口、租房搬家总丢东西……</div>
+      </div>
+      <div style="position:absolute;right:24px;bottom:24px;">
+        <i class="fas fa-question-circle" style="color:#1F2024;font-size:42px;opacity:.5;"></i>
+      </div>
+    </div>
+
+    <svg style="position:absolute;left:490px;top:200px;" width="120" height="60" viewBox="0 0 120 60">
+      <path d="M0 30 Q 15 0 30 30 T 60 30 T 90 30 T 120 30" stroke="#1F2024" stroke-width="4" fill="none" stroke-linecap="round" stroke-dasharray="0"/>
+      <polygon points="115,20 125,30 115,40" fill="#1F2024"/>
+    </svg>
+
+    <div class="path-card" style="background:#F6C945;position:absolute;left:595px;top:0;width:490px;height:440px;transform:rotate(1deg);">
+      <div class="path-num" style="color:#243B75;">02</div>
+      <div class="path-title">场景内容</div>
+      <div class="path-tag" style="background:#243B75;">SCENARIO</div>
+      <div class="path-q" style="margin-top:14px;">用户在哪些<br>具体时刻需要方案？</div>
+      <div style="margin-top:14px;padding:14px;border:2.5px dashed #1F2024;border-radius:12px;background:#FFF8EA;">
+        <div style="font-size:16px;color:#243B75;font-weight:700;margin-bottom:6px;">场景切片</div>
+        <div class="path-scene">周五夜晚约朋友、周日早上补觉后、旅行中的第37分钟、加班后的地铁末班车。</div>
+      </div>
+      <div style="position:absolute;right:24px;bottom:24px;">
+        <i class="fas fa-map-marked-alt" style="color:#1F2024;font-size:42px;opacity:.55;"></i>
+      </div>
+    </div>
+
+    <svg style="position:absolute;left:1085px;top:200px;" width="120" height="60" viewBox="0 0 120 60">
+      <path d="M0 30 Q 15 60 30 30 T 60 30 T 90 30 T 120 30" stroke="#1F2024" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <polygon points="115,20 125,30 115,40" fill="#1F2024"/>
+    </svg>
+
+    <div class="path-card" style="background:#54C6B1;position:absolute;left:1190px;top:20px;width:490px;height:440px;transform:rotate(-1deg);">
+      <div class="path-num" style="color:#243B75;">03</div>
+      <div class="path-title">态度内容</div>
+      <div class="path-tag" style="background:#8068C9;">ATTITUDE</div>
+      <div class="path-q" style="margin-top:14px;">用户希望通过<br>选择表达什么？</div>
+      <div style="margin-top:14px;padding:14px;border:2.5px dashed #1F2024;border-radius:12px;background:#FFF8EA;">
+        <div style="font-size:16px;color:#243B75;font-weight:700;margin-bottom:6px;">场景切片</div>
+        <div class="path-scene">我更在意生活方式；我愿意为设计付费；我要选择一个懂我的品牌。</div>
+      </div>
+      <div style="position:absolute;right:24px;bottom:24px;">
+        <i class="fas fa-heart" style="color:#1F2024;font-size:42px;opacity:.55;"></i>
+      </div>
+    </div>
+
+    <div style="position:absolute;left:240px;bottom:0;width:60px;height:60px;background:#8068C9;border-radius:50%;"></div>
+    <div style="position:absolute;left:840px;bottom:20px;width:44px;height:44px;background:#F06F61;border-radius:50%;border:3px solid #1F2024;"></div>
+    <i class="fas fa-star" style="position:absolute;left:1430px;bottom:0;color:#F6C945;font-size:36px;"></i>
+  </div>
+
+  <div class="conclusion">
+    <i class="fas fa-comment-dots" style="color:#F6C945;font-size:32px;"></i>
+    <span>只有进入用户生活的<span style="color:#F6C945;">具体时刻</span>，品牌才会<span style="color:#F6C945;">从产品变成关系</span>。</span>
+    <span style="margin-left:auto;font-size:18px;opacity:.9;letter-spacing:2px;">· INSIGHT ·</span>
+  </div>
+
+</section>
+</body>
+</html>

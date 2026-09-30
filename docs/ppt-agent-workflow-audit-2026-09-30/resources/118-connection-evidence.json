@@ -1,0 +1,90 @@
+{
+  "recorded_at": "2026-09-30T12:43:59+08:00",
+  "endpoint": "https://ppt-test-v118.wxbjq.top/agent/_bridge/codedeck",
+  "session_id": "01a0d23b7ac676f2a3f18d6de59bae39",
+  "connection": "authenticated request and two completed text Q&A rounds",
+  "final_state": "idle",
+  "works_unchanged": true,
+  "works_before": [
+    {
+      "id": "01a0d2a83d0c7a5183d8a305616633af",
+      "title": "render_probe 缺陷探测样本",
+      "version": 2,
+      "total_pages": 1,
+      "status": "completed"
+    }
+  ],
+  "works_after": [
+    {
+      "id": "01a0d2a83d0c7a5183d8a305616633af",
+      "title": "render_probe 缺陷探测样本",
+      "version": 2,
+      "total_pages": 1,
+      "status": "completed"
+    }
+  ],
+  "last_task_run": {
+    "status": "completed",
+    "reason": null,
+    "attempt": 1,
+    "started_at": "2026-09-30T04:38:23Z",
+    "completed_at": "2026-09-30T04:38:38Z"
+  },
+  "rounds": [
+    {
+      "round": 25,
+      "task_run_id": "01a0f09a01b47fd1b3cb9a2a0a27b78d",
+      "first_seq": 830054,
+      "last_seq": 830057,
+      "event_types": [
+        "tool_use",
+        "tool_use",
+        "agent_message",
+        "completed"
+      ],
+      "tool_events": [
+        {
+          "seq": 830054,
+          "event_type": "tool_use",
+          "data": {
+            "tool": "列出作品",
+            "tool_id": "list_works",
+            "desc_key": "tool_desc.list_works",
+            "description": "列出当前会话的所有作品",
+            "task_run_id": "01a0f09a01b47fd1b3cb9a2a0a27b78d"
+          }
+        },
+        {
+          "seq": 830055,
+          "event_type": "tool_use",
+          "data": {
+            "tool": "读取文件",
+            "tool_id": "read_file",
+            "desc_key": "tool_desc.read_file",
+            "desc_params": {
+              "path": "reports/render-probe-spec.md"
+            },
+            "description": "读取文件：reports/render-probe-spec.md",
+            "task_run_id": "01a0f09a01b47fd1b3cb9a2a0a27b78d"
+          }
+        }
+      ],
+      "answer_file": "118-round-25.md"
+    },
+    {
+      "round": 26,
+      "task_run_id": "01a0f09b45fe74728b9afc62f1d0b529",
+      "first_seq": 830059,
+      "last_seq": 830060,
+      "event_types": [
+        "agent_message",
+        "completed"
+      ],
+      "tool_events": [],
+      "answer_file": "118-round-26.md"
+    }
+  ],
+  "credential_storage": "No credentials or authorization headers included. Temporary authenticated client terminated.",
+  "scope": "technical Q&A and readonly tool/document inspection only",
+  "limitation": "Unchanged work metadata and observed events do not reveal all private backend internals."
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>改造前后——红线实战示例</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<style>
+  body{margin:0;font-family:'PingFang SC','Microsoft YaHei','Noto Sans SC','Inter','Helvetica Neue',Arial,sans-serif;background:#f5f7fb;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#f5f7fb;color:#1a1f2e;}
+  .title{position:absolute;top:80px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1a1f2e;padding-bottom:24px;}
+  .title h1{font-size:64px;font-weight:800;letter-spacing:-.01em;margin:0;line-height:1.05;}
+  .title .kicker{font-size:24px;color:#6b7280;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;}
+
+  .compare{position:absolute;top:246px;left:80px;right:80px;bottom:88px;display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  .panel{border-radius:14px;padding:32px 30px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+  .panel.bad{background:#fff;border:1px solid #f2c5ca;}
+  .panel.good{background:#fff;border:1px solid #cfe6d6;}
+  .flag{display:inline-flex;align-items:center;gap:12px;font-size:24px;font-weight:600;padding:8px 18px;border-radius:999px;width:fit-content;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;}
+  .flag.bad{background:#fdecee;color:#c1121f;}
+  .flag.good{background:#e6f4ea;color:#1a7f37;}
+  .panel h2{font-size:40px;font-weight:700;margin:18px 0 20px 0;line-height:1.1;}
+  .row{display:flex;gap:18px;align-items:flex-start;padding:14px 0;border-top:1px dashed #e2e6ee;}
+  .row:first-of-type{border-top:none;padding-top:6px;}
+  .row .lbl{flex:0 0 200px;font-size:24px;font-weight:600;color:#6b7280;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;line-height:1.4;}
+  .row .val{flex:1;font-size:32px;line-height:1.4;color:#1a1f2e;}
+  .row .val code{font-family:'JetBrains Mono',monospace;color:#c1121f;font-weight:600;}
+  .panel.good .row .val code{color:#1a7f37;}
+
+  .verdict{margin-top:auto;padding:16px 20px;border-radius:10px;font-size:24px;line-height:1.4;font-weight:500;}
+  .verdict.bad{background:#fdecee;color:#7a0e17;border-left:6px solid #c1121f;}
+  .verdict.good{background:#e6f4ea;color:#0f5423;border-left:6px solid #1a7f37;}
+
+  .footer{position:absolute;bottom:24px;left:80px;right:80px;display:flex;justify-content:space-between;font-size:20px;color:#6b7280;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="title">
+    <h1>改造前后——红线实战示例</h1>
+    <div class="kicker">§5 自检 · 完整示例</div>
+  </div>
+
+  <div class="compare">
+    <!-- 改造前 -->
+    <div class="panel bad">
+      <span class="flag bad"><i class="fas fa-xmark"></i>改造前 · 不通过</span>
+      <h2>卡片网格，压缩适配</h2>
+
+      <div class="row">
+        <div class="lbl">字号</div>
+        <div class="val">正文 <code>18px</code>，卡片标题 <code>28px</code>——低于 1920 下限 <code>32 / 40 px</code>。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">容量</div>
+        <div class="val">6行 × 18 × 1.5 = 162；卡片内部 140 → <code>×1.15 = 186 &gt; 140</code>。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">填充</div>
+        <div class="val">最后内容项结束于 <code>72%</code>——下方 240px 空白区域。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">占有率</div>
+        <div class="val">文字高度/容器 = <code>34%</code>；居中作为虚假填充。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">结构</div>
+        <div class="val">6节点纵向流程图；使用 <code>transform: scale(.85)</code> 压缩。</div>
+      </div>
+
+      <div class="verdict bad">第 1、2、3、4、5 项均不通过 → 该页必须重做。</div>
+    </div>
+
+    <!-- 改造后 -->
+    <div class="panel good">
+      <span class="flag good"><i class="fas fa-check"></i>改造后 · 通过</span>
+      <h2>2×2 卡片，按内容定尺</h2>
+
+      <div class="row">
+        <div class="lbl">字号</div>
+        <div class="val">正文 <code>32px</code>，卡片标题 <code>40px</code>——满足 1920 下限。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">容量</div>
+        <div class="val">3行 × 32 × 1.5 = 144；卡片内部 200 → <code>×1.15 = 166 ≤ 200</code>。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">填充</div>
+        <div class="val">最后内容项下边缘落在 <code>92%</code>——在区间内。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">占有率</div>
+        <div class="val">文字高度/容器 = <code>78%</code>；合规居中。</div>
+      </div>
+      <div class="row">
+        <div class="lbl">结构</div>
+        <div class="val">步骤改用编号列表——节点-连线图形已按§2.5删除。</div>
+      </div>
+
+      <div class="verdict good">六项全部通过 → 已追加交付记录注释。</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>示例数据——说明性数字，非来自实际渲染的幻灯片。</span>
+    <span>当场修正，不得批量延后——§5 交付门控</span>
+  </div>
+</section>
+<!-- 自检 第3页（详细版）：字号 [h1 64px 标题下限 ✓; panel h2 40px 卡片标题下限 ✓; row .val 32px 正文下限 ✓; flag / lbl / verdict / kicker 24px 辅助档下限 ✓; footer 20px 来源档下限 ✓; 同角色同字号：所有h2均40，所有.val均32，所有.lbl均24]; 容量 [panel内部宽度≈(1760-32)/2-60=804；panel内部高度≈746-64=682；内容：flag~40 + 间距18 + h2 40×1.1×1行=44 + 间距20 + 5行×(14+32×1.4×1行=59)=295 + verdict 24×1.4×1行=34 + verdict padding 32 → 内容合计~483，×1.15=555 ≤ 682 ✓]; 填充 [compare下边缘=1080-88=992 → 992/1080=91.9% 在88-95区间 ✓；footer顶边≈1080-24-20=1036；最后内容下边缘992 ≤ footer顶边1036 − G(≈35)=1001 ✓；网格：2列×864 + 32间距=1760=内容宽度 ✓；单行可用高度746已填满 ✓]; 占有率 [每个panel内容555/682≈81.4% ≥ 60% ✓；内容组在panel内整体顶部对齐，见§2.7]; 结构 [无空卡片；无scale；无重叠；无节点-连线图形；无mermaid；CSS已验证——冒号、分号、单位、闭合标签均正确]; 标注 [val单元格中的数值为说明性数字——footer已明确标注"示例数据"，语言与PPT一致 ✓]; 未执行渲染后审查。 -->
+</body>
+</html>

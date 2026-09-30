@@ -1,0 +1,51 @@
+{
+  "market_id": "87bd1f23308e45a18caa0049dd73c332",
+  "source": "118 public skill market API",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/SKILL.md",
+      "sha256": "aa4444bed4efdb4b51f284ca53012d8378f6e3af6e363f9d3846e8a93efb9ea3"
+    },
+    {
+      "path": "deck/paper-light-experiments.slides/manifest.json",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/deck/paper-light-experiments.slides/manifest.json",
+      "sha256": "e3cd06c61006d928bb02f442e84865f710b6b0924423011b8728061ec26a65bd"
+    },
+    {
+      "path": "deck/paper-light-experiments.slides/slides/01-cover.html",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/deck/paper-light-experiments.slides/slides/01-cover.html",
+      "sha256": "345e1b403431333da6ba4b0d207bf57c52effe80d3e20618506e14b3f9a723f5"
+    },
+    {
+      "path": "deck/paper-light-experiments.slides/slides/02-experience.html",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/deck/paper-light-experiments.slides/slides/02-experience.html",
+      "sha256": "0198057a2bae96c9b3b960564b18cdf5bc812180a93d1b2b1ce323855c2655ae"
+    },
+    {
+      "path": "previews/01-cover.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/previews/01-cover.png",
+      "sha256": "83f9375c56d77c9d12d10eace8b920c9b5b5b5f542112838dae7e4bdf8e664b2"
+    },
+    {
+      "path": "previews/02-experience.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/previews/02-experience.png",
+      "sha256": "9c124631ccb1e2c1a3042481c649451761ab056b71b894d7cf5e95367bcf57b7"
+    },
+    {
+      "path": "references/agent-runtime.md",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/references/agent-runtime.md",
+      "sha256": "5ef5cfe249a63cfa295fdbb6c84cfe77e63de63fc398601fc295efcd35fe46cd"
+    },
+    {
+      "path": "thumbnails/01-cover.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/thumbnails/01-cover.png",
+      "sha256": "f459d855900f352fef108145489cffbc0ab21224736f8944685e6b7f4e0d7238"
+    },
+    {
+      "path": "thumbnails/02-experience.png",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/87bd1f23308e45a18caa0049dd73c332/thumbnails/02-experience.png",
+      "sha256": "19d14ec555553dfb7bd65c34b13840491d6d9e04bb21deb673a17887642ae0bb"
+    }
+  ]
+}

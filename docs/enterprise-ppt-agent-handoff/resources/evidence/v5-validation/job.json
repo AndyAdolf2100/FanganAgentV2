@@ -1,0 +1,66 @@
+{
+  "id": "895b39e9fdb846ee8ca151b88fae8b6e",
+  "run_id": "6312ffe8a11e4345bbb5d763b7c5677e",
+  "status": "completed",
+  "stage": "needs_review",
+  "created": 1790747404.1013658,
+  "source_sha256": "77a0caae6020d34b35002af2d910f4641325a454cf5a2348aa92b366ad2862ca",
+  "source_runtime": "deerflow",
+  "page_count": 7,
+  "error": null,
+  "pipeline_version": "3.0.0-enterprise-html-v5",
+  "style_id": "auto",
+  "style_name": "54530772-3b5a-075d-e404-3a1b39cdae57 · v3",
+  "options": {
+    "template_id": "28201bbad982b9dfec9a3142301a1c9774925722fcc8819527d87e1adf68c236",
+    "template_revision": 3
+  },
+  "enterprise_workflow_version": 5,
+  "updated": 1790749013.4868143,
+  "agent_owner": "project_presentation_agent",
+  "enterprise_layout_mode": "enterprise-model-html-v4",
+  "page_progress": {
+    "current": 7,
+    "total": 7,
+    "page": 7
+  },
+  "repair_progress": {
+    "group": 7,
+    "attempt": 0,
+    "max_self_repairs": 3,
+    "deck_round": 0
+  },
+  "visual_progress": {
+    "phase": "initial",
+    "current": 1,
+    "total": 1,
+    "page": 1
+  },
+  "corrections_available": true,
+  "correction_count": 28,
+  "quality_status": "needs_review",
+  "deck_revision": "7c6408f901888f5cdcd043a055251b3e1d9c466be9729ae1cee28d4c4422343e",
+  "resume_requested_at": 1790748805.855125,
+  "template_progress": {
+    "current": 7,
+    "total": 7,
+    "template_page": 28
+  },
+  "ready_for_delivery": false,
+  "artifacts_available": [
+    "presentation.html",
+    "presentation.pptx"
+  ],
+  "checks": {
+    "source_complete": true,
+    "browser_passed": true,
+    "visual_complete": false,
+    "deck_review": "unverified",
+    "assets_complete": false,
+    "export_matches_review": true,
+    "pptx_exported": true
+  },
+  "visual_status": "needs_review",
+  "visual_notice": "草稿已保留；仍有未解决或未验证项",
+  "repairs": 7
+}

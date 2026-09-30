@@ -1,0 +1,18 @@
+{
+  "deck_name": "material-rhythm-studio",
+  "slide_count": 2,
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "slides": [
+    {
+      "file": "01-cover.html",
+      "title": "Ribbon Study"
+    },
+    {
+      "file": "02-workshop.html",
+      "title": "Workshop sequence"
+    }
+  ]
+}

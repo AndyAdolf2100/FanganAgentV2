@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "composition": "message_house",
+  "required_text_keys": [
+    "title",
+    "subtitle",
+    "section",
+    "item_0_label",
+    "item_0_text",
+    "item_1_label",
+    "item_1_text",
+    "item_2_label",
+    "item_2_text",
+    "item_3_label",
+    "item_3_text"
+  ],
+  "requires_scene": false,
+  "body": "<main>\n<section data-role=\"section\" data-ref='section'></section>\n<h1 data-role=\"title\" data-ref='title'></h1>\n<p class=\"subtitle\" data-role=\"body\" data-ref='subtitle'></p>\n<div class=\"house\">\n<div class=\"roof\">\n<div class=\"roof-label\" data-role=\"label\" data-ref='item_0_label'></div>\n<div class=\"roof-text\" data-role=\"body\" data-ref='item_0_text'></div>\n</div>\n<div class=\"roof-line\"></div>\n<div class=\"pillars\">\n<div class=\"pillar\">\n<div class=\"pillar-label\" data-role=\"label\" data-ref='item_1_label'></div>\n<p data-role=\"body\" data-ref='item_1_text'></p>\n</div>\n<div class=\"pillar\">\n<div class=\"pillar-label\" data-role=\"label\" data-ref='item_2_label'></div>\n<p data-role=\"body\" data-ref='item_2_text'></p>\n</div>\n</div>\n<div class=\"base\">\n<div class=\"base-label\"><span data-role=\"label\" data-ref='item_3_label'></span></div>\n<p class=\"base-text\" data-role=\"body\" data-ref='item_3_text'></p>\n</div>\n</div>\n</main>",
+  "css": "main{width:1280px;height:720px;background:var(--bg);color:var(--ink);padding:42px 64px 20px 64px;font-family:'Noto Sans CJK SC','Microsoft YaHei',sans-serif;position:relative;box-sizing:border-box;}\nsection[data-role=section]{font-size:17px;letter-spacing:6px;color:var(--muted);margin-bottom:10px;}\nh1{font-size:44px;margin:0 0 6px 0;font-weight:700;letter-spacing:1px;}\n.subtitle{font-size:28px;color:var(--muted);margin:0;}\n.house{margin-top:16px;}\n.roof{background:var(--ink);color:var(--bg);padding:18px 40px 16px;clip-path:polygon(5% 0,95% 0,100% 100%,0 100%);width:880px;margin:0 auto;}\n.roof-label{font-size:24px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;}\n.roof-text{font-size:43px;font-weight:700;line-height:1.25;white-space:pre-line;}\n.roof-line{width:1030px;height:3px;background:var(--accent);margin:14px auto 0;}\n.pillars{display:flex;gap:60px;width:1030px;margin:0 auto;}\n.pillar{flex:1;border-top:4px solid var(--accent);padding:14px 22px 12px;background:var(--paper);}\n.pillar-label{font-size:30px;font-weight:700;margin-bottom:8px;color:var(--ink);}\n.pillar p{font-size:28px;line-height:1.45;color:var(--ink);margin:0;white-space:pre-line;}\n.base{width:1030px;margin:16px auto 0;border-top:14px solid var(--ink);border-bottom:14px solid var(--ink);padding:10px 0;}\n.base-label{display:block;width:fit-content;margin:0 0 6px 0;}\n.base-label span{display:block;font-size:30px;font-weight:700;padding:2px 18px;background:var(--accent);color:var(--ink);}\n.base-text{font-size:28px;margin:0;padding:0 18px;line-height:1.4;white-space:pre-line;}\n.roof{width:1030px;padding:14px 38px;clip-path:none}.roof-text{font-size:36px;line-height:1.25}.roof-label{font-size:24px;line-height:32px}.base{display:flex;gap:20px;align-items:flex-start;border-top:6px solid var(--ink);border-bottom:0;padding:14px 0;margin-top:12px}.base-label{width:170px;flex:none}.base-label span{font-size:28px;line-height:40px;padding:0 14px;white-space:nowrap}.base-text{padding:0;font-size:28px;line-height:1.4}.pillar{padding:12px 22px}.roof-line{margin-top:12px}\nmain{padding:0}section[data-role=section]{position:absolute;left:64px;top:42px;font-size:17px;line-height:24px;letter-spacing:4px;margin:0}h1{position:absolute;left:64px;top:88px;width:1152px;font-size:46px;line-height:1.28;margin:0;letter-spacing:0}.subtitle{position:absolute;left:64px;top:164px;line-height:1.4}.house{position:absolute;left:64px;top:240px;width:1152px;margin:0}",
+  "provenance": {
+    "kind": "locally_authored_and_reviewed",
+    "source_page": 11,
+    "native_review_version": "2.3",
+    "note": "Geometry adapted from local review; source brand copy replaced with text IDs. Not an original 118 template."
+  }
+}

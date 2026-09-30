@@ -1,0 +1,67 @@
+{
+  "recorded_at": "2026-09-30T13:10:41.005931+08:00",
+  "job_id": "40bf3188a3bf430fa448a664ed8a4f4f",
+  "scope": "cumulative active job trace, not an account bill and not today-only",
+  "vision_network_responses": 218,
+  "local_cache_hits": 117,
+  "by_model": {
+    "doubao-seed-2-0-mini-260428": {
+      "responses": 113,
+      "prompt_tokens": 351568,
+      "completion_tokens": 20855,
+      "total_tokens": 372423
+    },
+    "doubao-seed-2-1-pro-260915": {
+      "responses": 105,
+      "prompt_tokens": 267603,
+      "completion_tokens": 63815,
+      "total_tokens": 331418
+    }
+  },
+  "latest_saved_response": {
+    "id": "021790744866300034d021d1c7434dbb2c855dd0aef562f123c4e",
+    "model": "doubao-seed-2-1-pro-260915",
+    "created": 1790744875,
+    "usage": {
+      "completion_tokens": 214,
+      "prompt_tokens": 2495,
+      "total_tokens": 2709,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 100
+      }
+    },
+    "created_shanghai": "2026-09-30T13:07:55+08:00",
+    "file": "vision-response-42-attempt-1.json",
+    "review_result": {
+      "pages": [
+        {
+          "page": 42,
+          "verdict": "pass",
+          "observed": "该页为正文信息页，顶部为蓝色企业风格标题栏，下方是“④ 转化层”小节。主体为四行三列表格，列名分别为“指标”“目标值”“口径说明”，使用蓝色表头与浅蓝隔行底色；表格下方设有浅蓝色“效果预估总览”说明框。文字清晰，层级明确，表格留白充足，未见文字裁切、重叠或主体图像问题。",
+          "issues": []
+        }
+      ]
+    }
+  },
+  "api_endpoint": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+  "text_endpoint": "https://open.bigmodel.cn/api/coding/paas/v4/",
+  "text_model": "glm-5.3",
+  "generation_tools_in_job": 0,
+  "review_status": "reviewing",
+  "initial_reviewed_pages": 56,
+  "local_budget_not_actual_bill": {
+    "image-cache": {
+      "reservations": 11,
+      "reserved_rmb": "1.32",
+      "note": "global local reservation, not billed cost"
+    },
+    "vision-cache": {
+      "reservations": 335,
+      "reserved_rmb": "79.25",
+      "note": "global local reservation, not billed cost"
+    }
+  }
+}

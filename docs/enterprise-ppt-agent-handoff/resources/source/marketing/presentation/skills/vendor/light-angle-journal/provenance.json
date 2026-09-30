@@ -1,0 +1,81 @@
+{
+  "market_id": "242f4d7a45b145838d88a56d3648591d",
+  "source": "118 public skill market API",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "a6451b6909fc88837eeb5bc4f4be9f9287d91220917cda6d3afda489800b7b85",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/SKILL.md"
+    },
+    {
+      "path": "deck/light-angle-journal.slides/manifest.json",
+      "sha256": "8d4811a01cf996105654e485abc49ec5f083058c2a2647ab8da31b92d3914cdd",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/deck/light-angle-journal.slides/manifest.json"
+    },
+    {
+      "path": "deck/light-angle-journal.slides/slides/01-cover.html",
+      "sha256": "da4d3b522fe4bbf5f326eee1e11de4d65d6e14b7b03b0d904f2fe0d18ca0ff50",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/deck/light-angle-journal.slides/slides/01-cover.html"
+    },
+    {
+      "path": "deck/light-angle-journal.slides/slides/02-workshop.html",
+      "sha256": "6bc5328705c1aa47add5624dc84372fad1369e25410a8a4005c1483095798ad8",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/deck/light-angle-journal.slides/slides/02-workshop.html"
+    },
+    {
+      "path": "deck/light-angle-journal.slides/slides/03-record.html",
+      "sha256": "cea2163380c70afce21329bfcd7078e99836fa3b9d7cbf858d53aa8f949a32dd",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/deck/light-angle-journal.slides/slides/03-record.html"
+    },
+    {
+      "path": "deck/light-angle-journal.slides/slides/04-display.html",
+      "sha256": "f6c6059003d13ca7a1fe281c35990437069fdc836793a700e26a187959132895",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/deck/light-angle-journal.slides/slides/04-display.html"
+    },
+    {
+      "path": "previews/01-cover.png",
+      "sha256": "b0f283b7b1cf9fe1c0f7d0525d6ac86f67a8a43b22ffd6dcc35b06100f7fc265",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/previews/01-cover.png"
+    },
+    {
+      "path": "previews/02-workshop.png",
+      "sha256": "1764722accb9a678bccf0e742955293028049611528929c3d371b697f13b214a",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/previews/02-workshop.png"
+    },
+    {
+      "path": "previews/03-record.png",
+      "sha256": "685ba6fba6c9caaac3d93cfe6731844beda85619dc3f33c80c2fec951dc05969",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/previews/03-record.png"
+    },
+    {
+      "path": "previews/04-display.png",
+      "sha256": "c7215b99c05971a47c0bbe81c4c636739510af6fd745cdc813849ba917e2a744",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/previews/04-display.png"
+    },
+    {
+      "path": "references/agent-runtime.md",
+      "sha256": "0ade95121ff527ad4ff811868c9aede2d288e0103942b3ee5a36dfc16da26c10",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/references/agent-runtime.md"
+    },
+    {
+      "path": "thumbnails/01-cover.png",
+      "sha256": "630c5e13f898e43a2abf84061cc86c7f0b8825516c0043271f844685d6809bec",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/thumbnails/01-cover.png"
+    },
+    {
+      "path": "thumbnails/02-workshop.png",
+      "sha256": "199e82c9bb5f9d5df340a40a355d76c1ab1003940e068d30c64c58ad1f606c4c",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/thumbnails/02-workshop.png"
+    },
+    {
+      "path": "thumbnails/03-record.png",
+      "sha256": "df323e5813446398e0c5d195148fd8fc9798775de6c63b3e7c4917f52b9298df",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/thumbnails/03-record.png"
+    },
+    {
+      "path": "thumbnails/04-display.png",
+      "sha256": "f622507147412e7d55d52992b6beed1a0bb871000c6510d945ac57c102b7359b",
+      "url": "https://agent-assets-test.aippt.cn/skills/market/242f4d7a45b145838d88a56d3648591d/thumbnails/04-display.png"
+    }
+  ]
+}

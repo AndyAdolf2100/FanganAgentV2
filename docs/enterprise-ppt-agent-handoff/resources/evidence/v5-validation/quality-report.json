@@ -1,0 +1,121 @@
+{
+  "workflow_version": 5,
+  "quality_status": "needs_review",
+  "ready_for_delivery": false,
+  "deck_revision": "7c6408f901888f5cdcd043a055251b3e1d9c466be9729ae1cee28d4c4422343e",
+  "artifact_sha256": {
+    "presentation.html": "1ed94c46f9e9adacbd7ee000ca5234e08a48e211f982da8a17a78312d9e5235b",
+    "presentation.pptx": "9369e34f7574b1feb764e4bee256cf28aba76cfa05868c1a4f6a558d812a4398"
+  },
+  "artifact_formats": [
+    "html",
+    "pptx"
+  ],
+  "pages": [
+    {
+      "slide_id": "group-0000-part-001",
+      "slide_version": "16bb21eb7921bdbfbea33a9765da69198bd06e63726037f3f04ea138c5e8ef8e",
+      "screenshot_sha": "8c44e09cc5a6826f13bf255c6a1cf52268cbd7d872267c73dc3952044fd383a5",
+      "visual_verified": false
+    },
+    {
+      "slide_id": "group-0001-part-001",
+      "slide_version": "9667ed23403ef8676b02886b382a84e3e09566dd2ac9e85174cdf3e27290b2c3",
+      "screenshot_sha": "0f3f24a6613b375881dc6b5ab890ac19d79a375a86690f81db30c66c09eebc62",
+      "visual_verified": false
+    },
+    {
+      "slide_id": "group-0002-part-001",
+      "slide_version": "64453aa9922f8f2a9de0e576e18b4bfb08692fe03d731b4e2bc02d8a6aac989a",
+      "screenshot_sha": "c32db1d4fd0d92d7f8a92e26f3f120933f992cb3b9537f3a58cb39414fef0a1e",
+      "visual_verified": false
+    },
+    {
+      "slide_id": "group-0003-part-001",
+      "slide_version": "988b05565ae4b29b818eed0fcfdee47cbe7f84d1912d10f441876e538ea9efc4",
+      "screenshot_sha": "e40582fa3c4e661f990668a25270a22c0d1f95309bbd7ec9c7e86177c229e10e",
+      "visual_verified": false
+    },
+    {
+      "slide_id": "group-0004-part-001",
+      "slide_version": "b7db5425c0a1de78beb332f84977e5629b8c19959f7481b9d469b3d1775bfa34",
+      "screenshot_sha": "19ffc3093edf2dd0582e45d649902529b10d44a2a6d39e4ce21f5b0a19234ea4",
+      "visual_verified": false
+    },
+    {
+      "slide_id": "group-0005-part-001",
+      "slide_version": "66ec7ec3c406fcd29a757e71c1ee5249b1bc7494b7e230614a38b35d49b0dcc2",
+      "screenshot_sha": "b4716ce6719c355e42d7a323193128acef87dddd74fa017943278526832f7cbb",
+      "visual_verified": false
+    },
+    {
+      "slide_id": "group-0006-part-001",
+      "slide_version": "33aa21284e613cf93095e4c0f6f19b11b68ab372bc9277c77f4587a39e37d23a",
+      "screenshot_sha": "6e54f70b082d2f7340fc43e9b713eb02d0fa2cfc6d546d5530930b0174620f1e",
+      "visual_verified": false
+    }
+  ],
+  "checks": {
+    "source_complete": true,
+    "browser_passed": true,
+    "visual_complete": false,
+    "deck_review": "unverified",
+    "assets_complete": false,
+    "export_matches_review": true,
+    "pptx_exported": true
+  },
+  "limitations": [
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0000-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0001-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0002-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0003-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0004-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0005-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "visual_budget_exhausted",
+      "slide_id": "group-0006-part-001",
+      "detail": "视觉预算不足，本页尚未验证"
+    },
+    {
+      "type": "deck_review_unverified",
+      "status": "unverified",
+      "issues": []
+    },
+    {
+      "type": "asset_quality",
+      "issues": [
+        {
+          "type": "asset_unavailable",
+          "asset_id": "service_space_concept",
+          "generation_group": 3,
+          "required": false,
+          "detail": "项目预算或视觉请求次数不足以完成素材生成及一次Seed验收"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>用户变化</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<style>
+  body{margin:0;font-family:"HarmonyOS Sans SC","Source Han Sans SC","Microsoft YaHei","Alibaba PuHuiTi",sans-serif;color:#1F2024;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#FFF8EA;}
+  .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#1F2024 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+  .page-num{position:absolute;left:120px;top:88px;font-weight:900;font-size:20px;letter-spacing:5px;}
+  .page-num span{background:#54C6B1;color:#1F2024;padding:6px 14px;border-radius:6px;}
+  .head-title{font-weight:900;font-size:44px;line-height:1.25;color:#1F2024;}
+  .head-title em{font-style:normal;color:#F06F61;}
+  .step{position:relative;padding:24px 26px 24px 30px;border:3px solid #1F2024;border-radius:16px;box-shadow:6px 6px 0 #1F2024;display:flex;gap:24px;align-items:flex-start;}
+  .step-num{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:56px;line-height:1;flex-shrink:0;}
+  .step-title{font-weight:900;font-size:28px;margin-bottom:6px;}
+  .step-desc{font-size:22px;line-height:1.55;color:#243B75;}
+  .data-card{border:3px solid #1F2024;border-radius:14px;padding:16px 18px;text-align:left;background:#FFF8EA;box-shadow:4px 4px 0 #1F2024;}
+  .data-val{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:44px;line-height:1;color:#1F2024;}
+  .data-label{font-size:18px;color:#243B75;line-height:1.4;margin-top:8px;}
+  .note{position:absolute;bottom:44px;left:120px;right:120px;display:flex;justify-content:space-between;font-size:16px;color:#1F2024;opacity:.7;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="grain"></div>
+
+  <div class="page-num"><span>03 / 16</span> &nbsp; USER SHIFT · 用户变化</div>
+
+  <svg style="position:absolute;right:130px;top:80px;" width="260" height="60" viewBox="0 0 260 60">
+    <path d="M0 30 Q 20 5 40 30 T 80 30 T 120 30 T 160 30 T 200 30 T 240 30" stroke="#F06F61" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div style="position:absolute;right:120px;top:150px;width:34px;height:34px;background:#F6C945;border-radius:50%;"></div>
+  <i class="fas fa-star" style="position:absolute;right:180px;top:150px;color:#8068C9;font-size:24px;"></i>
+
+  <div style="position:absolute;left:120px;top:180px;width:1680px;">
+    <div class="head-title">
+      年轻用户关注的不只是<em>产品功能</em>，<br>
+      还有<em style="color:#8068C9;">表达方式</em>、<em style="color:#54C6B1;">使用场景</em>和<em style="color:#56A8D8;">身份认同</em>。
+    </div>
+  </div>
+
+  <div style="position:absolute;left:120px;top:360px;width:960px;display:grid;grid-template-rows:1fr 1fr 1fr 1fr;gap:20px;">
+
+    <div class="step" style="background:#F4C9C5;">
+      <div class="step-num" style="color:#F06F61;">01</div>
+      <div>
+        <div class="step-title">功能需求</div>
+        <div class="step-desc">产品是否真正解决问题——这是必须先做到的基础项。</div>
+      </div>
+      <i class="fas fa-cube" style="position:absolute;right:26px;top:26px;color:#1F2024;font-size:36px;opacity:.85;"></i>
+    </div>
+
+    <div class="step" style="background:#F6C945;">
+      <div class="step-num" style="color:#243B75;">02</div>
+      <div>
+        <div class="step-title">体验需求</div>
+        <div class="step-desc">使用过程是否轻松、好玩、顺畅——从"能用"进入"愿意用"。</div>
+      </div>
+      <i class="fas fa-hand-sparkles" style="position:absolute;right:26px;top:26px;color:#1F2024;font-size:36px;"></i>
+    </div>
+
+    <div class="step" style="background:#54C6B1;">
+      <div class="step-num" style="color:#243B75;">03</div>
+      <div>
+        <div class="step-title">表达需求</div>
+        <div class="step-desc">品牌是否符合自己的审美和态度——用了它，代表我在表达什么。</div>
+      </div>
+      <i class="fas fa-comment-dots" style="position:absolute;right:26px;top:26px;color:#1F2024;font-size:36px;"></i>
+    </div>
+
+    <div class="step" style="background:#8068C9;color:#FFF8EA;">
+      <div class="step-num" style="color:#F6C945;">04</div>
+      <div>
+        <div class="step-title" style="color:#FFF8EA;">身份需求</div>
+        <div class="step-desc" style="color:#FFF8EA;">选择品牌是否能表达自己的生活方式和身份主张。</div>
+      </div>
+      <i class="fas fa-fingerprint" style="position:absolute;right:26px;top:26px;color:#F6C945;font-size:36px;"></i>
+    </div>
+  </div>
+
+  <div style="position:absolute;right:120px;top:360px;width:660px;">
+    <div style="font-weight:900;font-size:24px;margin-bottom:16px;letter-spacing:2px;">
+      <span style="background:#1F2024;color:#FFF8EA;padding:6px 14px;border-radius:6px;">用户行为示意数据</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+      <div class="data-card">
+        <div class="data-val" style="color:#F06F61;">+36<span style="font-size:24px;">%</span></div>
+        <div class="data-label">年轻用户<br>主动参与品牌内容</div>
+      </div>
+      <div class="data-card">
+        <div class="data-val" style="color:#8068C9;">×2.4</div>
+        <div class="data-label">真实体验内容互动率<br>相比普通广告</div>
+      </div>
+      <div class="data-card">
+        <div class="data-val" style="color:#54C6B1;">+28<span style="font-size:24px;">%</span></div>
+        <div class="data-label">用户主动分享产品体验</div>
+      </div>
+      <div class="data-card">
+        <div class="data-val" style="color:#56A8D8;">+31<span style="font-size:24px;">%</span></div>
+        <div class="data-label">场景化内容转化率</div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;padding:18px 22px;background:#243B75;color:#FFF8EA;border-radius:14px;font-weight:700;font-size:22px;line-height:1.55;">
+      <i class="fas fa-quote-left" style="color:#F6C945;margin-right:10px;"></i>
+      年轻用户购买的，是<span style="color:#F6C945;">"我认同的表达"</span>，<br>而不只是<span style="color:#54C6B1;">"我需要的功能"</span>。
+    </div>
+
+    <div style="margin-top:20px;position:relative;height:80px;">
+      <div style="position:absolute;left:0;top:20px;width:60px;height:60px;background:#F06F61;border-radius:50%;"></div>
+      <svg style="position:absolute;left:80px;top:30px;" width="120" height="40" viewBox="0 0 120 40">
+        <path d="M0 20 Q 15 0 30 20 T 60 20 T 90 20 T 120 20" stroke="#54C6B1" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div style="position:absolute;left:220px;top:20px;width:60px;height:60px;background-image:radial-gradient(#1F2024 2.4px,transparent 2.6px);background-size:16px 16px;"></div>
+      <svg style="position:absolute;left:320px;top:20px;transform:rotate(15deg);" width="70" height="70" viewBox="0 0 70 70">
+        <polygon points="35,4 66,64 4,64" fill="#F6C945"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="note">
+    <span>数据状态：示意数据｜口径：2025Q4-2026Q2 全渠道均值｜样本 12,400</span>
+    <span>USER · SHIFT · 03</span>
+  </div>
+
+</section>
+</body>
+</html>

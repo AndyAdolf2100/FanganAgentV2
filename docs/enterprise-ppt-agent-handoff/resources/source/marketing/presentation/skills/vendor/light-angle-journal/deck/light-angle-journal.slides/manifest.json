@@ -1,0 +1,26 @@
+{
+  "deck_name": "light-angle-journal",
+  "slide_count": 4,
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "slides": [
+    {
+      "file": "01-cover.html",
+      "title": "Shadow Composition"
+    },
+    {
+      "file": "02-workshop.html",
+      "title": "Workshop sequence"
+    },
+    {
+      "file": "03-record.html",
+      "title": "Project record"
+    },
+    {
+      "file": "04-display.html",
+      "title": "Comparison display"
+    }
+  ]
+}

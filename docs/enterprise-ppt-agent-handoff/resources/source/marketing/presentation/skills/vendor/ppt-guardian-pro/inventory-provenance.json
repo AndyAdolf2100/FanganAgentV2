@@ -1,0 +1,65 @@
+{
+  "source": "118 read_file transcription and sandbox original-image copy; validated against remote SHA manifest where available",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "bytes": 10599,
+      "sha256": "115eef8973fdb81fcef72076f05e73b486c831703908fff6d614cd3655122d02"
+    },
+    {
+      "path": "references/agent-runtime.md",
+      "bytes": 3893,
+      "sha256": "c9f854fd2dc8997fb718a1d7f08a252c939b2fb74aa9b40a541bf22e1cd839b0"
+    },
+    {
+      "path": "previews/02-six-requirements.png",
+      "bytes": 198328,
+      "sha256": "3c28c6ebc13dbf6800b48914db3321ab1a13fda8dae4ccbfbb14d5b19a07f4b6"
+    },
+    {
+      "path": "previews/03-before-after.png",
+      "bytes": 220962,
+      "sha256": "5cac7467ca76f7fc9660bf350e5ae8eb44a1e673fee20a2cab62741f2033cb1f"
+    },
+    {
+      "path": "previews/01-cover.png",
+      "bytes": 518245,
+      "sha256": "a71f419b625785f49287517c6360b200c307f6cc6d2b28a0638f8de4b012d1c0"
+    },
+    {
+      "path": "deck/ppt-guardian.slides/manifest.json",
+      "bytes": 361,
+      "sha256": "d8ca101ff52d957d2a1ad725caeb307a57ac5401c5e7590395173cfa1e6c1123"
+    },
+    {
+      "path": "deck/ppt-guardian.slides/slides/03-before-after.html",
+      "bytes": 6714,
+      "sha256": "ed0c421564021acf680f2d8185bd9420b55170b69558d5c8bbfa70fc4c8f0b09"
+    },
+    {
+      "path": "deck/ppt-guardian.slides/slides/02-six-requirements.html",
+      "bytes": 5259,
+      "sha256": "a54b0470f1fc07c0ddf9f58e5d52230da171d1c1e026998101e310e680d5c159"
+    },
+    {
+      "path": "deck/ppt-guardian.slides/slides/01-cover.html",
+      "bytes": 4673,
+      "sha256": "f4d56fa2432c02510e026e3970716054621a7aeedd2de1df73dd4a89c117ca57"
+    },
+    {
+      "path": "thumbnails/02-six-requirements.png",
+      "bytes": 49052,
+      "sha256": "90fe39d46179ac456a920fedb259bf099a51992fa43a97a7612a35a106a5c262"
+    },
+    {
+      "path": "thumbnails/03-before-after.png",
+      "bytes": 52608,
+      "sha256": "423d3a6a1adb7827eb03bab18fe0ba6105c7fc5be75d2148c231d8ec05cec656"
+    },
+    {
+      "path": "thumbnails/01-cover.png",
+      "bytes": 76221,
+      "sha256": "f59c48dc08863c0e22b41cea63069645e5576514dee53b1c025ad4f7519673ec"
+    }
+  ]
+}

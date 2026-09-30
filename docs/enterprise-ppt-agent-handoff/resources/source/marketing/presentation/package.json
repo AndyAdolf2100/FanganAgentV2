@@ -1,0 +1,1 @@
+{"name":"marketing-presentation-renderer","private":true,"type":"module","scripts":{"test":"node --test test.mjs"},"dependencies":{"playwright":"1.59.1","pptxgenjs":"4.0.1"},"overrides":{"image-size":"2.0.4"}}

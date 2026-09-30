@@ -1,0 +1,1968 @@
+{
+  "captured_at": "2026-09-30T07:08:52.057333+00:00",
+  "base_git_commit": "17239fe027048c3154a92cfd1612bf0e0ec954b0",
+  "working_tree_changes_included": true,
+  "status": "v5_core_deployed_latest_gate_pending_worker_reload_needs_review",
+  "quality_status": "needs_review",
+  "source_notes": "按负责人最终同步信号镜像。v5核心此前已部署；本包另含最后人工反馈稳定ID、逐项Seed复验、当前版本门禁、续跑先验draft及失败原页硬检保留机制。bc11692a2bdf4a86a10a3540d5a0a88c运行worker在最后补强前启动，尚未加载该门禁；计划本轮结束后重启并续跑同一ID，不清零检查点和调用记录。不能把源码完成、工程测试或Codex独立观察改善称为项目美观验收。历史56页及7页证据仍待复核。包内排除.env、数据库、日志、依赖目录和运行环境，凭据模式扫描无命中。presentation/README.md仅保留便携相对链接调整，其余指定源码按冻结工作区复制。",
+  "deployment_boundary": {
+    "core_deployed": true,
+    "active_job_id": "bc11692a2bdf4a86a10a3540d5a0a88c",
+    "latest_human_feedback_gate_loaded_by_active_worker": false,
+    "activation_plan": "本轮任务完成后重启worker并续跑原ID",
+    "is_live_status_feed": false
+  },
+  "source_directories": [
+    "marketing_agent",
+    "frontend",
+    "tests",
+    "presentation"
+  ],
+  "documentation_source": {
+    "path": "docs/ppt-agent-workflow-audit-2026-09-30/企业工作流v5实施与验收.md",
+    "sha256": "2640fc18e047f997b586e8d6db7ffec429b3e4f3007bc6b735d0b5bdea602c11",
+    "copied_without_changes": true
+  },
+  "engineering_test_record": {
+    "reported_by": "coordinating_agent_at_final_code_sync",
+    "python_passed": 376,
+    "python_skipped": 1,
+    "chrome_passed": 17,
+    "visual_acceptance": false
+  },
+  "validation": {
+    "mirrored_source_files": 424,
+    "portable_readme_adjustments": 1,
+    "local_markdown_links_checked": 73,
+    "broken_local_markdown_links": 0,
+    "credential_pattern_scan_text_files": 311,
+    "credential_pattern_findings": 0,
+    "excluded_artifacts_found": 0,
+    "v5_screenshot_count": 7,
+    "v5_evidence_status": "needs_review",
+    "v5_ready_for_delivery": false
+  },
+  "manifest_note": "files包含包内全部普通文件的字节数和SHA256，排除本manifest自身以避免递归自哈希。ZIP包含manifest；ZIP整体SHA256在交接结果单独报告。",
+  "files": {
+    "README.md": {
+      "bytes": 4420,
+      "sha256": "4cf9ff885ad67722ddb08f989c12eddee1afc8d39030b86f4e8472c75c326bc3"
+    },
+    "resources/evidence/README.md": {
+      "bytes": 6045,
+      "sha256": "03d4d85122b58566e3b67aa1999923eb742d1b74b99967de6ddbeefca30802f2"
+    },
+    "resources/evidence/after-1.png": {
+      "bytes": 612115,
+      "sha256": "a4ca9e193fa88bc5b45ff9f1d204c9224e0e45aeec2770b5f0275cd50703a19b"
+    },
+    "resources/evidence/after-12.png": {
+      "bytes": 143435,
+      "sha256": "25d763ce7e43bd1182a3c0587b98d78299b357d1baa09b182bcdb2f7993f6752"
+    },
+    "resources/evidence/after-2.png": {
+      "bytes": 259907,
+      "sha256": "d4aac3a79b78d772b76b635dd59bd42670ff1aa18c261ce1b2a1f6574625a58d"
+    },
+    "resources/evidence/after-3.png": {
+      "bytes": 130925,
+      "sha256": "515bad5e3ad5ef8615e531df77291c83e8477d2064263d0d4da67db006013609"
+    },
+    "resources/evidence/after-5.png": {
+      "bytes": 93177,
+      "sha256": "a50922b0dbc7fe45b4bf12f2f27ec04748ddb4e38721ca123f38617a77b367ee"
+    },
+    "resources/evidence/after-6.png": {
+      "bytes": 150214,
+      "sha256": "e1a5790d9e4636f03f9219617297f0e46af1ea9da94e8f7aceab1e53287ea06b"
+    },
+    "resources/evidence/after-7.png": {
+      "bytes": 198245,
+      "sha256": "d54f741850ebfe050cdd8ca9858858c9966763e8c433f5d00c4f9e24dc6f545b"
+    },
+    "resources/evidence/after-8.png": {
+      "bytes": 162741,
+      "sha256": "b150115edc3769da694a0d0a856d4df971204ca008d2d694f7c703b091030109"
+    },
+    "resources/evidence/before-1.png": {
+      "bytes": 610696,
+      "sha256": "af52db3fe82582f8af22f38cdbf53edf553f9be05458b83cd1ead4908a41c199"
+    },
+    "resources/evidence/before-12.png": {
+      "bytes": 131990,
+      "sha256": "9baa4438e52e6fdd7b834c6a1becc82e9ecf2c1dfb1d8313d3d6fa96299f071c"
+    },
+    "resources/evidence/before-2.png": {
+      "bytes": 264167,
+      "sha256": "32ef4a0c73cb4e8205ceb286eb309c4542f8aafc1a9617f5febba1ff1cb51156"
+    },
+    "resources/evidence/before-3.png": {
+      "bytes": 133534,
+      "sha256": "fb621b5836306a17533bf44454d500777f80fa4163ad36aa3a20accf69bc1acf"
+    },
+    "resources/evidence/before-5.png": {
+      "bytes": 89614,
+      "sha256": "007bc4a79e8ee3255756e7e01c6574b2d920077a1ab0db5f81356cc0d6f907d4"
+    },
+    "resources/evidence/before-6.png": {
+      "bytes": 114496,
+      "sha256": "87ecaad24e97a344430c12e7941e281755bb3f6ef7ab26b044596029a7b52b8e"
+    },
+    "resources/evidence/before-7.png": {
+      "bytes": 148223,
+      "sha256": "20a2944401a6ffbafc3cec1996c552a4ade9e7b19cfc8fa1a7743943b3801d1c"
+    },
+    "resources/evidence/before-8.png": {
+      "bytes": 163719,
+      "sha256": "6757e8d5e6dd598932355b95d622fc3605d65974617366a88b4e3de80127aa6a"
+    },
+    "resources/evidence/codex-review.json": {
+      "bytes": 3375,
+      "sha256": "902862254cb69b1c577a21a05e3b5aaef4a16e4d925fe7a2f084191ac87e93dc"
+    },
+    "resources/evidence/page8-calibrated-review.json": {
+      "bytes": 828,
+      "sha256": "1cc3037f1838a603792d741b608417676ec33af98855f5682fcca31ace216392"
+    },
+    "resources/evidence/project-snapshot.json": {
+      "bytes": 3313,
+      "sha256": "0def84f01eaa54d9c93885969590eca3a772340dc09fe610a7fa4ee3a37ea216"
+    },
+    "resources/evidence/v5-validation/codex-review.json": {
+      "bytes": 2059,
+      "sha256": "3d8bef8d54b07aa7db2895e3aa566504104f413b6abe03c14ffd516c33882169"
+    },
+    "resources/evidence/v5-validation/job.json": {
+      "bytes": 1835,
+      "sha256": "1b940ea64c73c81795a5943176a25f938ef6565948b090626aa3148835e7c928"
+    },
+    "resources/evidence/v5-validation/previews/1.png": {
+      "bytes": 603916,
+      "sha256": "8c44e09cc5a6826f13bf255c6a1cf52268cbd7d872267c73dc3952044fd383a5"
+    },
+    "resources/evidence/v5-validation/previews/2.png": {
+      "bytes": 211904,
+      "sha256": "0f3f24a6613b375881dc6b5ab890ac19d79a375a86690f81db30c66c09eebc62"
+    },
+    "resources/evidence/v5-validation/previews/3.png": {
+      "bytes": 299794,
+      "sha256": "c32db1d4fd0d92d7f8a92e26f3f120933f992cb3b9537f3a58cb39414fef0a1e"
+    },
+    "resources/evidence/v5-validation/previews/4.png": {
+      "bytes": 126240,
+      "sha256": "e40582fa3c4e661f990668a25270a22c0d1f95309bbd7ec9c7e86177c229e10e"
+    },
+    "resources/evidence/v5-validation/previews/5.png": {
+      "bytes": 304668,
+      "sha256": "19ffc3093edf2dd0582e45d649902529b10d44a2a6d39e4ce21f5b0a19234ea4"
+    },
+    "resources/evidence/v5-validation/previews/6.png": {
+      "bytes": 91791,
+      "sha256": "b4716ce6719c355e42d7a323193128acef87dddd74fa017943278526832f7cbb"
+    },
+    "resources/evidence/v5-validation/previews/7.png": {
+      "bytes": 600398,
+      "sha256": "6e54f70b082d2f7340fc43e9b713eb02d0fa2cfc6d546d5530930b0174620f1e"
+    },
+    "resources/evidence/v5-validation/quality-report.json": {
+      "bytes": 4105,
+      "sha256": "49a7daf82da8b1c5e3043554aa3a7490f363aa0c8ae11ebf5fcc729e2b8420e2"
+    },
+    "resources/examples/frontend-template.json": {
+      "bytes": 20515,
+      "sha256": "8a7769cba6b7adb0fb63d3b96842ff171cca5ddfbfa8e483e014bfd07f60b405"
+    },
+    "resources/examples/repair-feedback.json": {
+      "bytes": 397,
+      "sha256": "3b236f4c483ad7e719f8c77b853042e77056c4c70bbd6245c4d4defb2f3ab99c"
+    },
+    "resources/openapi.json": {
+      "bytes": 15938,
+      "sha256": "b8f1d601d0a67a523230726576d18178d643cc7a677e2ac0fc0d69f9d8310162"
+    },
+    "resources/preview-openapi.json": {
+      "bytes": 1916,
+      "sha256": "993e3c7399a33749372c1212822b16b23996afab3f835c8fdf4424a179a4fa74"
+    },
+    "resources/research/enterprise-template-reuse-assessment-2026-09-28.md": {
+      "bytes": 20672,
+      "sha256": "0b7cbc5d5819f447a81b314339b8b05fc6c2b510c6556769e508cec684020af0"
+    },
+    "resources/research/legacy/frontend/src/enterprise/Manager.vue": {
+      "bytes": 17164,
+      "sha256": "292d98cc93e443196de692c94a468ac22457d0a63e35072d7b8cb1062e0dd7d0"
+    },
+    "resources/research/legacy/frontend/src/enterprise/parser.ts": {
+      "bytes": 46194,
+      "sha256": "115b7c1c3f6ed9f1c7ab1d9f09c57d39e40af5d84917b8433981cc59dd76c3e4"
+    },
+    "resources/research/legacy/frontend/src/enterprise/types.ts": {
+      "bytes": 3607,
+      "sha256": "041c78d69fc9d56be277dfd3bfecf6a31fc903069a8bf32d03e95c11b507663e"
+    },
+    "resources/research/legacy/src/marketing_graph/template_components.py": {
+      "bytes": 5641,
+      "sha256": "66947abb68ac32f7e0d31f215db3ea5bf824a01065f468c09e4d11a7e9e0b52c"
+    },
+    "resources/research/legacy/src/marketing_graph/template_html.py": {
+      "bytes": 41806,
+      "sha256": "1d3c739cb3d7583fd5c8d53e5e849017af79dadba922d2d835708831498e9315"
+    },
+    "resources/research/legacy/src/marketing_graph/template_html_nodes.py": {
+      "bytes": 28485,
+      "sha256": "b4dcc373f333251b74205128d0db71a2541cb3eed14beeec0721b475f5636473"
+    },
+    "resources/research/legacy/src/marketing_graph/uploaded_templates.py": {
+      "bytes": 22633,
+      "sha256": "56d7df973daad934dc3cbb455acfb7d1aae8a7ddeebe8791620aa8fffda7732c"
+    },
+    "resources/research/legacy/src/server/template_library.py": {
+      "bytes": 5302,
+      "sha256": "13aec82b5e0f61298fc97e3c950745f5ca99a44356d5809e44f598cfeb18a141"
+    },
+    "resources/research/ppt-research-dialogue.md": {
+      "bytes": 396135,
+      "sha256": "14fde87ba287c141f77f542736b44ec4c7e40846970bca55d9d5ce0c0b690a21"
+    },
+    "resources/skills/enterprise-ppt-agent/SKILL.md": {
+      "bytes": 4698,
+      "sha256": "25161b3bbb4ec81931be2a6c91f0e525a61acb74c39b8a400522a6a92a6b7201"
+    },
+    "resources/skills/enterprise-ppt-agent/references/tool-contracts.md": {
+      "bytes": 4451,
+      "sha256": "8a603ed4e5922ad9bf9b51a3de012cc2984146ab0286666f13581a9ac492506f"
+    },
+    "resources/source/marketing/frontend/.dockerignore": {
+      "bytes": 18,
+      "sha256": "c8015948b6eaefde5eaa3862f2fe5ce0245fcde4d6e66f7441dcdcbbed46e652"
+    },
+    "resources/source/marketing/frontend/Dockerfile": {
+      "bytes": 310,
+      "sha256": "7eb6c4ae351e83f3533aeafd6feaa4b9278e97c017890ede72e12628b24f2d6f"
+    },
+    "resources/source/marketing/frontend/enterprise/Editor.vue": {
+      "bytes": 14390,
+      "sha256": "67061a724025771c83bb3bc6c6be3087bb27d3dec1d1c5575d8ff63547cab813"
+    },
+    "resources/source/marketing/frontend/enterprise/Manager.vue": {
+      "bytes": 24891,
+      "sha256": "959ffaf0be28689bab7e88a043c0f3fc68a650b67d1d2ec52cdebf307755c322"
+    },
+    "resources/source/marketing/frontend/enterprise/PresentationDraft.vue": {
+      "bytes": 4567,
+      "sha256": "f08c0effc0f7d85b87639f368ec0fa269d1a0fb99f3873dcfbb2cb31c5adfffc"
+    },
+    "resources/source/marketing/frontend/enterprise/analysis.ts": {
+      "bytes": 4568,
+      "sha256": "3e69b792dd9b6f1b58251eae8679eafe4c310b78077e4fb0c3a7f00d1e2a6ec4"
+    },
+    "resources/source/marketing/frontend/enterprise/edit.ts": {
+      "bytes": 5547,
+      "sha256": "fdc4eff11544fdbe664ed591b7ab2b0a87ed62cefdfedbb9023f393d1cb30984"
+    },
+    "resources/source/marketing/frontend/enterprise/font-check.ts": {
+      "bytes": 508,
+      "sha256": "ed13b6933db2792a56afb18b0836ac9f6aa16848e2ad5e89cbafe38cb509f72e"
+    },
+    "resources/source/marketing/frontend/enterprise/image-effects.ts": {
+      "bytes": 3267,
+      "sha256": "dd66dfb85f4154cad4a58a4134474e4fa756004efcad604c9601eb403d5c403a"
+    },
+    "resources/source/marketing/frontend/enterprise/labels.test.mjs": {
+      "bytes": 1605,
+      "sha256": "a8809d3c6a8205a74e4a511bc7b01e23243e13547ccaa02607cf163e01e4c944"
+    },
+    "resources/source/marketing/frontend/enterprise/labels.ts": {
+      "bytes": 11233,
+      "sha256": "aa3acc7f007892fd610cbf58b0d9165929aa19ca857174634a399988beaccbab"
+    },
+    "resources/source/marketing/frontend/enterprise/parser.ts": {
+      "bytes": 46319,
+      "sha256": "b81b8342dd749b4f948aca3e5ebb31b484e70ae15b5ba73b144332e39182cd22"
+    },
+    "resources/source/marketing/frontend/enterprise/presentation-status.ts": {
+      "bytes": 986,
+      "sha256": "398a69bf1d892cc89dc23ed6bb19d8bac3b2712e9e2c45fb0458c83d421c79d1"
+    },
+    "resources/source/marketing/frontend/enterprise/render.ts": {
+      "bytes": 9844,
+      "sha256": "e82ea2b02d5a00ecfc7e603602eb930fd40b4dfca2c37813ebc5077104057c8e"
+    },
+    "resources/source/marketing/frontend/enterprise/store.ts": {
+      "bytes": 7229,
+      "sha256": "b7f1da94e57616d7fb81d8c2cee9d7cdb2a8f105eece8b02fe8735654b5bc63f"
+    },
+    "resources/source/marketing/frontend/enterprise/types.ts": {
+      "bytes": 4575,
+      "sha256": "2a3a631e7da5d31c90818cc4672c8ae3c5be84d6d14dc47cec6dc7e131e4089e"
+    },
+    "resources/source/marketing/frontend/enterprise/vector.ts": {
+      "bytes": 3846,
+      "sha256": "c56a563f3b594459a9d87ffdfb29cbec7e8e8d729c333100616af3c2a00da22d"
+    },
+    "resources/source/marketing/frontend/enterprise-smoke.mjs": {
+      "bytes": 8217,
+      "sha256": "e760b9a1b69955fc68b68cd931c001583433b27765cb03924780d194ec301197"
+    },
+    "resources/source/marketing/frontend/index.html": {
+      "bytes": 271,
+      "sha256": "edd2784edf502036e9aca0b85c4d83f44b849edd54b2180bfae7773c01773848"
+    },
+    "resources/source/marketing/frontend/nginx.conf": {
+      "bytes": 717,
+      "sha256": "73ba19a1661e8b54f3960d7d4d0b0df52bb1ae4f89797421bdb43f083456d200"
+    },
+    "resources/source/marketing/frontend/package-lock.json": {
+      "bytes": 49498,
+      "sha256": "25120da6ddcabe428fbcbdcd18d39621073ac5c165349481152e8b9f7de3f206"
+    },
+    "resources/source/marketing/frontend/package.json": {
+      "bytes": 300,
+      "sha256": "16e6c929cf9a8fd2443a1df18a164d1f23e3cfdfcf36ffff4b11d3438632ef0c"
+    },
+    "resources/source/marketing/frontend/presentation.css": {
+      "bytes": 4849,
+      "sha256": "46c5ac0b0fae0831294fcb9181d49a4d77f6a39204edc9914119507fb6aabd1c"
+    },
+    "resources/source/marketing/frontend/smoke.mjs": {
+      "bytes": 6026,
+      "sha256": "b3ef9ee12d2c8d9f9e5ee3216c0299e284ee9073c05520cf8b2aab04b5f2d9e2"
+    },
+    "resources/source/marketing/frontend/src.js": {
+      "bytes": 32061,
+      "sha256": "61052bea5a900080bad19fc45c2d394df0e67e89cff6f59f440c8762639302bf"
+    },
+    "resources/source/marketing/frontend/style.css": {
+      "bytes": 8862,
+      "sha256": "73e2a4f4b94d3586d744586dae78c71515b451c7e2a9bb9e4703fdbe18125cfc"
+    },
+    "resources/source/marketing/frontend/vite.config.js": {
+      "bytes": 234,
+      "sha256": "33b7fb07323c4a980eeddc4e40c6021042394c19585ecc8b64a00494fcc15c53"
+    },
+    "resources/source/marketing/marketing_agent/__init__.py": {
+      "bytes": 74,
+      "sha256": "c423633d4f6e9db179c69e2e8284baf6104ec95d9d57148671479b8e5b07ff12"
+    },
+    "resources/source/marketing/marketing_agent/api.py": {
+      "bytes": 15116,
+      "sha256": "8fdb34deb516f13d51021366d4f66f12dddebbaeeefa29ad278c77dcbd9d6ba2"
+    },
+    "resources/source/marketing/marketing_agent/engine.py": {
+      "bytes": 4779,
+      "sha256": "18dd120bbe4ce601c57e14568ea18ee0380b187dabc5b9d1097e40323a79d70b"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/__init__.py": {
+      "bytes": 83,
+      "sha256": "4caca2f2a3c8a949f3e4611522f02a479aa3795649a686460cb1e239ff4963d6"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/adaptive.py": {
+      "bytes": 18524,
+      "sha256": "6fafd4bace6eb2113ac8d6567204757c3ffd9686257249556d5772bdb0d1fa3e"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/assets.py": {
+      "bytes": 34097,
+      "sha256": "732add1433db7aa15cd90ba9aa6cb8f71fa02c271ec9c5890165421145dede4e"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/diagnostics.py": {
+      "bytes": 25034,
+      "sha256": "298b59d76d973aecd6236f7522f8d4f54e38e6dc943858947833835a46d503c2"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/fixed.py": {
+      "bytes": 7438,
+      "sha256": "d5c68a26ac8be69e07718ca9bbfd117a84c672f8e2786f65351c44807236d0d5"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/manuscript.py": {
+      "bytes": 4731,
+      "sha256": "77a04907ed0c0d7ab682a0e6f5bd7c82b341d5198fec0dfee5b5ca09b2158644"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/model_html.py": {
+      "bytes": 62077,
+      "sha256": "3befb6848c7006919998ef58530c0d2a1bc6df3fb67fb76fc4b7dcfe07509cdb"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/pipeline.py": {
+      "bytes": 45613,
+      "sha256": "9f669396984e196a52aee0540d7e0cdebfd2fc7d57a30f2e6f01fe9e6af1905c"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/ppt_content.py": {
+      "bytes": 5888,
+      "sha256": "40c6049ec0adeba6f62e46688bbe1ee3b133ed2cd59ede49126a0a82383a9007"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/prompts.py": {
+      "bytes": 2630,
+      "sha256": "948d692309b18445c1e5bc496ae2cf7094e344fdf58343691c922451321d6340"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/refinement.py": {
+      "bytes": 5054,
+      "sha256": "2c9e53e3cc1c959efccd85c99282a53e4da51de355485df3ca0a7011e3fd580a"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/revisions.py": {
+      "bytes": 19742,
+      "sha256": "f26f97361000d312d6362765f47ebd3224dc66e05c27e67d4d9ae7cb8d739f84"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/service.py": {
+      "bytes": 7114,
+      "sha256": "e7867843030c9c9d5b91eea8722f6ed0308f94831e8f31545aa40062b59dbd58"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_analysis.py": {
+      "bytes": 16196,
+      "sha256": "6029f287d16c965c49499767d6198f41fa8f5982b47eb1a5e7a93a2fb9f8374d"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_body_layout.py": {
+      "bytes": 2053,
+      "sha256": "ca2f0789b0f23e8d044158de3f2d852d365b5787fb54f2366b9817d7fd134aae"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_capacity.py": {
+      "bytes": 2639,
+      "sha256": "f22257d343a1131537b89bd8b2b88c85d7055a480122f1f822a106b67753dde8"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_component_render.py": {
+      "bytes": 19573,
+      "sha256": "b4a1cdc5cda63752691ee4aa372bbda936a43034ac2677d403e0f05cc312258e"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_components.py": {
+      "bytes": 5821,
+      "sha256": "3f29a598429e72e2001ea62fb7ed92af0437d9baf8d745f5599b120982d18b91"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_html.py": {
+      "bytes": 41515,
+      "sha256": "ee69027db1fa9ceba21d2d5edc064152d60f337f283497462ca36ea811c6be71"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_labels.py": {
+      "bytes": 263,
+      "sha256": "690a7dfc1b9f98939f8e5a63420a210097f456b29d52004f9bc3d7c51a97deba"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/template_vector.py": {
+      "bytes": 5230,
+      "sha256": "b653d79566f9a10d0a6a390e339bcc22889012c6d0cd1a0b790aa19f4459ce4c"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/uploaded_templates.py": {
+      "bytes": 22762,
+      "sha256": "449bd12de39a652e7d7d5194ea5fa4dbf1aceb066095fd1cafe7ec784db0cc8a"
+    },
+    "resources/source/marketing/marketing_agent/enterprise/workflow.py": {
+      "bytes": 25414,
+      "sha256": "df9dac245653cecb06beec61555704c0dd81bcc0a489c3788648ea63477eeb30"
+    },
+    "resources/source/marketing/marketing_agent/manuscripts.py": {
+      "bytes": 4138,
+      "sha256": "854a09eab74624ec0821835a397c3b5d0fb2cfe1bc7923de245824a1f87f9eee"
+    },
+    "resources/source/marketing/marketing_agent/module_mapping.py": {
+      "bytes": 5101,
+      "sha256": "0a4258ada6a391097e605627531b0db9d1df5a7ee2006dac5e88464e3322dbcd"
+    },
+    "resources/source/marketing/marketing_agent/presentation.py": {
+      "bytes": 18436,
+      "sha256": "15723806bcc2a4e7b2ca4918110101abdd240dadb13bfd41fcdf9c150b0f896d"
+    },
+    "resources/source/marketing/marketing_agent/presentation_agent.py": {
+      "bytes": 9631,
+      "sha256": "1847f5136622c674902370269f769822f6e4f94bde41ccfb030b47bc2b8875e6"
+    },
+    "resources/source/marketing/marketing_agent/presentation_budget.py": {
+      "bytes": 2196,
+      "sha256": "8b43836b508781aa708a753dd20e9e24ccffcbd5eb4feb64a8d0ff6adad407a1"
+    },
+    "resources/source/marketing/marketing_agent/presentation_charts.py": {
+      "bytes": 4978,
+      "sha256": "fafeb3b46b393401df40d2456530fb9fbacc41114326e286fb02fb3872d33edd"
+    },
+    "resources/source/marketing/marketing_agent/presentation_compat.py": {
+      "bytes": 8808,
+      "sha256": "dd7286229d858d6badf8bd0c77e010f5a3002f62830cf935c0b511f2fb7ec456"
+    },
+    "resources/source/marketing/marketing_agent/presentation_design.py": {
+      "bytes": 13939,
+      "sha256": "19430fe9ed7fcd5cacf032fb7f87cfbc04b1de5a31e85dcfb81b27ebd3443b99"
+    },
+    "resources/source/marketing/marketing_agent/presentation_editorial.py": {
+      "bytes": 9382,
+      "sha256": "f0417bf68129828c2d61b21d675beba8b742027a38c9bc0d8fd13c9bc6e9dcf0"
+    },
+    "resources/source/marketing/marketing_agent/presentation_images.py": {
+      "bytes": 15694,
+      "sha256": "b1ccfe6fbdb54485c4f1dcb16e0841133c1385f586b703f1cadd8023746bffb2"
+    },
+    "resources/source/marketing/marketing_agent/presentation_masters.py": {
+      "bytes": 3879,
+      "sha256": "c83acd72c64cb1a04307fe83522765c853f55320349d6fb31b488c6cd63f95c3"
+    },
+    "resources/source/marketing/marketing_agent/presentation_options.py": {
+      "bytes": 2732,
+      "sha256": "dfae2bf1566573c65f03bc344c0317e8626fb9dd82c7b2a44ca654a527d41cff"
+    },
+    "resources/source/marketing/marketing_agent/presentation_pages.py": {
+      "bytes": 20604,
+      "sha256": "3012f7a8d644a0d2dc932bbf6956cf6e9020278b5c8e12f16657a22fb4d1c16f"
+    },
+    "resources/source/marketing/marketing_agent/presentation_preview.py": {
+      "bytes": 7544,
+      "sha256": "c34a08c9786e3d2c59ab0b962117b182b9516ab8aebf0446d4c1e6312e1ab5d8"
+    },
+    "resources/source/marketing/marketing_agent/presentation_styles.py": {
+      "bytes": 3172,
+      "sha256": "9734a9f95f9b577982cf2ae42134c50b10789302cc096906369c5356a8ab85bc"
+    },
+    "resources/source/marketing/marketing_agent/presentation_vision.py": {
+      "bytes": 20555,
+      "sha256": "683c62d6496ec6de435a0c073b20440bd6482623ea4afc989ad791963d8ccbf9"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B001.md": {
+      "bytes": 809,
+      "sha256": "84b61bf61c72acb56627390f9f2910d8a6a6eff2ab436c2c30ba3eb8bfca0316"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B002.md": {
+      "bytes": 393,
+      "sha256": "c1696ea1e4734f0e654924a6813f9906f76bf9b74b33997b2d87af108f0379cf"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B003.md": {
+      "bytes": 841,
+      "sha256": "cfb2efd25c88a80ac0978a492ae9d653d12adc42721e4e33bf0160d6dd99ba92"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B004.md": {
+      "bytes": 1124,
+      "sha256": "9a60f34f92f774ac427c7f6eb04ecafd0e35ec9e70e6f2a341f83cd7d4ef3a77"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B005.md": {
+      "bytes": 902,
+      "sha256": "1b2235c3fb32eeac00cdb357d94332422f020fddb0744bdf21056da32ce20983"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B006.md": {
+      "bytes": 426,
+      "sha256": "b35db61ddbaa367f8f163d5258f08408aad7ce329a24ffd34a4f396954de139c"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B007.md": {
+      "bytes": 499,
+      "sha256": "a872a44ce6948761e93dbdc0c7a0f72aaf776db5c928e8a9daa69d3c1eecce0e"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B008.md": {
+      "bytes": 385,
+      "sha256": "e86eb0a0748ca9dba3c4064104412a8ca620b4fdfa3b356ca7ef7ed045c3b1b3"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B009.md": {
+      "bytes": 377,
+      "sha256": "0e3b50d06bbbc04b7bfd175cca1c4bfc586a33800f3bc4966c555bee51321899"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B010.md": {
+      "bytes": 404,
+      "sha256": "c566e5cb7620750d2f9982fcd0c96caefe092b11ad93b2782b66d91b329423eb"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B011.md": {
+      "bytes": 391,
+      "sha256": "d206be82dd044f630c242e1f6d36e5e9af91b87ca58cbb0f4267ff310ef41a16"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B012.md": {
+      "bytes": 424,
+      "sha256": "9000c4d6fd5a1fa92f0a0434d626615225507420f8a799bceeda1fbefa1f5aa0"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B013.md": {
+      "bytes": 423,
+      "sha256": "89f9746e2ecc642f9610dab94fe5742fc57fded73076828ca605ffe77cc50990"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B014.md": {
+      "bytes": 358,
+      "sha256": "c63469870350476bd5677171c31de2a95f9250b2b9974098853e1a88924e038d"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B015.md": {
+      "bytes": 423,
+      "sha256": "587916eaca6eac8c9f469614cfad16a7eaf7ca8e8c3bb6fadd6e15fdad58fd2c"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B016.md": {
+      "bytes": 351,
+      "sha256": "aa28e4af232b9f02123b1808d9f2fc3a071260f8a8dc1a36b197a5397de24380"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B017.md": {
+      "bytes": 523,
+      "sha256": "5901514c572a94449f9a6f2546e5302624bb42816265e03e638986468392a77d"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B018.md": {
+      "bytes": 968,
+      "sha256": "cb228df96d51a2e7735f1c903c71c311ae3221edec499d0007aa35e1de8995b8"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B019.md": {
+      "bytes": 338,
+      "sha256": "ce9a2ac51bd61546ba9cd39a9b73983b20deed2ee851df9f6aa711b9b77a2126"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B020.md": {
+      "bytes": 332,
+      "sha256": "7fc25042aeab5b778c67e7331c3f3465b6eed29fa332f82707694ca24e2d4050"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B021.md": {
+      "bytes": 417,
+      "sha256": "e33b6fd28148be652ccdfcceb0a10a7d6ee96132a4585205f4bfa34d47869e6d"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B022.md": {
+      "bytes": 355,
+      "sha256": "35993707d4c7e149ff379d9f03cd1459a3245e12c05889f02088476ea75b8f70"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B023.md": {
+      "bytes": 344,
+      "sha256": "001a8c1e4988f7e4ef7e2aa2eadcfd9001ca45f946c5f9ad428f51e3a1b84270"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B024.md": {
+      "bytes": 358,
+      "sha256": "b85cfc7209bf42f8a40b2b732b22c1714b9d9e3c08fda36a4a125fe5cdba344b"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B025.md": {
+      "bytes": 984,
+      "sha256": "fe5e9bbf63fd34e15315c6d049b0fd172b149b37643b34f6d123061dc3c203c1"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B026.md": {
+      "bytes": 328,
+      "sha256": "178ea5b5b0ab6f150b845f0d61f67e73c19da4146b7dbfd03d1ce152696ba4ad"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B027.md": {
+      "bytes": 337,
+      "sha256": "4eceb8c420d12cc3aa9ba4182e8ca4a3a85316555a524dcffc89b6b676840929"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B028.md": {
+      "bytes": 334,
+      "sha256": "a371e9b8d7da672615dc425c58628b39adf4e2f2967dff39a880e6d85545a8fc"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B029.md": {
+      "bytes": 311,
+      "sha256": "c29eed044e4a6b69864f2caf9c4eb25a9f7d75b962d0b31a9695eed314d087af"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B030.md": {
+      "bytes": 320,
+      "sha256": "8ea6aaa0e9be7de3e188fda21e4e4703da60c98c687adf1fbc33f4a1d2bdab11"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B031.md": {
+      "bytes": 341,
+      "sha256": "0d6a84f57d8bc033c3ab1f23cb02668f23a28062f303bb49f9f8bc86f58750bc"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B032.md": {
+      "bytes": 316,
+      "sha256": "c61352d03b96475063b9deaa2aad46ffc47b756da54f8d68debba1614e5aca1f"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B033.md": {
+      "bytes": 346,
+      "sha256": "546d898ceeb247653ee9941d930e473302d2527a62f27d23af2aa7afc3db1c48"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B034.md": {
+      "bytes": 313,
+      "sha256": "e3c6720a4ae791ab33505cec58424d952495492fbc0228f08da08be0c426fd45"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B035.md": {
+      "bytes": 298,
+      "sha256": "0dc9e4435876d91aa4000a04a17e9c99d534bdbb7d6b8f522d89d8dd693364e8"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B036.md": {
+      "bytes": 316,
+      "sha256": "3d529b321166cb75b6985eada5f5e797d080f51cfdc2b94cf099079be4b216c7"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B040.md": {
+      "bytes": 963,
+      "sha256": "6d63c635ee6490dde06bc6f5bee3e6dff6628106cbce4c92d965f9215c717848"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B041.md": {
+      "bytes": 858,
+      "sha256": "1991125ae438fad9643907909bcb1fc93be40e0ef777d2799c968b6558479606"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B042.md": {
+      "bytes": 995,
+      "sha256": "0d7910e64f2edd1db8e39247300d44c1e10282783e1acdf7ecae9c4178bb8b06"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B043.md": {
+      "bytes": 357,
+      "sha256": "c97bd41d7f72123473440c7f9245e802b989762cb070ae15969b70a935223132"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B044.md": {
+      "bytes": 836,
+      "sha256": "9c1c2c36c9a5ec0e21ef14233fe533c681572e6b3205b372d83166d1d44a7c9c"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B045.md": {
+      "bytes": 356,
+      "sha256": "7ea34cea628336d85ccca2e9696633e3dea94d7b2e80663dbd2024f331b8bb17"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B046.md": {
+      "bytes": 363,
+      "sha256": "1b59ea45e2ad8d8537a9c1253091fbc24ad55516f8e7b6401ae2335b796c1297"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B047.md": {
+      "bytes": 1299,
+      "sha256": "30dee07343a92909e57e9aec96874958a2c554ceeb0a019c09f3d85d7828e928"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B048.md": {
+      "bytes": 1080,
+      "sha256": "ca1bedb9389bcf9ca8b768107804ad3b1a2891e1e679ec69faf3b303682b36f3"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B049.md": {
+      "bytes": 1142,
+      "sha256": "b2909b744ffdf01d72a381d00800f38d6642645661e268ad8a21406ad5c7f3b1"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_B050.md": {
+      "bytes": 758,
+      "sha256": "cd2ff590693ae2a207d6e64293d0b0d6f538e3e3254aa4b9c0f186cd28e4f287"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_assembly.md": {
+      "bytes": 3036,
+      "sha256": "2dcdeae8887b4ca34ae832bcc146032ca882d137ef7953caf7949ee877db6e8f"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_brief_confirm.md": {
+      "bytes": 2228,
+      "sha256": "433dd752319b589d304d826f3bbcb64e6e7449d43ba9903739753a489d566d9f"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_brief_intake.md": {
+      "bytes": 3863,
+      "sha256": "256cae0a4c04f44c01f38ec87bb45482de6349de3a363268501e016a38136051"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_creative.md": {
+      "bytes": 4881,
+      "sha256": "bb79fe9b92dd0356d8c05e9ea4054d4dff18574f6c7d813d8ffb3faf3a8962a3"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_kol.md": {
+      "bytes": 5579,
+      "sha256": "95a9e34d9e0cbddb1cc9561d381e025c809cfd61319e058a7342c156361bc9e6"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_kpi_douyin.md": {
+      "bytes": 2608,
+      "sha256": "dd82fce98dde60f97538f461d0f0cc892a6781e076283d7c84eb04cbb31515e0"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_kpi_game.md": {
+      "bytes": 2655,
+      "sha256": "a61a0ed41d4541ed515d11ffc3f5ff1f470a9c095039da85544b9c0f8830c4c1"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_kpi_general.md": {
+      "bytes": 2261,
+      "sha256": "5fc6c5a27829ecde2ec27b04974b84eecc4fca23a86d3de37dc08fb4691edced"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_kpi_xiaohongshu.md": {
+      "bytes": 2679,
+      "sha256": "1566d69585d046e91458dd22a9182782bcc74a68b87b0f31d63b1ad7275965b5"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_outline.md": {
+      "bytes": 4387,
+      "sha256": "a5c05d96c287dff366fe313bebd4771f97140b3e7d5d44f87489cf2cff797880"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_research.md": {
+      "bytes": 4575,
+      "sha256": "1699714895f203bc982678b6cf9a287aa0899becae732ddd873c0db5ebd4ac07"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_strategy.md": {
+      "bytes": 4303,
+      "sha256": "aba4f061f15c03072edbd0243fcb248437cdf3febbb584ebb57f6e993f887d0f"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_account.md": {
+      "bytes": 2919,
+      "sha256": "3814c4ba4ecb459809e6f860cc53b4d0ab985cc5a1e703cfebe21b3ff9515b94"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_douyin.md": {
+      "bytes": 2806,
+      "sha256": "acc8478f3440b9e6e4c7e3f9d53613d5f3122b929215d8b4ff5bd6fc62126dca"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_entertainment.md": {
+      "bytes": 2982,
+      "sha256": "c31abd042e6e69b9be51aaad1c875de0d69da6661536c0f43de852bb44061049"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_game.md": {
+      "bytes": 3057,
+      "sha256": "86a71c8d1492aeb6a61aaac08698d796490a71392d8c50398dc909e57192155b"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_general.md": {
+      "bytes": 2883,
+      "sha256": "54d52fc2636c1667612d2fc84bdfbb6642d39d833aa33d98cb675634175a9e08"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_integrated.md": {
+      "bytes": 2871,
+      "sha256": "88de6e8e3bc6eca525659814f81710f1ebbc367f3af238ed2660309cc263af88"
+    },
+    "resources/source/marketing/marketing_agent/prompts/marketing_v2_theme_xiaohongshu.md": {
+      "bytes": 2914,
+      "sha256": "bc843fa7758f16b9fbe3cd59f97250726976a345d60059d67ba5dd914a543b8c"
+    },
+    "resources/source/marketing/marketing_agent/prompts.py": {
+      "bytes": 4341,
+      "sha256": "c4ce37c98c1896318ef663ff0d74be20c83e60b29d102fed5c9a4c5fd4aa4014"
+    },
+    "resources/source/marketing/marketing_agent/runtime.py": {
+      "bytes": 6087,
+      "sha256": "c9eee886af7342f963c04db1e414d50ea3f81184b5920484db0f09bb4847e4d9"
+    },
+    "resources/source/marketing/marketing_agent/store.py": {
+      "bytes": 4231,
+      "sha256": "4457121e2f3ea4ae1b8d13afe0115c53788951b41d6a543e46ac1d01b0cfb7a1"
+    },
+    "resources/source/marketing/marketing_agent/workflow.py": {
+      "bytes": 1163,
+      "sha256": "befea86b005365929efd2e592d046970d4f557c1af906670a06e6504fdce8336"
+    },
+    "resources/source/marketing/presentation/README.md": {
+      "bytes": 5523,
+      "sha256": "eb9f5f96f19d0f01d3a1358a3a19bc080bdb95e56b0464011c8fb053a1e22aff"
+    },
+    "resources/source/marketing/presentation/assets/README.md": {
+      "bytes": 622,
+      "sha256": "d173288842e5dedaba85a62327f32a58c130e323c5d6b9caa36b18abda6b5459"
+    },
+    "resources/source/marketing/presentation/assets/cover.png": {
+      "bytes": 1526391,
+      "sha256": "d6967834855ab5333adfd36639febd563847dcfc55906262a55f9106545aac28"
+    },
+    "resources/source/marketing/presentation/assets/office.png": {
+      "bytes": 1960413,
+      "sha256": "8ed21124600e8b4bb1640c973e36aa676e82eb946c636ad54e347b8ed9a32c94"
+    },
+    "resources/source/marketing/presentation/assets/outdoor.png": {
+      "bytes": 1998536,
+      "sha256": "0c0d5f4932dd1c3dac9199301ee45abcc0a22999e55475ac3679e0ccb592e067"
+    },
+    "resources/source/marketing/presentation/assets/style-references/brand_launch.jpg": {
+      "bytes": 163191,
+      "sha256": "44d282b18dfd056d6c04c587cb5824ba07cb2caf02fe2521d63bc0747c779a5c"
+    },
+    "resources/source/marketing/presentation/audit_native_pdf.py": {
+      "bytes": 4759,
+      "sha256": "11b0f4e90a9ba5d0c5fe2170ac10d3444b23f930b1aae682b3cc82f9871f1fd3"
+    },
+    "resources/source/marketing/presentation/charts.mjs": {
+      "bytes": 8697,
+      "sha256": "4c3e2e0c3a84626ec291f037b0f4b82d8cbdad39d25d8e0e27e0f18a7ee036e4"
+    },
+    "resources/source/marketing/presentation/consistency.mjs": {
+      "bytes": 1872,
+      "sha256": "d6554922e229a4fdf8ea858252e34a904f9f2ec8d2de1a7dffe92f26d050ea77"
+    },
+    "resources/source/marketing/presentation/custom.mjs": {
+      "bytes": 2181,
+      "sha256": "6aa461b04182f8af09e5dec3277dc7f1170fe6806af5029b285c2715f314ac9a"
+    },
+    "resources/source/marketing/presentation/design.css": {
+      "bytes": 11580,
+      "sha256": "216a407115a9fbb1cb8b7b32ba8ead31fe511be93f6330d1483c29fdd604d614"
+    },
+    "resources/source/marketing/presentation/design.mjs": {
+      "bytes": 3670,
+      "sha256": "48e60afd1429226e792198a4a9a69408df55542a6b50b9a15ddde620d54ff3d5"
+    },
+    "resources/source/marketing/presentation/enterprise.mjs": {
+      "bytes": 34607,
+      "sha256": "b57819ef98f4f112fee1ce316de5dac8406b5ac8f332933ccdfab3ec8b7db3e0"
+    },
+    "resources/source/marketing/presentation/enterprise.test.mjs": {
+      "bytes": 13901,
+      "sha256": "a4efaefa12cab6f0f73e888c6d62790e11f807d01223ebe7c58904707b8676cd"
+    },
+    "resources/source/marketing/presentation/package-lock.json": {
+      "bytes": 7890,
+      "sha256": "e53a0f01b12b42b919a3aa69a174e4488cb470c44274f0846bf0d2a82da618e0"
+    },
+    "resources/source/marketing/presentation/package.json": {
+      "bytes": 210,
+      "sha256": "39f0b3591f359bd622d51b4f226c05ade744b87f4345f1d12bdd20897729c9bb"
+    },
+    "resources/source/marketing/presentation/probe-page.mjs": {
+      "bytes": 2156,
+      "sha256": "2b7b2dda6bc37d402d98895f5b8f2d4bdc39166fc48555e4842e8038a5948788"
+    },
+    "resources/source/marketing/presentation/render.mjs": {
+      "bytes": 21253,
+      "sha256": "18d7be33a179ef4ca8e8ff62fff27bda1a0eaab9a6d7f9b9a3f45ea2ec014338"
+    },
+    "resources/source/marketing/presentation/skills/enterprise-deck/SKILL.md": {
+      "bytes": 12235,
+      "sha256": "f2196ddb968c91191a2713827bb0cbc0aee4d90b25bffb7d2c7dfa1ad7a568fc"
+    },
+    "resources/source/marketing/presentation/skills/enterprise-deck/references/html-contract.md": {
+      "bytes": 6316,
+      "sha256": "0d60b22f53237005e1959d0b4850eba1a3dde39ad35a33bdbb49649058a21e87"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/SKILL.md": {
+      "bytes": 8543,
+      "sha256": "2efa0ff03923e9a8fd6304f3e12adb0772e70070685f7e9e7771280e41e6c49d"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/masters/audience_bands.json": {
+      "bytes": 2952,
+      "sha256": "95b5046f8d37aa2429a44b78d501691059a5347c008565ab3d68215f2c5eeb95"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/masters/hero_statement.json": {
+      "bytes": 1803,
+      "sha256": "3a9aab060f07b926d046e129593f8e0d19d1246b0d3bf0b98445b8a56f64794c"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/masters/message_house.json": {
+      "bytes": 4040,
+      "sha256": "a6402c0695a833444374a38c6be2df716cfc68cfa623911cfe4e8abeecb27dcf"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/masters/platform_bands.json": {
+      "bytes": 2133,
+      "sha256": "6808395795495d7608759fceefd600fafddd78c4a2a4c965c82543f712d122cf"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/masters/subject_profile.json": {
+      "bytes": 1905,
+      "sha256": "bef0309b568f86f42b6ffd68d8e43547601a0af7b9354d763089925a243ca120"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/masters/time_grid.json": {
+      "bytes": 2269,
+      "sha256": "4d19c7cbb97c248f7a88b00827d49bfecb485287d37dfa877085d27341a2bea9"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/references/agent-workflow.md": {
+      "bytes": 2191,
+      "sha256": "7ae5607ad4cbd9e93508c1e39729c86dd50586fd46622a8a35e6cf23d4df81aa"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/references/image-briefs.md": {
+      "bytes": 2551,
+      "sha256": "2b19d83bf79aeb99f810dbe2be3bb5a5005fb5c1f23830c2f2121138c18fad42"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/references/page-generation.md": {
+      "bytes": 4768,
+      "sha256": "9331e584cdde8305a621658d0e40db1488ca1d323c0e2a46416407dc35fe67dc"
+    },
+    "resources/source/marketing/presentation/skills/marketing-deck/references/screenshot-review.md": {
+      "bytes": 1745,
+      "sha256": "fe430be24b686a9416640c90308c0de1dc12fcc949ccc8e9a6f26f7d4399f98a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/SKILL.md": {
+      "bytes": 1372,
+      "sha256": "14bdd8e59ab363e861daef8f9e92db637d443192ca5c42b42882d59ff2011edc"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/deck/balance-form-lab.slides/manifest.json": {
+      "bytes": 383,
+      "sha256": "730ad558d98fd85a6fc24bce46e01c62a7f667fb7d955010145a436c99ea728e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/deck/balance-form-lab.slides/slides/01-cover.html": {
+      "bytes": 1886,
+      "sha256": "ed451095d897b45d4cb627bea5e4548f7c153bdcbc681bc243708784ff86c6a6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/deck/balance-form-lab.slides/slides/02-experience.html": {
+      "bytes": 2198,
+      "sha256": "216bef46188570de812e11bdc0e7027a570a9a86cba144354b71f1b7d2747684"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/deck/balance-form-lab.slides/slides/03-pilot.html": {
+      "bytes": 2179,
+      "sha256": "08da0ae6b7de1355255ef9df4f4e5f5410fe883f5f5fd5f3afb5c10819f758a3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/previews/01-cover.png": {
+      "bytes": 87914,
+      "sha256": "69a22dc91371140e925406198c8d0670b6558997d6a04e6875ba607fbfe43b66"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/previews/02-experience.png": {
+      "bytes": 91334,
+      "sha256": "ab5ba9790140d72d6e3583f82ea18a384e8444fe0d5aab30f8d1072c5297fb4c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/previews/03-pilot.png": {
+      "bytes": 93454,
+      "sha256": "32a2739d47f5342334ab7b030cc803208e25c670b6b0ac70646ceee325a4fda5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/provenance.json": {
+      "bytes": 3411,
+      "sha256": "9edafcbb050fe23a7489aefc6c413b424661afebb632badbaf0bb0ea30274373"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/references/agent-runtime.md": {
+      "bytes": 299,
+      "sha256": "f7c403aa66ec5360c24977937151225a650b533edf25971221e62ae652ee2453"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/thumbnails/01-cover.png": {
+      "bytes": 30694,
+      "sha256": "bf650b8f1835aa60f8d8c1664a3b599da987e54af0952670514398bf06939afa"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/thumbnails/02-experience.png": {
+      "bytes": 37577,
+      "sha256": "cdb3492541ee16693efb1120c7f33ead534538587f28e8b3dbad6fc29326bcc5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/balance-form-lab/thumbnails/03-pilot.png": {
+      "bytes": 38102,
+      "sha256": "f37ba479c309e137fdc263053393eb970037034215db78c0b2333b078da45dc3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/SKILL.md": {
+      "bytes": 1375,
+      "sha256": "ae624d5581dd181cf0038d011290fdbf6c2aee842aa3b207f241e89c95f04556"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/deck/folded-map-studio.slides/manifest.json": {
+      "bytes": 384,
+      "sha256": "d7d3b11b3e25fa6d2e4f43ccf3f9cea9683eb37a6231debcf0b863f946fa2d6a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/deck/folded-map-studio.slides/slides/01-cover.html": {
+      "bytes": 1878,
+      "sha256": "9c14d4214ff154886dcd0d779c8359ae7371ae2b5ab17cc72057b8c352712470"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/deck/folded-map-studio.slides/slides/02-experience.html": {
+      "bytes": 2205,
+      "sha256": "39191d6481ce54062b640dd34865e45650a984838c7404b9cdac4488884e0c94"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/deck/folded-map-studio.slides/slides/03-pilot.html": {
+      "bytes": 2174,
+      "sha256": "2c8c95da01554f3317ab3f3e9a4021fd23bb995e7ea8692c7dfbaa52127ceaee"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/previews/01-cover.png": {
+      "bytes": 81339,
+      "sha256": "a7a738510bef0edae5e735083343cf7a3c02851041e979a650e301606bee05d0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/previews/02-experience.png": {
+      "bytes": 113852,
+      "sha256": "9aff21784b5106a615c8cfa370144a6b2f6065bacbef8bb31b2c0ffb8da74d4f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/previews/03-pilot.png": {
+      "bytes": 114330,
+      "sha256": "9fb895a30fa737056f8d83ab09290b224bf7371903f42259b0ebde8e393bd4d1"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/provenance.json": {
+      "bytes": 3419,
+      "sha256": "63f2c09cfcc40db96ad08ac8e9d5079031282e4c6818991d6d6d76788a9ec211"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/references/agent-runtime.md": {
+      "bytes": 299,
+      "sha256": "754deca1338a6687405d0af41744ef79f26e031c0c44e135586ef0af811a64f3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/thumbnails/01-cover.png": {
+      "bytes": 29258,
+      "sha256": "53404ac6568142de602a2bc467705c0e3e437d94238e845258b7d08d8b580f7d"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/thumbnails/02-experience.png": {
+      "bytes": 38447,
+      "sha256": "a6ffc6d5cd124cb4946aea9a60179b3c0384598c78a3bc3ac69b35533850a574"
+    },
+    "resources/source/marketing/presentation/skills/vendor/folded-map-studio/thumbnails/03-pilot.png": {
+      "bytes": 37812,
+      "sha256": "2d8b3dc06490cc966ef3b4e0936873b7a13fdf3142e016b249b345779ef54038"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/SKILL.md": {
+      "bytes": 1848,
+      "sha256": "a6451b6909fc88837eeb5bc4f4be9f9287d91220917cda6d3afda489800b7b85"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/deck/light-angle-journal.slides/manifest.json": {
+      "bytes": 481,
+      "sha256": "8d4811a01cf996105654e485abc49ec5f083058c2a2647ab8da31b92d3914cdd"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/deck/light-angle-journal.slides/slides/01-cover.html": {
+      "bytes": 1325,
+      "sha256": "da4d3b522fe4bbf5f326eee1e11de4d65d6e14b7b03b0d904f2fe0d18ca0ff50"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/deck/light-angle-journal.slides/slides/02-workshop.html": {
+      "bytes": 1610,
+      "sha256": "6bc5328705c1aa47add5624dc84372fad1369e25410a8a4005c1483095798ad8"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/deck/light-angle-journal.slides/slides/03-record.html": {
+      "bytes": 1535,
+      "sha256": "cea2163380c70afce21329bfcd7078e99836fa3b9d7cbf858d53aa8f949a32dd"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/deck/light-angle-journal.slides/slides/04-display.html": {
+      "bytes": 1624,
+      "sha256": "f6c6059003d13ca7a1fe281c35990437069fdc836793a700e26a187959132895"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/previews/01-cover.png": {
+      "bytes": 78360,
+      "sha256": "b0f283b7b1cf9fe1c0f7d0525d6ac86f67a8a43b22ffd6dcc35b06100f7fc265"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/previews/02-workshop.png": {
+      "bytes": 91167,
+      "sha256": "1764722accb9a678bccf0e742955293028049611528929c3d371b697f13b214a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/previews/03-record.png": {
+      "bytes": 71827,
+      "sha256": "685ba6fba6c9caaac3d93cfe6731844beda85619dc3f33c80c2fec951dc05969"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/previews/04-display.png": {
+      "bytes": 94348,
+      "sha256": "c7215b99c05971a47c0bbe81c4c636739510af6fd745cdc813849ba917e2a744"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/provenance.json": {
+      "bytes": 4272,
+      "sha256": "675931d9d253f3292d9231e72be84b7a7407a10157eaa67c140764590344200b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/references/agent-runtime.md": {
+      "bytes": 445,
+      "sha256": "0ade95121ff527ad4ff811868c9aede2d288e0103942b3ee5a36dfc16da26c10"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/thumbnails/01-cover.png": {
+      "bytes": 30863,
+      "sha256": "630c5e13f898e43a2abf84061cc86c7f0b8825516c0043271f844685d6809bec"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/thumbnails/02-workshop.png": {
+      "bytes": 35606,
+      "sha256": "199e82c9bb5f9d5df340a40a355d76c1ab1003940e068d30c64c58ad1f606c4c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/thumbnails/03-record.png": {
+      "bytes": 28774,
+      "sha256": "df323e5813446398e0c5d195148fd8fc9798775de6c63b3e7c4917f52b9298df"
+    },
+    "resources/source/marketing/presentation/skills/vendor/light-angle-journal/thumbnails/04-display.png": {
+      "bytes": 36055,
+      "sha256": "f622507147412e7d55d52992b6beed1a0bb871000c6510d945ac57c102b7359b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/SKILL.md": {
+      "bytes": 1731,
+      "sha256": "ed4c20ab317506a8ee2c14b85f2b3e06a5cddd563d4a6397809b55a447c7da81"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/deck/material-rhythm-studio.slides/manifest.json": {
+      "bytes": 311,
+      "sha256": "7e7740b6c36812ab02cb1b3c77b3ebaabab9072683fdaf7fe027f5e55cbfbeff"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/deck/material-rhythm-studio.slides/slides/01-cover.html": {
+      "bytes": 1294,
+      "sha256": "1e74bf1191101ed904c2adc4f679eee642138fb9c37b0eb68ae9d12c8ed89a29"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/deck/material-rhythm-studio.slides/slides/02-workshop.html": {
+      "bytes": 1578,
+      "sha256": "22c74de7addf627df4d8702f33ec67c1d440ecfe599cc6ceaa2514b7031c0cf8"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/previews/01-cover.png": {
+      "bytes": 59295,
+      "sha256": "c4669c9b2dbafbb4a23c43c09ece50251733d3d689dcf92b35633d7202bfb16e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/previews/02-workshop.png": {
+      "bytes": 85835,
+      "sha256": "155a4cc383d8949d432f2159c9951084008d55a5ca02f8443af36d0612fbc33c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/provenance.json": {
+      "bytes": 2610,
+      "sha256": "c678a8433b3f18884c723d66b9ac6f9a16abed0b7caf2b00c79b45eb76870fdc"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/references/agent-runtime.md": {
+      "bytes": 445,
+      "sha256": "29ffb05078512419981768635a953609bd3be3348e9f34cfdc1361b7c8c95763"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/thumbnails/01-cover.png": {
+      "bytes": 26084,
+      "sha256": "d8f0526afc70259febaba1236da3f814de067249ac8284593afe295696b48092"
+    },
+    "resources/source/marketing/presentation/skills/vendor/material-rhythm-studio/thumbnails/02-workshop.png": {
+      "bytes": 33762,
+      "sha256": "a9b190c950dd82c28fa0349d313f34bf116e8521d93548a16e47a95e98d09e5a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/SKILL.md": {
+      "bytes": 6474,
+      "sha256": "8ed0c802ccd0f5c367f675589b801fd0578cf386ce69c266e25f3de0fa111497"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/assets/ext/7b4c0297445eb53f.png": {
+      "bytes": 1687205,
+      "sha256": "7a35358f8c09a8909467ae863e1f0e66efad15321afd59b5c5de2ec548e69ac0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/manifest.json": {
+      "bytes": 1574,
+      "sha256": "1cbec8db61a9334a83565f4a4d8ce12bead43099a758564bf30a6475d00e6930"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/01-cover.html": {
+      "bytes": 6027,
+      "sha256": "59b71021de03a77c49e4f7242823fef2038af42065a1089be9d48a6fbec2891c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/02-core-judgment.html": {
+      "bytes": 5658,
+      "sha256": "c43a74cc0e4b7ce31cb24a1d570b37bbb54179ad4055fa534dc7f85852638d4d"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/03-user-shift.html": {
+      "bytes": 7434,
+      "sha256": "f276695379a6d45a87bf827c1a7c6df9d4ae0f0a1b9bd1c72374c4608fce9c21"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/04-brand-problem.html": {
+      "bytes": 6173,
+      "sha256": "aa22046509263429a3511eb639ca5da0851200f0bd4d60ae0f240b7518cee3da"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/05-data-evidence.html": {
+      "bytes": 7883,
+      "sha256": "41894205c626eb66ea8877f0eed9e264de67e13d7905a2e32b84c37767b02cb8"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/06-user-insight.html": {
+      "bytes": 7349,
+      "sha256": "d41a1c08ba8797b8e6528141606f5a8de6dafd9bfb84f009fb00bed5bbc371cc"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/07-opportunity-matrix.html": {
+      "bytes": 8572,
+      "sha256": "f5a8e18c74bc13198b27e59bcbacba3413b4c32cad103382427a2b76d1e0aba4"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/08-strategy-framework.html": {
+      "bytes": 7416,
+      "sha256": "3d6bb5f811ae0762beea3168ad78b832faad8fe254ea7c661d2951a998caad75"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/09-content-matrix.html": {
+      "bytes": 9550,
+      "sha256": "8eb494f6182662cfc2d6a1197d2f151715e70774caf5acc51f6a6e26a41a84b0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/10-user-journey.html": {
+      "bytes": 7706,
+      "sha256": "2fc2b466cb4175dda76aba544628e64c0f1c2ad9f28245c32a6eb044dd09e0bc"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/11-case-study.html": {
+      "bytes": 8024,
+      "sha256": "858a4c854848d22397abebcc6b3656a4a2824ec4061e73a58e64c283d2e52184"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/12-metrics-system.html": {
+      "bytes": 7905,
+      "sha256": "6172726897908bf5438988259e9a3e9ca0283a88fab182298d1149ccd70052e7"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/13-roadmap.html": {
+      "bytes": 7555,
+      "sha256": "f9537f47cba49ff55e2ebe4ecadee1a28e4fd5368009b4ef0128d97e4a363b7f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/14-resource-allocation.html": {
+      "bytes": 8767,
+      "sha256": "14ee7a9224534d7efde7396fad8fd41c216f7c779353a5c4411f5d179645dafa"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/15-executive-decision.html": {
+      "bytes": 6097,
+      "sha256": "304c8b9bded0a09d7e005029210907fa3ae09439acea89e8f54b39709f9ac794"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/deck/memphis-youth-brand-growth-deck.slides/slides/16-end-note.html": {
+      "bytes": 7740,
+      "sha256": "4c3752a31c476e5463bf7c939bfa9cf2c20f8606aa6cc685b6bd6e55ab51cab4"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/01-cover.png": {
+      "bytes": 363785,
+      "sha256": "24b4d7f790b51a94c276da75e619c5b17069d6cd72b97b2b9d2914638702f95b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/02-core-judgment.png": {
+      "bytes": 175413,
+      "sha256": "d7edd022109ca36eba977ba14607fda85adfef87e3991647ecc5cc3d243ac555"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/03-user-shift.png": {
+      "bytes": 178059,
+      "sha256": "642ba9c5b0b9b3a13d9fb537edea6afb93cf179486ffdca4003935783c11b6cb"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/04-brand-problem.png": {
+      "bytes": 181193,
+      "sha256": "3d17b7f9f311fb8a588708082adae474236385b245e27bf10a779ace825db2e5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/05-data-evidence.png": {
+      "bytes": 163651,
+      "sha256": "f9e463d8381415022b857c64f7e1c1923a45a3cbf72d45dffccb11da97266809"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/06-user-insight.png": {
+      "bytes": 191257,
+      "sha256": "f1b3dae2ff4498c37367cc269bd295211066d7dfae9780f2698231b023012fc6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/07-opportunity-matrix.png": {
+      "bytes": 143666,
+      "sha256": "8b4899198d58e7588211c4f903aad187db0ac0d87fe9c45b66233e8bb7d8f0cd"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/08-strategy-framework.png": {
+      "bytes": 181693,
+      "sha256": "fd359a9c34b922ec8a850bf495a5a2e22e1089798efa6db8916166981d7c329c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/09-content-matrix.png": {
+      "bytes": 160000,
+      "sha256": "b0364d638af45e52e7e48087a4477ff524270d256e2b4efac74890ec63d8f3f9"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/10-user-journey.png": {
+      "bytes": 130112,
+      "sha256": "64ab9442485d426a05e47d20bf3d0e297d3083d66bfc8d90ed39932ae4b94fa3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/11-case-study.png": {
+      "bytes": 175828,
+      "sha256": "6346b348f28eb96bbdd7c9d0e541949a66f5ae459859f0ad63960a55e2d02e1c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/12-metrics-system.png": {
+      "bytes": 190481,
+      "sha256": "f99643fff8f127f312f08b202c4df46743e5cb0ff447cfaeb6adcd08cba4a6d6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/13-roadmap.png": {
+      "bytes": 192264,
+      "sha256": "41b578ac5ecff51f180374437a3b9621f999565bf93d453c09f0c3e5faed79ef"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/14-resource-allocation.png": {
+      "bytes": 139400,
+      "sha256": "2e7dc4ffb6c5b7fcc9270fddd9a7b740aa1fa27a23acaba3afba6a599f04a538"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/15-executive-decision.png": {
+      "bytes": 165893,
+      "sha256": "76dfc3d40251d09c68c8a2a68a9d6732c351ccfc5821d10c953013beb26d1be6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/previews/16-end-note.png": {
+      "bytes": 194792,
+      "sha256": "0806a03415a0990bf6866338e812581cf10cc6b6c7be951677754ae14b0ca9d7"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/provenance.json": {
+      "bytes": 15635,
+      "sha256": "2d2077c259516a86c5a434e4cd88159aa11dc68e8e0364974486f908c291ff6c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/references/agent-runtime.md": {
+      "bytes": 6279,
+      "sha256": "5011d5c48501d23fba3b80f93e53520bb5f86f1b8e81d4919b1c79a2edf7ee20"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/01-cover.png": {
+      "bytes": 85211,
+      "sha256": "489750ca45ad9966d0ceaf2b133fa813ce001f4019b5ef1755b073b79c587ba6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/02-core-judgment.png": {
+      "bytes": 42793,
+      "sha256": "993fb7573c0d14748cb7ff8692692bfdc2c49e2bf3b1e4adf1009fd7b00a1ed0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/03-user-shift.png": {
+      "bytes": 46541,
+      "sha256": "697f89839676c6a6ceb56e63f3a366ea2d4322a2cb5ba0200f8460ea8284cb99"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/04-brand-problem.png": {
+      "bytes": 44648,
+      "sha256": "e9048db2a7c8f01085c5ea5cae0ddb73b1dbbb123063a3307074f6b888215bba"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/05-data-evidence.png": {
+      "bytes": 43419,
+      "sha256": "873538ae6e4f41bc19069bd2e7472aa3d687bdbc616e0ff177c6c7f4187e6c2a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/06-user-insight.png": {
+      "bytes": 50346,
+      "sha256": "be107bd7f691b6dc43ed8bedde53d4b73761bf7547354cd50f9202c3dc61ea92"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/07-opportunity-matrix.png": {
+      "bytes": 36918,
+      "sha256": "52867c335dbf6419fe7c932bd238851e014fb8558f8cea9e0dbf1e965194a2e6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/08-strategy-framework.png": {
+      "bytes": 45714,
+      "sha256": "a8a3ed41634efc0e773cf9a277ab76f49e8afb84ad5377665f4d67ee54145da0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/09-content-matrix.png": {
+      "bytes": 41122,
+      "sha256": "0c246788ca8eaa3d33eb0192d376c3d95b863d9bc4a0c8349bb479998408a6da"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/10-user-journey.png": {
+      "bytes": 30751,
+      "sha256": "bad6db20b48a9e1189ef264af520d31ade4a76849700ccc3a9f762a6dfef1a65"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/11-case-study.png": {
+      "bytes": 44363,
+      "sha256": "137c747d144bb202abad26a962d9e89dcc57e492ffaebc5d5d53b8c0b06fa96b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/12-metrics-system.png": {
+      "bytes": 48795,
+      "sha256": "101fe2124c6eb8a628a00e02cd82acfd4699ec40790f22f076b4b23438c1c9de"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/13-roadmap.png": {
+      "bytes": 48982,
+      "sha256": "adf1fcf7affb6ba9bbd9ce0ca256d3035f02ca24b9606f5d9ee260aa1f4a4715"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/14-resource-allocation.png": {
+      "bytes": 36255,
+      "sha256": "812c2370a731b5b28ecd89452f9d02a2a319c43cd81ab84cd8f5f37ea40ecef2"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/15-executive-decision.png": {
+      "bytes": 40551,
+      "sha256": "4e5b3a075104f01585f813a70f5ee0f636927849fcc19030e80ed30fa59c09c5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/memphis-youth-brand-growth-deck/thumbnails/16-end-note.png": {
+      "bytes": 49747,
+      "sha256": "39b8e92d070ed49ef1987f29a8169c80e337ac63509718f71e41b850c2ae1641"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/SKILL.md": {
+      "bytes": 1337,
+      "sha256": "aa4444bed4efdb4b51f284ca53012d8378f6e3af6e363f9d3846e8a93efb9ea3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/deck/paper-light-experiments.slides/manifest.json": {
+      "bytes": 312,
+      "sha256": "e3cd06c61006d928bb02f442e84865f710b6b0924423011b8728061ec26a65bd"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/deck/paper-light-experiments.slides/slides/01-cover.html": {
+      "bytes": 1873,
+      "sha256": "345e1b403431333da6ba4b0d207bf57c52effe80d3e20618506e14b3f9a723f5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/deck/paper-light-experiments.slides/slides/02-experience.html": {
+      "bytes": 2212,
+      "sha256": "0198057a2bae96c9b3b960564b18cdf5bc812180a93d1b2b1ce323855c2655ae"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/previews/01-cover.png": {
+      "bytes": 86518,
+      "sha256": "83f9375c56d77c9d12d10eace8b920c9b5b5b5f542112838dae7e4bdf8e664b2"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/previews/02-experience.png": {
+      "bytes": 92354,
+      "sha256": "9c124631ccb1e2c1a3042481c649451761ab056b71b894d7cf5e95367bcf57b7"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/provenance.json": {
+      "bytes": 2628,
+      "sha256": "2e4326d5f678899b200d90981a141f7f4bc7757b45e475d60408981e5b833038"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/references/agent-runtime.md": {
+      "bytes": 299,
+      "sha256": "5ef5cfe249a63cfa295fdbb6c84cfe77e63de63fc398601fc295efcd35fe46cd"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/thumbnails/01-cover.png": {
+      "bytes": 29907,
+      "sha256": "f459d855900f352fef108145489cffbc0ab21224736f8944685e6b7f4e0d7238"
+    },
+    "resources/source/marketing/presentation/skills/vendor/paper-light-experiments/thumbnails/02-experience.png": {
+      "bytes": 38355,
+      "sha256": "19d14ec555553dfb7bd65c34b13840491d6d9e04bb21deb673a17887642ae0bb"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/SKILL.md": {
+      "bytes": 10599,
+      "sha256": "115eef8973fdb81fcef72076f05e73b486c831703908fff6d614cd3655122d02"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/deck/ppt-guardian.slides/manifest.json": {
+      "bytes": 361,
+      "sha256": "d8ca101ff52d957d2a1ad725caeb307a57ac5401c5e7590395173cfa1e6c1123"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/deck/ppt-guardian.slides/slides/01-cover.html": {
+      "bytes": 4673,
+      "sha256": "f4d56fa2432c02510e026e3970716054621a7aeedd2de1df73dd4a89c117ca57"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/deck/ppt-guardian.slides/slides/02-six-requirements.html": {
+      "bytes": 5259,
+      "sha256": "a54b0470f1fc07c0ddf9f58e5d52230da171d1c1e026998101e310e680d5c159"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/deck/ppt-guardian.slides/slides/03-before-after.html": {
+      "bytes": 6714,
+      "sha256": "ed0c421564021acf680f2d8185bd9420b55170b69558d5c8bbfa70fc4c8f0b09"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/export-provenance.json": {
+      "bytes": 2177,
+      "sha256": "8b4fb2f7452738853e3d6f11814d5ace7f5240887d8e30fd01c9769ccbe95928"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/inventory-provenance.json": {
+      "bytes": 2172,
+      "sha256": "edaac033f955ca0c7baf85ae17d2d4954a4744b9324d9b02c04a04c098d9c445"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/previews/01-cover.png": {
+      "bytes": 518245,
+      "sha256": "a71f419b625785f49287517c6360b200c307f6cc6d2b28a0638f8de4b012d1c0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/previews/02-six-requirements.png": {
+      "bytes": 198328,
+      "sha256": "3c28c6ebc13dbf6800b48914db3321ab1a13fda8dae4ccbfbb14d5b19a07f4b6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/previews/03-before-after.png": {
+      "bytes": 220962,
+      "sha256": "5cac7467ca76f7fc9660bf350e5ae8eb44a1e673fee20a2cab62741f2033cb1f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/provenance.json": {
+      "bytes": 399,
+      "sha256": "7e562aa1984c9ad4baa0227b6dad0a92318d6dd1b09025f53fae96b955d852f5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/references/agent-runtime.md": {
+      "bytes": 3893,
+      "sha256": "c9f854fd2dc8997fb718a1d7f08a252c939b2fb74aa9b40a541bf22e1cd839b0"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/text-export-provenance.json": {
+      "bytes": 1224,
+      "sha256": "c9d2c65067571a178a89d01feeda51dc6ac55bb62b7280215cacdda9f7bf6823"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/thumbnails/01-cover.png": {
+      "bytes": 76221,
+      "sha256": "f59c48dc08863c0e22b41cea63069645e5576514dee53b1c025ad4f7519673ec"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/thumbnails/02-six-requirements.png": {
+      "bytes": 49052,
+      "sha256": "90fe39d46179ac456a920fedb259bf099a51992fa43a97a7612a35a106a5c262"
+    },
+    "resources/source/marketing/presentation/skills/vendor/ppt-guardian-pro/thumbnails/03-before-after.png": {
+      "bytes": 52608,
+      "sha256": "423d3a6a1adb7827eb03bab18fe0ba6105c7fc5be75d2148c231d8ec05cec656"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/SKILL.md": {
+      "bytes": 1450,
+      "sha256": "18ffd293accb9f4b567be07d9f97acca5d4a616f6f9d9a8c6157e9520efbfe2e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/deck/print-surface-workshop.slides/manifest.json": {
+      "bytes": 469,
+      "sha256": "9bc5d98a91335d9eb9414c330c5d320fa88362ed2d9ded6a0fe55597c3e45dbe"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/deck/print-surface-workshop.slides/slides/01-cover.html": {
+      "bytes": 1875,
+      "sha256": "9f79c36a6a79dec3aca3df799a790d0c909f576c6d3e5af7a3a0999d65c7971a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/deck/print-surface-workshop.slides/slides/02-experience.html": {
+      "bytes": 2199,
+      "sha256": "f9189c9613f16bb9e4808fd0f4b6db98f6a5727df21d03e388c0b092c6b82ea8"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/deck/print-surface-workshop.slides/slides/03-pilot.html": {
+      "bytes": 2180,
+      "sha256": "fd7d03376856d0d97bbc5b18d987dfcd8b583ed14d493c19ea0097dedd222869"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/deck/print-surface-workshop.slides/slides/04-records.html": {
+      "bytes": 2214,
+      "sha256": "f7d5626b316b9ccb76dd09d79b6364a933958e4cb03b5bee1dfdd8cd4dcff618"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/previews/01-cover.png": {
+      "bytes": 82216,
+      "sha256": "3fa5be4b9bebd0a844281c64787376a40e609ad1f48c8e804887b22c0a276c79"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/previews/02-experience.png": {
+      "bytes": 90771,
+      "sha256": "538304448e731f7ec1a9d819a435777a154ff97b51a9512cc7d9799dd3890200"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/previews/03-pilot.png": {
+      "bytes": 93030,
+      "sha256": "bf50773628bb890e176f6b6a255075e5d24db643cb2b54f0866bb8b3759cc16a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/previews/04-records.png": {
+      "bytes": 95257,
+      "sha256": "139d02e34fddef7c92c94ac8bf495f144ad8a365d121cc0a1e3ee763628c67ee"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/provenance.json": {
+      "bytes": 4308,
+      "sha256": "b7cca5949fd67cc982b813ebc5cbc9ac816ccb364b40dbf138b7aedaac48eee8"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/references/agent-runtime.md": {
+      "bytes": 299,
+      "sha256": "9ee4916733a748de31d11fb6523e788e1de20e95d3ccfbb14c0cf7d3eb77b6ad"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/thumbnails/01-cover.png": {
+      "bytes": 20301,
+      "sha256": "2135b67e28723aa453a2614c6af63bb734ca2cb55c8b5f8281096cb24cfff227"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/thumbnails/02-experience.png": {
+      "bytes": 37920,
+      "sha256": "df3fe3287722666bf396343132087c22c9a759afbdc0841f49450e76afb00bb4"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/thumbnails/03-pilot.png": {
+      "bytes": 38324,
+      "sha256": "f410b705a98106d1754fbaa06b54ae5767dcfda8b8db87e83991ddf3234fad01"
+    },
+    "resources/source/marketing/presentation/skills/vendor/print-surface-workshop/thumbnails/04-records.png": {
+      "bytes": 39222,
+      "sha256": "444f76e16a6fa5ae3b9be99b10ad6f634e99138159c88f72509e7f05c54ef701"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/SKILL.md": {
+      "bytes": 1450,
+      "sha256": "2f8a71b9f9dc5e6782ec7b60d3a04070f564bbace041629e46172cf61ad12a02"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/deck/visual-sequence-studio.slides/manifest.json": {
+      "bytes": 469,
+      "sha256": "ecc3a7d1b87f4ff7713783e9c85c94e5ca73ff9377702fcb7f09e529bf895767"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/deck/visual-sequence-studio.slides/slides/01-cover.html": {
+      "bytes": 1880,
+      "sha256": "92f3425868b9752001455164aaf348cd0a4b08a4c82847c2d0b6a5faffa833d5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/deck/visual-sequence-studio.slides/slides/02-experience.html": {
+      "bytes": 2210,
+      "sha256": "7b204985753f40133f2b532125180f62b4bc10394bee306f2599eef97a4b9e91"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/deck/visual-sequence-studio.slides/slides/03-pilot.html": {
+      "bytes": 2188,
+      "sha256": "ca0baa2c93fb99b418fedd9047f02fc5e729979a2a1e3a83273dc51c6e2213cc"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/deck/visual-sequence-studio.slides/slides/04-records.html": {
+      "bytes": 2216,
+      "sha256": "b6852eb99bba2e4a5490241e2961e62377e6610bb51420267659e6f60aa5f9c2"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/previews/01-cover.png": {
+      "bytes": 83064,
+      "sha256": "392e17b2ece8b7ce54b4d222f8d9a353f81bb3b9fae60d4b051ec383e11f733f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/previews/02-experience.png": {
+      "bytes": 87736,
+      "sha256": "b2f35f46100e8ffe2ed06ab77ff465ca0e2310c52d09642e0fe395de91e5943e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/previews/03-pilot.png": {
+      "bytes": 93213,
+      "sha256": "a3e65802f61f8dac71d27e78890408c3a55647d159b0b060e80e90aef1bdc915"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/previews/04-records.png": {
+      "bytes": 115861,
+      "sha256": "17a3ac657fbea139135c5a62f229d8a4a30f763b2270e5925664a41af8d6cb3e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/provenance.json": {
+      "bytes": 4308,
+      "sha256": "78c74f234945ce010ca43aa70c6c6c804fa508d22f6907396cb41a2630faf3f9"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/references/agent-runtime.md": {
+      "bytes": 299,
+      "sha256": "3b61771861f7c5d2e8c5898f208385c3233b1036cae09001952e66ddaeece89f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/thumbnails/01-cover.png": {
+      "bytes": 29260,
+      "sha256": "63faffd3a9c704d3e80fe9cd53d2c2f49877b4c00e25a0894146094c77ba2c49"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/thumbnails/02-experience.png": {
+      "bytes": 37238,
+      "sha256": "96bcea414ad02dc48dc9d2335b90089858eafb5baf1646bcc5b6345700f5fef7"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/thumbnails/03-pilot.png": {
+      "bytes": 37817,
+      "sha256": "d5567f35cd42fc4aff57611c297368f44f1e80950497fd902acf62c493bb7a2d"
+    },
+    "resources/source/marketing/presentation/skills/vendor/visual-sequence-studio/thumbnails/04-records.png": {
+      "bytes": 38942,
+      "sha256": "59c66243c6afeba3ff1f39bfc8c7fb23ad064ec9d21f5449861b4b9be696296b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/SKILL.md": {
+      "bytes": 16768,
+      "sha256": "924e262423d9b70d88a764f40fb5f1fd8ba23a469b88f54e519e5f0c22c21d3d"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/export-provenance.json": {
+      "bytes": 20207,
+      "sha256": "c47ca2309d3cd63852ce5135322cfdbdd346a039d8ed2725668e48f5b512ed6a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/inventory-provenance.json": {
+      "bytes": 10239,
+      "sha256": "a4ce0cfa7c4e061e63c01c6507cc70371d726832e0fd511b37ea7d2915fd4348"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/provenance.json": {
+      "bytes": 668,
+      "sha256": "90f68b0cc8e764d0cf113841222eae4812b5ddc8b228ac8081424b53fe76cec6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/references-provenance.json": {
+      "bytes": 1159,
+      "sha256": "6535e9cbd23d3c1416ab065d4afcceeba9b54c4d764959841c3e1bcf18840bf7"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/STYLE-INDEX.md": {
+      "bytes": 5585,
+      "sha256": "d232bf5880f11fbe7122ef81413d620b4b5f8c2d124826e9b53503a735355a2e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-01.jpeg": {
+      "bytes": 31527,
+      "sha256": "29c84d69284c2586aab47009c99740dec53e2eef7f0e19fe5bbe305c737572f6"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-02.jpeg": {
+      "bytes": 90243,
+      "sha256": "390466980d98da97439898388dbd75cda3bc38e15cadd094da550b7490696aad"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-03.jpeg": {
+      "bytes": 39879,
+      "sha256": "6774e8895b55102698c7032d898453c81bb20992c45096b62b48f312dae5b0d9"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-04.jpeg": {
+      "bytes": 76870,
+      "sha256": "89f7cc7c1d325bcd91bd67f053bd963ab8dc125f4889066ffd1cd41e01bf4a82"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-05.jpeg": {
+      "bytes": 57634,
+      "sha256": "dc0d39e1fe57f43cf92bd13deb05ae1231c1016761d8f3b78b960291923b3a83"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-06.jpeg": {
+      "bytes": 147561,
+      "sha256": "dc0062da93fcc85b9e8daf67229626e0456dfbff9caf827a2fc649e4f917a4a9"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-07.jpeg": {
+      "bytes": 35476,
+      "sha256": "a5ef5810e8aaf4a501fa5430d0c7957930c1cef9672b1ff6421510007fd457d3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-08.jpeg": {
+      "bytes": 127257,
+      "sha256": "3377d90138d1c7749ce1a8f1320280f3fb3c086cbe71ae6dad12665d9c0fd18b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-09.jpeg": {
+      "bytes": 32818,
+      "sha256": "1e2f0002e1ea5deb8f5d41ec9860afae52cee1ab60c38131eb0aee39bc96e7dd"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-10.jpeg": {
+      "bytes": 53435,
+      "sha256": "716c9a83c9c24290efb9a85b632b6d1cb23e72419a6a2544843c489b8cfdf077"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-11.jpeg": {
+      "bytes": 38565,
+      "sha256": "d244aa6f7ff844880ff599ba78aee40d3fbf4eef975940ac1d14549379ca0d28"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-12.jpeg": {
+      "bytes": 121533,
+      "sha256": "d90c5e7f70c3cf74e830206e4d2917f230500d9ff5152473cc4071601cea3468"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-13.jpeg": {
+      "bytes": 102921,
+      "sha256": "a7f776dd5f1e8644d2cb51dfce150b475c9abbb3ae3f49de466a82e2bdbedb66"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-14.jpeg": {
+      "bytes": 69973,
+      "sha256": "6b04d894cbc2f5319236d57f140979600be02b6e164f100d3f945664145d027f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-15.jpeg": {
+      "bytes": 37091,
+      "sha256": "f03dd606e0fc8245d8c3737dcca5a08a240ea7d25e9d6409da3239709f6c0c7f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-16.jpeg": {
+      "bytes": 82650,
+      "sha256": "c14d07dceb643369dc2fed7e454d717f6778cafdf2953adcb1b9244cfd6b35ad"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-17.jpeg": {
+      "bytes": 16905,
+      "sha256": "8cf8a0515b9ef2eca5521f1f325842ec399584723f8defd11d35d764aabbb17c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-18.jpeg": {
+      "bytes": 31830,
+      "sha256": "49c2f76a7b5931fee174cc8923a7f3996813272a95d674d9e945794b7e6fcd68"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-19.jpeg": {
+      "bytes": 32443,
+      "sha256": "12393a1d644653bd52b11da8e4f84ae14690879e1e4b30264577ea31a1aa8865"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-20.jpeg": {
+      "bytes": 44706,
+      "sha256": "4ba4541d3912018821845488decb00a1c3ae641103508f754661a97f67bfb1c3"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-21.jpeg": {
+      "bytes": 54878,
+      "sha256": "e590abb3744e8153baaf0979a05196003ab615197725b19ddada210e66e9e923"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-22.jpeg": {
+      "bytes": 68590,
+      "sha256": "d193055f777c8b3a3e1002ea960e88a783757c160e1f33d477c98680033b725e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-23.jpeg": {
+      "bytes": 74493,
+      "sha256": "4fab857375e155772afba0e808b7afecbdeb214671f2d5a7e5d04bdead9c2b10"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-24.jpeg": {
+      "bytes": 84964,
+      "sha256": "043b952142f67021f681ec7ffbb0fa4ba21e6748047c28c036bfcfc11b68e94a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-25.jpeg": {
+      "bytes": 54288,
+      "sha256": "57087f3fb9b585fcb1aba2f66f0cb51b1397e3c3dc90ac9ae67c315f92d2b1c9"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-26.jpeg": {
+      "bytes": 77226,
+      "sha256": "89c2090fb80fed9cd20381985721cd0ac2420b101e0c59e0dd8ec4c057ddf25b"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-27.jpeg": {
+      "bytes": 64437,
+      "sha256": "93066e2e1cc1d6025779cdcce1ad756249f1220c3c6ed5ae3a7127d07487c041"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-28.jpeg": {
+      "bytes": 152508,
+      "sha256": "4559279865b76163967a944c960013ac3c931278bbfd804b6c36f05f7f55602a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-29.jpeg": {
+      "bytes": 92561,
+      "sha256": "ba69ae0b4e495879f9df5945b0e1e1bc33f2c43260a09665239076a3057a1cb4"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-30.jpeg": {
+      "bytes": 67890,
+      "sha256": "a544dae938e486c6ea66b3f15d9a29f0e7f6f59fc0497e7bff8c5acea4ebc2ed"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-31.jpeg": {
+      "bytes": 71262,
+      "sha256": "1ee2e8adb227d1135fd39a1137ec99b7a646b518c6bd9bd7c4488b489f4c85ed"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-32.jpeg": {
+      "bytes": 65508,
+      "sha256": "d701aed5b34c227e1aacb419ccc73bfcbe7eb3b8b8cc490f196beb5182a0a50c"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-33.jpeg": {
+      "bytes": 46589,
+      "sha256": "399801f6831d217f91951e2a32a2dfd8701df6023b978408904a1a426d30430e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-34.jpeg": {
+      "bytes": 80811,
+      "sha256": "bb21d52172d0b7bc98fdf568e6e43f689d4833ed8998dca84aa79a6adffab1d7"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-35.jpeg": {
+      "bytes": 52626,
+      "sha256": "6221d53475ba42a0639c9f9394d210dab5a9a727ba700089c999cc034b49f05f"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-36.jpeg": {
+      "bytes": 128164,
+      "sha256": "7dd910211d6654c7b1e14500dbbe7dee48467b803daa84fced47557da6dc2761"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-37.jpeg": {
+      "bytes": 101544,
+      "sha256": "e87606cfe06e45a5a933146da8d5f7a5870497cc0f5f9127ab1c0305f2708618"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-38.jpeg": {
+      "bytes": 66600,
+      "sha256": "e1f8fb387e718ff34ba28ea8562a89ef582ed9a311a1db6a1a1cf31ac89dd261"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-39.jpeg": {
+      "bytes": 113909,
+      "sha256": "aefed6fec190cf4e192e15ce85d938b521d7a27b445c3d4171ea8231d14299ce"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-40.jpeg": {
+      "bytes": 68806,
+      "sha256": "e72dfacceb99aa4e48792dc470d09fffb42c471d40c7eed4d84d5cf7f6423c5e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-41.jpeg": {
+      "bytes": 53348,
+      "sha256": "09ae88513481d86df4cc1e127d4d9bbc16c274967be877a42628126306214c5e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-42.jpeg": {
+      "bytes": 33845,
+      "sha256": "cfc0ff2491f9190406801e7785a14950c9475ecef92ce3c59106281c30e67f96"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-43.jpeg": {
+      "bytes": 12545,
+      "sha256": "e797648504ae55ed80ae44cd16c452574fd08bfe6ff102a6eb9690d9f0dc28fe"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-44.jpeg": {
+      "bytes": 30783,
+      "sha256": "c458414675e6a9c34819860faf0a82bb5bc0c317d5070957a742466c23777d41"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-45.jpeg": {
+      "bytes": 146765,
+      "sha256": "b9e40e036e94f39a21d41fd51f57352f9f3c5e63dd424b17bbfa7fa02985da78"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-46.jpeg": {
+      "bytes": 44778,
+      "sha256": "a109bfea6e425f66265506e8cc74d7d8cc73451efb57e39df47cd64b110a9235"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-47.jpeg": {
+      "bytes": 28639,
+      "sha256": "5226dd2f6a4231061ae3be72ed7fc337f7df3d29887b12e835d26b9722ef7482"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-48.jpeg": {
+      "bytes": 120378,
+      "sha256": "1840aaaf66a9dad3f1c6a165cfdb41b23fa2c5cf9e951ffa698061519d4c26fa"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-49.jpeg": {
+      "bytes": 72454,
+      "sha256": "ca776caf7bbc58da62c0ed5548893ea91f78deaca89b7eabd143e31597ce88f5"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-50.jpeg": {
+      "bytes": 49591,
+      "sha256": "8ef051c6fe1a7bb6c7e95b60c27af65b5b394f21cf78870cda10f01699ef8628"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-51.jpeg": {
+      "bytes": 21196,
+      "sha256": "3edfdca302908d3114716a7019aa821a9c4f375fe5b05698b3ad6296e461453e"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-52.jpeg": {
+      "bytes": 97059,
+      "sha256": "4e99d595e83f7c8295070aea40312d02f598b94394e7b75714a09e6fb11d8477"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-53.jpeg": {
+      "bytes": 21555,
+      "sha256": "4fbd22939e070796163f3eb13c5022ba48a9fafa012933ef18d0feaf249c2560"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-54.jpeg": {
+      "bytes": 85650,
+      "sha256": "e728657759b073b97d196ac85d8480614d9fb8fd964f492f1fa0a310340249af"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-55.jpeg": {
+      "bytes": 98165,
+      "sha256": "42f8680a7f99ba89e44ec25876431c10a2de7c2344735fb2ca2b0a171c653abf"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-56.jpeg": {
+      "bytes": 89729,
+      "sha256": "dd0eedd6ea02d475dc089063fe57c2b8d5d2ba900eb8de68494b240b19f6dc9a"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-57.jpeg": {
+      "bytes": 77889,
+      "sha256": "16158c70ae400654750b3343a2a30f884d6c7eb314f8b8ca22e369094f85fdf9"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-58.jpeg": {
+      "bytes": 28230,
+      "sha256": "cca37766f00cd40bd5574b16a81ec2530316e806f572f4497a3593ea0d2b84ad"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-59.jpeg": {
+      "bytes": 46946,
+      "sha256": "28ff4f1ed0a83681c7d297c2bcaed0e924bf1271783b68211153bf5b90ffeceb"
+    },
+    "resources/source/marketing/presentation/skills/vendor/xiaofang-methodology/styles/images/style-60.jpeg": {
+      "bytes": 67146,
+      "sha256": "892ae91cb997ef69c85c753472ee5f72055f48ffd88b8d0d6a5f143eb7314459"
+    },
+    "resources/source/marketing/presentation/test.mjs": {
+      "bytes": 10115,
+      "sha256": "0343aa3969f5020e8629decd0c6a8539999136e836c9f924bbe9ae69a3934ae0"
+    },
+    "resources/source/marketing/presentation/theme.css": {
+      "bytes": 2076,
+      "sha256": "74c8d23214f871e00b32e06e21334f0fa1f8447907771fc2b528a7a9ba308615"
+    },
+    "resources/source/marketing/presentation/validate_package.py": {
+      "bytes": 5527,
+      "sha256": "c1e5f2a143ae29040201f4f3e47bb28e7b4bd0b764cacfc8cdab8d6d16afe30e"
+    },
+    "resources/source/marketing/pyproject.toml": {
+      "bytes": 747,
+      "sha256": "1892a52adfdbe8793425858aa38681857dc0d9aa33ba1e13ab114e661e5afab9"
+    },
+    "resources/source/marketing/tests/test_deerflow_adapter.py": {
+      "bytes": 4676,
+      "sha256": "389a5079f262e41343321f481c81436daa09f11fc4bfbfd77bf93bc8c93fe96b"
+    },
+    "resources/source/marketing/tests/test_enterprise.py": {
+      "bytes": 10154,
+      "sha256": "785e17d67b648688b5442c6575a174f6bb5b049388126b4ed296c835bc8e3422"
+    },
+    "resources/source/marketing/tests/test_enterprise_adaptive.py": {
+      "bytes": 5991,
+      "sha256": "131db689f1683e363de33b811eb58d5334bdead2cf82a7545799cf9c1a638db0"
+    },
+    "resources/source/marketing/tests/test_enterprise_assets.py": {
+      "bytes": 29797,
+      "sha256": "ace6553181eb73377806f1242e9fb1a0905b6183e1be89a9515292f6fb24d4e8"
+    },
+    "resources/source/marketing/tests/test_enterprise_diagnostics.py": {
+      "bytes": 17289,
+      "sha256": "0c6a085ed2782bfd6b7019b77db12a09c45f2223003d0e9c15584d0a18e75591"
+    },
+    "resources/source/marketing/tests/test_enterprise_fixed.py": {
+      "bytes": 5276,
+      "sha256": "b9868eba77b0ccc925bd1b850c6c91e7d6536e42be9b9cf33c3cebe63379a818"
+    },
+    "resources/source/marketing/tests/test_enterprise_model_html.py": {
+      "bytes": 25103,
+      "sha256": "5b71ef275b1287e0e861970d3ea2eb7e355d7ff5074317900f60a5b9bd4e6346"
+    },
+    "resources/source/marketing/tests/test_enterprise_pipeline.py": {
+      "bytes": 36636,
+      "sha256": "94126ce55758d9248edf8e25b76513ea66d67ef5852291529f240529e0c11a38"
+    },
+    "resources/source/marketing/tests/test_enterprise_preface.py": {
+      "bytes": 7754,
+      "sha256": "8d6ebb0bcfc45d3824f5373ef7450b8241f4aee01d2222c27b0dbf47104207cb"
+    },
+    "resources/source/marketing/tests/test_enterprise_refinement.py": {
+      "bytes": 6014,
+      "sha256": "f1b9ba65e642c465fbef63055658cd5ac9a7ed8bacca6b5a3c882b3856dfb92d"
+    },
+    "resources/source/marketing/tests/test_enterprise_revisions.py": {
+      "bytes": 15170,
+      "sha256": "6903a61aefba777ce1b46675147d09fff6de4ec21b259d3fb59bf70994b7b376"
+    },
+    "resources/source/marketing/tests/test_enterprise_v5_api.py": {
+      "bytes": 2827,
+      "sha256": "2e2f931fe250faf9131b3d5e7cb6d9a870438dc63498b0dc6c5ff409b6cda2d3"
+    },
+    "resources/source/marketing/tests/test_enterprise_v5_model_adapter.py": {
+      "bytes": 16799,
+      "sha256": "a87fa03be90318332a8668e549f2c3e8c7e9f01c7e079d5708103e7864caa0b3"
+    },
+    "resources/source/marketing/tests/test_manuscript_import.py": {
+      "bytes": 5788,
+      "sha256": "d53ed4d05f92632ad19535a39806c5db0e5d74cb70a2132548017f21f825b263"
+    },
+    "resources/source/marketing/tests/test_presentation.py": {
+      "bytes": 16676,
+      "sha256": "c1a89d27cc63058aacf0b4465fabe44bb975ba617b0c18e54dfd19e965008cf6"
+    },
+    "resources/source/marketing/tests/test_presentation_agent.py": {
+      "bytes": 6429,
+      "sha256": "f9c4171b230c7c2aa0afd0c622aeaf0bd86f9a68e29bb23a77aeb9688e93dbaf"
+    },
+    "resources/source/marketing/tests/test_presentation_compat.py": {
+      "bytes": 7258,
+      "sha256": "5b6c373a7563f32f2eedea033324309dbbc9412dcf21b400c583e64eab157bb2"
+    },
+    "resources/source/marketing/tests/test_presentation_editorial.py": {
+      "bytes": 5828,
+      "sha256": "f629080c5c2374d7afb21a13c27e0cef00ae2add6f444238c9eedc9b0445f0d0"
+    },
+    "resources/source/marketing/tests/test_presentation_options.py": {
+      "bytes": 3225,
+      "sha256": "7ba357d5f8364275134138634541293eb382b4737bc1e3128ecf5186514431f7"
+    },
+    "resources/source/marketing/tests/test_presentation_preview.py": {
+      "bytes": 3897,
+      "sha256": "4ccf582517245b98096d5acea4d23be3eda6b59c10dc9654ca58eb775e328285"
+    },
+    "resources/source/marketing/tests/test_presentation_vision.py": {
+      "bytes": 10045,
+      "sha256": "aff7477b9ddbc73a019c7d02a53fa21302aec1004dd5a07ce1966777e02ba496"
+    },
+    "resources/source/marketing/tests/test_template_analysis.py": {
+      "bytes": 11491,
+      "sha256": "836824ccab7ec0336c17543d603f7e6e8ac929733fd10a467e1c985a2e0f9ce1"
+    },
+    "resources/source/marketing/tests/test_workflow.py": {
+      "bytes": 6570,
+      "sha256": "157bc8f6a70c1e2e3cd2fb7a37aca2f321bf3564eb07590161cc6af4c36873b3"
+    },
+    "resources/tools/project_ppt_client.py": {
+      "bytes": 3338,
+      "sha256": "4deae3b644e7fb09b17d5964e5903719420f2fe9d5e1e12eb0aba5ca7b13e522"
+    },
+    "resources/user-layout-feedback-20260930.json": {
+      "bytes": 59069,
+      "sha256": "fc2ee9baaf465471bf18a6e24fa871b5f87d32a6f7dff4beae5154293144361b"
+    },
+    "resources/user-layout-feedback-20260930.md": {
+      "bytes": 4022,
+      "sha256": "596c8ecf3d6bb0839a41451383454450e0ab0961f667b66aae3680a00b983d7a"
+    },
+    "v5实施与验收.md": {
+      "bytes": 15167,
+      "sha256": "2640fc18e047f997b586e8d6db7ffec429b3e4f3007bc6b735d0b5bdea602c11"
+    },
+    "前端输入协议.md": {
+      "bytes": 5030,
+      "sha256": "38f63e12b52c88c17ab075a3b7b33c7074d747d34dc5182d55ecbcce5129dd28"
+    },
+    "工具与接入说明.md": {
+      "bytes": 7796,
+      "sha256": "5eccc9a07be07c5afff248798d06d7fd3895a12da7eb99f241701ae1ce31abb0"
+    },
+    "方案与实施说明.md": {
+      "bytes": 17150,
+      "sha256": "aabea406a6ed6949ba6c4c4800f7671d336e884a1320f055de73595b002c645d"
+    }
+  }
+}

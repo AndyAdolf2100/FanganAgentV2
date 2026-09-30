@@ -1,0 +1,501 @@
+{
+  "job_id": "bc11692a2bdf4a86a10a3540d5a0a88c",
+  "created_at": "2026-09-30T07:01:13.607471+00:00",
+  "observer": "Codex",
+  "scope": "Read-only production plan/check records and independent preview screenshots. No task writes, model calls or budget changes.",
+  "model_acceptance": "These observations are not Seed review or delivery approval. Reviewed pages are draft_needs_review due to visual budget exhaustion.",
+  "pages": [
+    {
+      "generation_group": 6,
+      "current_page": 7,
+      "slide_id": "group-0006-part-001",
+      "slide_version": "b293b457cc2df541fef4bb7bed0012c6276f64857896bf6bf9bc0d9fd75e9afe",
+      "candidate_revision": "aabf2ec7913d96a4b45a3f9686af84660a456c1d8eeeeea1c264e65b73e218df",
+      "title": "1.2 行业机会（基于公开资料检索整理，关键数据需复核）",
+      "html_sha256": "0d39ddedc59296d5bc25d080e568f92f0ef7b991e485e74dd18483df33ab2023",
+      "browser_screenshot_sha256": "b2a33d8b4d55285fb202ec240a7cb6e2bdfadc2529e472ca13eef024ee449af1",
+      "quality_state": "draft_needs_review",
+      "revision_status": "draft_needs_review",
+      "title_frame": {
+        "x": 31.67,
+        "y": 13.33,
+        "width": 1150,
+        "height": 60.59
+      },
+      "body_frame": {
+        "x": 60,
+        "y": 110,
+        "width": 1080,
+        "height": 538
+      },
+      "title_measurements": [
+        {
+          "font_size_px": 40,
+          "font_weight": "700",
+          "line_count": 1,
+          "text_bounds": {
+            "x": 43.65625,
+            "y": 20.625,
+            "width": 1044.796875,
+            "height": 46
+          },
+          "available_width_px": 1126,
+          "nowrap_width_px": 1044.796875
+        }
+      ],
+      "body_measurements": {
+        "frame": {
+          "x": 60,
+          "y": 110,
+          "width": 1080,
+          "height": 538
+        },
+        "frame_source": "contract",
+        "container_rect": {
+          "x": 60,
+          "y": 110,
+          "width": 1080,
+          "height": 538
+        },
+        "text_content_bounds": {
+          "x": 112,
+          "y": 123,
+          "width": 1010,
+          "height": 512
+        },
+        "content_bounds": {
+          "x": 112,
+          "y": 123,
+          "width": 1010,
+          "height": 512
+        },
+        "text_gaps": {
+          "left_px": 52,
+          "right_px": 18,
+          "top_px": 13,
+          "bottom_px": 13
+        },
+        "content_gaps": {
+          "left_px": 52,
+          "right_px": 18,
+          "top_px": 13,
+          "bottom_px": 13
+        },
+        "left_gap_px": 52,
+        "right_gap_px": 18,
+        "canvas_gaps": {
+          "left_px": 112,
+          "right_px": 78
+        },
+        "content_bounds_basis": "visible DOM text ranges plus image and SVG geometry; excludes empty layout containers and CSS backgrounds"
+      },
+      "record_reason": "[{\"type\": \"visual_budget_exhausted\", \"slide_id\": \"group-0006-part-001\", \"detail\": \"视觉预算不足，本页尚未验证\"}]",
+      "original_page": 7,
+      "screenshot_file": "6-candidate.png",
+      "screenshot_sha256": "b2a33d8b4d55285fb202ec240a7cb6e2bdfadc2529e472ca13eef024ee449af1",
+      "observation_type": "Codex independent screenshot observation; not Seed acceptance",
+      "observations": [
+        "完整长标题单行显示，字形清楚，没有看到裁剪。",
+        "浏览器实测标题40px/700，1行；文字宽1044.80px，可用1126px。"
+      ],
+      "remaining_findings": [
+        "标题文字上缘y20.625，而已检查第8/13页y16.328；字号相同但垂直位置仍相差约4.3px。",
+        "probe contrast=1仅为白色body祖先估计；真实截图标题在蓝页眉，不能据此认定不可读。"
+      ],
+      "seed_verified": false,
+      "screenshot_matches_browser_probe": true,
+      "source_screenshot_file": "/Users/duxiao/workspace/marketing-agent/marketing_v2_agent/.local/system-workflow-20260930/user-layout-review/6-candidate.png",
+      "screenshot_path_basis": "relative_to_this_json; original path retained as provenance"
+    },
+    {
+      "generation_group": 7,
+      "current_page": 8,
+      "slide_id": "group-0007-part-001",
+      "slide_version": "2d50a3dca59e42c7fa4b320a804f5ec294ab458234b38f1fefbd37e8dcd66df8",
+      "candidate_revision": "4f93c59dd2aae1efb1c490e210380279fc9c7d1dd318d235febf5538a2834e98",
+      "title": "1.3 项目目标与硬性约束",
+      "html_sha256": "c24bd6416e466927df3de624cede4e9f2876414f889eddaa4e060b706ff26dce",
+      "browser_screenshot_sha256": "740b8597e2910aabef55d357f96b5d570eaa262b13335db69812ea29fb5ee577",
+      "quality_state": "draft_needs_review",
+      "revision_status": "draft_needs_review",
+      "title_frame": {
+        "x": 31.67,
+        "y": 13.33,
+        "width": 1130,
+        "height": 60.59
+      },
+      "body_frame": {
+        "x": 0,
+        "y": 86.67,
+        "width": 1200,
+        "height": 561.66
+      },
+      "title_measurements": [
+        {
+          "font_size_px": 40,
+          "font_weight": "700",
+          "line_count": 1,
+          "text_bounds": {
+            "x": 43.65625,
+            "y": 16.328125,
+            "width": 444.796875,
+            "height": 46
+          },
+          "available_width_px": 1106,
+          "nowrap_width_px": 444.796875
+        }
+      ],
+      "body_measurements": {
+        "frame": {
+          "x": 0,
+          "y": 86.67,
+          "width": 1200,
+          "height": 561.66
+        },
+        "frame_source": "contract",
+        "container_rect": {
+          "x": 0,
+          "y": 86.65625,
+          "width": 1200,
+          "height": 561.65625
+        },
+        "text_content_bounds": {
+          "x": 78,
+          "y": 136.65625,
+          "width": 1036.234375,
+          "height": 439.1875
+        },
+        "content_bounds": {
+          "x": 78,
+          "y": 136.65625,
+          "width": 1036.234375,
+          "height": 439.1875
+        },
+        "text_gaps": {
+          "left_px": 78,
+          "right_px": 85.765625,
+          "top_px": 49.98625,
+          "bottom_px": 72.48624999999993
+        },
+        "content_gaps": {
+          "left_px": 78,
+          "right_px": 85.765625,
+          "top_px": 49.98625,
+          "bottom_px": 72.48624999999993
+        },
+        "left_gap_px": 78,
+        "right_gap_px": 85.765625,
+        "canvas_gaps": {
+          "left_px": 78,
+          "right_px": 85.765625
+        },
+        "content_bounds_basis": "visible DOM text ranges plus image and SVG geometry; excludes empty layout containers and CSS backgrounds"
+      },
+      "record_reason": "[{\"type\": \"visual_budget_exhausted\", \"slide_id\": \"group-0007-part-001\", \"detail\": \"视觉预算不足，本页尚未验证\"}]",
+      "original_page": 8,
+      "screenshot_file": "7-candidate.png",
+      "screenshot_sha256": "740b8597e2910aabef55d357f96b5d570eaa262b13335db69812ea29fb5ee577",
+      "observation_type": "Codex independent screenshot observation; not Seed acceptance",
+      "observations": [
+        "三个圆内W1–3、W3–6、W5–8均完整单行显示，未见字形越圆边或裁剪。",
+        "时间圈与配套文字比例合理，页面整体左右分布均衡。"
+      ],
+      "remaining_findings": [
+        "标题40px/700单行，但与第7页仍有约4.3px垂直位置差；本页与第13页一致。"
+      ],
+      "seed_verified": false,
+      "original_html_sha256": "3fcce935f46a247c24069e375361eb2dfd25e1268577f7678c43ff5212a8a3d0",
+      "is_new_html": true,
+      "screenshot_matches_browser_probe": true,
+      "source_screenshot_file": "/Users/duxiao/workspace/marketing-agent/marketing_v2_agent/.local/system-workflow-20260930/user-layout-review/7-candidate.png",
+      "screenshot_path_basis": "relative_to_this_json; original path retained as provenance"
+    },
+    {
+      "generation_group": 12,
+      "current_page": 13,
+      "slide_id": "group-0012-part-001",
+      "slide_version": "849a99085256e775d878c80eba213f1276915f10dee775c80546ab13b2d69666",
+      "candidate_revision": "133410c8b34e14b0090a44a4d7572dd8883d6624a549af442e7e64809e4394b7",
+      "title": "2.3 人群与消费者洞察",
+      "html_sha256": "59533c2d7eaeb9f293c4d91a592d3d5e3767b7e7720aa4551bb49650a3dcb0e7",
+      "browser_screenshot_sha256": "3dcfe4341b4d8117a3c56bca19bb9d386fa35c6cc470c09326da2c97e33057e7",
+      "quality_state": "draft_needs_review",
+      "revision_status": "draft_needs_review",
+      "title_frame": {
+        "x": 31.67,
+        "y": 13.33,
+        "width": 1130,
+        "height": 60.59
+      },
+      "body_frame": {
+        "x": 72,
+        "y": 100,
+        "width": 1056,
+        "height": 555
+      },
+      "title_measurements": [
+        {
+          "font_size_px": 40,
+          "font_weight": "700",
+          "line_count": 1,
+          "text_bounds": {
+            "x": 43.65625,
+            "y": 16.328125,
+            "width": 404.796875,
+            "height": 46
+          },
+          "available_width_px": 1106,
+          "nowrap_width_px": 404.796875
+        }
+      ],
+      "body_measurements": {
+        "frame": {
+          "x": 72,
+          "y": 100,
+          "width": 1056,
+          "height": 555
+        },
+        "frame_source": "contract",
+        "container_rect": {
+          "x": 72,
+          "y": 110,
+          "width": 1056,
+          "height": 520
+        },
+        "text_content_bounds": {
+          "x": 130,
+          "y": 137,
+          "width": 968.890625,
+          "height": 430
+        },
+        "content_bounds": {
+          "x": 108,
+          "y": 134,
+          "width": 990.890625,
+          "height": 479.9632721202004
+        },
+        "text_gaps": {
+          "left_px": 58,
+          "right_px": 29.109375,
+          "top_px": 37,
+          "bottom_px": 88
+        },
+        "content_gaps": {
+          "left_px": 36,
+          "right_px": 29.109375,
+          "top_px": 34,
+          "bottom_px": 41.03672787979963
+        },
+        "left_gap_px": 36,
+        "right_gap_px": 29.109375,
+        "canvas_gaps": {
+          "left_px": 108,
+          "right_px": 101.109375
+        },
+        "content_bounds_basis": "visible DOM text ranges plus image and SVG geometry; excludes empty layout containers and CSS backgrounds"
+      },
+      "record_reason": "[{\"type\": \"visual_budget_exhausted\", \"slide_id\": \"group-0012-part-001\", \"detail\": \"视觉预算不足，本页尚未验证\"}]",
+      "original_page": 13,
+      "screenshot_file": "12-candidate.png",
+      "screenshot_sha256": "3dcfe4341b4d8117a3c56bca19bb9d386fa35c6cc470c09326da2c97e33057e7",
+      "observation_type": "Codex independent screenshot observation; not Seed acceptance",
+      "observations": [
+        "左侧三个箭头和右侧文案利用正文宽度，原先整体右偏明显改善。",
+        "箭头内文字清楚，未看到裁剪。内容到画布左右边缘约108px/101.11px。",
+        "标题40px/700单行，文字位置与第8页一致。"
+      ],
+      "remaining_findings": [
+        "与第7页标题垂直位置仍有约4.3px差异。"
+      ],
+      "seed_verified": false,
+      "original_html_sha256": "1ad2a332f98e5a5d2253dab234fe450a94920247c081df59ecb2c43752e13b46",
+      "is_new_html": true,
+      "screenshot_matches_browser_probe": true,
+      "source_screenshot_file": "/Users/duxiao/workspace/marketing-agent/marketing_v2_agent/.local/system-workflow-20260930/user-layout-review/12-candidate.png",
+      "screenshot_path_basis": "relative_to_this_json; original path retained as provenance"
+    },
+    {
+      "generation_group": 18,
+      "current_page": 20,
+      "slide_id": "group-0018-part-001",
+      "slide_version": "0542d5fb36b8005e56d0b28961e8284d59fc86b4384a665e1c3660e2e49659e9",
+      "candidate_revision": "fc26e4193add434affbe492ae62176ad7bb85a24691754d20e0e71823ef34a3b",
+      "title": "3.3 内容策略",
+      "html_sha256": "06f1ab6092eb54c6fdbc49e63630d95188d1f43c0f745ba05ff4b5a1a0b0e0b0",
+      "browser_screenshot_sha256": "2a7a8e76fb71d11a8c90fcc02d47fed995450b6a2afae462114a762641708a39",
+      "quality_state": "draft_needs_review",
+      "revision_status": "draft_needs_review",
+      "title_frame": {
+        "x": 31.67,
+        "y": 13.33,
+        "width": 1000,
+        "height": 60.59
+      },
+      "body_frame": {
+        "x": 60,
+        "y": 105,
+        "width": 1080,
+        "height": 530
+      },
+      "title_measurements": [
+        {
+          "font_size_px": 40,
+          "font_weight": "700",
+          "line_count": 1,
+          "text_bounds": {
+            "x": 43.65625,
+            "y": 16.328125,
+            "width": 244.796875,
+            "height": 46
+          },
+          "available_width_px": 976,
+          "nowrap_width_px": 244.796875
+        }
+      ],
+      "body_measurements": {
+        "frame": {
+          "x": 60,
+          "y": 105,
+          "width": 1080,
+          "height": 530
+        },
+        "frame_source": "contract",
+        "container_rect": {
+          "x": 60,
+          "y": 105,
+          "width": 1080,
+          "height": 530
+        },
+        "text_content_bounds": {
+          "x": 60,
+          "y": 108,
+          "width": 1063.125,
+          "height": 502
+        },
+        "content_bounds": {
+          "x": 60,
+          "y": 108,
+          "width": 1080,
+          "height": 502
+        },
+        "text_gaps": {
+          "left_px": 0,
+          "right_px": 16.875,
+          "top_px": 3,
+          "bottom_px": 25
+        },
+        "content_gaps": {
+          "left_px": 0,
+          "right_px": 0,
+          "top_px": 3,
+          "bottom_px": 25
+        },
+        "left_gap_px": 0,
+        "right_gap_px": 0,
+        "canvas_gaps": {
+          "left_px": 60,
+          "right_px": 60
+        },
+        "content_bounds_basis": "visible DOM text ranges plus image and SVG geometry; excludes empty layout containers and CSS backgrounds"
+      },
+      "svg_measurements": [
+        {
+          "selector": "body>div:nth-of-type(1)>div:nth-of-type(4)>div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(1)>svg:nth-of-type(1)",
+          "viewport_rect": {
+            "x": 60,
+            "y": 209,
+            "width": 250,
+            "height": 138
+          },
+          "internal_safe_area": {
+            "status": "unmeasured",
+            "reason": "SVG viewport和图形外接框不能等同于圆圈内部或箭头中段可用文字区域"
+          },
+          "bounds_limitations": [
+            "几何bounds不含描边扩张、滤镜、mask/clipPath内部裁剪和其他元素遮挡；不是文字安全区"
+          ]
+        },
+        {
+          "selector": "body>div:nth-of-type(1)>div:nth-of-type(4)>div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(2)>svg:nth-of-type(1)",
+          "viewport_rect": {
+            "x": 336.671875,
+            "y": 209,
+            "width": 250,
+            "height": 138
+          },
+          "internal_safe_area": {
+            "status": "unmeasured",
+            "reason": "SVG viewport和图形外接框不能等同于圆圈内部或箭头中段可用文字区域"
+          },
+          "bounds_limitations": [
+            "几何bounds不含描边扩张、滤镜、mask/clipPath内部裁剪和其他元素遮挡；不是文字安全区"
+          ]
+        },
+        {
+          "selector": "body>div:nth-of-type(1)>div:nth-of-type(4)>div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(3)>svg:nth-of-type(1)",
+          "viewport_rect": {
+            "x": 613.328125,
+            "y": 209,
+            "width": 250,
+            "height": 138
+          },
+          "internal_safe_area": {
+            "status": "unmeasured",
+            "reason": "SVG viewport和图形外接框不能等同于圆圈内部或箭头中段可用文字区域"
+          },
+          "bounds_limitations": [
+            "几何bounds不含描边扩张、滤镜、mask/clipPath内部裁剪和其他元素遮挡；不是文字安全区"
+          ]
+        },
+        {
+          "selector": "body>div:nth-of-type(1)>div:nth-of-type(4)>div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(4)>svg:nth-of-type(1)",
+          "viewport_rect": {
+            "x": 890,
+            "y": 209,
+            "width": 250,
+            "height": 138
+          },
+          "internal_safe_area": {
+            "status": "unmeasured",
+            "reason": "SVG viewport和图形外接框不能等同于圆圈内部或箭头中段可用文字区域"
+          },
+          "bounds_limitations": [
+            "几何bounds不含描边扩张、滤镜、mask/clipPath内部裁剪和其他元素遮挡；不是文字安全区"
+          ]
+        }
+      ],
+      "record_reason": "[{\"type\": \"visual_budget_exhausted\", \"slide_id\": \"group-0018-part-001\", \"detail\": \"视觉预算不足，本页尚未验证\"}]",
+      "original_page": 20,
+      "original_html_sha256": "dafd9a8cb6d4939bc31307818676bc4ee81e570529be0a0de5917c19ba69e6af",
+      "is_new_html": true,
+      "screenshot_file": "18-candidate.png",
+      "screenshot_sha256": "2a7a8e76fb71d11a8c90fcc02d47fed995450b6a2afae462114a762641708a39",
+      "observation_type": "Codex independent screenshot observation; not Seed acceptance",
+      "seed_verified": false,
+      "observations": [
+        "四个箭头中保留清楚的01/02/03/04编号，完整位于实际有色区域，未看到下缘字形跨到白底。",
+        "具体方向说明移到箭头下方，使用深色文字置于白底，清楚可读；不是仍用白字跨在箭头下缘。",
+        "整体左右边距60px，四箭头及下方比例图横向均衡。",
+        "标题40px/700单行，文字y16.328与已查第8/13页一致。"
+      ],
+      "remaining_findings": [
+        "第7页标题垂直位置仍与本页相差约4.3px。",
+        "SVG内部安全区仍标记unmeasured；本观察来自实际截图，不能当作程序已精确验证内部几何。",
+        "箭头外框约250×138，原模板约219×211；当前轮廓仍偏扁，标签可读性已改善，但形状比例需继续复核，不能据此称美观验收完成。"
+      ],
+      "screenshot_matches_browser_probe": true,
+      "source_screenshot_file": "/Users/duxiao/workspace/marketing-agent/marketing_v2_agent/.local/system-workflow-20260930/user-layout-review/18-candidate.png",
+      "screenshot_path_basis": "relative_to_this_json; original path retained as provenance"
+    }
+  ],
+  "pending": [],
+  "updated_at": "2026-09-30T07:05:36.964635+00:00",
+  "completed_requested_observations": true,
+  "portable_copy": {
+    "source_json_sha256": "0e09294c6ff510a53a0a021a61177e2cf833bc7db8f8d8d67bbe252258cfb890",
+    "screenshot_count": 4,
+    "quality_status": "needs_review",
+    "model_acceptance": false,
+    "change": "Only screenshot paths adapted for portability; observations and screenshot hashes unchanged."
+  }
+}

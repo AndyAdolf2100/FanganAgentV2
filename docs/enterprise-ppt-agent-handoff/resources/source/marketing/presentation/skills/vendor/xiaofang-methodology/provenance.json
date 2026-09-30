@@ -1,0 +1,18 @@
+{
+  "source": "118 agent read_file transcription, event 818908",
+  "byte_exact_verified": false,
+  "note": "Agent-provided original text; byte totals differ from its list_dir claims. No direct source-file hash available.",
+  "byte_verified": true,
+  "verified_against_event": 818968,
+  "transcription_correction": "Removed one extra ASCII space at byte offset 5404; exact remote SHA256 match",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "924e262423d9b70d88a764f40fb5f1fd8ba23a469b88f54e519e5f0c22c21d3d"
+    },
+    {
+      "path": "styles/STYLE-INDEX.md",
+      "sha256": "d232bf5880f11fbe7122ef81413d620b4b5f8c2d124826e9b53503a735355a2e"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "feedback": [
+    {
+      "page": 8,
+      "issues": [
+        {
+          "severity": "medium",
+          "type": "label_wrap",
+          "detail": "时间轴圆形节点内W1–3等区间拆成两行并偏离中心。",
+          "fix_hint": "让GLM完整重排时间标签，例如放在节点上方保持单行；不修改周次和品牌，不手工写CSS。"
+        }
+      ]
+    }
+  ]
+}

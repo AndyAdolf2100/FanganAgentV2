@@ -1,0 +1,848 @@
+{
+  "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "version": 1,
+  "name": "交接协议样例（非设计样例）",
+  "createdAt": 1,
+  "width": 1200,
+  "height": 675,
+  "originalWidth": 1200,
+  "originalHeight": 675,
+  "aspectRatio": "16:9",
+  "pages": [
+    {
+      "id": "cover",
+      "name": "cover",
+      "role": "cover",
+      "background": "#FFFFFF",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "title",
+          "order": 1,
+          "x": 64,
+          "y": 40,
+          "width": 1072,
+          "height": 80,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "brand",
+          "kind": "text",
+          "binding": "fixed",
+          "textRole": "brand",
+          "order": 1,
+          "x": 64,
+          "y": 610,
+          "width": 1072,
+          "height": 40,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "企业固定品牌",
+                  "size": 18,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "shape",
+          "binding": "fixed",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 12,
+          "fill": "#BB3322"
+        }
+      ]
+    },
+    {
+      "id": "contents",
+      "name": "contents",
+      "role": "contents",
+      "background": "#FFFFFF",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "title",
+          "order": 1,
+          "x": 64,
+          "y": 40,
+          "width": 1072,
+          "height": 80,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "contentsItem",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "contentsItem",
+          "order": 1,
+          "x": 64,
+          "y": 150,
+          "width": 1072,
+          "height": 420,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "brand",
+          "kind": "text",
+          "binding": "fixed",
+          "textRole": "brand",
+          "order": 1,
+          "x": 64,
+          "y": 610,
+          "width": 1072,
+          "height": 40,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "企业固定品牌",
+                  "size": 18,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "shape",
+          "binding": "fixed",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 12,
+          "fill": "#BB3322"
+        }
+      ]
+    },
+    {
+      "id": "section",
+      "name": "section",
+      "role": "section",
+      "background": "#FFFFFF",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "title",
+          "order": 1,
+          "x": 64,
+          "y": 40,
+          "width": 1072,
+          "height": 80,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sectionNumber",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "sectionNumber",
+          "order": 1,
+          "x": 64,
+          "y": 140,
+          "width": 1072,
+          "height": 80,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "brand",
+          "kind": "text",
+          "binding": "fixed",
+          "textRole": "brand",
+          "order": 1,
+          "x": 64,
+          "y": 610,
+          "width": 1072,
+          "height": 40,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "企业固定品牌",
+                  "size": 18,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "shape",
+          "binding": "fixed",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 12,
+          "fill": "#BB3322"
+        }
+      ]
+    },
+    {
+      "id": "body",
+      "name": "body",
+      "role": "body",
+      "background": "#FFFFFF",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "title",
+          "order": 1,
+          "x": 64,
+          "y": 40,
+          "width": 1072,
+          "height": 80,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "body",
+          "order": 1,
+          "x": 64,
+          "y": 150,
+          "width": 1072,
+          "height": 420,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "模板示例",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "brand",
+          "kind": "text",
+          "binding": "fixed",
+          "textRole": "brand",
+          "order": 1,
+          "x": 64,
+          "y": 610,
+          "width": 1072,
+          "height": 40,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "企业固定品牌",
+                  "size": 18,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "shape",
+          "binding": "fixed",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 12,
+          "fill": "#BB3322"
+        }
+      ]
+    },
+    {
+      "id": "ending",
+      "name": "ending",
+      "role": "ending",
+      "background": "#FFFFFF",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "binding": "content",
+          "textRole": "title",
+          "order": 1,
+          "x": 64,
+          "y": 40,
+          "width": 1072,
+          "height": 80,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "谢谢",
+                  "size": 28,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "brand",
+          "kind": "text",
+          "binding": "fixed",
+          "textRole": "brand",
+          "order": 1,
+          "x": 64,
+          "y": 610,
+          "width": 1072,
+          "height": 40,
+          "paragraphs": [
+            {
+              "align": "left",
+              "runs": [
+                {
+                  "text": "企业固定品牌",
+                  "size": 18,
+                  "font": "Noto Sans CJK SC",
+                  "color": "#223344",
+                  "bold": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "shape",
+          "binding": "fixed",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 12,
+          "fill": "#BB3322"
+        }
+      ]
+    }
+  ],
+  "assets": [],
+  "fonts": [
+    "Noto Sans CJK SC"
+  ],
+  "colors": [
+    "#223344"
+  ],
+  "warnings": [],
+  "published": {
+    "revision": 1,
+    "name": "交接协议样例（非设计样例）",
+    "pages": [
+      {
+        "id": "cover",
+        "name": "cover",
+        "role": "cover",
+        "background": "#FFFFFF",
+        "elements": [
+          {
+            "id": "title",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "title",
+            "order": 1,
+            "x": 64,
+            "y": 40,
+            "width": 1072,
+            "height": 80,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "brand",
+            "kind": "text",
+            "binding": "fixed",
+            "textRole": "brand",
+            "order": 1,
+            "x": 64,
+            "y": 610,
+            "width": 1072,
+            "height": 40,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "企业固定品牌",
+                    "size": 18,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "shape",
+            "binding": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 12,
+            "fill": "#BB3322"
+          }
+        ]
+      },
+      {
+        "id": "contents",
+        "name": "contents",
+        "role": "contents",
+        "background": "#FFFFFF",
+        "elements": [
+          {
+            "id": "title",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "title",
+            "order": 1,
+            "x": 64,
+            "y": 40,
+            "width": 1072,
+            "height": 80,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "contentsItem",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "contentsItem",
+            "order": 1,
+            "x": 64,
+            "y": 150,
+            "width": 1072,
+            "height": 420,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "brand",
+            "kind": "text",
+            "binding": "fixed",
+            "textRole": "brand",
+            "order": 1,
+            "x": 64,
+            "y": 610,
+            "width": 1072,
+            "height": 40,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "企业固定品牌",
+                    "size": 18,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "shape",
+            "binding": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 12,
+            "fill": "#BB3322"
+          }
+        ]
+      },
+      {
+        "id": "section",
+        "name": "section",
+        "role": "section",
+        "background": "#FFFFFF",
+        "elements": [
+          {
+            "id": "title",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "title",
+            "order": 1,
+            "x": 64,
+            "y": 40,
+            "width": 1072,
+            "height": 80,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "sectionNumber",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "sectionNumber",
+            "order": 1,
+            "x": 64,
+            "y": 140,
+            "width": 1072,
+            "height": 80,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "brand",
+            "kind": "text",
+            "binding": "fixed",
+            "textRole": "brand",
+            "order": 1,
+            "x": 64,
+            "y": 610,
+            "width": 1072,
+            "height": 40,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "企业固定品牌",
+                    "size": 18,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "shape",
+            "binding": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 12,
+            "fill": "#BB3322"
+          }
+        ]
+      },
+      {
+        "id": "body",
+        "name": "body",
+        "role": "body",
+        "background": "#FFFFFF",
+        "elements": [
+          {
+            "id": "title",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "title",
+            "order": 1,
+            "x": 64,
+            "y": 40,
+            "width": 1072,
+            "height": 80,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "body",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "body",
+            "order": 1,
+            "x": 64,
+            "y": 150,
+            "width": 1072,
+            "height": 420,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "模板示例",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "brand",
+            "kind": "text",
+            "binding": "fixed",
+            "textRole": "brand",
+            "order": 1,
+            "x": 64,
+            "y": 610,
+            "width": 1072,
+            "height": 40,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "企业固定品牌",
+                    "size": 18,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "shape",
+            "binding": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 12,
+            "fill": "#BB3322"
+          }
+        ]
+      },
+      {
+        "id": "ending",
+        "name": "ending",
+        "role": "ending",
+        "background": "#FFFFFF",
+        "elements": [
+          {
+            "id": "title",
+            "kind": "text",
+            "binding": "content",
+            "textRole": "title",
+            "order": 1,
+            "x": 64,
+            "y": 40,
+            "width": 1072,
+            "height": 80,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "谢谢",
+                    "size": 28,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "brand",
+            "kind": "text",
+            "binding": "fixed",
+            "textRole": "brand",
+            "order": 1,
+            "x": 64,
+            "y": 610,
+            "width": 1072,
+            "height": 40,
+            "paragraphs": [
+              {
+                "align": "left",
+                "runs": [
+                  {
+                    "text": "企业固定品牌",
+                    "size": 18,
+                    "font": "Noto Sans CJK SC",
+                    "color": "#223344",
+                    "bold": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "shape",
+            "binding": "fixed",
+            "x": 0,
+            "y": 0,
+            "width": 1200,
+            "height": 12,
+            "fill": "#BB3322"
+          }
+        ]
+      }
+    ]
+  },
+  "reviewAccepted": true
+}

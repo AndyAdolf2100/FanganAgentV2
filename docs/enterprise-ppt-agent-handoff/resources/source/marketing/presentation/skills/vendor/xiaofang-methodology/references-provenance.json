@@ -1,0 +1,26 @@
+[
+  {
+    "path": "styles/images/style-05.jpeg",
+    "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-55069dfc-e900-42ee-87bd-b9594a4a9117/dc0d39e1fe57f43cf92bd13deb05ae12.jpeg",
+    "bytes": 57634,
+    "sha256": "dc0d39e1fe57f43cf92bd13deb05ae1231c1016761d8f3b78b960291923b3a83"
+  },
+  {
+    "path": "styles/images/style-48.jpeg",
+    "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-55069dfc-e900-42ee-87bd-b9594a4a9117/1840aaaf66a9dad3f1c6a165cfdb41b2.jpeg",
+    "bytes": 120378,
+    "sha256": "1840aaaf66a9dad3f1c6a165cfdb41b23fa2c5cf9e951ffa698061519d4c26fa"
+  },
+  {
+    "path": "styles/images/style-50.jpeg",
+    "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-55069dfc-e900-42ee-87bd-b9594a4a9117/8ef051c6fe1a7bb6c7e95b60c27af65b.jpeg",
+    "bytes": 49591,
+    "sha256": "8ef051c6fe1a7bb6c7e95b60c27af65b5b394f21cf78870cda10f01699ef8628"
+  },
+  {
+    "path": "styles/images/style-54.jpeg",
+    "url": "https://agent-assets-test.aippt.cn/sandbox/sbx-55069dfc-e900-42ee-87bd-b9594a4a9117/e728657759b073b97d196ac85d848061.jpeg",
+    "bytes": 85650,
+    "sha256": "e728657759b073b97d196ac85d8480614d9fb8fd964f492f1fa0a310340249af"
+  }
+]

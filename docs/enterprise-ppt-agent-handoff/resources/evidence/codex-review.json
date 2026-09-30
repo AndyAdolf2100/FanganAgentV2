@@ -1,0 +1,75 @@
+{
+  "job_id": "40bf3188a3bf430fa448a664ed8a4f4f",
+  "reviewer": "Codex独立截图审查",
+  "pages": [
+    {
+      "page": 1,
+      "verdict": "pass",
+      "note": "标题按语义分行，营销不再被拆开；固定品牌和元信息完整。",
+      "screenshot_sha256": "a4ca9e193fa88bc5b45ff9f1d204c9224e0e45aeec2770b5f0275cd50703a19b"
+    },
+    {
+      "page": 2,
+      "verdict": "pass",
+      "note": "装饰序号弱化，实际目录序号清晰；局部双行内容较密，暂不构成阻碍。",
+      "screenshot_sha256": "d4aac3a79b78d772b76b635dd59bd42670ff1aa18c261ce1b2a1f6574625a58d"
+    },
+    {
+      "page": 3,
+      "verdict": "fix",
+      "issues": [
+        {
+          "severity": "medium",
+          "type": "unbalanced_body_frame",
+          "detail": "左侧约330px空白，正文被挤向右侧，长目录项出现“提炼”等词内断行，两栏宽度不足。项目视觉通过不能作为此页美观验收通过。",
+          "fix_hint": "保留顶部蓝色企业页眉及标题外框。重新分析正文约束，确认背景白色底板不是必须留空的侧栏，扩大横向正文自由区至接近左右页边距，再由模型重排两栏完整目录，不修改来源文字。"
+        }
+      ],
+      "screenshot_sha256": "515bad5e3ad5ef8615e531df77291c83e8477d2064263d0d4da67db006013609"
+    },
+    {
+      "page": 5,
+      "verdict": "pass",
+      "note": "新正文从狭窄右侧区扩展到页内主要宽度，信息分组和核心目标强调清楚。残余竖线可进一步简化，暂不构成中高问题。",
+      "screenshot_sha256": "a50922b0dbc7fe45b4bf12f2f27ec04748ddb4e38721ca123f38617a77b367ee"
+    },
+    {
+      "page": 6,
+      "verdict": "fix",
+      "issues": [
+        {
+          "severity": "medium",
+          "type": "orphan_character",
+          "detail": "调整小字字号后，蓝色价格卡片说明将“主流价格带”的“带”单字折到下一行，影响成品精致度。其余分栏和信息主次已明显改善。",
+          "fix_hint": "只需模型重新组织卡片说明的语义换行，例如在间隔符前后换行，让“主流价格带”完整处于同一行；保持18px以上和固定标题外框。"
+        }
+      ],
+      "screenshot_sha256": "e1a5790d9e4636f03f9219617297f0e46af1ea9da94e8f7aceab1e53287ea06b"
+    },
+    {
+      "page": 7,
+      "verdict": "pass",
+      "note": "主要数值与来源分区清楚，整页宽度得到有效利用。",
+      "screenshot_sha256": "d54f741850ebfe050cdd8ca9858858c9966763e8c433f5d00c4f9e24dc6f545b"
+    },
+    {
+      "page": 8,
+      "verdict": "fix",
+      "issues": [
+        {
+          "severity": "medium",
+          "type": "label_wrap",
+          "detail": "W1–3/W3–6/W5–8在圆形时间标签内拆成两行，字形偏离圆心，项目视觉报告将该问题归为low而放行。",
+          "fix_hint": "让模型重排标签至节点外或扩大合理标签容器，保持时间区间单行。"
+        }
+      ],
+      "screenshot_sha256": "b150115edc3769da694a0d0a856d4df971204ca008d2d694f7c703b091030109"
+    },
+    {
+      "page": 12,
+      "verdict": "pass",
+      "note": "竞品表格扩展到有效页宽，品牌方案列明确强调，原文说明分区清楚。",
+      "screenshot_sha256": "25d763ce7e43bd1182a3c0587b98d78299b357d1baa09b182bcdb2f7993f6752"
+    }
+  ]
+}

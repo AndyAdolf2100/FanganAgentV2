@@ -1,0 +1,34 @@
+{
+  "recorded_at": "2026-09-30T16:45:16.499974+08:00",
+  "session_id": "01a0d23b7ac676f2a3f18d6de59bae39",
+  "task_run_id": "01a0f17c0f787051a3cca9b044c83d75",
+  "works_unchanged": true,
+  "works_before": [
+    {
+      "id": "01a0d2a83d0c7a5183d8a305616633af",
+      "title": "render_probe 缺陷探测样本",
+      "version": 2,
+      "total_pages": 1,
+      "status": "completed"
+    }
+  ],
+  "works_after": [
+    {
+      "id": "01a0d2a83d0c7a5183d8a305616633af",
+      "title": "render_probe 缺陷探测样本",
+      "version": 2,
+      "total_pages": 1,
+      "status": "completed"
+    }
+  ],
+  "final_state": "idle",
+  "event_types": [
+    "user_message",
+    "agent_message",
+    "completed"
+  ],
+  "first_seq": 830792,
+  "last_seq": 830804,
+  "answer_file": "118-round-29.md",
+  "credentials_saved": false
+}

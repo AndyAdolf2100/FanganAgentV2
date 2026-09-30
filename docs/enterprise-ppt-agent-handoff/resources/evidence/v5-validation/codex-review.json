@@ -1,0 +1,62 @@
+{
+  "reviewer": "Codex independent image inspection",
+  "job_id": "895b39e9fdb846ee8ca151b88fae8b6e",
+  "verdict": "needs_review",
+  "model_project_verdict": "not substituted by this review",
+  "pages": [
+    {
+      "page": 1,
+      "screenshot_sha256": "8c44e09cc5a6826f13bf255c6a1cf52268cbd7d872267c73dc3952044fd383a5",
+      "issues": []
+    },
+    {
+      "page": 2,
+      "screenshot_sha256": "0f3f24a6613b375881dc6b5ab890ac19d79a375a86690f81db30c66c09eebc62",
+      "issues": [
+        {
+          "severity": "medium",
+          "detail": "目录只有两项，原模板下方两个无内容六边形仍在，模板装饰与真实目录数量不协调；需模型在保护允许范围处理。"
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "screenshot_sha256": "c32db1d4fd0d92d7f8a92e26f3f120933f992cb3b9537f3a58cb39414fef0a1e",
+      "issues": []
+    },
+    {
+      "page": 4,
+      "screenshot_sha256": "e40582fa3c4e661f990668a25270a22c0d1f95309bbd7ec9c7e86177c229e10e",
+      "issues": [
+        {
+          "severity": "medium",
+          "detail": "三条行动标题带原文分号且第一条偏长，视觉层级和短标签写法可进一步优化；正文未采用通过验收的新配图。"
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "screenshot_sha256": "19ffc3093edf2dd0582e45d649902529b10d44a2a6d39e4ce21f5b0a19234ea4",
+      "issues": []
+    },
+    {
+      "page": 6,
+      "screenshot_sha256": "b4716ce6719c355e42d7a323193128acef87dddd74fa017943278526832f7cbb",
+      "issues": [
+        {
+          "severity": "high",
+          "detail": "试点目标说明连续重复两遍，需查明来源标记与模型额外说明，保留来源一次并去掉非来源重复。"
+        },
+        {
+          "severity": "medium",
+          "detail": "表格上方留白较大，说明、表格及底部结论的垂直间距需要模型统一。"
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "screenshot_sha256": "6e54f70b082d2f7340fc43e9b713eb02d0fa2cfc6d546d5530930b0174620f1e",
+      "issues": []
+    }
+  ]
+}

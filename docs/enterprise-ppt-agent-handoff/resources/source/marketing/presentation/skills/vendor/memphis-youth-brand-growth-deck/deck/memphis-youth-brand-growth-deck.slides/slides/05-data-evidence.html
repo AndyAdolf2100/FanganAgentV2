@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>数据证据</title>
+<link href="https://agent-resource-test.aippt.cn/lib/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://agent-resource-test.aippt.cn/lib/fontawesome-all.min.css">
+<script src="https://agent-resource-test.aippt.cn/lib/chart.umd.js"></script>
+<style>
+  body{margin:0;font-family:"HarmonyOS Sans SC","Source Han Sans SC","Microsoft YaHei","Alibaba PuHuiTi",sans-serif;color:#1F2024;}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:#FFF8EA;}
+  .grain{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(#1F2024 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+  .page-num{position:absolute;left:120px;top:88px;font-weight:900;font-size:20px;letter-spacing:5px;}
+  .page-num span{background:#F6C945;color:#1F2024;padding:6px 14px;border-radius:6px;}
+  .head-title{font-weight:900;font-size:44px;line-height:1.25;}
+  .head-title em{font-style:normal;color:#F06F61;}
+  .metric-card{border:3px solid #1F2024;border-radius:14px;padding:14px 18px;background:#FFF8EA;box-shadow:4px 4px 0 #1F2024;}
+  .metric-val{font-family:Inter,Arial,sans-serif;font-weight:900;font-size:52px;line-height:1;}
+  .metric-label{font-size:18px;color:#243B75;margin-top:6px;}
+  .group-title{font-weight:900;font-size:24px;padding:8px 16px;border-radius:8px;display:inline-block;border:3px solid #1F2024;margin-bottom:14px;}
+  .conclusion{position:absolute;left:120px;bottom:110px;right:120px;padding:22px 30px;background:#243B75;color:#FFF8EA;border-radius:16px;font-weight:700;font-size:24px;display:flex;align-items:center;gap:18px;}
+  .note{position:absolute;bottom:44px;left:120px;font-size:15px;color:#1F2024;opacity:.7;}
+</style>
+</head>
+<body>
+<section class="slide">
+  <div class="grain"></div>
+
+  <div class="page-num"><span>05 / 16</span> &nbsp; DATA EVIDENCE · 数据证据</div>
+
+  <div style="position:absolute;right:140px;top:80px;width:120px;height:70px;background-image:radial-gradient(#1F2024 2.4px,transparent 2.6px);background-size:20px 20px;"></div>
+  <svg style="position:absolute;right:270px;top:80px;transform:rotate(20deg);" width="60" height="60" viewBox="0 0 60 60">
+    <polygon points="30,4 56,52 4,52" fill="#8068C9"/>
+  </svg>
+
+  <div style="position:absolute;left:120px;top:180px;width:1680px;">
+    <div class="head-title">
+      <em>真实、有趣、可参与</em>的内容，<br>
+      更容易获得<em style="color:#8068C9;">用户停留</em>。
+    </div>
+  </div>
+
+  <div style="position:absolute;left:120px;top:380px;width:1680px;height:440px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;">
+
+    <div>
+      <span class="group-title" style="background:#F4C9C5;">A · 普通品牌内容</span>
+      <div style="display:flex;gap:12px;">
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#F06F61;">18<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">平均停留率</div>
+        </div>
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#F06F61;">2.1<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">有效互动率</div>
+        </div>
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#F06F61;">0.7<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">分享率</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;height:280px;border:3px solid #1F2024;border-radius:14px;padding:12px;background:#FFF8EA;box-shadow:4px 4px 0 #1F2024;">
+        <canvas id="c1" width="470" height="256"></canvas>
+      </div>
+    </div>
+
+    <div>
+      <span class="group-title" style="background:#F6C945;">B · 场景化内容</span>
+      <div style="display:flex;gap:12px;">
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#243B75;">34<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">平均停留率</div>
+        </div>
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#243B75;">5.8<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">有效互动率</div>
+        </div>
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#243B75;">2.4<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">分享率</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;height:280px;border:3px solid #1F2024;border-radius:14px;padding:12px;background:#FFF8EA;box-shadow:4px 4px 0 #1F2024;">
+        <canvas id="c2" width="470" height="256"></canvas>
+      </div>
+    </div>
+
+    <div>
+      <span class="group-title" style="background:#54C6B1;">C · 用户共创内容</span>
+      <div style="display:flex;gap:12px;">
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#8068C9;">42<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">平均停留率</div>
+        </div>
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#8068C9;">8.1<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">有效互动率</div>
+        </div>
+        <div class="metric-card" style="flex:1;">
+          <div class="metric-val" style="color:#8068C9;">4.2<span style="font-size:22px;">%</span></div>
+          <div class="metric-label">分享率</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;height:280px;border:3px solid #1F2024;border-radius:14px;padding:12px;background:#FFF8EA;box-shadow:4px 4px 0 #1F2024;">
+        <canvas id="c3" width="470" height="256"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="conclusion">
+    <i class="fas fa-chart-line" style="color:#F6C945;font-size:30px;"></i>
+    <span>当内容从<span style="color:#F6C945;">"品牌表达"</span>转向<span style="color:#54C6B1;">"用户参与"</span>，互动与传播<span style="color:#F06F61;">同时提升</span>。</span>
+    <span style="margin-left:auto;font-size:16px;opacity:.7;letter-spacing:2px;">单位：% ｜ 类型：对比柱状图</span>
+  </div>
+
+  <div class="note">数据状态：示意数据｜口径：内容平台A/B测试均值 2025.10-2026.06｜样本 8,600</div>
+
+<script>
+  const opt = (color, values) => ({
+    type:'bar',
+    data:{labels:['停留率','互动率','分享率'],datasets:[{data:values,backgroundColor:color,borderColor:'#1F2024',borderWidth:2,borderRadius:6}]},
+    options:{
+      responsive:false,maintainAspectRatio:true,
+      plugins:{legend:{display:false},tooltip:{enabled:false},datalabels:{}},
+      scales:{
+        y:{beginAtZero:true,max:50,ticks:{color:'#1F2024',font:{size:14}},grid:{color:'rgba(31,32,36,0.1)'},title:{display:true,text:'百分比 %',color:'#1F2024',font:{size:14,weight:'bold'}}},
+        x:{ticks:{color:'#1F2024',font:{size:16,weight:'bold'}},grid:{display:false}}
+      }
+    }
+  });
+  const chart1 = new Chart(document.getElementById('c1'), opt('#F06F61',[18,2.1,0.7]));
+  const chart2 = new Chart(document.getElementById('c2'), opt('#F6C945',[34,5.8,2.4]));
+  const chart3 = new Chart(document.getElementById('c3'), opt('#54C6B1',[42,8.1,4.2]));
+
+  [chart1,chart2,chart3].forEach(ch=>{
+    ch.options.animation = {onComplete: function(){
+      const ctx = ch.ctx;
+      ctx.font = 'bold 16px Inter, Arial';
+      ctx.fillStyle = '#1F2024';
+      ctx.textAlign = 'center';
+      ch.data.datasets[0].data.forEach((v,i)=>{
+        const bar = ch.getDatasetMeta(0).data[i];
+        ctx.fillText(v+'%', bar.x, bar.y-8);
+      });
+    }};
+    ch.update();
+  });
+</script>
+</section>
+</body>
+</html>

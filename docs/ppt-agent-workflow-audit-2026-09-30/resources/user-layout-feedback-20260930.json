@@ -1,0 +1,2084 @@
+{
+  "audit_date": "2026-09-30",
+  "read_only": true,
+  "paid_model_calls": 0,
+  "production_artifacts_modified": false,
+  "job": {
+    "id": "40bf3188a3bf430fa448a664ed8a4f4f",
+    "run_id": "99162889686a4e7ca7f3a69a83e93c86",
+    "pipeline_version": "3.0.0-enterprise-html-v4",
+    "enterprise_layout_mode": "enterprise-model-html-v4",
+    "status": "completed",
+    "stage": "completed"
+  },
+  "page_count": 56,
+  "template_id": "28201bbad982b9dfec9a3142301a1c9774925722fcc8819527d87e1adf68c236",
+  "template_revision": 2,
+  "screenshot_provenance": "逐页对照生产已保存previews与template-reference/previews，不是模型新生成图。委派上下文未附用户上传图文件，故不把生产PNG冒称用户原始上传截图。",
+  "source_artifacts": [
+    {
+      "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/job.json",
+      "sha256": "996104ef7590b8d4093a0cfdb5dcb8e11f44fe5d1f409bfd80f6e8517e31ea29"
+    },
+    {
+      "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/plan.json",
+      "sha256": "ba1bbbef2d7d089aeeb79bb679b864e94863c62b70a0033f0827ff006c2bc4d1"
+    },
+    {
+      "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/template.json",
+      "sha256": "e32ca8cd375a6c7b4aff58b9a774450e38e44f42a7463c9c8e337bb9b82309d8"
+    },
+    {
+      "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/enterprise-design-contract.json",
+      "sha256": "fc1a6608bd817f66fdd826c6b0717f1bdaba10ac4b33d16c759368309d39ed55"
+    },
+    {
+      "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/visual-review.json",
+      "sha256": "db19b28e139d546e19512cc390c231229f85d584cb05d7a6935b689116ed6609"
+    },
+    {
+      "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/enterprise-probe.json",
+      "sha256": "7e7abb89153b93df72ee37d93cab316c279977a84fb60a39859e9eea314157f7"
+    }
+  ],
+  "method": "生产容器Chromium仅加载保存HTML到禁JS、阻止外网的临时context；采集computedStyle、字形Range、canvas单行宽和SVG填充命中。未修改HTML、PNG或PPTX。",
+  "header_audit": {
+    "user_feedback": "顶部标题字号不统一，明明一行能放下仍换行。",
+    "body_header_pages": 43,
+    "font_size_distribution": {
+      "40px": 10,
+      "36px": 8,
+      "22px": 5,
+      "24px": 3,
+      "33px": 1,
+      "26px": 3,
+      "30px": 1,
+      "32px": 1,
+      "34px": 2,
+      "25px": 2,
+      "20px": 2,
+      "19px": 1,
+      "21px": 3,
+      "28px": 1
+    },
+    "distinct_font_sizes": 14,
+    "original_template_title": {
+      "x": 31.67,
+      "y": 13.33,
+      "width": 428.14,
+      "height": 60.59,
+      "font_size": 40,
+      "wrap": false
+    },
+    "generated_common_outer_width": 428.125,
+    "generated_common_inner_width": 404.125,
+    "multi_line_headers": [
+      {
+        "page": 7,
+        "role": "body",
+        "group": 6,
+        "template": 5,
+        "title": {
+          "text": "1.2 行业机会（基于公开资料检索整理，关键数据需复核）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "22px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            16,
+            45
+          ],
+          "right": 442.296875
+        }
+      }
+    ],
+    "page_7_width_at_original_40px": 1044.78466796875,
+    "all_43_body_titles_fit_1096px_at_40px": true,
+    "measurement_note": "全册最长正文页眉为第7页；现有字体40px测得1044.785px。按文字起点43.656、右侧留60，蓝条可用1096.344px；实际是否允许扩大仍须合同审查品牌避让。",
+    "cause": "继承模板短占位标题框并锁外框尺寸，使模型在404px净宽里各自缩字；缺少同类页眉统一字号与可用整条蓝栏宽度的约束。",
+    "constraints": [
+      "受限title_frame允许保留x/y/height、仅向右扩至品牌安全边界。",
+      "正文页眉统一采用模板字体/粗细/字号基准；实际安全宽度足够时单行，不以随机缩字解决原窄占位框。"
+    ],
+    "per_page": [
+      {
+        "page": 3,
+        "role": "body",
+        "group": 2,
+        "template": 5,
+        "title": {
+          "text": "提案总览（完整目录）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            20
+          ],
+          "right": 443.65625
+        }
+      },
+      {
+        "page": 5,
+        "role": "body",
+        "group": 4,
+        "template": 5,
+        "title": {
+          "text": "项目概要",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            20
+          ],
+          "right": 203.65625
+        }
+      },
+      {
+        "page": 6,
+        "role": "body",
+        "group": 5,
+        "template": 5,
+        "title": {
+          "text": "1.1 品牌与产品",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 299.96875
+        }
+      },
+      {
+        "page": 7,
+        "role": "body",
+        "group": 6,
+        "template": 5,
+        "title": {
+          "text": "1.2 行业机会（基于公开资料检索整理，关键数据需复核）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "22px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            16,
+            45
+          ],
+          "right": 442.296875
+        }
+      },
+      {
+        "page": 8,
+        "role": "body",
+        "group": 7,
+        "template": 21,
+        "title": {
+          "text": "1.3 项目目标与硬性约束",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 443.96875
+        },
+        "circles": [
+          {
+            "text": "W1–3",
+            "box": {
+              "x": 198,
+              "y": 413,
+              "width": 64,
+              "height": 64
+            },
+            "fontSize": "24px",
+            "border": "4px",
+            "neededSingleLineWidth": 71.87109375,
+            "chars": [
+              {
+                "text": "W",
+                "x": 202,
+                "y": 417,
+                "width": 26.484375,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "1",
+                "x": 228.46875,
+                "y": 417,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "–",
+                "x": 245.171875,
+                "y": 417,
+                "width": 12,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "3",
+                "x": 202,
+                "y": 445,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              }
+            ]
+          },
+          {
+            "text": "W3–6",
+            "box": {
+              "x": 568,
+              "y": 413,
+              "width": 64,
+              "height": 64
+            },
+            "fontSize": "24px",
+            "border": "4px",
+            "neededSingleLineWidth": 71.87109375,
+            "chars": [
+              {
+                "text": "W",
+                "x": 572,
+                "y": 417,
+                "width": 26.484375,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "3",
+                "x": 598.46875,
+                "y": 417,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "–",
+                "x": 615.171875,
+                "y": 417,
+                "width": 12,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "6",
+                "x": 572,
+                "y": 445,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              }
+            ]
+          },
+          {
+            "text": "W5–8",
+            "box": {
+              "x": 938,
+              "y": 413,
+              "width": 64,
+              "height": 64
+            },
+            "fontSize": "24px",
+            "border": "4px",
+            "neededSingleLineWidth": 71.87109375,
+            "chars": [
+              {
+                "text": "W",
+                "x": 942,
+                "y": 417,
+                "width": 26.484375,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "5",
+                "x": 968.46875,
+                "y": 417,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "–",
+                "x": 985.171875,
+                "y": 417,
+                "width": 12,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "8",
+                "x": 942,
+                "y": 445,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "page": 10,
+        "role": "body",
+        "group": 9,
+        "template": 5,
+        "title": {
+          "text": "2.1 宏观环境（PEST）：政策与经济",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "24px"
+          ],
+          "whiteSpace": [
+            "pre-wrap"
+          ],
+          "lines": [
+            30
+          ],
+          "right": 438.171875
+        }
+      },
+      {
+        "page": 11,
+        "role": "body",
+        "group": 10,
+        "template": 21,
+        "title": {
+          "text": "2.1 宏观环境（PEST）：社会与技术",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "22px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            31
+          ],
+          "right": 405.296875
+        }
+      },
+      {
+        "page": 12,
+        "role": "body",
+        "group": 11,
+        "template": 5,
+        "title": {
+          "text": "2.2 竞争格局与差异化空隙",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "33px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 443.609375
+        }
+      },
+      {
+        "page": 13,
+        "role": "body",
+        "group": 12,
+        "template": 5,
+        "title": {
+          "text": "2.3 人群与消费者洞察",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            16
+          ],
+          "right": 448.453125
+        },
+        "body": {
+          "box": {
+            "x": 330,
+            "y": 120,
+            "width": 830,
+            "height": 520
+          },
+          "items": [
+            {
+              "tag": "DIV",
+              "text": "核心人群",
+              "box": {
+                "x": 330,
+                "y": 156,
+                "width": 217,
+                "height": 130
+              }
+            },
+            {
+              "tag": "P",
+              "text": "核心人群：“健康意识觉醒但口味不妥协”的 18–30 岁都市",
+              "box": {
+                "x": 573,
+                "y": 160,
+                "width": 587,
+                "height": 122
+              }
+            },
+            {
+              "tag": "DIV",
+              "text": "痛点与情感",
+              "box": {
+                "x": 330,
+                "y": 316,
+                "width": 217,
+                "height": 130
+              }
+            },
+            {
+              "tag": "P",
+              "text": "• 品类第一痛点：无糖茶“苦涩接受门槛”；第二痛点：同质化疲",
+              "box": {
+                "x": 573,
+                "y": 320,
+                "width": 587,
+                "height": 122
+              }
+            },
+            {
+              "tag": "DIV",
+              "text": "决策路径",
+              "box": {
+                "x": 330,
+                "y": 476,
+                "width": 217,
+                "height": 140
+              }
+            },
+            {
+              "tag": "P",
+              "text": "• 决策路径：抖音内容触发→看后搜查口碑→商城/直播间比价→",
+              "box": {
+                "x": 573,
+                "y": 480,
+                "width": 587,
+                "height": 132
+              }
+            }
+          ]
+        }
+      },
+      {
+        "page": 14,
+        "role": "body",
+        "group": 13,
+        "template": 5,
+        "title": {
+          "text": "2.4 平台生态洞察",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            21
+          ],
+          "right": 356.453125
+        }
+      },
+      {
+        "page": 15,
+        "role": "body",
+        "group": 14,
+        "template": 6,
+        "title": {
+          "text": "2.5 五条核心洞察（策略总输入）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "22px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            30
+          ],
+          "right": 376.296875
+        }
+      },
+      {
+        "page": 17,
+        "role": "body",
+        "group": 16,
+        "template": 5,
+        "title": {
+          "text": "3.1 核心策略主张",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            21
+          ],
+          "right": 368.453125
+        }
+      },
+      {
+        "page": 18,
+        "role": "body",
+        "group": 16,
+        "template": 5,
+        "title": {
+          "text": "3.1 核心策略主张",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            21
+          ],
+          "right": 368.453125
+        }
+      },
+      {
+        "page": 19,
+        "role": "body",
+        "group": 17,
+        "template": 9,
+        "title": {
+          "text": "3.2 传播策略",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 263.96875
+        }
+      },
+      {
+        "page": 20,
+        "role": "body",
+        "group": 18,
+        "template": 6,
+        "title": {
+          "text": "3.3 内容策略",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            16
+          ],
+          "right": 288.453125
+        },
+        "arrows": [
+          {
+            "text": "口味翻案（盲测实测）",
+            "box": {
+              "x": 99.75,
+              "y": 269.5,
+              "width": 180,
+              "height": 26
+            },
+            "color": "rgb(255, 255, 255)",
+            "svgBox": {
+              "x": 60,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": ""
+          },
+          {
+            "text": "午后办公室（共情梗剧情）",
+            "box": {
+              "x": 355.25,
+              "y": 269.5,
+              "width": 216,
+              "height": 26
+            },
+            "color": "rgb(18, 57, 92)",
+            "svgBox": {
+              "x": 333.5,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": "）"
+          },
+          {
+            "text": "周末出游（视觉锤 vlog）",
+            "box": {
+              "x": 631.03125,
+              "y": 269.5,
+              "width": 211.421875,
+              "height": 26
+            },
+            "color": "rgb(255, 255, 255)",
+            "svgBox": {
+              "x": 607,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": "）"
+          },
+          {
+            "text": "机制化互动（UGC 杠杆）",
+            "box": {
+              "x": 904.8125,
+              "y": 269.5,
+              "width": 210.875,
+              "height": 26
+            },
+            "color": "rgb(255, 255, 255)",
+            "svgBox": {
+              "x": 880.5,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": "）"
+          }
+        ]
+      },
+      {
+        "page": 21,
+        "role": "body",
+        "group": 19,
+        "template": 5,
+        "title": {
+          "text": "3.4 人群策略（O-5A 分层运营）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "26px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            28
+          ],
+          "right": 439.421875
+        }
+      },
+      {
+        "page": 23,
+        "role": "body",
+        "group": 21,
+        "template": 21,
+        "title": {
+          "text": "#给生活留一点甜# 一主三辅话题体系",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "22px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            31
+          ],
+          "right": 406.1875
+        }
+      },
+      {
+        "page": 25,
+        "role": "body",
+        "group": 23,
+        "template": 5,
+        "title": {
+          "text": "5.1 核心创意概念",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            24
+          ],
+          "right": 335.96875
+        }
+      },
+      {
+        "page": 26,
+        "role": "body",
+        "group": 24,
+        "template": 23,
+        "title": {
+          "text": "5.2 内容矩阵与六大核心创意",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "30px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            26
+          ],
+          "right": 437.25
+        }
+      },
+      {
+        "page": 27,
+        "role": "body",
+        "group": 25,
+        "template": 24,
+        "title": {
+          "text": "5.2 六大核心创意（一）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 443.96875
+        }
+      },
+      {
+        "page": 28,
+        "role": "body",
+        "group": 26,
+        "template": 5,
+        "title": {
+          "text": "5.2 六大核心创意（二）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "32px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            24
+          ],
+          "right": 399.5
+        }
+      },
+      {
+        "page": 29,
+        "role": "body",
+        "group": 27,
+        "template": 21,
+        "title": {
+          "text": "5.2 六大核心创意（三）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "34px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 421.734375
+        }
+      },
+      {
+        "page": 30,
+        "role": "body",
+        "group": 28,
+        "template": 25,
+        "title": {
+          "text": "5.3 分阶段创意规划",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 371.96875
+        }
+      },
+      {
+        "page": 31,
+        "role": "body",
+        "group": 29,
+        "template": 5,
+        "title": {
+          "text": "5.4 物料清单",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            21
+          ],
+          "right": 288.453125
+        }
+      },
+      {
+        "page": 33,
+        "role": "body",
+        "group": 31,
+        "template": 6,
+        "title": {
+          "text": "6.1 矩阵架构（预算 120 万）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "24px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            29
+          ],
+          "right": 377.34375
+        }
+      },
+      {
+        "page": 34,
+        "role": "body",
+        "group": 32,
+        "template": 5,
+        "title": {
+          "text": "6.2 选择标准",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            16
+          ],
+          "right": 288.453125
+        }
+      },
+      {
+        "page": 35,
+        "role": "body",
+        "group": 33,
+        "template": 8,
+        "title": {
+          "text": "6.3 推荐名单：头部（选 1 位）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "24px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            30
+          ],
+          "right": 391.9375
+        }
+      },
+      {
+        "page": 36,
+        "role": "body",
+        "group": 34,
+        "template": 5,
+        "title": {
+          "text": "6.3 推荐名单：中腰部与 KOC",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "25px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            29
+          ],
+          "right": 388.203125
+        }
+      },
+      {
+        "page": 37,
+        "role": "body",
+        "group": 35,
+        "template": 5,
+        "title": {
+          "text": "6.4 合作方案与发布节奏",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "34px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            19
+          ],
+          "right": 421.734375
+        }
+      },
+      {
+        "page": 39,
+        "role": "body",
+        "group": 37,
+        "template": 5,
+        "title": {
+          "text": "7.1 抖音 KPI 指标体系：流量层",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "26px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            28
+          ],
+          "right": 425.75
+        }
+      },
+      {
+        "page": 40,
+        "role": "body",
+        "group": 38,
+        "template": 5,
+        "title": {
+          "text": "7.1 抖音 KPI 指标体系：互动层与 5A 人群",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "20px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            32
+          ],
+          "right": 440.90625
+        }
+      },
+      {
+        "page": 41,
+        "role": "body",
+        "group": 38,
+        "template": 5,
+        "title": {
+          "text": "7.1 抖音 KPI 指标体系：互动层与 5A 人群",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "20px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            32
+          ],
+          "right": 440.90625
+        }
+      },
+      {
+        "page": 42,
+        "role": "body",
+        "group": 39,
+        "template": 5,
+        "title": {
+          "text": "7.1 抖音 KPI 指标体系：转化层与总览",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "22px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            30
+          ],
+          "right": 432.96875
+        }
+      },
+      {
+        "page": 43,
+        "role": "body",
+        "group": 40,
+        "template": 6,
+        "title": {
+          "text": "7.2 预算分配（总额 300 万）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "26px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            28
+          ],
+          "right": 405.15625
+        }
+      },
+      {
+        "page": 44,
+        "role": "body",
+        "group": 41,
+        "template": 5,
+        "title": {
+          "text": "机动金机制与 7.3 数据监测优化",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "25px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            21
+          ],
+          "right": 403.359375
+        }
+      },
+      {
+        "page": 45,
+        "role": "body",
+        "group": 42,
+        "template": 5,
+        "title": {
+          "text": "7.4 风险预案",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            21
+          ],
+          "right": 288.453125
+        }
+      },
+      {
+        "page": 47,
+        "role": "body",
+        "group": 44,
+        "template": 6,
+        "title": {
+          "text": "八、执行排期与项目管理：60天执行排期表",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "19px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            32
+          ],
+          "right": 412.109375
+        }
+      },
+      {
+        "page": 49,
+        "role": "body",
+        "group": 46,
+        "template": 6,
+        "title": {
+          "text": "九、假设与待核验清单",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            20
+          ],
+          "right": 403.671875
+        }
+      },
+      {
+        "page": 51,
+        "role": "body",
+        "group": 48,
+        "template": 8,
+        "title": {
+          "text": "十、数据来源与核验清单（主要来源）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "21px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            31
+          ],
+          "right": 400.65625
+        }
+      },
+      {
+        "page": 52,
+        "role": "body",
+        "group": 48,
+        "template": 8,
+        "title": {
+          "text": "十、数据来源与核验清单（主要来源）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "21px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            31
+          ],
+          "right": 400.65625
+        }
+      },
+      {
+        "page": 53,
+        "role": "body",
+        "group": 48,
+        "template": 8,
+        "title": {
+          "text": "十、数据来源与核验清单（主要来源）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "21px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            31
+          ],
+          "right": 400.65625
+        }
+      },
+      {
+        "page": 54,
+        "role": "body",
+        "group": 49,
+        "template": 26,
+        "title": {
+          "text": "方案收束与合规说明",
+          "box": {
+            "x": 31.65625,
+            "y": 12.828125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            16
+          ],
+          "right": 367.671875
+        }
+      },
+      {
+        "page": 55,
+        "role": "body",
+        "group": 50,
+        "template": 6,
+        "title": {
+          "text": "修订说明（V1.0 → V1.1）",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "28px"
+          ],
+          "whiteSpace": [
+            "normal"
+          ],
+          "lines": [
+            27
+          ],
+          "right": 397.171875
+        }
+      }
+    ]
+  },
+  "pages": [
+    {
+      "page_number": 8,
+      "page_index": 7,
+      "generation_group": 7,
+      "slide_id": null,
+      "slide_id_note": "v4计划未保存slide_id，未伪造v5身份。",
+      "template_page_index": 20,
+      "template_page_number": 21,
+      "title": "1.3 项目目标与硬性约束",
+      "html_sha256": "3fcce935f46a247c24069e375361eb2dfd25e1268577f7678c43ff5212a8a3d0",
+      "source_block_ids": [
+        "b0010",
+        "b0011",
+        "b0012"
+      ],
+      "page_template_contract": {
+        "reason": "改用模板21替代原圆环遮挡版式。元素0为全页蓝色背景图、元素1为白色内容底板，二者构成模板品牌框架，完整保护。元素2是页眉标题占位（'单击此处添加文字标题'为可替换示例，非品牌），保留外框(31.65625,13.328125,428.125,60.578125)不动，仅替换内部文字为本页主标题，未接到页面HTML前不得改动其位置与尺寸。元素3-8为中央六宫格示例文字卡与商务示例图片，属于内容素材而非品牌，全部解除锁定，由模型在白色底板内按来源重排：左侧核心目标、右侧硬性约束卡、下方认知/兴趣/转化三阶段横向时间轴，阶段标签完整可见、与图形保留安全间距，避免再次出现大圆环压字。白色底板(0,86.67,1200,561.67)在页眉下方提供约1120x555的宽敞正文区，body_frame据此设定。",
+        "protected_elements": [
+          0,
+          1
+        ],
+        "text_frames": [
+          2
+        ],
+        "title_element": 2,
+        "body_frame": {
+          "x": 60,
+          "y": 100,
+          "width": 1080,
+          "height": 545
+        }
+      },
+      "current_global_contract": {
+        "reason": "元素0为整页背景图、元素1为白色内容底板，属品牌/母版资产，完整保护。元素2虽被自动标为brand，但内容是'单击此处添加文字标题'占位文本，且位于顶部通栏(31,13,428x60)白字加粗，语义为本页主标题，作为text_frames保留外框供替换。元素3/4/5为中央网格的蓝色示例文字块，元素6/7/8为对应的示例场景图片，均为可替换的正文内容装饰，按协议从protected与text_frames中排除，由模型在正文区内重建图文网格，可复用资源别名保持蓝色系视觉DNA。",
+        "protected_elements": [
+          0,
+          1
+        ],
+        "text_frames": [
+          2
+        ],
+        "title_element": 2,
+        "body_frame": {
+          "x": 40,
+          "y": 90,
+          "width": 1120,
+          "height": 560
+        }
+      },
+      "measurements": {
+        "page": 8,
+        "role": "body",
+        "group": 7,
+        "template": 21,
+        "title": {
+          "text": "1.3 项目目标与硬性约束",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "36px"
+          ],
+          "whiteSpace": [
+            "nowrap"
+          ],
+          "lines": [
+            23
+          ],
+          "right": 443.96875
+        },
+        "circles": [
+          {
+            "text": "W1–3",
+            "box": {
+              "x": 198,
+              "y": 413,
+              "width": 64,
+              "height": 64
+            },
+            "fontSize": "24px",
+            "border": "4px",
+            "neededSingleLineWidth": 71.87109375,
+            "chars": [
+              {
+                "text": "W",
+                "x": 202,
+                "y": 417,
+                "width": 26.484375,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "1",
+                "x": 228.46875,
+                "y": 417,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "–",
+                "x": 245.171875,
+                "y": 417,
+                "width": 12,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "3",
+                "x": 202,
+                "y": 445,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              }
+            ]
+          },
+          {
+            "text": "W3–6",
+            "box": {
+              "x": 568,
+              "y": 413,
+              "width": 64,
+              "height": 64
+            },
+            "fontSize": "24px",
+            "border": "4px",
+            "neededSingleLineWidth": 71.87109375,
+            "chars": [
+              {
+                "text": "W",
+                "x": 572,
+                "y": 417,
+                "width": 26.484375,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "3",
+                "x": 598.46875,
+                "y": 417,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "–",
+                "x": 615.171875,
+                "y": 417,
+                "width": 12,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "6",
+                "x": 572,
+                "y": 445,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              }
+            ]
+          },
+          {
+            "text": "W5–8",
+            "box": {
+              "x": 938,
+              "y": 413,
+              "width": 64,
+              "height": 64
+            },
+            "fontSize": "24px",
+            "border": "4px",
+            "neededSingleLineWidth": 71.87109375,
+            "chars": [
+              {
+                "text": "W",
+                "x": 942,
+                "y": 417,
+                "width": 26.484375,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "5",
+                "x": 968.46875,
+                "y": 417,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "–",
+                "x": 985.171875,
+                "y": 417,
+                "width": 12,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              },
+              {
+                "text": "8",
+                "x": 942,
+                "y": 445,
+                "width": 16.703125,
+                "height": 28,
+                "size": "24px",
+                "whiteSpace": "normal"
+              }
+            ]
+          }
+        ]
+      },
+      "prior_visual_review": {
+        "page": 8,
+        "verdict": "pass",
+        "observed": "页面为正文内容页，顶部蓝色通栏标题为“1.3 项目目标与硬性约束”。上方左侧是浅蓝底“核心目标”说明框，右侧是深蓝底白字“硬性约束”说明框；下方为“认知→兴趣→转化”的三阶段时间轴，包含W1-3、W3-6、W5-8三个节点及三张阶段说明卡。整体信息可读、配色统一，但时间轴节点标签排版较局促，且节点视觉状态不一致。",
+        "issues": [
+          {
+            "severity": "low",
+            "type": "alignment",
+            "detail": "时间轴圆形节点内的周次标签被强制拆成两行，显示为“W1-/3”“W3-/6”“W5-/8”，视觉上略显拥挤。",
+            "fix_hint": "增大圆形节点直径、减小标签字号，或改为“W1–3”单行显示；也可将周次标签放在节点上方或下方。"
+          },
+          {
+            "severity": "low",
+            "type": "hierarchy",
+            "detail": "W1-3和W3-6为蓝色描边空心节点，W5-8为深蓝实心节点，但页面未说明该差异代表当前阶段或重点状态，容易被误解为样式不统一。",
+            "fix_hint": "若三阶段为并列关系，统一三个节点的填充和描边样式；若W5-8需强调，应增加明确的状态标识或图例。"
+          }
+        ]
+      },
+      "production_preview": {
+        "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/previews/8.png",
+        "sha256": "b150115edc3769da694a0d0a856d4df971204ca008d2d694f7c703b091030109"
+      },
+      "original_template_preview": {
+        "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/template-reference/previews/21.png",
+        "sha256": "5b5eb5cc27fe078df47c4c7fab7ad0ee4e46db31b327d1ae3edcaefabc79322d"
+      },
+      "user_feedback": "第8页SVG圆组件可放大，避免内容换行。",
+      "cause": "实际是CSS圆形div（该页SVG数为0）。64px外径含两侧4px边框，内容可用宽56px；24px粗体W1–3实测单行71.871px，white-space:normal导致末位换到第二行。",
+      "constraints": [
+        "保留三阶段原文和本页来源；将节点放大到足够容纳实测字宽及安全留白（例如约96px），不要靠删字。",
+        "周次单行、不裁切；同步调整连线至节点中心和卡片间距。"
+      ]
+    },
+    {
+      "page_number": 13,
+      "page_index": 12,
+      "generation_group": 12,
+      "slide_id": null,
+      "slide_id_note": "v4计划未保存slide_id，未伪造v5身份。",
+      "template_page_index": 4,
+      "template_page_number": 5,
+      "title": "2.3 人群与消费者洞察",
+      "html_sha256": "1ad2a332f98e5a5d2253dab234fe450a94920247c081df59ecb2c43752e13b46",
+      "source_block_ids": [
+        "b0022",
+        "b0023",
+        "b0024"
+      ],
+      "page_template_contract": {
+        "reason": "全幅背景图（元素0）与白色内容底板（元素1）是必须保留的品牌/背景骨架。元素2是顶部通栏40px白色粗体页眉，语义为本页主标题，属可替换文字框。元素6/10/12及5/9/11是中央三组示例小标题与正文，均为待重建内容；箭头块（3/7/13）与白色小图标（4/8/14-19）是中央内容装饰而非企业品牌，可移除重设计。中央保留大面积自由内容区。",
+        "protected_elements": [
+          0,
+          1
+        ],
+        "text_frames": [
+          2
+        ],
+        "title_element": 2,
+        "body_frame": {
+          "x": 330,
+          "y": 120,
+          "width": 830,
+          "height": 520
+        }
+      },
+      "current_global_contract": {
+        "reason": "接受审查反馈：旧body_frame（x=330，宽830）沿用示例文字列位置而非品牌边界。重新分析本页真实约束：全页背景图（元素0）与白色内容底板（元素1）为品牌性结构，白色底板横跨整页宽度，左侧仅是空白底板，无受保护品牌；元素2为顶部通栏页眉主标题（'单击此处添加文字标题'是可替换示例，非品牌），保留其位置与样式作为title。中央三个箭头徽章（3/7/13）、白色图标（4、8、14-19）及三组示例小标题/正文（5、6、9-12）均为内容素材，不锁死，由模型重建。因此将body_frame扩至白底板通栏可用区（x=60、y=115、宽1080、高520），使正文两栏可对称各占约半幅，消除左侧空置与右栏挤压；页眉（y<87）与页脚安全区保留，无需更换模板变体。",
+        "protected_elements": [
+          0,
+          1
+        ],
+        "text_frames": [
+          2
+        ],
+        "title_element": 2,
+        "body_frame": {
+          "x": 60,
+          "y": 115,
+          "width": 1080,
+          "height": 520
+        }
+      },
+      "measurements": {
+        "page": 13,
+        "role": "body",
+        "group": 12,
+        "template": 5,
+        "title": {
+          "text": "2.3 人群与消费者洞察",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            16
+          ],
+          "right": 448.453125
+        },
+        "body": {
+          "box": {
+            "x": 330,
+            "y": 120,
+            "width": 830,
+            "height": 520
+          },
+          "items": [
+            {
+              "tag": "DIV",
+              "text": "核心人群",
+              "box": {
+                "x": 330,
+                "y": 156,
+                "width": 217,
+                "height": 130
+              }
+            },
+            {
+              "tag": "P",
+              "text": "核心人群：“健康意识觉醒但口味不妥协”的 18–30 岁都市",
+              "box": {
+                "x": 573,
+                "y": 160,
+                "width": 587,
+                "height": 122
+              }
+            },
+            {
+              "tag": "DIV",
+              "text": "痛点与情感",
+              "box": {
+                "x": 330,
+                "y": 316,
+                "width": 217,
+                "height": 130
+              }
+            },
+            {
+              "tag": "P",
+              "text": "• 品类第一痛点：无糖茶“苦涩接受门槛”；第二痛点：同质化疲",
+              "box": {
+                "x": 573,
+                "y": 320,
+                "width": 587,
+                "height": 122
+              }
+            },
+            {
+              "tag": "DIV",
+              "text": "决策路径",
+              "box": {
+                "x": 330,
+                "y": 476,
+                "width": 217,
+                "height": 140
+              }
+            },
+            {
+              "tag": "P",
+              "text": "• 决策路径：抖音内容触发→看后搜查口碑→商城/直播间比价→",
+              "box": {
+                "x": 573,
+                "y": 480,
+                "width": 587,
+                "height": 132
+              }
+            }
+          ]
+        }
+      },
+      "prior_visual_review": {
+        "page": 13,
+        "verdict": "pass",
+        "observed": "该页为正文内容页，顶部为蓝色通栏标题“2.3 人群与消费者洞察”。主体采用三组左箭头标签与右侧说明文字对应的结构，分别呈现核心人群、痛点与情感、决策路径。标签使用不同深浅的蓝色，文字为黑色，整体可读性良好；三组信息纵向均匀分布，层级清晰，未见文字碰撞、关键内容裁切或对比度不足的问题。",
+        "issues": []
+      },
+      "production_preview": {
+        "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/previews/13.png",
+        "sha256": "80643e24f6a62d9c40e8632c09448ce95279e8948ed00414080e1419055a30a0"
+      },
+      "original_template_preview": {
+        "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/template-reference/previews/5.png",
+        "sha256": "af3fa5f4b411fba82a58339f5946e7eded32e9a0d2d6a37ac4547b18380e2855"
+      },
+      "user_feedback": "第13页整体偏右。",
+      "cause": "最终页面仍采用旧body_frame(x330,y120,w830,h520)，将箭头与正文一起置于右侧；原模板箭头实际渲染x约108.38，文字列x349.28。",
+      "constraints": [
+        "使用已纠正全局合同x60,y115,w1080,h520重新布局整个正文组；页眉、背景与品牌不移动。",
+        "均衡左右留白，并依据内容安排箭头/标签与正文，不继续把原示例文字列起点当成整组边界。"
+      ]
+    },
+    {
+      "page_number": 20,
+      "page_index": 19,
+      "generation_group": 18,
+      "slide_id": null,
+      "slide_id_note": "v4计划未保存slide_id，未伪造v5身份。",
+      "template_page_index": 5,
+      "template_page_number": 6,
+      "title": "3.3 内容策略",
+      "html_sha256": "dafd9a8cb6d4939bc31307818676bc4ee81e570529be0a0de5917c19ba69e6af",
+      "source_block_ids": [
+        "b0040",
+        "b0041"
+      ],
+      "page_template_contract": {
+        "reason": "元素0为全幅背景图（品牌底图），元素1为白色内容底板，二者属品牌/背景保护；元素2是页眉主标题'单击此处添加文字标题'，为可替换示例文字，保留外框作为本页title。中央的01–05数字、箭头形状与示例说明文字属于模板示例内容装饰，按协议由模型重建，不锁定。正文自由区域为白色底板内、页眉下方区域。",
+        "protected_elements": [
+          0,
+          1
+        ],
+        "text_frames": [
+          2
+        ],
+        "title_element": 2,
+        "body_frame": {
+          "x": 60,
+          "y": 100,
+          "width": 1080,
+          "height": 545
+        }
+      },
+      "current_global_contract": {
+        "reason": "该body页真实品牌元素仅两项：全页背景图（元素0，顶部蓝天标题带所在的母版背景）与白色内容底板（元素1）。元素2是被自动误标为brand的页眉标题占位“单击此处添加文字标题”，属于可替换示例文字，应保留其外框作为本页主标题（title_element）但内容可改。中央的01–05数字、五组异形箭头形状、黑色阴影块、细引导竖线以及五段“随着计算机技术发展…”示例正文，全部是该模板示例流程内容，不是企业品牌，均由模型按实际内容重建。重审正文自由区：白色底板覆盖y≈87至y≈648的整页宽度，左侧无受保护品牌，因此body_frame取通栏宽敞区域，解决旧合同x=330窄列导致的表格偏右问题；预算表可在约1080px宽内完整展开，合计行以标准“万元”文字替代缺字符号。",
+        "protected_elements": [
+          0,
+          1
+        ],
+        "text_frames": [
+          2
+        ],
+        "title_element": 2,
+        "body_frame": {
+          "x": 60,
+          "y": 105,
+          "width": 1080,
+          "height": 530
+        }
+      },
+      "measurements": {
+        "page": 20,
+        "role": "body",
+        "group": 18,
+        "template": 6,
+        "title": {
+          "text": "3.3 内容策略",
+          "box": {
+            "x": 31.65625,
+            "y": 13.328125,
+            "width": 428.125,
+            "height": 60.578125
+          },
+          "fontSizes": [
+            "40px"
+          ],
+          "whiteSpace": [
+            "pre"
+          ],
+          "lines": [
+            16
+          ],
+          "right": 288.453125
+        },
+        "arrows": [
+          {
+            "text": "口味翻案（盲测实测）",
+            "box": {
+              "x": 99.75,
+              "y": 269.5,
+              "width": 180,
+              "height": 26
+            },
+            "color": "rgb(255, 255, 255)",
+            "svgBox": {
+              "x": 60,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": ""
+          },
+          {
+            "text": "午后办公室（共情梗剧情）",
+            "box": {
+              "x": 355.25,
+              "y": 269.5,
+              "width": 216,
+              "height": 26
+            },
+            "color": "rgb(18, 57, 92)",
+            "svgBox": {
+              "x": 333.5,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": "）"
+          },
+          {
+            "text": "周末出游（视觉锤 vlog）",
+            "box": {
+              "x": 631.03125,
+              "y": 269.5,
+              "width": 211.421875,
+              "height": 26
+            },
+            "color": "rgb(255, 255, 255)",
+            "svgBox": {
+              "x": 607,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": "）"
+          },
+          {
+            "text": "机制化互动（UGC 杠杆）",
+            "box": {
+              "x": 904.8125,
+              "y": 269.5,
+              "width": 210.875,
+              "height": 26
+            },
+            "color": "rgb(255, 255, 255)",
+            "svgBox": {
+              "x": 880.5,
+              "y": 214,
+              "width": 259.5,
+              "height": 100
+            },
+            "outside": "）"
+          }
+        ]
+      },
+      "prior_visual_review": {
+        "page": 20,
+        "verdict": "pass",
+        "observed": "该页为正文页，顶部为蓝色横幅标题“3.3 内容策略”。标题下方是一段四大内容方向、形式配比和生产机制的概述；中部用四个彩色箭头依次呈现01口味翻案、02午后办公室、03周末出游、04机制化互动；下方分别以横向比例条展示形式配比（达人短视频50%、图文15%、自产+直播20%、UGC15%）和生产机制（PGC20%、PUGC50%、UGC30%）。整体层级清晰，色彩与品牌蓝色系统一，文字未见明显碰撞或裁切，比例数据可读。",
+        "issues": []
+      },
+      "production_preview": {
+        "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/previews/20.png",
+        "sha256": "970ae67dd64387d808b5056b0d9c683e8f02cc2287b516a9ada2e7ddebc67fa0"
+      },
+      "original_template_preview": {
+        "path": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/template-reference/previews/6.png",
+        "sha256": "d24c1f7b48c8832db96e9e4647c876385daa21d77d17a2344e36b9fe1c987e37"
+      },
+      "user_feedback": "第20页01–04箭头文字超出，背景导致看不清。",
+      "cause": "原模板第6页已有01–05箭头，同一路径原约219x211px，说明文字在箭头外。生成页将4个箭头非等比压成259.5x100px，再将18px说明放进内部；矩形文字框位于SVG外框内，但字形边缘越出实际填充区域，白字落到白底。",
+      "constraints": [
+        "沿用模板箭头可行；按实际填充区域而非SVG外接矩形确定文字安全区。",
+        "可扩大图形并留足文字空间，或恢复数字在箭头内、完整标签在箭头外的安排；保持方向、阅读顺序与四条来源。",
+        "验收应核对字形与实际背景的覆盖/对比度，不能只依赖DOM外框不溢出。"
+      ]
+    }
+  ],
+  "contract_resume_review": {
+    "source": "marketing/marketing_agent/enterprise/model_html.py",
+    "current_assignment": "contracts[str(index)]=group[0]['template_contract']",
+    "trigger": "generated复用前缀内，仅带body_template_revision的组。v5已有revision-state.json时generated为空，通常不触发；v4迁移/首次优化和无revision-state恢复可触发。",
+    "risk": "同一模板的多个旧组可按遍历顺序用旧页合同覆盖较新全局合同；generate读取global合同，后续候选会回退。",
+    "recommendation": "v5不覆盖已有全局合同；旧页/accepted候选仍保存自己的template_contract供原HTML验证。可保留legacy旧行为。",
+    "why_safe": "resume_prefix(existing_contracts=True)验证每页原合同；renderer使用page.template_contract校验；因此保留旧快照不依赖覆盖global。",
+    "test_case": "较新global合同+两个同模板旧body_template_revision组；v5恢复后新generate payload仍用global，旧HTML及其contract不变。",
+    "causality_limit": "已证明最终页13合同与global合同不同，也已证明恢复代码存在覆盖机制；未将当前页13的全部历史归因于单一覆盖语句，仍可能是其他组重析后未回修该页。"
+  }
+}

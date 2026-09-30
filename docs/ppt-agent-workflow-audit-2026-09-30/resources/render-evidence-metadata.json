@@ -1,0 +1,77 @@
+{
+  "captured_at": "2026-09-30T04:34:58.786823+00:00",
+  "files": {
+    "render-18-task-preview.png": {
+      "sha256": "b4ab92848fbde7cff1b38760644eb804a7dc48e1634edc2ff6b1b61218a07855",
+      "bytes": 107615,
+      "source": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/previews/18.png"
+    },
+    "render-18-task-background.png": {
+      "sha256": "29bd61d20604caf38043da864cd25dcad576c3129ac6a2c7323a792426ef6acd",
+      "bytes": 44444,
+      "source": "/data/marketing/presentations/40bf3188a3bf430fa448a664ed8a4f4f/backgrounds/18.png"
+    },
+    "render-18-prior-codex-copy.png": {
+      "sha256": "b4ab92848fbde7cff1b38760644eb804a7dc48e1634edc2ff6b1b61218a07855",
+      "bytes": 107615,
+      "source": ".local/enterprise-optimization/18.png",
+      "mtime": 1790742602.0
+    },
+    "render-18-preview-service.png": {
+      "sha256": "b4ab92848fbde7cff1b38760644eb804a7dc48e1634edc2ff6b1b61218a07855",
+      "bytes": 107615,
+      "source": "http://localhost:18080/api/presentation-drafts/40bf3188a3bf430fa448a664ed8a4f4f/previews/18",
+      "headers": {
+        "Server": "nginx/1.27.5",
+        "Date": "Wed, 30 Sep 2026 04:34:59 GMT",
+        "Content-Type": "image/png",
+        "Content-Length": "107615",
+        "Connection": "close",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "accept-ranges": "bytes",
+        "last-modified": "Wed, 30 Sep 2026 04:34:59 GMT",
+        "etag": "\"dbfc1e9710d12bcc845adc698d7bac48\""
+      }
+    },
+    "render-18-independent.png": {
+      "sha256": "b4ab92848fbde7cff1b38760644eb804a7dc48e1634edc2ff6b1b61218a07855",
+      "bytes": 107615
+    }
+  },
+  "independent_render": {
+    "html_sha256": "d2fa0ba7bed32900bd67797fc7b4759974971c0a0f1c2e30fdeeac530aa9638e",
+    "plan_sha256": "370baf45d61246c4a411a76d0bae510908efdc6322458bc20b73b0b437c084bc",
+    "title": {
+      "text": "3.1 核心策略主张",
+      "bounds": {
+        "x": 43.65625,
+        "y": 23.609375,
+        "width": 324.796875,
+        "height": 40,
+        "top": 23.609375,
+        "right": 368.453125,
+        "bottom": 63.609375,
+        "left": 43.65625
+      },
+      "style": {
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "color": "rgb(255, 255, 255)",
+        "fontSize": "40px",
+        "zIndex": "auto",
+        "fontFamily": "微软雅黑, sans-serif",
+        "webkitTextFillColor": "rgb(255, 255, 255)"
+      },
+      "fontStatus": "loaded",
+      "topElement": "<p>3.1 核心策略主张</p>"
+    },
+    "png_sha256": "b4ab92848fbde7cff1b38760644eb804a7dc48e1634edc2ff6b1b61218a07855"
+  },
+  "renderer_sha256": {
+    "marketing-v2-agent-api-1": "fe8f448d84dbd65fc677525a7ccf1ca307afb8204b6b53ee26d6e4c76c8688b6",
+    "marketing-v2-agent-preview-1": "fe8f448d84dbd65fc677525a7ccf1ca307afb8204b6b53ee26d6e4c76c8688b6",
+    "workspace": "fe8f448d84dbd65fc677525a7ccf1ca307afb8204b6b53ee26d6e4c76c8688b6"
+  }
+}
