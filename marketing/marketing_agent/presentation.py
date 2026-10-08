@@ -129,6 +129,8 @@ class PresentationJobs:
         if not path.exists():
             raise KeyError(job_id)
         data = json.loads(path.read_text())
+        if not data.get('options', {}).get('template_id') and ((path.parent/'normal-outline-plan.json').is_file() or (path.parent/'outline.json').is_file()):
+            data['outline_available'] = True
         progress = path.parent/'progress.json'
         if data['status']=='running' and progress.exists():
             try:
@@ -197,6 +199,8 @@ class PresentationJobs:
             if template:
                 job['enterprise_workflow_version']=5
                 job['outline_review_required']=os.getenv('MARKETING_RUNTIME', 'demo') != 'demo'
+            else:
+                job['outline_review_required']=True
             if last and (retryable or last['status']=='failed' or last.get('pipeline_version')!=pipeline_version) and last['source_sha256']==fingerprint and last.get('style_id','auto')==style_id and last.get('options', {})==options:
                 for name in ('design-response-2.json','design-response-1.json','resumed-response.json'):
                     response=self.root/last['id']/name
@@ -211,7 +215,31 @@ class PresentationJobs:
     def outline(self, job_id):
         job = self.get(job_id)
         if job.get('enterprise_workflow_version') != 5:
-            raise ValueError('只有企业模板任务提供生成前大纲')
+            path = self.root / job_id / 'normal-outline-plan.json'
+            legacy = not path.is_file()
+            if legacy:
+                path = self.root / job_id / 'outline.json'
+            if not path.is_file():
+                raise ValueError('通用版大纲尚未完成')
+            saved = json.loads(path.read_text())
+            plan = saved if legacy else saved['plan']
+            blocks = {block['id']: block for block in plan['source_blocks']}
+            pages = []
+            for number, page in enumerate(plan['pages'], 1):
+                selected = [blocks[block_id] for block_id in page.get('source_ids', []) if block_id in blocks]
+                if not selected:
+                    selected = page.get('blocks', [])
+                preview = re.sub(r'\s+', ' ', ' '.join(str(block.get('source') or block.get('text') or '') for block in selected)).strip()[:180]
+                pages.append({'number': number, 'role': page.get('layout', 'editorial'), 'title': page.get('title', ''),
+                              'section': page.get('section', ''), 'source_preview': preview,
+                              'design_intent': {'focus': str(page.get('layout_brief') or '')[:180]}})
+            agenda = [{'id': f'section-{index}', 'number': index, 'text': section['title']}
+                      for index, section in enumerate((section for section in plan.get('sections', []) if section.get('level', 3) <= 2), 1)]
+            approved = job.get('outline_approval') or {}
+            return {'job_id': job_id, 'mode': 'general', 'legacy': legacy, 'title': plan['title'], 'agenda': agenda,
+                    'planned_page_count': len(pages), 'approved_page_count': approved.get('page_count'),
+                    'actual_page_count': job.get('page_count') if job['status'] == 'completed' else None,
+                    'pages': pages, 'status': job['status']}
         path = self.root / job_id / 'source-plan.json'
         if not path.is_file():
             raise ValueError('项目 Agent 尚未完成大纲规划')
@@ -222,9 +250,10 @@ class PresentationJobs:
             block_ids = item.get('block_ids') or []
             preview = ' '.join(str(blocks.get(str(block_id), {}).get('text') or '') for block_id in block_ids)
             pages.append({'number': number, 'role': item.get('role'), 'title': item.get('title'),
-                          'template_page': item.get('template_page'), 'source_preview': preview[:180]})
+                          'template_page': item.get('template_page'), 'source_preview': preview[:180],
+                          'design_intent': item.get('design_intent') if isinstance(item.get('design_intent'), dict) else None})
         approved = job.get('outline_approval') or {}
-        return {'job_id': job_id, 'title': source.get('title'), 'agenda': source.get('agenda') or [],
+        return {'job_id': job_id, 'mode': 'enterprise', 'title': source.get('title'), 'agenda': source.get('agenda') or [],
                 'planned_page_count': len(pages), 'approved_page_count': approved.get('page_count'),
                 'actual_page_count': job.get('page_count') if job.get('status') == 'completed' else None,
                 'pages': pages, 'status': job['status']}
@@ -232,7 +261,7 @@ class PresentationJobs:
     def confirm_outline(self, job_id):
         with self.lock:
             job = self.get(job_id)
-            if job.get('enterprise_workflow_version') != 5 or not job.get('outline_review_required'):
+            if not job.get('outline_review_required'):
                 raise ValueError('此任务不需要确认大纲')
             if job['status'] != 'awaiting_outline_confirmation':
                 raise ValueError('当前任务不在等待确认大纲阶段')
@@ -241,12 +270,15 @@ class PresentationJobs:
             current = self.store.get(job['run_id'])['outputs'].get('assembly', '')
             if hashlib.sha256(current.encode()).hexdigest() != job['source_sha256']:
                 raise ValueError('文稿已更新，请重新规划大纲')
-            path = self.root / job_id / 'source-plan.json'
+            enterprise = job.get('enterprise_workflow_version') == 5
+            path = self.root / job_id / ('source-plan.json' if enterprise else 'normal-outline-plan.json')
+            if not path.is_file():
+                raise ValueError('项目 Agent 尚未完成大纲规划')
             source = json.loads(path.read_text())
-            count = len(source.get('planned') or [])
+            count = len(source.get('planned') or []) if enterprise else len(source.get('plan', {}).get('pages') or [])
             if not count:
                 raise ValueError('大纲没有页面，不能继续生成')
-            approval = {'source_plan_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+            approval = {('source_plan_sha256' if enterprise else 'normal_plan_sha256'): hashlib.sha256(path.read_bytes()).hexdigest(),
                         'page_count': count, 'approved_at': time.time()}
             job = self.update(job_id, outline_approval=approval, status='queued', stage='queued', error=None)
             self.pool.submit(self.execute, job_id)
@@ -324,41 +356,60 @@ class PresentationJobs:
                 from .enterprise.workflow import execute
                 execute(self, job_id, agent)
                 return
-            source = (folder/'manuscript.md').read_text()
-            plan = agent.call('read_manuscript',plan_outline,source)
             job = self.get(job_id)
-            plan['source_run_id'] = job['run_id']
-            plan['source_runtime'] = job['source_runtime']
-            plan['style_id'] = job.get('style_id', 'auto')
-            plan['presentation_options'] = job.get('options', {})
-            plan['style'] = get_style(plan['style_id'])
-            plan['theme'] = apply_user_palette(apply_style(plan['theme'], plan['style_id']), plan['presentation_options'])
-            needs_cover=agent.call('prepare_assets',presentation_images.prepare_assets,plan,source,folder,ROOT/'presentation'/'assets')
-            if os.getenv('MARKETING_RUNTIME','demo') != 'demo':
-                self.update(job_id,stage='reference_analysis',agent_owner='project_presentation_agent')
-                plan['style_reference']=agent.call('understand_reference',analyze_reference,folder,plan)
-                from .presentation_style_research import research_online_style
-                self.update(job_id,stage='online_style_research')
-                online=agent.call('research_online_style',research_online_style,folder,plan)
-                plan['style_reference']['online_inspiration']={
-                    'status':online['status'],
-                    'visual_analysis':online['analysis'],
-                    'case_descriptions':[{'id':item['id'],'description':item['summary'] or item['title']}
-                                         for item in online['references'][:3]],
-                }
-                (folder/'reference-analysis.json').write_text(json.dumps(plan['style_reference'],ensure_ascii=False,indent=2))
-                self.update(job_id,style_research_status=online['status'],style_reference_count=len(online['references']))
-                from .presentation_design import plan_design
-                self.update(job_id,stage='designing')
-                design=agent.call('plan_outline',plan_design,plan,folder)
-                self.update(job_id,stage='editing')
-                from .presentation_editorial import refine_design
-                design=agent.call('edit_deck',refine_design,design,plan,folder)
-                plan.update(pages=design['pages'],theme=design['visual_dna'],design_mode='narrative',
-                            visual_dna=design['visual_dna'],note_only_source_ids=design['note_only_source_ids'],
-                            corrections=design.get('corrections',[]))
-                self.update(job_id,correction_count=len(plan['corrections']),
-                            warning_count=sum(c['status']=='warning' for c in plan['corrections']),corrections_available=True)
+            checkpoint = folder/'normal-outline-plan.json'
+            approval = job.get('outline_approval')
+            if approval and job.get('outline_review_required'):
+                snapshot = checkpoint.read_bytes()
+                if (approval.get('normal_plan_sha256') != hashlib.sha256(snapshot).hexdigest() or
+                        hashlib.sha256((folder/'manuscript.md').read_bytes()).hexdigest() != job['source_sha256'] or
+                        hashlib.sha256(self.store.get(job['run_id'])['outputs'].get('assembly','').encode()).hexdigest() != job['source_sha256']):
+                    raise ValueError('已确认的通用版大纲或文稿发生变化，请重新规划并确认')
+                saved = json.loads(snapshot)
+                plan, needs_cover = saved['plan'], saved['needs_cover']
+                if len(plan['pages']) != approval['page_count']:
+                    raise ValueError('已确认的通用版大纲页数发生变化')
+            else:
+                source = (folder/'manuscript.md').read_text()
+                plan = agent.call('read_manuscript',plan_outline,source)
+                plan['source_run_id'] = job['run_id']
+                plan['source_runtime'] = job['source_runtime']
+                plan['style_id'] = job.get('style_id', 'auto')
+                plan['presentation_options'] = job.get('options', {})
+                plan['style'] = get_style(plan['style_id'])
+                plan['theme'] = apply_user_palette(apply_style(plan['theme'], plan['style_id']), plan['presentation_options'])
+                needs_cover=agent.call('prepare_assets',presentation_images.prepare_assets,plan,source,folder,ROOT/'presentation'/'assets')
+                if os.getenv('MARKETING_RUNTIME','demo') != 'demo':
+                    self.update(job_id,stage='reference_analysis',agent_owner='project_presentation_agent')
+                    plan['style_reference']=agent.call('understand_reference',analyze_reference,folder,plan)
+                    from .presentation_style_research import research_online_style
+                    self.update(job_id,stage='online_style_research')
+                    online=agent.call('research_online_style',research_online_style,folder,plan)
+                    plan['style_reference']['online_inspiration']={
+                        'status':online['status'],
+                        'visual_analysis':online['analysis'],
+                        'case_descriptions':[{'id':item['id'],'description':item['summary'] or item['title']}
+                                             for item in online['references'][:3]],
+                    }
+                    (folder/'reference-analysis.json').write_text(json.dumps(plan['style_reference'],ensure_ascii=False,indent=2))
+                    self.update(job_id,style_research_status=online['status'],style_reference_count=len(online['references']))
+                    from .presentation_design import plan_design
+                    self.update(job_id,stage='designing')
+                    design=agent.call('plan_outline',plan_design,plan,folder)
+                    self.update(job_id,stage='editing')
+                    from .presentation_editorial import refine_design
+                    design=agent.call('edit_deck',refine_design,design,plan,folder)
+                    plan.update(pages=design['pages'],theme=design['visual_dna'],design_mode='narrative',
+                                visual_dna=design['visual_dna'],note_only_source_ids=design['note_only_source_ids'],
+                                corrections=design.get('corrections',[]))
+                    self.update(job_id,correction_count=len(plan['corrections']),
+                                warning_count=sum(c['status']=='warning' for c in plan['corrections']),corrections_available=True)
+                check_page_count(len(plan['pages']), plan['presentation_options'])
+                if job.get('outline_review_required'):
+                    self._write(checkpoint, {'plan': plan, 'needs_cover': needs_cover})
+                    agent.finish('awaiting_outline_confirmation', page_count=len(plan['pages']))
+                    self.update(job_id,status='awaiting_outline_confirmation',stage='outline_review',page_count=len(plan['pages']))
+                    return
             check_page_count(len(plan['pages']), plan['presentation_options'])
             self.update(job_id,stage='images')
             agent.call('generate_or_reuse_images',presentation_images.materialize_assets,plan,folder,needs_cover)

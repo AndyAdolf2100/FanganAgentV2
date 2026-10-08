@@ -29,6 +29,7 @@ PLAN_POLICY = '''你是企业PPT主Agent。只分析给定文字、页面任务�
 "generation_group":0,"target":"body_content","purpose":"配图与内容的关系、裁切及构图要求",
 "prompt":"完整生图提示词","required":false,"reference_asset_id":null}]}。
 无需图片时assets为空；不要按每页、固定槽位或行业关键词机械生图。只为给定body组内允许的正文自由区策划。
+先看每组design_intent及实际模板元素方向：模板已有可编辑图形能清楚表达关系时，优先让HTML重组模板元素，不额外生图；确需场景图时，让主体、裁切方向、留白及色彩配合该页模板语法与design_intent.focus。图片不能代替来源数据或把模板变成通用摄影海报。
 不能替换或覆盖企业Logo、背景、页眉页脚、人工固定品牌或固定页。不得生成整页PPT、数据图、额外文字、数字、臆造商标或显著大水印。
 允许并保留服务端统一添加的角落“AI生成”来源标识，不要求移除、裁切或遮盖该标识。
 图片是概念说明，不得冒充真实产品摄影、数据证据或功能证明。品牌文字、数字、统计图仍由HTML与来源绑定工具表达。
@@ -93,6 +94,8 @@ def _eligible_groups(source, groups, contracts):
         if type(group_id) is not int or group_id in eligible:
             raise ValueError('企业素材页面组身份无效或重复')
         eligible[group_id] = {'generation_group': group_id, 'title': group.get('title', ''),
+                              'template_page': group['template_page'],
+                              'design_intent': deepcopy(group.get('design_intent')),
                               'blocks': [deepcopy(blocks[key]) for key in group.get('block_ids', []) if key in blocks],
                               'body_frame': deepcopy(contract['body_frame']),
                               'protected_elements': deepcopy(contract.get('protected_elements', []))}

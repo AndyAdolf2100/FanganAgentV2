@@ -106,7 +106,28 @@ def test_normal_workflow_reviews_and_rechecks_each_repaired_page_separately(tmp_
     monkeypatch.setattr(vision.PageTools,'cache_reviewed_page',lambda *args:None)
     def render():(tmp_path/'outline.json').write_bytes((tmp_path/'plan.json').read_bytes())
     result=vision.review_and_repair(tmp_path,render)
-    assert result['status']=='passed' and calls==[[1],[2],[1],[2]]
+    assert result['status']=='passed' and sorted(calls)==[[1],[1],[2],[2]]
+
+
+def test_normal_initial_screenshot_reviews_run_concurrently(tmp_path,monkeypatch):
+    from marketing_agent import presentation_budget
+    plan=fixture_plan(tmp_path)
+    plan['pages'].append({'title':'第二页','layout':'statement','items':[]})
+    for name in ('plan.json','outline.json'):(tmp_path/name).write_text(json.dumps(plan))
+    monkeypatch.setenv('MARKETING_VISION_ENABLED','true')
+    monkeypatch.setenv('MARKETING_VISION_WORKERS','2')
+    monkeypatch.setattr(presentation_budget,'can_reserve',lambda *args:False)
+    barrier=threading.Barrier(2)
+    def review(folder,plan,indexes):
+        assert len(indexes)==1
+        barrier.wait(timeout=3)
+        return [{'page':indexes[0],'verdict':'pass','issues':[]}]
+    monkeypatch.setattr(vision,'review_batch',review)
+    progress=[]
+    report=vision.review_and_repair(tmp_path,lambda:None,lambda done,total:progress.append((done,total)))
+    assert report['status']=='passed'
+    assert [page['page'] for page in report['pages']]==[1,2]
+    assert progress==[(1,2),(2,2)]
 
 
 def test_concurrent_tool_calls_keep_run_state_consistent(tmp_path):

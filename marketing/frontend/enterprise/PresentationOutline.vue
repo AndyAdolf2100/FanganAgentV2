@@ -1,18 +1,21 @@
 <script setup>
-defineProps({outline: {type: Object, default: null}, busy: Boolean})
+defineProps({outline: {type: Object, default: null}, busy: Boolean, readOnly: Boolean})
 defineEmits(['confirm'])
-const roleNames = {cover:'封面',preface:'序言',contents:'目录',section:'章节',body:'正文',ending:'尾页'}
+const roleNames = {cover:'封面',preface:'序言',contents:'目录',section:'章节',body:'正文',ending:'尾页',
+  editorial:'正文',table:'表格',statement:'核心主张',metrics:'关键数字',columns:'并列信息',
+  comparison:'对比',steps:'执行步骤',bars:'数据比较',chart:'图表',image:'场景视觉',closing:'收尾'}
 </script>
 
 <template>
   <section class="presentation-outline" aria-label="PPT 大纲">
-    <div class="outline-heading"><div><h3>确认生成大纲</h3><p>项目 Agent 已根据文稿和企业模板规划页面。确认后才会开始排版与配图。</p></div><strong v-if="outline">预计 {{outline.planned_page_count}} 页</strong></div>
+    <div class="outline-heading"><div><h3>{{outline?.legacy ? '成品页面结构' : readOnly ? '生成大纲' : '确认生成大纲'}}</h3><p v-if="outline?.legacy">这份 PPT 生成时尚无大纲确认环节；以下按实际成品页面展示。</p><p v-else-if="outline?.mode==='general'">项目 Agent 已根据文稿和所选风格规划页面。确认后才会开始排版与配图。</p><p v-else>项目 Agent 已根据文稿和企业模板规划页面。确认后才会开始排版与配图。</p></div><strong v-if="outline"><template v-if="outline.legacy">成品 {{outline.actual_page_count || outline.planned_page_count}} 页</template><template v-else>预计 {{outline.planned_page_count}} 页<template v-if="readOnly && outline.actual_page_count != null"> · 成品 {{outline.actual_page_count}} 页</template></template></strong></div>
     <p v-if="!outline" class="muted">正在读取大纲…</p>
     <template v-else>
       <div v-if="outline.agenda?.length" class="outline-agenda"><b>章节目录</b><span v-for="chapter in outline.agenda" :key="chapter.id">{{chapter.number}}. {{chapter.text}}</span></div>
-      <ol class="outline-pages"><li v-for="page in outline.pages" :key="page.number"><span class="outline-number">{{String(page.number).padStart(2,'0')}}</span><div><b>{{page.title || roleNames[page.role] || '未命名页面'}}</b><small>{{roleNames[page.role] || page.role}} · 模板第 {{Number(page.template_page) + 1}} 页</small><p v-if="page.source_preview">{{page.source_preview}}</p></div></li></ol>
-      <p class="muted">生成后会核对成品页数。若因缺页或续页与已确认大纲不符，草稿会保留并标记为待复核。</p>
-      <button type="button" :disabled="busy" @click="$emit('confirm')">确认大纲并开始生成</button>
+      <ol class="outline-pages"><li v-for="page in outline.pages" :key="page.number"><span class="outline-number">{{String(page.number).padStart(2,'0')}}</span><div><b>{{page.title || roleNames[page.role] || '未命名页面'}}</b><small>{{roleNames[page.role] || page.role}}<template v-if="outline.mode==='general' && page.section"> · {{page.section}}</template><template v-if="outline.mode!=='general'"> · 模板第 {{Number(page.template_page) + 1}} 页</template></small><p v-if="page.design_intent?.focus"><strong>设计重点：</strong>{{page.design_intent.focus}}</p><p v-if="page.design_intent?.template_motif"><strong>模板元素：</strong>{{page.design_intent.template_motif}}</p><p v-if="page.source_preview">{{page.source_preview}}</p></div></li></ol>
+      <p v-if="!readOnly && outline.mode==='general'" class="muted">这是排版前的页面规划；若页面内容溢出，排版修复可能增加成品页数。</p>
+      <p v-else-if="!readOnly" class="muted">生成后会核对成品页数。若因缺页或续页与已确认大纲不符，草稿会保留并标记为待复核。</p>
+      <button v-if="!readOnly" type="button" :disabled="busy" @click="$emit('confirm')">确认大纲并开始生成</button>
     </template>
   </section>
 </template>

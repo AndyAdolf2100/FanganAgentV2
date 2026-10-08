@@ -17,6 +17,10 @@ MAX_GROUP_ATTEMPTS = 4  # Initial attempt plus three corrections.
 MAX_DECK_REPAIR_ROUNDS = 1
 MAX_CHAT_BATCHES = 3
 LAYOUT_REVIEW_POLICY = (
+    '正文评价须尊重所选企业模板的真实元素与固定边界：可编辑形状、底板、线条、图形比例及配图应支持该页核心信息；'
+    '固定封面、目录、章节和尾页保留原构图，不把模板自身风格或行业不匹配当作页面修复缺陷。'
+    '对有明确截图与来源证据的正文冗余标题、无主次段落堆积、机械等宽卡片、图形无意义或无目的空白给出具体修复目标；'
+    '正常过渡页留白、合理不对称和个人审美偏好不能判错。保留所有原文，设计意图不能替代来源。'
     '结合layout_measurements的浏览器事实和Seed观察逐项复核：同用途且页眉兼容的顶部标题应有一致的字号、字重、文字起点和基线，'
     '比较titles的真实文字bounds及typography，不能只比较标题容器，也不要求封面/章节/正文强行一致。'
     '短标签无必要换行须检查实际行数、nowrap_width_px/available_width_px、white_space及br；不能从截图臆断CSS成因。'
@@ -30,6 +34,9 @@ LAYOUT_REVIEW_POLICY = (
     '结合字号与模板尺度判断；不能一律将外置标签塞进形状，也不能任意把图内标签移到外部。所有问题须引用具体页和可复验事实。'
 )
 LAYOUT_REPAIR_GOAL = (
+    '先依据本页来源重点与真实模板元素重构可编辑正文：挑选有助于说明内容的形状、线条、底板、图片或来源绑定图表，'
+    '保留模板字色比例与固定区域；避免把原文机械塞进等宽卡片、重复顶部标题或用大块无目的留白掩盖内容。'
+    '修复必须针对当前截图可证实的问题，不能为追求装饰而改固定页或丢弃来源。'
     '依据实测证据解决问题，保留完整来源，由GLM决定版式、区域重析或续页。'
     '同类顶部标题先对照accepted_typography_references，维持字号、字重、起点与基线；'
     '先检查可用宽度、内边距、white-space、无必要br及SVG/文字子容器，不用缩字掩盖窄框。'
@@ -985,7 +992,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                 answer = call('enterprise_deck_critic',
                     '你是企业演示稿整册审查者。仅依据给定逐页观察、来源标题和实测摘要判断叙事重复、样式漂移、关键内容未突出。不要假装看过图片。'
                     '返回JSON {"issues":[{"slide_id":"给定ID","severity":"medium或high","detail":"具体证据","fix_hint":"建议"}]}。'
-                    '保留企业固定样式，不把正常章节留白当缺陷。逐项审视aesthetics量表与证据：低分且有明确可修复缺陷时须反馈对应页面，'
+                    '保留企业固定样式，不把正常章节留白当缺陷。比较相邻正文页的视觉节奏与信息重点；若多页重复同构卡片、标题重复或连续堆满段落，且有逐页观察支持，则指出具体slide_id及可修复依据。逐项审视aesthetics量表与证据：低分且有明确可修复缺陷时须反馈对应页面，'
                     '不能把“勉强可用”认定为完成高质量审查，也不能仅依据分数机械判坏或捏造截图事实；没有明确问题则空数组。'
                     + LAYOUT_REVIEW_POLICY,
                     {'theme': plan.get('theme', {}), 'pages': [_page_observation(p, by_id[p['slide_id']]) for p in plan['pages']]})

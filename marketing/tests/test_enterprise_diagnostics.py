@@ -196,7 +196,7 @@ def test_changed_browser_layout_facts_do_not_reuse_same_screenshot_diagnosis(sce
     second = d.diagnose_page(folder, plan, 1, probe=probe, provider=provider)
     assert first['screenshot_sha'] == second['screenshot_sha']
     assert first['request_sha256'] != second['request_sha256'] and len(calls) == 2
-    assert first['rubric_version'] == 'enterprise-visual-rubric-v4'
+    assert first['rubric_version'] == 'enterprise-visual-rubric-v5'
 
 
 def test_generic_artwork_and_external_label_relations_keep_unknown_geometry(scene):

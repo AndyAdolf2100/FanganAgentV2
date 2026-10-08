@@ -63,6 +63,55 @@ test('enterprise outline is previewed before the same job resumes',async()=>{
  }finally{await page.close();}
 });
 
+test('general outline pauses generation and remains viewable after completion',async()=>{
+ let status='awaiting_outline_confirmation',confirmations=0;
+ const current=()=>({id:'general-job',status,stage:status==='awaiting_outline_confirmation'?'outline_review':status==='running'?'rendering':'completed',page_count:status==='completed'?3:2,style_id:'auto',outline_review_required:true,outline_available:true,options:{}});
+ const outline=()=>({job_id:'general-job',mode:'general',status,title:'品牌方案',planned_page_count:2,actual_page_count:status==='completed'?3:null,pages:[
+  {number:1,role:'cover',title:'品牌主张',source_preview:'明确品牌定位',design_intent:{focus:'左侧大标题'}},
+  {number:2,role:'steps',title:'分阶段传播',source_preview:'按阶段开展传播。',section:'执行'}]});
+ const {page,errors}=await fixture(({route,count,json})=>{
+  if(status==='running'&&count>=3)status='completed';
+  return json(route,current());
+ },{extra:({route,p,json})=>{
+  if(p==='/api/presentations/general-job/outline'){json(route,outline());return true;}
+  if(p==='/api/presentations/general-job/confirm-outline'){confirmations++;status='running';json(route,current(),202);return true;}
+  return false;
+ }});
+ try{
+  await page.getByRole('heading',{name:'确认生成大纲'}).waitFor();
+  assert.equal(await page.getByText('分阶段传播').count(),1);
+  assert.equal(await page.getByText('模板第 1 页').count(),0);
+  await page.getByRole('button',{name:'确认大纲并开始生成'}).click();
+  await page.getByRole('button',{name:'正在生成…',exact:true}).waitFor();
+  await page.clock.fastForward(1500);
+  await page.getByRole('button',{name:'查看大纲'}).waitFor();
+  await page.getByRole('button',{name:'查看大纲'}).click();
+  await page.getByRole('heading',{name:'生成大纲',exact:true}).waitFor();
+  assert.equal(await page.getByText('预计 2 页 · 成品 3 页').count(),1);
+  assert.equal(await page.getByRole('button',{name:'确认大纲并开始生成'}).count(),0);
+  assert.equal(confirmations,1);assert.deepEqual(errors,[]);
+ }finally{await page.close();}
+});
+
+test('completed general PPT from before outline confirmation shows its actual pages',async()=>{
+ const completed={id:'legacy-general',status:'completed',stage:'completed',page_count:2,style_id:'auto',outline_available:true,options:{}};
+ const outline={job_id:'legacy-general',mode:'general',legacy:true,status:'completed',title:'品牌方案',planned_page_count:2,actual_page_count:2,pages:[
+  {number:1,role:'editorial',title:'目标',source_preview:'提升产品认知。'},
+  {number:2,role:'editorial',title:'执行',source_preview:'按阶段开展传播。'}]};
+ const {page,errors}=await fixture(({route,json})=>json(route,completed),{extra:({route,p,json})=>{
+  if(p==='/api/presentations/legacy-general/outline'){json(route,outline);return true;}
+  return false;
+ }});
+ try{
+  await page.getByRole('button',{name:'查看大纲'}).click();
+  await page.getByRole('heading',{name:'成品页面结构'}).waitFor();
+  assert.equal(await page.getByText('成品 2 页').count(),1);
+  assert.equal(await page.getByText('按阶段开展传播。').count(),1);
+  assert.equal(await page.getByRole('button',{name:'确认大纲并开始生成'}).count(),0);
+  assert.deepEqual(errors,[]);
+ }finally{await page.close();}
+});
+
 test('502 recovers, preserves independent business errors, and stops on completion',async()=>{
  const {page,counts,errors}=await fixture(({route,count,json})=>count===2?json(route,{detail:'Bad Gateway'},502):json(route,job(count>=4?'completed':'running')));
  try{

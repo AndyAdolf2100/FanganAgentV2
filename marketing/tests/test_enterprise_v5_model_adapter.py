@@ -123,6 +123,19 @@ def test_new_enterprise_job_waits_for_approved_outline_before_layout(context):
     assert context.renders and context.asset_preparations and context.pipelines
 
 
+def test_html_model_receives_editable_template_elements_and_neighbor_context(context):
+    context.source['planned'][1]['design_intent'] = {
+        'focus': '预算金额', 'template_motif': '正文模板的可编辑图形与标题带'}
+    captured = context.execute()
+    captured.generate(captured.groups[1])
+    payload = html_calls(context)[0]['payload']
+    assert payload['proposal']['design_intent'] == context.source['planned'][1]['design_intent']
+    editable = payload['editable_template_elements']['elements']
+    assert [element['index'] for element in editable] == [1]
+    assert payload['deck_context']['position'] == 2
+    assert [page['role'] for page in payload['deck_context']['nearby_pages']] == ['cover','body','ending']
+
+
 @pytest.mark.parametrize('version', [5, 4, None])
 def test_only_explicit_v5_jobs_enter_the_new_pipeline(context, version):
     if version is None:

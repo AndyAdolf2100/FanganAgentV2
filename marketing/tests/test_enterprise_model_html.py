@@ -365,6 +365,20 @@ def test_planner_can_bind_source_heading_to_cover_without_host_reassignment():
     with pytest.raises(ValueError,match='b1'):m.validate_plan({'slides':pages},blocks,m.catalog(fixture()),agenda,True,True)
 
 
+def test_v5_body_plan_requires_concrete_design_intent_without_changing_source_assignment():
+    blocks=[{'id':'b1','kind':'paragraph','text':'预算30万元。'}]
+    pages=[{'role':'cover','template_page':0,'title':'计划'},
+           {'role':'contents','template_page':1,'title':'目录','agenda_ids':['a1']},
+           {'role':'body','template_page':3,'title':'预算','block_ids':['b1']},
+           {'role':'ending','template_page':4,'title':'谢谢'}]
+    entries=[{'id':'a1','number':1,'text':'预算'}]
+    with pytest.raises(ValueError,match='设计意图'):
+        m.validate_plan({'slides':pages},blocks,m.catalog(fixture()),entries,True,True,require_design_intent=True)
+    pages[2]['design_intent']={'focus':'预算分配的核心数字','template_motif':'沿用正文模板的标题带与可编辑图形结构'}
+    result=m.validate_plan({'slides':pages},blocks,m.catalog(fixture()),entries,True,True,require_design_intent=True)
+    assert result[2]['block_ids']==['b1'] and result[2]['design_intent']==pages[2]['design_intent']
+
+
 def test_normal_web_ppt_keeps_original_entry_and_pipeline_version(tmp_path,monkeypatch):
     from marketing_agent.api import create_app
     from marketing_agent.runtime import DemoRuntime

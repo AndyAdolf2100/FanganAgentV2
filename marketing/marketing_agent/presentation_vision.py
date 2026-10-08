@@ -220,9 +220,12 @@ def review_and_repair(folder, render_again, progress=None):
     (folder/'plan-before-visual.json').write_bytes((folder/'plan.json').read_bytes())
     (folder/'plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2))
     try:
-        for index in range(1,len(plan['pages'])+1):
-            if progress:progress(index,len(plan['pages']))
-            report['pages'].extend(review_batch(folder,plan,[index]));save()
+        total=len(plan['pages'])
+        for completed,rows in enumerate(review_pages(folder,plan,range(1,total+1),vision_workers()),1):
+            report['pages'].extend(rows)
+            report['pages'].sort(key=lambda page:page['page'])
+            if progress:progress(completed,total)
+            save()
     except (ValueError,KeyError,TypeError,OSError) as exc:
         report.update(status='incomplete',notice=str(exc)[:350]);save();return report
     from .presentation_agent import choose_repairs
@@ -265,8 +268,9 @@ def review_and_repair(folder, render_again, progress=None):
             save();continue
         try:
             final=[]
-            for index in repaired:
-                final.extend(review_batch(folder,plan,[index]))
+            for rows in review_pages(folder,plan,repaired,vision_workers()):
+                final.extend(rows)
+            final.sort(key=lambda page:page['page'])
             report['rounds'].append({'round':round_number,'before':deepcopy(report['pages']),'after':final})
             for finding in final:
                 if finding['verdict']=='pass':tools.cache_reviewed_page(finding['page']-1)

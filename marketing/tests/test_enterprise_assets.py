@@ -77,6 +77,18 @@ def test_no_demand_and_fixed_only_decks_do_not_generate_images(context, monkeypa
     assert result['status'] == 'not_needed'
 
 
+def test_asset_planner_sees_the_pages_template_based_design_intent(context, monkeypatch):
+    context[2][1]['design_intent'] = {'focus': '室外体验', 'template_motif': '沿用模板的宽幅图形区域'}
+    seen = []
+    def call(name, policy, payload):
+        seen.append(payload)
+        return {'reason': '现有模板元素足以表达，无需新增图片。', 'assets': []}
+    result = prepare(context, call)
+    assert result['status'] == 'not_needed'
+    assert seen[0]['groups'][0]['template_page'] == 1
+    assert seen[0]['groups'][0]['design_intent'] == context[2][1]['design_intent']
+
+
 @pytest.mark.parametrize('changes', [
     {'generation_group': 0}, {'target': 'brand'}, {'replace_template_element': 2},
     {'reference_asset_id': '__PPT_PROTECTED_2__'}, {'id': '../brand'}])

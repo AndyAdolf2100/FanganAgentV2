@@ -13,6 +13,7 @@ import subprocess
 import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
+from .presentation_html_policy import HTML_EDITING_POLICY
 
 ROOT=Path(__file__).resolve().parents[1]/'presentation'
 
@@ -218,7 +219,7 @@ class PageTools:
         return self.cache/(digest+'.json')
 
     def cache_reviewed_page(self,index):
-        skill=(ROOT/'skills'/'marketing-deck'/'references'/'page-generation.md').read_text()
+        skill=(ROOT/'skills'/'marketing-deck'/'references'/'page-generation.md').read_text()+HTML_EDITING_POLICY
         checked=validate_html(self.plan['pages'][index]['custom'],self.plan['pages'][index],self.plan['assets'])
         self.page_cache_path(self.page_brief(index),skill).write_text(json.dumps(checked,ensure_ascii=False,indent=2))
         self.trace('cache_reviewed_page',page_index=index)
@@ -230,7 +231,7 @@ class PageTools:
             if not self.render_probe(index)['issues']:
                 self.trace('page_cache',page_index=index,hit=True,source='reviewed_plan')
                 return result
-        skill=(ROOT/'skills'/'marketing-deck'/'references'/'page-generation.md').read_text()
+        skill=(ROOT/'skills'/'marketing-deck'/'references'/'page-generation.md').read_text()+HTML_EDITING_POLICY
         brief=self.page_brief(index)
         cached=self.page_cache_path(brief,skill)
         if cached.exists():

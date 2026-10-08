@@ -17,7 +17,7 @@ createApp({
     const health = ref({ stages: [], tags: {}, gates: {} }), runs = ref([]), run = ref(null)
     const brief = ref(''), mode = ref('auto'), tag = ref('auto'), knowledgeMode = ref('both'), knowledge = ref('')
     const busy = ref(false), error = ref(''), feedback = ref(''), tab = ref(''), events = ref([]), live = ref('')
-    const presentation = ref(null), presentationOutline = ref(null), presentationPollError = ref(''), slideNumber = ref(1), showSlides = ref(false)
+    const presentation = ref(null), presentationOutline = ref(null), presentationPollError = ref(''), slideNumber = ref(1), showSlides = ref(false), showOutline = ref(false)
     const entryMode = ref('brief'), importStep = ref(1), manuscript = ref(''), manuscriptTitle = ref(''), manuscriptFile = ref(''), importNotice = ref('')
     const styles = ref([]), styleId = ref('auto')
     const templateStore = useEnterpriseTemplateStore(), showTemplateManager = ref(false), templateId = ref('')
@@ -48,7 +48,7 @@ createApp({
     async function select(id) {
       showTemplateManager.value=false; templateId.value=''
       source?.close()
-      resetPresentationPolling(); presentation.value = null; presentationOutline.value = null; slideNumber.value = 1; showSlides.value = false
+      resetPresentationPolling(); presentation.value = null; presentationOutline.value = null; slideNumber.value = 1; showSlides.value = false; showOutline.value = false
       const current = ++generation
       events.value = []; live.value = ''; lastMessage = ''; feedback.value = ''; error.value = ''
       const value = await api('/runs/' + id)
@@ -91,7 +91,7 @@ createApp({
       busy.value = true; error.value = ''
       try { await fn() } catch (e) { error.value = e.message } finally { busy.value = false }
     }
-    function newRun() { history.replaceState(null,'',location.pathname); showTemplateManager.value=false; templateId.value=''; source?.close(); resetPresentationPolling(); generation++; run.value = null; presentation.value = null; presentationOutline.value = null; showSlides.value = false; tab.value = ''; events.value = []; live.value = ''; error.value = ''; entryMode.value = 'brief'; importStep.value = 1; manuscript.value = ''; manuscriptTitle.value = ''; manuscriptFile.value = ''; importNotice.value = ''; styleId.value = 'auto' }
+    function newRun() { history.replaceState(null,'',location.pathname); showTemplateManager.value=false; templateId.value=''; source?.close(); resetPresentationPolling(); generation++; run.value = null; presentation.value = null; presentationOutline.value = null; showSlides.value = false; showOutline.value = false; tab.value = ''; events.value = []; live.value = ''; error.value = ''; entryMode.value = 'brief'; importStep.value = 1; manuscript.value = ''; manuscriptTitle.value = ''; manuscriptFile.value = ''; importNotice.value = ''; styleId.value = 'auto' }
     function resetPresentationPolling() {
       clearTimeout(pptTimer); pptTimer = undefined; pptPollRequest++; pptPollFailures = 0; presentationPollError.value = ''
     }
@@ -108,7 +108,7 @@ createApp({
         pptPollFailures = 0; presentationPollError.value = ''
         if (!presentation.value && value) { styleId.value = value.style_id || 'auto'; templateId.value = value.options?.template_id || '' }
         presentation.value = value
-        if (value?.status === 'awaiting_outline_confirmation' && presentationOutline.value?.job_id !== value.id) {
+        if ((value?.status === 'awaiting_outline_confirmation' || (value?.status === 'completed' && value?.outline_available && !value?.options?.template_id)) && (presentationOutline.value?.job_id !== value.id || presentationOutline.value?.status !== value.status)) {
           const outline = await api('/presentations/' + value.id + '/outline')
           if (!active()) return
           presentationOutline.value = outline
@@ -132,7 +132,7 @@ createApp({
       await action(async () => {
         const value = await api('/runs/' + id + '/presentation', {method:'POST', body:JSON.stringify(presentationOptions())})
         if(current !== generation) return
-        presentation.value = value; presentationOutline.value = null; slideNumber.value = 1; showSlides.value = true
+        presentation.value = value; presentationOutline.value = null; slideNumber.value = 1; showSlides.value = true; showOutline.value = false
         await pollPresentation(id,current)
       })
     }
@@ -141,7 +141,7 @@ createApp({
       await action(async()=>{
         const job=await api('/presentations/'+jobId+'/confirm-outline',{method:'POST'})
         if(current!==generation || run.value?.id!==id)return
-        presentation.value=job
+        presentation.value=job;showOutline.value=false
         await pollPresentation(id,current)
       })
     }
@@ -237,7 +237,7 @@ createApp({
     const currentTitle = computed(() => health.value.stages[run.value?.index]?.title || '方案完成')
     const canRespond = computed(() => run.value && run.value.source_type !== 'manuscript' && ['waiting','completed','failed'].includes(run.value.status))
     const eventText = e => e.kind === 'tools' ? '调用工具 · ' + e.data.calls.map(c=>c.name).join('、') : e.kind === 'stage_started' ? '开始 · ' + e.data.title : ({created:'任务已创建',manuscript_imported:'完整文稿已导入',started:'工作流启动',stage_completed:'阶段成果已保存',feedback:'反馈已保存',failed:'执行失败',interrupted:'服务重启，可续跑',runtime:e.data.message,tool_result:'收到检索结果'})[e.kind] || ''
-    return {presentationRepairProgress,presentationVisualProgress,templateStore,showTemplateManager,templateId,publishedTemplates,refreshTemplates,templatePublished,health,runs,run,brief,mode,tag,knowledgeMode,knowledge,busy,error,feedback,tab,events,live,statusNames,rendered,currentTitle,canRespond,eventText,select,submit, newRun,sendFeedback,retry,upload,action,presentation,presentationOutline,presentationPollError,slideNumber,showSlides,pptStages,pptWorking,pptBase,pptQuality,pptStatusText,generatePresentation,confirmPresentationOutline,optimizePresentation,resumePresentation,refreshPresentationChat,entryMode,importStep,manuscript,manuscriptTitle,manuscriptFile,importNotice,styles,styleId,uploadManuscript,chooseStyle,submitManuscript,manuscriptPreview}
+    return {presentationRepairProgress,presentationVisualProgress,templateStore,showTemplateManager,templateId,publishedTemplates,refreshTemplates,templatePublished,health,runs,run,brief,mode,tag,knowledgeMode,knowledge,busy,error,feedback,tab,events,live,statusNames,rendered,currentTitle,canRespond,eventText,select,submit, newRun,sendFeedback,retry,upload,action,presentation,presentationOutline,presentationPollError,slideNumber,showSlides,showOutline,pptStages,pptWorking,pptBase,pptQuality,pptStatusText,generatePresentation,confirmPresentationOutline,optimizePresentation,resumePresentation,refreshPresentationChat,entryMode,importStep,manuscript,manuscriptTitle,manuscriptFile,importNotice,styles,styleId,uploadManuscript,chooseStyle,submitManuscript,manuscriptPreview}
   },
   template: `
   <div class="workspace">
@@ -295,12 +295,13 @@ createApp({
         <div class="project-top"><div><div class="eyebrow">PROJECT / {{run.id.slice(0,8).toUpperCase()}}</div><h1>{{run.brief.slice(0,44)}}</h1><p v-if="run.source_type==='manuscript'" class="muted">文稿导入 · {{run.source_filename || '粘贴文稿'}} · 可直接生成 PPT</p><p v-else class="muted">{{run.mode==='auto'?'自主执行':'逐步确认'}} · {{health.tags[run.plan?.c_tag] || '正在分析需求'}} · {{statusNames[run.status]}}</p></div><a v-if="run.outputs.assembly" class="download" :href="'/api/runs/'+run.id+'/export'">↓ 下载方案</a></div>
         <div v-if="run.runtime==='demo'" class="demo-banner">演示任务：以下内容仅用于验证流程，未调用模型或检索服务。</div>
         <section v-if="run.outputs.assembly" class="ppt-panel" aria-label="演示文稿">
-          <div class="enterprise-choice"><label>企业模板<select v-model="templateId" :disabled="busy || pptWorking" aria-label="企业模板"><option value="">使用通用风格</option><option v-for="t in publishedTemplates" :key="t.id" :value="t.id">{{t.published.name}} · v{{t.published.revision}}</option></select></label><button type="button" class="secondary" @click="showTemplateManager=true">上传 / 管理模板</button><p v-if="templateId" class="muted">16:9 · 保留企业页眉、页脚与标题样式；正文由项目 Agent 重新排版，表格和统计图按文稿生成。</p></div>
+          <div class="enterprise-choice"><label>企业模板<select v-model="templateId" :disabled="busy || pptWorking || presentation?.status==='awaiting_outline_confirmation'" aria-label="企业模板"><option value="">使用通用风格</option><option v-for="t in publishedTemplates" :key="t.id" :value="t.id">{{t.published.name}} · v{{t.published.revision}}</option></select></label><button type="button" class="secondary" @click="showTemplateManager=true">上传 / 管理模板</button><p v-if="templateId" class="muted">16:9 · 保留企业页眉、页脚与标题样式；正文由项目 Agent 重新排版，表格和统计图按文稿生成。</p></div>
           <div class="ppt-toolbar"><div><h2>{{pptQuality.needsReview ? '演示文稿草稿' : '演示文稿'}}</h2><p class="muted">{{presentation ? pptStatusText : '将完整方案排版为可编辑 PPT' }}<template v-if="presentation?.status==='completed'"> · {{presentation.page_count}} 页</template></p></div>
-            <div class="ppt-actions"><label v-if="!templateId" class="ppt-style-select">生成风格<select v-model="styleId" :disabled="busy || pptWorking" aria-label="生成风格"><option v-for="style in styles" :value="style.id">{{style.name}}</option></select></label><button @click="generatePresentation" :disabled="busy || pptWorking || presentation?.status==='awaiting_outline_confirmation' || run.status!=='completed'">{{pptWorking?'正在生成…':presentation?.status==='awaiting_outline_confirmation'?'大纲待确认':presentation?.status==='failed'?'重新生成 PPT':'生成 PPT'}}</button><button v-if="presentation?.enterprise_workflow_version===5 && (presentation?.status==='failed' || pptQuality.needsReview)" class="secondary" @click="resumePresentation" :disabled="busy || pptWorking">{{presentation?.status==='failed'?'继续当前任务':'继续修复草稿'}}</button><template v-if="presentation?.status==='completed'"><button v-if="presentation?.options?.template_id && !pptQuality.needsReview" class="secondary" @click="optimizePresentation" :disabled="busy || pptWorking">Agent 再优化</button><button class="secondary" @click="showSlides=!showSlides">{{showSlides?'收起预览':pptQuality.needsReview?'预览草稿':'预览 PPT'}}</button><a v-if="pptQuality.pptx" class="download" :href="pptBase+'/files/presentation.pptx'">{{pptQuality.needsReview ? '下载草稿 PPTX' : '下载 PPTX'}}</a><a v-if="pptQuality.html" class="download" :href="pptBase+'/files/presentation.html'">{{pptQuality.needsReview ? '下载草稿 HTML' : '下载 HTML'}}</a></template></div>
+            <div class="ppt-actions"><label v-if="!templateId" class="ppt-style-select">生成风格<select v-model="styleId" :disabled="busy || pptWorking || presentation?.status==='awaiting_outline_confirmation'" aria-label="生成风格"><option v-for="style in styles" :value="style.id">{{style.name}}</option></select></label><button @click="generatePresentation" :disabled="busy || pptWorking || presentation?.status==='awaiting_outline_confirmation' || run.status!=='completed'">{{pptWorking?'正在生成…':presentation?.status==='awaiting_outline_confirmation'?'大纲待确认':presentation?.status==='failed'?'重新生成 PPT':'生成 PPT'}}</button><button v-if="presentation?.enterprise_workflow_version===5 && (presentation?.status==='failed' || pptQuality.needsReview)" class="secondary" @click="resumePresentation" :disabled="busy || pptWorking">{{presentation?.status==='failed'?'继续当前任务':'继续修复草稿'}}</button><template v-if="presentation?.status==='completed'"><button v-if="presentation?.options?.template_id && !pptQuality.needsReview" class="secondary" @click="optimizePresentation" :disabled="busy || pptWorking">Agent 再优化</button><button v-if="!presentation?.options?.template_id && presentation?.outline_available" class="secondary" @click="showOutline=!showOutline">{{showOutline?'收起大纲':'查看大纲'}}</button><button class="secondary" @click="showSlides=!showSlides">{{showSlides?'收起预览':pptQuality.needsReview?'预览草稿':'预览 PPT'}}</button><a v-if="pptQuality.pptx" class="download" :href="pptBase+'/files/presentation.pptx'">{{pptQuality.needsReview ? '下载草稿 PPTX' : '下载 PPTX'}}</a><a v-if="pptQuality.html" class="download" :href="pptBase+'/files/presentation.html'">{{pptQuality.needsReview ? '下载草稿 HTML' : '下载 HTML'}}</a></template></div>
           </div>
           <p v-if="presentationPollError" role="alert" class="error">{{presentationPollError}}</p>
           <PresentationOutline v-if="presentation?.status==='awaiting_outline_confirmation'" :outline="presentationOutline" :busy="busy" @confirm="confirmPresentationOutline" />
+          <PresentationOutline v-if="presentation?.status==='completed' && !presentation?.options?.template_id && showOutline" :outline="presentationOutline" read-only />
           <p v-if="presentation?.checks?.outline_page_count_matches===false" role="status" class="error">成品 {{presentation.page_count}} 页，与已确认大纲 {{presentation.outline_approval?.page_count}} 页不一致；已保留草稿供复核。</p>
           <p v-if="pptQuality.needsReview" role="status" class="error">当前为待复核草稿，尚未通过交付验收。可以预览已生成页面，并通过“继续修复草稿”处理未完成意见。</p>
           <p v-if="presentation?.optimization_of" class="muted">项目 Agent 正文与版式优化版本 · 保留文稿及企业主题 · <a :href="'/api/presentations/'+presentation.optimization_of+'/files/presentation.html'" target="_blank">查看优化前版本</a></p>
