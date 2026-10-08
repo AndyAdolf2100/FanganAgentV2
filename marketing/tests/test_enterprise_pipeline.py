@@ -5,6 +5,7 @@ import base64
 import hashlib
 import json
 import subprocess
+import threading
 
 import pytest
 from PIL import Image
@@ -37,6 +38,10 @@ class Agent:
 class Harness:
     def __init__(self, tmp_path, monkeypatch, count=1):
         monkeypatch.setenv('MARKETING_VISION_ENABLED', 'true')
+        # Existing assertions assume deterministic event order; parallel review
+        # is opt-in per test. Production defaults to concurrent single-image
+        # reviews via MARKETING_VISION_WORKERS.
+        monkeypatch.setenv('MARKETING_VISION_WORKERS', '1')
         self.folder = tmp_path / 'job'
         self.folder.mkdir()
         self.jobs, self.agent = Jobs(tmp_path), Agent()
@@ -47,7 +52,7 @@ class Harness:
         self.counts = Counter()
         self.visual_hook, self.generate_hook, self.critic_hook, self.browser_hook = None, None, None, None
         self.validation_hook, self.export_hook = None, None
-        self.measurement_hook, self.policies = None, {}
+        self.measurement_hook, self.freeze_measurement_hook, self.policies = None, None, {}
         self.corrections = []
         self.asset_manifest = None
         self.source = {}
@@ -73,8 +78,13 @@ class Harness:
             screenshot = ('offline-screenshot:' + page['html']).encode()
             (folder / 'previews' / f'{index}.png').write_bytes(screenshot)
             issues = self.browser_hook(page, folder, probe_only) if self.browser_hook else []
+            # Opt-in: model a measured difference that first appears in the
+            # assembled deck. Ordinary frozen pages retain candidate evidence.
+            measurements = self.measurement_hook(page) if self.measurement_hook else {}
+            if folder == self.folder and self.freeze_measurement_hook:
+                measurements = self.freeze_measurement_hook(page)
             rows.append({'page': index, 'slide_id': page['slide_id'], 'issues': issues,
-                         'layout_measurements': self.measurement_hook(page) if self.measurement_hook else {},
+                         'layout_measurements': measurements,
                          'html_sha256': hashlib.sha256(page['html'].encode()).hexdigest(),
                          'screenshot_sha': hashlib.sha256(screenshot).hexdigest()})
         probe = {'pages': rows}
@@ -101,12 +111,15 @@ class Harness:
         event = {'folder': folder, 'page': deepcopy(page), 'index': index, **deepcopy(kwargs)}
         self.diagnoses.append(event)
         row = {'page': index, 'slide_id': page['slide_id'], 'slide_version': page['slide_version'],
+               'review_scope': 'full_page',
+               'review_evidence_sha256': diagnostics.review_evidence_sha256(page, probe),
                'rubric_version': diagnostics.RUBRIC_VERSION, 'schema_version': diagnostics.SCHEMA_VERSION,
                'html_sha256': probe['html_sha256'], 'screenshot_sha': probe['screenshot_sha'],
                'verdict': 'pass', 'observed': page['html'], 'issues': [], 'aesthetics': {},
                'probe_evidence': diagnostics.browser_evidence(probe, screenshot_sha=probe['screenshot_sha'],
                                                              html_sha256=probe['html_sha256']),
-               'phase': kwargs['phase'], 'context_id': kwargs.get('context_id') or kwargs['phase'],
+               'phase': kwargs['phase'],
+               'context_id': kwargs.get('context_id') or f'enterprise-{kwargs["phase"]}-{diagnostics.RUBRIC_VERSION}',
                'request_sha256': digest({'html': page['html'], 'phase': kwargs['phase'], 'context': kwargs.get('context_id')}),
                'rechecks': [{'issue_id': i['issue_id'], 'status': 'resolved', 'evidence': '当前已清晰', 'original_issue': deepcopy(i)}
                             for i in kwargs.get('prior_issues') or []]}
@@ -134,6 +147,16 @@ class Harness:
 
     def report(self):
         return json.loads((self.folder / 'visual-review.json').read_text())
+
+
+def test_confirmed_outline_page_count_is_checked_at_delivery(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch)
+    h.jobs.get = lambda job_id: {'outline_approval': {'page_count': 2}}
+    quality = h.run()
+    assert quality['outline_page_count'] == {'approved': 2, 'actual': 1, 'matches': False}
+    assert quality['checks']['outline_page_count_matches'] is False
+    assert quality['ready_for_delivery'] is False
+    assert any(issue['type'] == 'outline_page_count_mismatch' for issue in quality['limitations'])
 
 
 def test_candidate_uncertain_rechecks_keep_html_and_request_fresh_review(tmp_path, monkeypatch):
@@ -288,8 +311,10 @@ def test_repeated_browser_capacity_reaches_layout_escalation(tmp_path,monkeypatc
 
 def test_seed_and_glm_final_findings_return_to_groups_then_refreeze_with_repagination(tmp_path, monkeypatch):
     h = Harness(tmp_path, monkeypatch, count=3)
+    h.freeze_measurement_hook = lambda page: ({'titles': [{'font_size_px': 24}]}
+        if page['group'] == 0 and 'generation 1' in page['html'] else {})
     def visual(row, event):
-        if event['phase'] == 'final' and event['context_id'].endswith(':final-0') and event['page']['group'] == 0:
+        if event['phase'] == 'final' and h.counts[0] == 1 and event['page']['group'] == 0:
             row.update(verdict='fix', issues=[h.issue(row)])
     def critic(payload, number):
         return {'issues': [{'slide_id': payload['pages'][1]['slide_id'], 'severity': 'medium',
@@ -307,8 +332,15 @@ def test_seed_and_glm_final_findings_return_to_groups_then_refreeze_with_repagin
     candidate = next(e for e in h.diagnoses if e['phase'] == 'candidate' and e['page']['group'] == 0)
     assert candidate['prior_issues'][0]['slide_id'] == candidate['page']['slide_id']
     finals = [e for e in h.diagnoses if e['phase'] == 'final']
-    assert len({e['context_id'] for e in finals}) == 2
+    # Only the genuinely changed frozen measurement needs a new observation.
+    # Repaired groups already have candidate reviews; a moved page number alone
+    # does not invalidate the untouched group's initial visual evidence.
+    assert [e['page']['group'] for e in finals] == [0]
     assert all(e['prior_issues'] is None for e in finals)
+    reused = [row for row in h.report()['pages'] if row.get('reused_final_review')]
+    assert len(reused) == 4
+    assert [row['phase'] for row in reused] == ['candidate', 'candidate', 'candidate', 'initial']
+    assert reused[-1]['page'] == 4 and reused[-1]['review_reuse']['page'] == 1
     assert h.report()['issues'] == [] and len(h.report()['audits']) == 2
     assert digest(json.loads((h.folder / 'frozen-plan.json').read_text())) == quality['deck_revision']
 
@@ -367,6 +399,7 @@ def test_hard_check_repair_keeps_browser_layout_measurements(tmp_path, monkeypat
 
 def test_final_repair_is_bounded_and_failed_drafts_cannot_replace_accepted_reviews(tmp_path, monkeypatch):
     h = Harness(tmp_path, monkeypatch)
+    h.freeze_measurement_hook = lambda page: {'titles': [{'font_size_px': 24}]}
     def visual(row, event):
         if event['phase'] in {'candidate', 'final'}:
             issue = h.issue(row)
@@ -452,6 +485,7 @@ def test_user_feedback_maps_original_page_to_group_and_survives_format_error(tmp
 
 def test_partial_final_error_keeps_visual_flags_bound_to_slide_id(tmp_path, monkeypatch):
     h = Harness(tmp_path, monkeypatch, count=2)
+    h.freeze_measurement_hook = lambda page: {'titles': [{'font_size_px': 24}]}
     def visual(row, event):
         if event['phase'] == 'final' and event['page']['group'] == 0:
             raise ValueError('该页视觉服务暂不可用')
@@ -549,8 +583,10 @@ def test_renderer_subprocess_failure_is_local_to_group(tmp_path, monkeypatch):
 
 def test_glm_comparison_rejects_clear_regression_before_replacing_accepted(tmp_path, monkeypatch):
     h = Harness(tmp_path, monkeypatch)
+    h.freeze_measurement_hook = lambda page: ({'titles': [{'font_size_px': 24}]}
+        if 'generation 1' in page['html'] else {})
     def visual(row, event):
-        if event['phase'] == 'final' and event['context_id'].endswith(':final-0'):
+        if event['phase'] == 'final' and h.counts[0] == 1:
             row.update(verdict='fix', issues=[h.issue(row)])
     h.visual_hook = visual
     h.compare_hook = lambda payload, count: {'accept': count > 1,
@@ -568,6 +604,7 @@ def test_glm_comparison_rejects_clear_regression_before_replacing_accepted(tmp_p
 
 def test_successful_resume_replaces_stale_final_needs_review_state(tmp_path, monkeypatch):
     h = Harness(tmp_path, monkeypatch)
+    h.freeze_measurement_hook = lambda page: {'titles': [{'font_size_px': 24}]}
     def visual(row, event):
         if event['phase'] == 'final':
             raise ValueError('暂不可验证终审')
@@ -648,6 +685,7 @@ def test_reviewer_applied_draft_resumes_seed_without_rewriting_and_resolved_is_r
 @pytest.mark.parametrize('invalid', ['missing', 'duplicate', 'no-evidence', 'uncertain', 'persists'])
 def test_blind_final_pass_cannot_close_missing_or_unresolved_human_rechecks(tmp_path, monkeypatch, invalid):
     h = Harness(tmp_path, monkeypatch)
+    h.freeze_measurement_hook = lambda page: {'titles': [{'font_size_px': 24}]}
     reviewer_input(h, count=2)
     def visual(row, event):
         if event['phase'] != 'candidate':
@@ -1149,6 +1187,7 @@ def test_partial_seed_matrix_resumes_without_losing_registry_or_redoing_html(tmp
 
 def test_failed_replacements_cannot_erase_final_seed_issue_of_retained_version(tmp_path, monkeypatch):
     h = Harness(tmp_path, monkeypatch)
+    h.freeze_measurement_hook = lambda page: {'titles': [{'font_size_px': 24}]}
     observed = []
     def visual(row, event):
         if event['phase'] == 'final' and not observed:
@@ -1174,3 +1213,147 @@ def test_failed_replacements_cannot_erase_final_seed_issue_of_retained_version(t
     assert quality['ready_for_delivery'] and h.counts[0] == 5
     event = next(e for e in h.diagnoses[before:] if e['phase'] == 'candidate')
     assert event['prior_issues'][0]['issue_id'] == observed[0]
+
+
+def test_parallel_reviews_overlap_and_keep_page_order(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch)
+    monkeypatch.setenv('MARKETING_VISION_WORKERS', '5')
+    h.generate_hook = lambda gi, count, feedback, current: [h.page(gi, f'part {part}') for part in (1, 2, 3, 4)]
+    # Every single-image pass has exactly four pages; the barrier only releases
+    # if the window truly runs them concurrently.
+    barrier = threading.Barrier(4, timeout=20)
+    h.visual_hook = lambda row, event: barrier.wait()
+    quality = h.run()
+    assert quality['ready_for_delivery'] and quality['checks']['visual_complete'], quality['limitations']
+    assert [row['page'] for row in h.report()['pages']] == [1, 2, 3, 4]
+    assert {row['slide_id'] for row in h.report()['pages']} == {p['slide_id'] for p in h.plan['pages']}
+
+
+def test_parallel_reviews_stop_reserving_after_budget_exhaustion(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch)
+    monkeypatch.setenv('MARKETING_VISION_WORKERS', '2')
+    h.generate_hook = lambda gi, count, feedback, current: [h.page(gi, f'part {part}') for part in (1, 2, 3, 4)]
+    h.visual_hook = lambda row, event: (_ for _ in ()).throw(ValueError('视觉预算不足'))
+    quality = h.run()
+    assert not quality['ready_for_delivery']
+    # Only the in-flight window paid a failed reservation; the rest are marked
+    # unverified without another model call. A fast failure can stop the window
+    # even earlier, so the invariant is "no paid call beyond the window".
+    calls = len([e for e in h.diagnoses if e['phase'] == 'initial'])
+    assert 1 <= calls <= 2
+    entry = next(item for item in h.report()['repairs'] if item['group'] == 0)
+    types = [error['type'] for error in entry['errors']]
+    assert len(types) == 4
+    assert types.count('visual_unverified') == calls
+    assert types.count('visual_budget_exhausted') == 4 - calls
+
+
+def test_deck_repair_round_re_reviews_only_changed_pages(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch, count=2)
+    def critic(payload, number):
+        return {'issues': [{'slide_id': payload['pages'][0]['slide_id'], 'severity': 'medium',
+                            'detail': '第一页与第二页强调重复', 'fix_hint': '调整第一页层级'}]} if number == 1 else {'issues': []}
+    def generate(gi, count, feedback, current):
+        return [h.page(gi, f'g{gi} ' + ('repaired' if count > 1 else 'initial'))]
+    h.critic_hook, h.generate_hook = critic, generate
+    quality = h.run()
+    assert quality['ready_for_delivery'] and quality['limitations'] == []
+    assert [(e['phase'], e['page']['slide_id']) for e in h.diagnoses] == [
+        ('initial', 'group-0000-part-001'), ('initial', 'group-0001-part-001'),
+        ('candidate', 'group-0000-part-001')]
+    assert h.counts == {0: 2, 1: 1}
+    rows = h.report()['pages']
+    assert [row['slide_id'] for row in rows] == ['group-0000-part-001', 'group-0001-part-001']
+    assert [row['phase'] for row in rows] == ['candidate', 'initial']
+    assert all(row.get('reused_visual_review') for row in rows)
+    assert all(row['review_reuse']['source'] == 'committed_candidate' for row in rows)
+    assert [row['review_reuse']['phase'] for row in rows] == ['candidate', 'initial']
+    assert 'repaired' in rows[0]['observed'] and 'initial' in rows[1]['observed']
+    audit0 = json.loads((h.folder / 'final-audit-0.json').read_text())
+    assert [row['phase'] for row in audit0['pages']] == ['initial', 'initial']
+    assert all(row['review_reuse']['source'] == 'committed_candidate' for row in audit0['pages'])
+    assert rows[1]['request_sha256'] == audit0['pages'][1]['request_sha256']
+    assert rows[0]['request_sha256'] != audit0['pages'][0]['request_sha256']
+    audit1 = json.loads((h.folder / 'final-audit-1.json').read_text())
+    assert audit0['reused_visual_reviews'] == audit1['reused_visual_reviews'] == 2
+
+
+def test_single_page_groups_share_bounded_reviews_across_multiple_windows(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch, count=12)
+    monkeypatch.setenv('MARKETING_VISION_WORKERS', '4')
+    owner = threading.get_ident()
+    barrier = threading.Barrier(4, timeout=10)
+    lock = threading.Lock()
+    active = peak = 0
+
+    def visual(row, event):
+        nonlocal active, peak
+        assert threading.get_ident() != owner
+        with lock:
+            active += 1
+            peak = max(peak, active)
+        try:
+            barrier.wait()
+        finally:
+            with lock:
+                active -= 1
+
+    def generate(gi, count, feedback, current):
+        assert threading.get_ident() == owner  # GLM and workflow mutations remain serialized.
+        return [h.page(gi, f'group {gi}')]
+
+    original_update = h.jobs.update
+    def update(*args, **kwargs):
+        assert threading.get_ident() == owner
+        original_update(*args, **kwargs)
+
+    h.visual_hook, h.generate_hook = visual, generate
+    monkeypatch.setattr(h.jobs, 'update', update)
+    quality = h.run()
+    assert quality['ready_for_delivery'] and peak == 4
+    assert Counter(e['phase'] for e in h.diagnoses) == {'initial': 12}
+    assert all(row['phase'] == 'initial' and row.get('reused_visual_review') for row in h.report()['pages'])
+    assert json.loads((h.folder / 'final-audit-0.json').read_text())['reused_visual_reviews'] == 12
+    assert [p['generation_group'] for p in h.plan['pages']] == list(range(12))
+    assert [r['page'] for r in h.report()['pages']] == list(range(1, 13))
+
+
+def test_mixed_parallel_failures_keep_budget_stop_and_all_pages(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch, count=4)
+    monkeypatch.setenv('MARKETING_VISION_WORKERS', '2')
+    barrier = threading.Barrier(2, timeout=10)
+
+    def visual(row, event):
+        barrier.wait()
+        if event['page']['group'] == 1:
+            raise ValueError('视觉预算不足')
+        raise ValueError('视觉响应JSON无效')
+
+    h.visual_hook = visual
+    quality = h.run()
+    assert not quality['ready_for_delivery']
+    assert len(h.plan['pages']) == 4
+    assert len(h.diagnoses) == 2  # No final/repair model requests after the stop.
+    errors = h.report()['issues']
+    assert len([error for error in errors if error['type'] == 'visual_budget_exhausted']) == 4
+
+
+def test_final_reuse_requires_current_browser_measurements(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch, count=2)
+    h.measurement_hook = lambda page: {'titles': [{'font_size_px': 39 + h.counts[0]}]}
+    def critic(payload, number):
+        return {'issues': [{'slide_id': payload['pages'][0]['slide_id'], 'severity': 'medium',
+                            'detail': '修复第一页强调', 'fix_hint': '调整层级'}]} if number == 1 else {'issues': []}
+    h.critic_hook = critic
+    quality = h.run()
+    assert quality['ready_for_delivery']
+    assert Counter(e['phase'] for e in h.diagnoses) == {'initial': 2, 'candidate': 1, 'final': 1}
+    audit0 = json.loads((h.folder / 'final-audit-0.json').read_text())
+    assert all(row['phase'] == 'initial' and row.get('reused_visual_review') for row in audit0['pages'])
+    unchanged = [e for e in h.diagnoses if e['phase'] == 'final' and e['page']['group'] == 1]
+    assert len(unchanged) == 1
+    initial = next(e for e in h.diagnoses if e['phase'] == 'initial' and e['page']['group'] == 1)
+    assert initial['probe']['screenshot_sha'] == unchanged[0]['probe']['screenshot_sha']
+    assert initial['probe']['layout_measurements'] != unchanged[0]['probe']['layout_measurements']
+    assert h.critics[-1]['pages'][1]['layout_measurements']['titles'][0]['font_size_px'] == 41
+    assert not h.report()['pages'][1].get('reused_final_review')

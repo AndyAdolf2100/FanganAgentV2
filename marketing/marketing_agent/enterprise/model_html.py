@@ -471,13 +471,17 @@ def plan_deck(folder, template, manuscript, call):
             **({'contents_source_bindings':contents_bindings,'contents_source_policy_version':1} if contents_bindings else {})}
 
 
-def resume_prefix(saved, plan, groups, references, contracts, source, template=None,existing_contracts=False):
-    """Reuse validated model HTML, never regenerate or patch a completed prefix."""
+def resume_prefix(saved, plan, groups, references, contracts, source, template=None,existing_contracts=False,
+                  allow_sparse=False):
+    """Reuse validated HTML; sparse refinement slots keep their original group IDs."""
     if not saved:return []
     for key in ('enterprise_layout_mode','canvas','theme','source_sha256','source_blocks','template_id','template_revision'):
         if saved.get(key)!=plan.get(key):
             raise ValueError(f'已有草稿与当前输入不一致（{key}），保留草稿，不能直接续跑')
     pages=saved.get('pages',[]);result=[];offset=0
+    if not isinstance(pages,list) or any(not isinstance(page,dict)
+        or type(page.get('generation_group')) is not int or page['generation_group']<0 for page in pages):
+        raise ValueError('已有草稿页面组格式无效，保留草稿，不能直接续跑')
     for proposal in groups:
         group=[]
         while offset<len(pages) and pages[offset].get('generation_group')==proposal['generation_group']:
@@ -503,7 +507,11 @@ def resume_prefix(saved, plan, groups, references, contracts, source, template=N
             agenda=[a for a in source['agenda'] if a['id'] in proposal.get('agenda_ids',[])]
             document_check(page['html'],references[index],contract,proposal,blocks,agenda,source['metadata'])
             group.append(deepcopy(page));offset+=1
-        if not group:break
+        if not group:
+            if allow_sparse:
+                result.append([])
+                continue
+            break
         html.validate_sources([p['html'] for p in group],blocks,agenda,html.table_headers(source['blocks']))
         result.append(group)
     if offset!=len(pages):raise ValueError('已有草稿生成组不连续，保留草稿，不能直接续跑')
@@ -550,6 +558,17 @@ def execute(jobs, job_id, agent):
     jobs.update(job_id,stage='designing',error=None,agent_owner='project_presentation_agent',enterprise_layout_mode=MODE)
     source=json.loads((folder/'source-plan.json').read_text()) if refinement or (v5 and (folder/'source-plan.json').exists()) else plan_deck(folder,template,(folder/'manuscript.md').read_text(),call)
     (folder/'source-plan.json').write_text(json.dumps(source,ensure_ascii=False,indent=2))
+    job = jobs.get(job_id)
+    if v5 and job.get('outline_review_required'):
+        approval = job.get('outline_approval')
+        if not approval:
+            page_count = len(source['planned'])
+            agent.finish('awaiting_outline_confirmation', page_count=page_count)
+            jobs.update(job_id,status='awaiting_outline_confirmation',stage='outline_review',page_count=page_count)
+            return
+        if (approval.get('page_count') != len(source['planned']) or
+                approval.get('source_plan_sha256') != hashlib.sha256((folder/'source-plan.json').read_bytes()).hexdigest()):
+            raise ValueError('已确认的大纲发生变化，请重新规划并确认')
     if 'MARKETING_ENTERPRISE_LAYOUT_MAX_CALLS' not in os.environ:
         # The former fixed 80 calls could not even cover a long deck's initial
         # planning + per-layout analysis + page generation, let alone repairs.
@@ -578,6 +597,8 @@ def execute(jobs, job_id, agent):
     for position,index in enumerate(used_templates,1):
         if v5:jobs.update(job_id,stage='template_analyzing',template_progress={'current':position,'total':len(used_templates),'template_page':index+1})
         ensure_contract(index)
+        if v5 and getattr(jobs, 'chat', None):
+            jobs.chat.checkpoint(job_id, saved or {'pages': []}, source, call)
     (folder/'enterprise-design-contract.json').write_text(json.dumps({'mode':MODE,'contracts':contracts,'metadata':source['metadata'],'frontend_labels':'read_only_reference','visual_analysis':visual_analysis},ensure_ascii=False,indent=2))
     if v5:
         from .template_profile import build_layout_profile, template_fingerprint
@@ -730,17 +751,19 @@ def execute(jobs, job_id, agent):
         asset_options={'resume':True} if jobs.get(job_id).get('resume_requested_at') else {}
         asset_manifest=agent.call('prepare_enterprise_assets',prepare_enterprise_assets,folder,source,groups,contracts,theme,call,**asset_options)
     if v5 and refinement:
-        # Materialized plan.json can be only the committed prefix after an
-        # interruption. Keep the original optimization input as fallback for
-        # untouched groups; RevisionStore still wins for already repaired ones.
+        # A checked draft may omit failed groups. Preserve source-plan positions
+        # so the pipeline fills gaps without reassigning existing HTML or IDs.
+        # RevisionStore still wins for groups already repaired in this job.
         from .refinement import load_refinement_base
         original_plan=load_refinement_base(folder)
-        generated=resume_prefix(original_plan,plan,groups,references,contracts,source,template,existing_contracts=True)
+        generated=resume_prefix(original_plan,plan,groups,references,contracts,source,template,
+                                existing_contracts=True,allow_sparse=True)
     else:
         generated=[] if v5 and (folder/'revision-state.json').exists() else resume_prefix(saved,plan,groups,references,contracts,source,template,existing_contracts=refinement or v5)
     if generated:
         plan['pages']=[page for group in generated for page in group]
         for gi,group in enumerate(generated):
+            if not group:continue
             if group[0].get('body_template_revision'):
                 index=group[0]['template_page']
                 ensure_contract(index)
@@ -749,8 +772,9 @@ def execute(jobs, job_id, agent):
                 # for subsequent repairs of this or another source group.
                 if not v5:contracts[str(index)]=group[0]['template_contract']
                 groups[gi]={k:v for k,v in group[0].items() if k in groups[gi] or k=='body_template_revision'}
-        agent.state.update(resumed_groups=len(generated),resumed_pages=len(plan['pages']));agent.save()
-        corrections.append({'tool':'resume_enterprise_html','action':'校验后复用已有完整HTML，直接继续未完成生成组','groups':len(generated),'pages':len(plan['pages'])});log()
+        resumed_groups=sum(bool(group) for group in generated)
+        agent.state.update(resumed_groups=resumed_groups,resumed_pages=len(plan['pages']));agent.save()
+        corrections.append({'tool':'resume_enterprise_html','action':'校验后复用已有完整HTML，直接继续未完成生成组','groups':resumed_groups,'pages':len(plan['pages'])});log()
     def check_deck():
         check_page_count(len(plan['pages']),options)
         html.validate_deck(plan['pages'],catalog(template))
@@ -789,14 +813,14 @@ def execute(jobs, job_id, agent):
     jobs.update(job_id,stage='rendering');agent.call('export_enterprise_pptx',run_renderer,folder)
     visual={'status':'disabled','pages':[],'repairs':[],'notice':'未启用视觉模型复核'}
     if os.getenv('MARKETING_VISION_ENABLED','false').lower()=='true':
-        from ..presentation_vision import review_batch,review_pages,review_reservation
+        from ..presentation_vision import review_batch,review_pages,review_reservation,vision_workers
         from ..presentation_budget import can_reserve
         jobs.update(job_id,stage='visual_review',vision_model=os.getenv('MARKETING_VISION_MODEL'))
         visual.update(status='reviewing',notice='正在逐页审查截图')
         try:
             def review_all():
                 jobs.update(job_id,visual_progress={'phase':'review','current':0,'total':len(plan['pages']),'page':1})
-                for completed,rows in enumerate(review_pages(folder,plan,range(1,len(plan['pages'])+1),3 if refinement else 1),1):
+                for completed,rows in enumerate(review_pages(folder,plan,range(1,len(plan['pages'])+1),vision_workers() if refinement else 1),1):
                     visual['pages'].extend(rows);visual['pages'].sort(key=lambda p:p['page'])
                     jobs.update(job_id,visual_progress={'phase':'review','current':completed,'total':len(plan['pages']),'page':rows[0]['page']})
                     (folder/'visual-review.json').write_text(json.dumps(visual,ensure_ascii=False,indent=2))

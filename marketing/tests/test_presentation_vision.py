@@ -165,3 +165,16 @@ def test_scene_edit_receives_successful_anchor(tmp_path,monkeypatch):
     monkeypatch.setattr(images,'generate_image',generate)
     images.materialize_assets(plan,tmp_path,True)
     assert refs==[None,tmp_path/'cover.png'] and len(plan['assets'])==2
+
+
+@pytest.mark.parametrize(('configured', 'expected'), [
+    (None, 5), ('', 5), ('   ', 5), ('invalid', 5), ('2.5', 5),
+    ('2', 2), (' 3 ', 3), ('0', 1), ('-1', 1), ('10', 10), ('50', 10),
+])
+def test_vision_workers_reads_bounded_env_configuration(monkeypatch, configured, expected):
+    from marketing_agent import presentation_vision as vision
+    if configured is None:
+        monkeypatch.delenv('MARKETING_VISION_WORKERS', raising=False)
+    else:
+        monkeypatch.setenv('MARKETING_VISION_WORKERS', configured)
+    assert vision.vision_workers() == expected

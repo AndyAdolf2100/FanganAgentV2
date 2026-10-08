@@ -1,17 +1,21 @@
 """Version 5: bounded group repair, independent audits and frozen delivery."""
 from copy import deepcopy
+from functools import partial
 import hashlib
 import json
 import os
 import subprocess
+from threading import Event
 
 from .revisions import RevisionStore, atomic_json, digest
 from .repair_policy import build_repair_policy, classify_error
+from .review_scheduler import ReviewBatch, run_review_workflows
 
 
 ERRORS = (ValueError, KeyError, TypeError, OSError, RuntimeError, subprocess.SubprocessError)
 MAX_GROUP_ATTEMPTS = 4  # Initial attempt plus three corrections.
 MAX_DECK_REPAIR_ROUNDS = 1
+MAX_CHAT_BATCHES = 3
 LAYOUT_REVIEW_POLICY = (
     '结合layout_measurements的浏览器事实和Seed观察逐项复核：同用途且页眉兼容的顶部标题应有一致的字号、字重、文字起点和基线，'
     '比较titles的真实文字bounds及typography，不能只比较标题容器，也不要求封面/章节/正文强行一致。'
@@ -117,7 +121,8 @@ def _budget_error(reason):
 
 def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_deck,
         call, renderer, corrections, log, asset_manifest=None):
-    from .diagnostics import diagnose_page, classify_persistence, RUBRIC_VERSION, SCHEMA_VERSION
+    from .diagnostics import (diagnose_page, classify_persistence, RUBRIC_VERSION, SCHEMA_VERSION,
+                              vision_workers, review_input_sha256, review_evidence_sha256)
 
     folder = jobs.root / job_id
     # html_only is an export result, never an inherited generation constraint.
@@ -127,8 +132,11 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
     enabled = os.getenv('MARKETING_VISION_ENABLED', 'false').lower() == 'true'
     report = {'schema_version': 5, 'status': 'reviewing', 'pages': [], 'repairs': [],
               'issues': [], 'history': [], 'audits': [], 'notice': '逐组生成、检查和优化'}
-    budget_exhausted = False
+    budget_exhausted = Event()
+    workers = vision_workers()
     group_reviews, diagnostic_history, seed_groups = {}, {}, {}
+    chat = getattr(jobs, 'chat', None)
+    chat_resume = bool(chat and jobs.get(job_id).get('chat_resume'))
 
     def retain_seed_issues(gi, rows):
         """Keep original issue identities; new observations may resolve them."""
@@ -269,6 +277,67 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
             'input_sha256': digest(store.fingerprint), 'groups': reviewer_groups, 'unmapped': reviewer_unmapped})
         report['reviewer_feedback'] = deepcopy(feedback)
 
+    # Live conversation requests have stable identities independent of the
+    # original reviewer-feedback file. Appending to that file would invalidate
+    # its saved page mapping and every issue ID derived from its whole hash.
+    chat_mapping_path = folder / 'chat-feedback-mapping.json'
+    chat_mapping = {'schema_version': 1, 'input_sha256': digest(store.fingerprint), 'requests': {}}
+    if chat_mapping_path.exists():
+        chat_mapping = json.loads(chat_mapping_path.read_text())
+        if (chat_mapping.get('schema_version') != 1
+            or chat_mapping.get('input_sha256') != digest(store.fingerprint)
+            or not isinstance(chat_mapping.get('requests'), dict)):
+            raise ValueError('对话意见映射与当前来源版本不符，拒绝套用旧意见')
+
+    def chat_rows(request):
+        rows = request.get('rows')
+        if not isinstance(rows, list) or not rows:
+            raise ValueError('对话修改请求缺少页面意见')
+        ids = set()
+        for row in rows:
+            gi = row.get('generation_group')
+            if (type(gi) is not int or not 0 <= gi < len(groups)
+                or not isinstance(row.get('slide_id'), str)
+                or not row['slide_id'].startswith(f'group-{gi:04d}-part-')
+                or not row.get('observed_revision')
+                or not isinstance(row.get('observed_group_slide_ids'), list)
+                or row['slide_id'] not in row['observed_group_slide_ids']
+                or not isinstance(row.get('issues'), list) or not row['issues']):
+                raise ValueError('对话意见缺少稳定页面组、页面身份或观察版本')
+            for issue in row['issues']:
+                issue_id = issue.get('issue_id')
+                if (not isinstance(issue_id, str) or not issue_id.startswith('reviewer-chat-')
+                    or issue_id in ids or issue.get('severity') not in {'medium', 'high'}
+                    or not isinstance(issue.get('detail'), str) or not issue['detail'].strip()
+                    or issue.get('slide_id') != row['slide_id']):
+                    raise ValueError('对话意见问题身份或内容无效')
+                ids.add(issue_id)
+        return rows
+
+    def import_chat_request(request):
+        for row in chat_rows(request):
+            rows = reviewer_groups.setdefault(row['generation_group'], [])
+            if row not in rows:
+                rows.append(deepcopy(row))
+
+    for request_id, request in chat_mapping['requests'].items():
+        if (not isinstance(request_id, str) or not request_id or not isinstance(request, dict)
+            or request.get('status') not in {'applying', 'completed', 'needs_attention'}):
+            raise ValueError('对话意见映射请求状态无效')
+        import_chat_request(request)
+
+    def save_chat_mapping():
+        atomic_json(chat_mapping_path, chat_mapping)
+        report['chat_requests'] = [
+            {'id': key, 'status': request['status'], 'groups': sorted({row['generation_group'] for row in request['rows']})}
+            for key, request in chat_mapping['requests'].items()]
+
+    def chat_checkpoint():
+        if chat is not None:
+            # Called only by generator advancement on the workflow thread. It
+            # may plan messages, but never mutates in-flight review obligations.
+            chat.checkpoint(job_id, plan, source, call)
+
     def page_binding(page):
         return {'slide_id': page['slide_id'], 'slide_version': page['slide_version'],
                 'html_sha256': hashlib.sha256(page['html'].encode()).hexdigest()}
@@ -391,7 +460,6 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                 'accept': answer['accept'], 'reason': answer['reason'], 'decision_owner': 'GLM'}
 
     def diagnose(candidate, candidate_plan, probe, phase, previous=(), context_id=None, reusable=()):
-        nonlocal budget_exhausted
         rows, errors = [], []
         if not enabled:
             return rows, [{'type': 'vision_disabled', 'detail': '视觉未启用，不能认定视觉通过'}]
@@ -401,8 +469,18 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
             for page in candidate_plan['pages']:
                 scope_pages.setdefault(page['generation_group'], []).append(page)
         scopes = {gi: reviewer_scope(gi, pages) for gi, pages in scope_pages.items() if review_targets(gi)}
+        def page_context(page):
+            return (f'final:{page["slide_id"]}:{hashlib.sha256(page["html"].encode()).hexdigest()}'
+                    if phase == 'final' and context_id is None else context_id)
+
+        def input_sha(page, prior, index):
+            return review_input_sha256(page, measured[index], phase=phase,
+                                       prior_issues=prior, context_id=page_context(page))
+
+        prepared = []
         for index, page in enumerate(candidate_plan['pages'], 1):
             prior = _prior_issues(previous, page['slide_id']) if phase == 'candidate' else None
+            cached = None
             gi = page['generation_group']
             if phase == 'candidate' and gi in scopes:
                 by_id = {i['issue_id']: i for i in prior}
@@ -419,30 +497,53 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                     and row.get('phase') == phase and row.get('verdict') == 'pass'
                     and all(row.get(k) == v for k, v in page_binding(page).items())
                     and row.get('screenshot_sha') and row['screenshot_sha'] == measured[index].get('screenshot_sha')
+                    and row.get('review_input_sha256') == review_input_sha256(page, measured[index],
+                        phase=phase, prior_issues=prior, context_id=row.get('context_id'))
                     and not actionable([row]) and len(checks_by_id) == len(checks)
                     and all(checks_by_id.get(i['issue_id'], {}).get('status') == 'resolved'
                         and isinstance(checks_by_id[i['issue_id']].get('evidence'), str)
                         and checks_by_id[i['issue_id']]['evidence'].strip()
                         and checks_by_id[i['issue_id']].get('original_issue') == i for i in prior)):
-                    rows.append(deepcopy(row))
-                    continue
-            if budget_exhausted:
-                errors.append({'type': 'visual_budget_exhausted', 'slide_id': page['slide_id'],
-                               'detail': '视觉预算不足，本页尚未验证'})
-                continue
+                    cached = deepcopy(row)
+            elif phase == 'final' and reusable:
+                # Delivery verifies evidence, not a second opinion on unchanged
+                # pixels. Keep the actual observation phase/request and preserve
+                # unresolved findings; reusing a fix never means accepting it.
+                evidence_sha = review_evidence_sha256(page, measured[index])
+                for row in reusable:
+                    if (current_review_protocol(row) and row.get('phase') in {'initial', 'candidate', 'final'}
+                        and row.get('review_scope') == 'full_page'
+                        and row.get('review_evidence_sha256') == evidence_sha
+                        and row.get('verdict') in {'pass', 'fix'} and isinstance(row.get('issues'), list)
+                        and all(row.get(k) == v for k, v in page_binding(page).items())
+                        and row.get('screenshot_sha') and row['screenshot_sha'] == measured[index].get('screenshot_sha')):
+                        origin = row.get('review_reuse') or {'phase': row['phase'], 'page': row['page'],
+                            'request_sha256': row.get('request_sha256'), 'source': 'previous_audit'}
+                        cached = {**deepcopy(row), 'page': index, 'reused_final_review': True,
+                                  'reused_visual_review': True, 'review_reuse': deepcopy(origin)}
+                        break
+            prepared.append((index, page, prior, cached))
+
+        def review(index, page, prior):
+            """One single-image request in a worker thread; evidence never crosses pages."""
+            # Final contexts bind to page content, not the deck or the round:
+            # an unchanged page resolves to the same request and reuses its one
+            # independent observation across rounds and restarts, while a
+            # repaired page naturally receives a fresh context.
+            context = page_context(page)
+            if budget_exhausted.is_set():
+                return skipped(index)
             try:
-                jobs.update(job_id, stage='visual_review', visual_progress={
-                    'phase': phase, 'current': index, 'total': len(candidate_plan['pages']), 'page': index})
                 row = agent.call('final_enterprise_visual_review' if phase == 'final' else 'diagnose_enterprise_page',
                     diagnose_page, candidate, candidate_plan, index, probe=measured[index], phase=phase,
                     prior_issues=prior,
-                    context_id=context_id, cache_root=cache)
+                    context_id=context, cache_root=cache)
                 if (row.get('page') != index or row.get('slide_id') != page['slide_id']
                     or row.get('slide_version') != page['slide_version'] or row.get('phase') != phase
                     or row.get('screenshot_sha') != measured[index].get('screenshot_sha')
                     or row.get('html_sha256') != hashlib.sha256(page['html'].encode()).hexdigest()
                     or row.get('verdict') not in {'pass', 'fix'} or not isinstance(row.get('issues'), list)
-                    or (context_id is not None and row.get('context_id') != context_id)):
+                    or (context is not None and row.get('context_id') != context)):
                     raise ValueError('视觉诊断未绑定当前页面、版本、截图或独立审查上下文')
                 if prior:
                     checks = row.get('rechecks', [])
@@ -451,15 +552,46 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                         or any(c.get('status') not in {'resolved', 'persists', 'uncertain'}
                                or not isinstance(c.get('evidence'), str) or not c['evidence'].strip() for c in checks)):
                         raise ValueError('视觉诊断未逐项复验全部原问题，普通pass不能关闭人工反馈')
-                rows.append(row)
+                row['review_input_sha256'] = input_sha(page, prior, index)
+                return 'row', row
             except ERRORS as exc:
                 reason = str(exc)[:2000]
-                budget_exhausted = budget_exhausted or _budget_error(reason)
-                errors.append({'type': 'visual_unverified', 'slide_id': page['slide_id'], 'detail': reason})
+                if _budget_error(reason):
+                    budget_exhausted.set()
+                return 'error', {'type': 'visual_unverified', 'slide_id': page['slide_id'], 'detail': reason}
+
+        # Suspend this group while single-image tasks share one bounded pool
+        # with other groups. State changes and progress stay on the main thread.
+        total, collected = len(prepared), {}
+        for index, page, prior, cached in prepared:
+            if cached is not None:
+                collected[index] = ('row', cached)
+        pending = [(index, page, prior) for index, page, prior, cached in prepared if cached is None]
+        budget_gap = {'type': 'visual_budget_exhausted', 'detail': '视觉预算不足，本页尚未验证'}
+        finished = len(collected)
+
+        def progress(index, value):
+            nonlocal finished
+            finished += 1
+            jobs.update(job_id, stage='visual_review', visual_progress={
+                'phase': phase, 'current': finished, 'total': total, 'page': index,
+                'group': candidate_plan['pages'][index - 1]['generation_group'] + 1,
+                'workers': workers})
+
+        def skipped(index):
+            return 'error', {**budget_gap, 'slide_id': candidate_plan['pages'][index - 1]['slide_id']}
+
+        if pending:
+            completed = yield ReviewBatch(
+                tasks={index: partial(review, index, page, prior) for index, page, prior in pending},
+                on_result=progress, skipped_result=skipped)
+            collected.update(completed)
+        rows.extend(value for _, (kind, value) in sorted(collected.items()) if kind == 'row')
+        errors.extend(value for _, (kind, value) in sorted(collected.items()) if kind == 'error')
         return rows, errors
 
-    def process_group(gi, proposal, existing=None, extra=None, deck_round=0):
-        nonlocal budget_exhausted
+    def process_group(gi, proposal, existing=None, extra=None, deck_round=0,
+                      force_repair=False, chat_request_ids=()):
         proposal = deepcopy(proposal)
         current, findings = deepcopy(existing), deepcopy(extra or [])
         human = deepcopy(reviewer_groups.get(gi, []))
@@ -490,9 +622,10 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
         # A committed draft is already hard-checked. Resume with explicit Seed
         # rechecks, including legacy drafts whose application history is unknown.
         # Fresh original input has no committed version and still gets GLM repair.
-        review_current = bool(before and review_targets(gi) and not deck_round)
+        review_current = bool(before and review_targets(gi) and not deck_round and not force_repair)
         last_visual = deepcopy(extra or group_reviews.get(gi, []))
         observed = diagnostic_history.setdefault(gi, [])
+        generated_revision = None
         for attempt in range(MAX_GROUP_ATTEMPTS):
             revision, probe, rows, generated_now = None, {}, [], False
             repair_policy = build_repair_policy(proposal, findings, history=attempts,
@@ -501,7 +634,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                 page_progress={'current': gi + 1, 'total': len(groups), 'page': gi + 1},
                 repair_progress={'group': gi + 1, 'attempt': attempt, 'max_self_repairs': 3, 'deck_round': deck_round})
             try:
-                if current and ((attempt == 0 and (not extra or review_current))
+                if current and ((attempt == 0 and not force_repair and (not extra or review_current))
                     or repair_policy['category'] == 'review_evidence'):
                     replacement = current
                 else:
@@ -534,6 +667,8 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                     raise ValueError('生成组没有返回页面')
                 check_assets(replacement, gi)
                 candidate, candidate_plan, revision = store.candidate(gi, replacement)
+                if generated_now:
+                    generated_revision = revision
                 probe = agent.call('render_enterprise_candidate', renderer, candidate, True)
                 hard_rows = browser_rows(probe)
                 if len(probe.get('pages', [])) != len(replacement):
@@ -541,7 +676,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                 if hard_rows:
                     rows, errors = hard_rows, []
                 else:
-                    rows, errors = diagnose(candidate, candidate_plan, probe,
+                    rows, errors = yield from diagnose(candidate, candidate_plan, probe,
                         'candidate' if attempt or extra or review_targets(gi) else 'initial', previous=[*last_visual, *human],
                         context_id=(f'enterprise-candidate-review-retry:{revision}:attempt-{attempt}'
                                     if repair_policy['category'] == 'review_evidence' and attempt else None),
@@ -565,6 +700,12 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                     application = feedback_application(gi, revision)
                 notes = {'errors': errors, 'reviewer_feedback': human_checks,
                          'seed_issue_registry': deepcopy(seed_groups.get(gi, [])), 'seed_issues': seed_checks}
+                if chat_request_ids and generated_revision == revision:
+                    # This committed check is the durable proof that the chat
+                    # instruction reached generation, including review-only
+                    # retries of the generated candidate and crash recovery.
+                    notes['chat_application'] = {'request_ids': list(chat_request_ids),
+                        'generated_revision': revision, 'base_revision': (before or {}).get('revision')}
                 if application and application == feedback_application(gi, revision):
                     notes['reviewer_feedback_application'] = application
                 elif review_current and attempt == 0:
@@ -605,7 +746,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                     any(c.get('status') == 'persists' for c in row.get('rechecks', [])) for row in rows)
                 evidence_retry = build_repair_policy(proposal, findings, history=attempts,
                     attempt=attempt+1, current=current)['category'] == 'review_evidence'
-                if not hard_rows and (not enabled or budget_exhausted or
+                if not hard_rows and (not enabled or budget_exhausted.is_set() or
                     ((human_pending or (review_current and attempt == 0)) and not confirmed_fix and not evidence_retry)):
                     seed_groups[gi] = committed_seed
                     report['history'].append({'group': gi, 'type': 'visual_unverified', 'attempts': deepcopy(attempts)})
@@ -623,7 +764,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                     'type': 'tool_error', 'detail': reason,
                     'fix_hint': '根据原始工具错误修复，不得删除来源或解除人工品牌保护'}]}]
                 if _budget_error(reason):
-                    budget_exhausted = True
+                    budget_exhausted.set()
                     break
             corrections.append({'tool': 'enterprise_v5_repair', 'group': gi + 1, 'attempt': attempt,
                                 'deck_round': deck_round, 'findings': deepcopy(findings)})
@@ -660,16 +801,121 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
         update_report()
         return False
 
-    # A failing group does not discard or prevent processing the other groups.
-    for gi, proposal in enumerate(groups):
-        before = committed_evidence(gi)
-        if before and before['status'] == 'accepted' and review_targets(gi) and all(
-            item['status'] == 'resolved' for item in issue_status(gi, before['pages'], before['reviews'], review_targets(gi))):
-            continue
-        existing = store.committed_group(gi) or (generated[gi] if gi < len(generated) else None)
-        process_group(gi, proposal, existing, reviewer_groups.get(gi))
+    def group_workflow(*args, **kwargs):
+        result = yield from process_group(*args, **kwargs)
+        chat_checkpoint()
+        return result
 
-    def audit(round_number):
+    def chat_request_checks(request_id, request):
+        results = []
+        for gi in sorted({row['generation_group'] for row in request['rows']}):
+            current = committed_evidence(gi)
+            targets = [row for row in request['rows'] if row['generation_group'] == gi]
+            checks = issue_status(gi, (current or {}).get('pages', []),
+                                  (current or {}).get('reviews', []), targets)
+            application = (current or {}).get('notes', {}).get('chat_application', {})
+            generated = (current is not None and current['status'] == 'accepted'
+                and request_id in application.get('request_ids', [])
+                and application.get('generated_revision') == current['revision'])
+            results.append({'generation_group': gi, 'revision': (current or {}).get('revision'),
+                'generated_and_committed': bool(generated), 'checks': checks,
+                'resolved': bool(generated and checks and all(item['status'] == 'resolved' for item in checks))})
+        return results
+
+    def finish_chat_request(request_id, request, details):
+        status = 'completed' if details and all(item['resolved'] for item in details) else 'needs_attention'
+        text = ('修改已提交，相关页面已逐项复验。' if status == 'completed'
+                else '本轮未能完成并验证全部修改；现稿与未完成意见已保留。')
+        request.update(status=status, result_text=text, details=details)
+        # Persist first: if acknowledgement fails, recovery acknowledges this
+        # result again without paying for the same generation a second time.
+        save_chat_mapping()
+        chat.finish_request(job_id, request_id, status, text, details=details)
+
+    chat_batches = 0
+
+    def drain_chat():
+        nonlocal chat_batches
+        if chat is None:
+            return
+        # Only call after the scheduler has drained every in-flight group.
+        # Freeze all rows in a batch before starting any of its reviews.
+        while chat_batches < MAX_CHAT_BATCHES:
+            chat_checkpoint()
+            claimed = chat.claim_ready(job_id, plan)
+            if not claimed:
+                break
+            chat_batches += 1
+            requests = {}
+            for claimed_request in claimed:
+                request_id = claimed_request['id']
+                if not isinstance(request_id, str) or not request_id:
+                    raise ValueError('对话修改请求ID无效')
+                request = chat_mapping['requests'].get(request_id)
+                if request is None:
+                    chat_rows(claimed_request)
+                    request = {'rows': deepcopy(claimed_request['rows']), 'status': 'applying'}
+                    chat_mapping['requests'][request_id] = request
+                    save_chat_mapping()
+                    import_chat_request(request)
+                elif request['rows'] != claimed_request['rows']:
+                    raise ValueError('已认领的对话意见发生变化，拒绝覆盖原始请求')
+                if request['status'] == 'needs_attention' and claimed_request.get('retry_requested') is True:
+                    request.update(status='applying')
+                    request.pop('result_text', None)
+                    request.pop('details', None)
+                    save_chat_mapping()
+                if request['status'] in {'completed', 'needs_attention'}:
+                    chat.finish_request(job_id, request_id, request['status'], request['result_text'],
+                                        details=request.get('details'))
+                    continue
+                requests[request_id] = request
+            affected = {}
+            for request_id, request in requests.items():
+                details = chat_request_checks(request_id, request)
+                # A crash after commit but before acknowledging the queue does
+                # not require another generation or another visual request.
+                if details and all(item['resolved'] for item in details):
+                    finish_chat_request(request_id, request, details)
+                    continue
+                for row in request['rows']:
+                    affected.setdefault(row['generation_group'], set()).add(request_id)
+            if affected and not budget_exhausted.is_set():
+                run_review_workflows((group_workflow(gi, groups[gi], store.committed_group(gi),
+                    reviewer_groups.get(gi), force_repair=True, chat_request_ids=sorted(request_ids))
+                    for gi, request_ids in sorted(affected.items())), workers=workers,
+                    stopped=budget_exhausted.is_set)
+            for request_id, request in requests.items():
+                if request['status'] == 'applying':
+                    finish_chat_request(request_id, request, chat_request_checks(request_id, request))
+            update_report()
+
+    # Only immutable single-image requests run in worker threads. GLM generation,
+    # rendering, revision commits and all shared workflow state stay serialized.
+    def group_workflows():
+        for gi, proposal in enumerate(groups):
+            before = committed_evidence(gi)
+            chat_group = any(row['generation_group'] == gi
+                             for request in chat_mapping['requests'].values() for row in request['rows'])
+            if before and (chat_resume or chat_group):
+                # Chat requests are retried only when the persistent queue asks
+                # for it. Completed/failed obligations remain visible to audit.
+                continue
+            if before and before['status'] == 'accepted' and review_targets(gi) and all(
+                item['status'] == 'resolved' for item in issue_status(gi, before['pages'], before['reviews'], review_targets(gi))):
+                continue
+            existing = store.committed_group(gi) or (generated[gi] if gi < len(generated) else None)
+            yield group_workflow(gi, proposal, existing, reviewer_groups.get(gi))
+
+    # A manual conversation resume must spend its next available review slots
+    # on the pages the user named, before unrelated draft groups use the budget.
+    if chat_resume:
+        drain_chat()
+    run_review_workflows(group_workflows(), workers=workers, stopped=budget_exhausted.is_set)
+    drain_chat()
+
+    def audit(round_number, prior_final=()):
+        drain_chat()
         materialize()
         missing = sorted(set(range(len(groups))) - {p['generation_group'] for p in plan['pages']})
         validation_error = ''
@@ -700,7 +946,31 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
         jobs.update(job_id, stage='rendering', quality_status='checking', deck_revision=frozen)
         final = []
         if hard:
-            final, visual_errors = diagnose(folder, plan, probe, 'final', context_id=f'{frozen}:final-{round_number}')
+            # Committed checks are hash-verified and keep the original stage and
+            # source location. A prior unresolved observation takes precedence
+            # unless the current candidate explicitly resolves its issue IDs.
+            reusable = []
+            for gi in sorted({p['generation_group'] for p in plan['pages']}):
+                committed = committed_evidence(gi)
+                if not committed:
+                    continue
+                for row in committed['reviews']:
+                    previous = [r for r in prior_final if r.get('slide_id') == row.get('slide_id')]
+                    resolved = {c.get('issue_id') for c in row.get('rechecks', [])
+                                if c.get('status') == 'resolved' and c.get('evidence')}
+                    for old in previous:
+                        obligations = {i['issue_id'] for i in _prior_issues([old], old['slide_id'])
+                                       if i.get('severity') in {'medium', 'high'}}
+                        if actionable([old]) and (not obligations or not obligations.issubset(resolved)):
+                            reusable.append(old)
+                    reusable.append({**deepcopy(row), 'review_reuse': {'phase': row.get('phase'),
+                        'page': row.get('page'), 'request_sha256': row.get('request_sha256'),
+                        'source': 'committed_candidate', 'folder': f'candidates/{committed["revision"]}',
+                        'check': committed['check'], 'check_sha256': committed['check_sha256']}})
+            reusable.extend(prior_final)
+            final, visual_errors = run_review_workflows(
+                [diagnose(folder, plan, probe, 'final', reusable=reusable)],
+                workers=workers, stopped=budget_exhausted.is_set)[0]
             errors.extend(visual_errors)
         deck_review = {'status': 'unverified', 'issues': []}
         asset_errors = []
@@ -732,7 +1002,10 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                 deck_review['reason'] = str(exc)[:1000]
         result = {'round': round_number, 'deck_revision': frozen, 'probe': probe, 'pages': final,
                   'deck_review': deck_review, 'missing_groups': missing, 'source_validation_error': validation_error,
-                  'browser_passed': browser_passed, 'hard_pass': hard, 'errors': errors, 'asset_errors': asset_errors}
+                  'browser_passed': browser_passed, 'hard_pass': hard, 'errors': errors, 'asset_errors': asset_errors,
+                  'visual_review_mode': 'changed_pages_only',
+                  'reused_final_reviews': sum(1 for row in final if row.get('reused_final_review')),
+                  'reused_visual_reviews': sum(1 for row in final if row.get('reused_visual_review'))}
         atomic_json(folder / f'final-audit-{round_number}.json', result)
         report['audits'].append({'round': round_number, 'deck_revision': frozen, 'report': f'final-audit-{round_number}.json'})
         report.update(pages=final, deck_revision=frozen, deck_review=deck_review)
@@ -746,7 +1019,10 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
         group_by_id = {p['slide_id']: p['generation_group'] for p in plan['pages']}
         for row in final_audit['pages']:
             diagnostic_history.setdefault(group_by_id[row['slide_id']], []).append(deepcopy(row))
-            if actionable([row]):
+            # Initial/candidate findings already exhausted that group's bounded
+            # repair loop. Reusing the same evidence must not start four more
+            # attempts; only new frozen-render observations enter this loop.
+            if actionable([row]) and (not row.get('reused_visual_review') or row.get('phase') == 'final'):
                 affected.setdefault(group_by_id[row['slide_id']], []).append(deepcopy(row))
         for issue in final_audit['deck_review']['issues']:
             affected.setdefault(group_by_id[issue['slide_id']], []).append({
@@ -755,11 +1031,15 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
         for row in browser_rows(final_audit['probe']):
             if row.get('slide_id') in group_by_id:
                 affected.setdefault(group_by_id[row['slide_id']], []).append(row)
-        if not affected or budget_exhausted:
+        if not affected or budget_exhausted.is_set():
             break
-        for gi, findings in sorted(affected.items()):
-            process_group(gi, groups[gi], store.committed_group(gi), findings, deck_round=deck_round)
-        final_audit = audit(deck_round)
+        run_review_workflows((group_workflow(gi, groups[gi], store.committed_group(gi), findings,
+                                           deck_round=deck_round) for gi, findings in sorted(affected.items())),
+                             workers=workers, stopped=budget_exhausted.is_set)
+        # The next audit reuses the latest full-page check of each exact version,
+        # including a repaired page already checked during candidate acceptance.
+        final_audit = audit(deck_round,
+                            prior_final=final_audit['pages'] if final_audit['hard_pass'] else ())
 
     final, probe = final_audit['pages'], final_audit['probe']
     frozen, hard = final_audit['deck_revision'], final_audit['hard_pass']
@@ -787,16 +1067,23 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
         limitations.append({'type': 'missing_groups', 'groups': final_audit['missing_groups']})
     if final_audit['source_validation_error']:
         limitations.append({'type': 'source_validation_failed', 'detail': final_audit['source_validation_error']})
+    approval = jobs.get(job_id).get('outline_approval') if hasattr(jobs, 'get') else None
+    approved_page_count = approval.get('page_count') if approval else None
+    outline_page_count_matches = approved_page_count is None or approved_page_count == len(plan['pages'])
+    if not outline_page_count_matches:
+        limitations.append({'type': 'outline_page_count_mismatch', 'approved': approved_page_count,
+                            'actual': len(plan['pages']),
+                            'detail': '成品页数与已确认大纲不一致；保留完整草稿，请检查缺页或续页后重新确认'})
     limitations.extend({'type': 'browser_issue', **row} for row in browser_rows(probe))
     limitations.extend({'type': 'visual_issue', **row} for row in final if actionable([row]))
     if len(final) != len(plan['pages']) and not final_audit['errors']:
-        limitations.append({'type': 'visual_incomplete', 'detail': '最终截图尚未逐页完成独立视觉审查'})
+        limitations.append({'type': 'visual_incomplete', 'detail': '最终截图尚未逐页绑定有效的完整视觉审查证据'})
     if deck_review['status'] != 'passed':
         limitations.append({'type': 'deck_review_' + deck_review['status'], **deepcopy(deck_review)})
     asset_issues = [*deepcopy((asset_manifest or {}).get('quality_issues', [])), *deepcopy(final_audit['asset_errors'])]
     if asset_issues:
         limitations.append({'type': 'asset_quality', 'issues': asset_issues})
-    accepted = (hard and enabled and len(final) == len(plan['pages']) and not actionable(final)
+    accepted = (hard and enabled and outline_page_count_matches and len(final) == len(plan['pages']) and not actionable(final)
         and deck_review['status'] == 'passed' and not asset_issues and not reviewer_unmapped
         and not human_pending and not seed_pending and not original_fallbacks)
 
@@ -831,13 +1118,17 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
     status = 'accepted' if accepted else 'needs_review'
     final_by_id = {row['slide_id']: row for row in final}
     probe_by_id = {row.get('slide_id'): row for row in probe.get('pages', [])}
-    quality = {'workflow_version': 5, 'quality_status': status, 'ready_for_delivery': accepted, 'deck_revision': frozen,
+    quality = {'workflow_version': 5, 'visual_review_mode': 'changed_pages_only',
+        'quality_status': status, 'ready_for_delivery': accepted, 'deck_revision': frozen,
+        'outline_page_count': {'approved': approved_page_count, 'actual': len(plan['pages']),
+                               'matches': outline_page_count_matches},
         'artifact_sha256': artifacts, 'artifact_formats': ['pptx' if name.endswith('.pptx') else 'html' for name in artifacts],
         'pages': [{'slide_id': p['slide_id'], 'slide_version': p['slide_version'],
             'screenshot_sha': probe_by_id.get(p['slide_id'], {}).get('screenshot_sha'),
             'visual_verified': p['slide_id'] in final_by_id and not actionable([final_by_id[p['slide_id']]])}
             for p in plan['pages']],
         'checks': {'source_complete': not final_audit['missing_groups'] and not final_audit['source_validation_error'],
+                   'outline_page_count_matches': outline_page_count_matches,
                    'browser_passed': final_audit['browser_passed'], 'visual_complete': len(final) == len(plan['pages']),
                    'deck_review': deck_review['status'], 'assets_complete': not asset_issues,
                    'reviewer_feedback_complete': not human_pending and not reviewer_unmapped,

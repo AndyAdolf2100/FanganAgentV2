@@ -20,7 +20,7 @@ import urllib.error
 import urllib.request
 
 from ..presentation_budget import reserve
-from ..presentation_vision import image_part, review_reservation
+from ..presentation_vision import image_part, review_reservation, vision_workers
 
 
 SCHEMA_VERSION = 'enterprise-diagnostics-v1'
@@ -50,7 +50,8 @@ POLICY = '''你是企业幻灯片的截图观察工具。每次只有一张待�
 每个美观维度给0至4分：0严重不可读/失衡，1明显缺陷，2可用但有可见不足，3清晰协调，4非常清晰协调。
 readability看断行和可读性；hierarchy看主次；alignment看边缘/轴线；spacing看间距与留白；density看内容容量；contrast看文字背景辨识；composition看视觉重心。
 评分是有证据的视觉量表，不是DOM测量或科学精确值。各项必须写具体截图证据与0到1的不确定度。
-candidate复查须逐项回应给定原问题ID，说明resolved/persists/uncertain并引用当前截图证据，resolved不是最终验收。
+initial、candidate、final每次均完整检查当前整页的全部文字、图形和版式，发现新问题；candidate不能只看原问题所在局部。
+candidate复查还须逐项回应给定原问题ID，说明resolved/persists/uncertain并引用当前截图证据，resolved不是最终验收。
 final为独立上下文完整重审，不能假定上一轮已修复。仅输出指定JSON结构。'''
 
 
@@ -89,6 +90,36 @@ def _json(value):
 
 def _sha(value):
     return hashlib.sha256(value if isinstance(value, bytes) else _json(value).encode()).hexdigest()
+
+
+def review_input_sha256(page, probe, *, phase, prior_issues=None, context_id=None):
+    """Conservative identity for reusing an already validated page observation.
+
+    Include raw browser facts, not only pixels: unchanged screenshots do not
+    imply unchanged DOM evidence. The paid request cache remains authoritative
+    when this fast-path identity is absent or differs (including old reports).
+    """
+    return _sha({'page': {key: value for key, value in page.items() if key != 'quality_state'},
+                 'probe': probe, 'phase': phase,
+                 'prior_issues': prior_issues or [] if phase == 'candidate' else [],
+                 'context_id': str(context_id or f'enterprise-{phase}-{RUBRIC_VERSION}'),
+                 'model': os.getenv('MARKETING_VISION_MODEL', ''),
+                 'provider': os.getenv('MARKETING_IMAGE_BASE_URL', ''),
+                 'schema': SCHEMA_VERSION, 'rubric': RUBRIC_VERSION,
+                 'policy': POLICY, 'answer_schema': ANSWER_SCHEMA,
+                 'evidence_summary': EVIDENCE_SUMMARY_VERSION,
+                 'evidence_max_chars': EVIDENCE_MAX_CHARS, 'briefing_max_chars': BRIEFING_MAX_CHARS})
+
+
+def review_evidence_sha256(page, probe):
+    """Full-page evidence identity, independent of stage and deck position.
+
+    Local page 1 may become deck page 30. Ignore only that top-level address;
+    every measured fact, pixel hash, content/contract field, model and policy
+    remains bound. Prior-issue closure is checked on committed candidate rows.
+    """
+    return review_input_sha256(page, {key: value for key, value in probe.items() if key != 'page'},
+                               phase='full_page', context_id='full-page-evidence-v1')
 
 
 def _write(path, value):
@@ -417,8 +448,8 @@ def diagnose_page(folder, plan, index, *, probe=None, version=None, phase='initi
 
     ``provider(payload)`` may return an Ark response or the decoded strict
     answer, enabling offline tests. ``final`` deliberately receives no repair
-    history. A reused final context can reuse its cache, but never initial or
-    candidate evidence. New independent audits should supply new context IDs.
+    history. Request caches remain phase-specific; delivery can separately reuse
+    a complete, unchanged initial/candidate observation by its evidence identity.
     """
     folder = Path(folder)
     cache_root = Path(cache_root) if cache_root is not None else folder.parent / 'vision-cache'
@@ -440,9 +471,12 @@ def diagnose_page(folder, plan, index, *, probe=None, version=None, phase='initi
     if current_probe.get('slide_id') is not None and str(current_probe['slide_id']) != slide_id:
         raise ValueError('浏览器probe不属于当前slide_id')
     raw_evidence = browser_evidence(current_probe, screenshot_sha=screenshot_sha, html_sha256=html_sha256)
-    probe_path = folder / 'enterprise-probe.json'
-    evidence = summarize_evidence(raw_evidence, raw_probe_sha256=_sha(current_probe),
-        artifact={'path': 'enterprise-probe.json', 'sha256': _sha(probe_path.read_bytes()) if probe_path.is_file() else None,
+    # Bind the briefing to this page's own probe row, not the whole probe file:
+    # a whole-file sha would invalidate every page's cache key whenever any
+    # other page of the deck changes.
+    probe_row_sha = _sha(current_probe)
+    evidence = summarize_evidence(raw_evidence, raw_probe_sha256=probe_row_sha,
+        artifact={'path': f'enterprise-probe.json#page-{index}', 'sha256': probe_row_sha,
                   'page': index})
     model = os.getenv('MARKETING_VISION_MODEL', '')
     if not model:
@@ -483,6 +517,9 @@ def diagnose_page(folder, plan, index, *, probe=None, version=None, phase='initi
             _write(path, {'answer': answer, 'usage': usage})
     unresolved = any(i['severity'] in {'high', 'medium'} for i in issues) or any(c['status'] != 'resolved' for c in rechecks)
     row = {'page': index, **binding, 'schema_version': SCHEMA_VERSION, 'html_sha256': html_sha256,
+           'review_scope': 'full_page', 'review_evidence_sha256': review_evidence_sha256(page, current_probe),
+           'review_input_sha256': review_input_sha256(page, current_probe, phase=phase,
+               prior_issues=prior, context_id=context_id),
            'model': model, 'verdict': 'fix' if unresolved else 'pass', 'observed': answer['observed'],
            'text_visibility': deepcopy(answer['text_visibility']),
            'issues': issues, 'rechecks': rechecks, 'aesthetics': deepcopy(answer['aesthetics']),
@@ -510,7 +547,7 @@ def diagnose_pages(folder, plan, indexes, workers=1, **kwargs):
         for index in indexes:
             yield [diagnose_page(folder, plan, index, **kwargs)]
         return
-    with ThreadPoolExecutor(max_workers=min(workers, 3)) as pool:
+    with ThreadPoolExecutor(max_workers=min(workers, vision_workers())) as pool:
         futures = [pool.submit(diagnose_page, folder, plan, index, **kwargs) for index in indexes]
         for future in as_completed(futures):
             yield [future.result()]

@@ -6,12 +6,13 @@ import time
 from decimal import Decimal
 
 
-def can_reserve(cache,price,limit):
+def can_reserve(cache,price,limit,requests=1):
     paths={cache.parent/'image-cache/budget.json',cache.parent/'vision-cache/budget.json',cache/'budget.json'}
     ledgers={p:json.loads(p.read_text()) if p.exists() else {'reservations':[]} for p in paths}
     spent=sum((Decimal(x['reserved_rmb']) for d in ledgers.values() for x in d['reservations']),Decimal(0))
     cap=Decimal(os.getenv('MARKETING_PPT_BUDGET_RMB','5'))
-    return spent+Decimal(str(price))<=cap and len(ledgers[cache/'budget.json']['reservations'])<limit
+    return (spent+Decimal(str(price))<=cap
+        and len(ledgers[cache/'budget.json']['reservations'])+requests<=limit)
 
 
 def reserve(cache, price, limit, digest=None, category_cap=None):

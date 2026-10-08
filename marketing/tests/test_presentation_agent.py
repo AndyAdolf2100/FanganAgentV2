@@ -1,4 +1,5 @@
 import json
+import threading
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 import pytest
@@ -106,3 +107,29 @@ def test_normal_workflow_reviews_and_rechecks_each_repaired_page_separately(tmp_
     def render():(tmp_path/'outline.json').write_bytes((tmp_path/'plan.json').read_bytes())
     result=vision.review_and_repair(tmp_path,render)
     assert result['status']=='passed' and calls==[[1],[2],[1],[2]]
+
+
+def test_concurrent_tool_calls_keep_run_state_consistent(tmp_path):
+    run = agent.PresentationAgent(tmp_path)
+    gate = threading.Event()
+
+    def tool(index):
+        gate.wait(timeout=10)
+        if index == 3:
+            raise ValueError('模拟一次工具失败')
+        return index
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        futures = [pool.submit(run.call, f'tool-{index}', tool, index) for index in range(8)]
+        gate.set()
+        for index, future in enumerate(futures):
+            if index == 3:
+                with pytest.raises(ValueError, match='模拟一次工具失败'):
+                    future.result(timeout=10)
+            else:
+                assert future.result(timeout=10) == index
+    state = json.loads((tmp_path / 'agent-run.json').read_text())
+    assert len(state['tools']) == 8
+    assert sorted(event['tool'] for event in state['tools']) == [f'tool-{index}' for index in range(8)]
+    assert [event['status'] for event in state['tools']].count('failed') == 1
+    assert all(event['status'] in {'completed', 'failed'} for event in state['tools'])

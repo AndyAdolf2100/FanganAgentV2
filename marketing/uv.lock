@@ -2310,6 +2310,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "beautifulsoup4" },
+    { name = "ddgs" },
     { name = "fastapi" },
     { name = "jinja2" },
     { name = "pillow" },
@@ -2331,6 +2332,7 @@ test = [
 requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.12,<5" },
     { name = "deerflow-harness", marker = "extra == 'runtime'", editable = "../backend/packages/harness" },
+    { name = "ddgs", specifier = ">=9.10,<10" },
     { name = "fastapi", specifier = ">=0.115,<1" },
     { name = "httpx", marker = "extra == 'test'", specifier = ">=0.28,<1" },
     { name = "jinja2", specifier = ">=3.1,<4" },

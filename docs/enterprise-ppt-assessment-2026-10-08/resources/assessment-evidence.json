@@ -1,0 +1,74 @@
+{
+  "recorded_at": "2026-10-08T11:21:25+08:00",
+  "scope": "read_only_code_audit_and_offline_tests",
+  "score": {
+    "total": 70,
+    "out_of": 100,
+    "meaning": "主观成熟度评分，不是成功率或118对照实测分",
+    "dimensions": {
+      "workflow": [
+        17,
+        20
+      ],
+      "source_and_brand": [
+        15,
+        20
+      ],
+      "template_compatibility": [
+        8,
+        15
+      ],
+      "visual_quality": [
+        13,
+        20
+      ],
+      "self_repair": [
+        11,
+        15
+      ],
+      "delivery_and_efficiency": [
+        6,
+        10
+      ]
+    }
+  },
+  "tests": {
+    "passed": 549,
+    "skipped": 1,
+    "warnings": 2
+  },
+  "docker": "daemon_unreachable; live task state not verified",
+  "paid_model_calls": 0,
+  "source_html": {
+    "file": "99162889-轻芽-完整演示.html",
+    "mtime": "2026-09-30T19:13:17+08:00",
+    "sha256": "2de4dc79f96991f992b19853bb6429c3d943c42e1543f61001d2fdfff2538bce"
+  },
+  "screenshots": [
+    {
+      "page": 8,
+      "file": "page-8.png",
+      "sha256": "45e2748d648c6e4b78f3c8500cfdb7465d80c3016ed79764aca84560e35dc1fb"
+    },
+    {
+      "page": 13,
+      "file": "page-13.png",
+      "sha256": "8c4a7123a826464ff5db48c4477688d39f84c7076a30cef92f4d44170a89edf4"
+    },
+    {
+      "page": 20,
+      "file": "page-20.png",
+      "sha256": "981671ae441cbec560365a89f095a3b95af1ce5b5b329c40792fd9421f3dd87e"
+    },
+    {
+      "page": 25,
+      "file": "page-25.png",
+      "sha256": "61ff10495abea53e989e19e7b96f417b2b8762f089b77f5f6df31b21fe92abbb"
+    }
+  ],
+  "visual_scope": "本地Chrome离线重渲染四页；不是本轮项目Seed终审，也不证明服务器字体一致",
+  "reproduced_issue": {
+    "manual_outlined_brand_omitted_from_contract_protection": true,
+    "production_deletion_observed": false
+  }
+}

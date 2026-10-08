@@ -65,6 +65,21 @@ class OptimizePresentation(BaseModel):
     feedback: list[PageReviewFeedback] = Field(default_factory=list,max_length=500)
 
 
+class PresentationChatMessage(BaseModel):
+    text: str = Field(min_length=1, max_length=6000)
+    client_message_id: str = Field(min_length=8, max_length=100, pattern=r'^[A-Za-z0-9_-]+$')
+    page_numbers: list[int] = Field(default_factory=list, max_length=200)
+    job_id: str = Field(pattern=r'^[a-f0-9]{32}$')
+
+    @model_validator(mode='before')
+    @classmethod
+    def strict_pages(cls, value):
+        if isinstance(value, dict) and isinstance(value.get('page_numbers'), list):
+            if any(type(n) is not int or not 1 <= n <= 200 for n in value['page_numbers']):
+                raise ValueError('页码须为1至200的整数')
+        return value
+
+
 class ImportManuscript(BaseModel):
     title: str = Field(min_length=1, max_length=120)
     manuscript: str = Field(min_length=1, max_length=MAX_TEXT_LENGTH)
@@ -288,6 +303,22 @@ def create_app(data_dir=None, runtime=None):
         except KeyError:
             raise HTTPException(404, 'PPT任务不存在')
 
+    @app.get('/api/presentations/{job_id}/outline')
+    def presentation_outline(job_id: str):
+        presentation_status(job_id)
+        try:
+            return presentations.outline(job_id)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
+    @app.post('/api/presentations/{job_id}/confirm-outline', status_code=202)
+    def confirm_presentation_outline(job_id: str):
+        presentation_status(job_id)
+        try:
+            return presentations.confirm_outline(job_id)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
     @app.post('/api/presentations/{job_id}/optimize',status_code=202)
     def optimize_presentation(job_id:str,body:OptimizePresentation|None=None):
         presentation_status(job_id)
@@ -300,11 +331,24 @@ def create_app(data_dir=None, runtime=None):
         try:return presentations.resume_optimization(job_id)
         except ValueError as exc:raise HTTPException(409,str(exc))
 
+    @app.get('/api/runs/{run_id}/presentation-chat')
+    def presentation_chat(run_id: str):
+        get(run_id)
+        return presentations.chat.view(run_id)
+
+    @app.post('/api/runs/{run_id}/presentation-chat', status_code=202)
+    def send_presentation_chat(run_id: str, body: PresentationChatMessage):
+        get(run_id)
+        try:
+            return presentations.chat.submit(run_id, body.text, body.client_message_id, body.page_numbers, body.job_id)
+        except ValueError as exc:
+            raise HTTPException(409, str(exc)) from exc
+
     @app.get('/api/presentations/{job_id}/files/{filename}')
     def presentation_file(job_id: str, filename: str):
         job = presentation_status(job_id)
         allowed = {'presentation.pptx','presentation.html','outline.json','report.json','manuscript.md','visual-review.json','image-plan.json','quality-report.json','enterprise-assets.json'}
-        logs = {'corrections.md','corrections.json','agent-run.json','reference-analysis.json'}
+        logs = {'corrections.md','corrections.json','agent-run.json','reference-analysis.json','online-style-research.json'}
         path = presentations.root/job_id/filename
         if filename in {'presentation.pptx','presentation.html'} and 'artifacts_available' in job and filename not in job['artifacts_available']:
             raise HTTPException(404,'当前版本没有此交付文件')

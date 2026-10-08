@@ -18,6 +18,9 @@ from .presentation_options import PresentationOptions, apply_user_palette, check
 
 ROOT = Path(__file__).resolve().parents[1]
 PIPELINE_VERSION = '3.0.0'
+STYLE_RESEARCH_VERSION = 1
+STYLE_RESEARCH_TTL_SECONDS = 7 * 24 * 60 * 60
+STYLE_RESEARCH_RETRY_SECONDS = 60 * 60
 
 
 def plain(text):
@@ -102,6 +105,8 @@ class PresentationJobs:
         self.templates = TemplateLibrary(directory)
         self.lock = threading.RLock()
         self.pool = ThreadPoolExecutor(max_workers=1)
+        from .presentation_chat import PresentationChat
+        self.chat = PresentationChat(self)
 
     def recover(self):
         for path in self.root.glob('*/job.json'):
@@ -109,6 +114,7 @@ class PresentationJobs:
             if data['status'] in {'queued','running'}:
                 data.update(status='failed', error='服务重启中断了PPT生成，请重新生成。', stage='interrupted')
                 self._write(path, data)
+        self.chat.recover()
 
     @staticmethod
     def _write(path, data):
@@ -161,14 +167,21 @@ class PresentationJobs:
             style_id = 'auto'
             style = {'name': template['name'] + ' · v' + str(options['template_revision'])}
         pipeline_version = PIPELINE_VERSION + ('-enterprise-html-v5' if template else '')
+        research_required = not template and os.getenv('MARKETING_RUNTIME', 'demo') != 'demo'
         with self.lock:
             last = self.latest(run['id'])
+            if last and last['status'] == 'awaiting_outline_confirmation' and last.get('source_sha256') == fingerprint and last.get('style_id', 'auto') == style_id and last.get('options', {}) == options:
+                return last
             if last and last['status'] in {'queued','running'}:
                 if last.get('style_id', 'auto') != style_id or last.get('options', {}) != options:
                     raise ValueError('当前 PPT 正在生成，请完成后再切换风格或页面要求')
                 return last
             retryable=last and (last.get('image_notice') or last.get('visual_status')=='incomplete' or last.get('quality_status')=='needs_review')
-            if last and not retryable and last['status']=='completed' and last['source_sha256']==fingerprint and last.get('pipeline_version')==pipeline_version and last.get('style_id', 'auto')==style_id and last.get('options', {})==options:
+            research_ttl = (STYLE_RESEARCH_TTL_SECONDS if last and last.get('style_research_status') in {'analyzed', 'search_only'}
+                            else STYLE_RESEARCH_RETRY_SECONDS)
+            research_fresh = not research_required or (last and last.get('style_research_version') == STYLE_RESEARCH_VERSION
+                and time.time() - last.get('created', 0) < research_ttl)
+            if last and not retryable and research_fresh and last['status']=='completed' and last['source_sha256']==fingerprint and last.get('pipeline_version')==pipeline_version and last.get('style_id', 'auto')==style_id and last.get('options', {})==options:
                 return last
             job_id = uuid.uuid4().hex
             folder = self.root/job_id
@@ -179,7 +192,11 @@ class PresentationJobs:
             job = {'id':job_id,'run_id':run['id'],'status':'queued','stage':'queued','created':time.time(),
                    'source_sha256':fingerprint,'source_runtime':run.get('runtime'),'page_count':0,'error':None,'pipeline_version':pipeline_version,
                    'style_id':style_id,'style_name':style['name'],'options':options}
-            if template:job['enterprise_workflow_version']=5
+            if research_required:
+                job['style_research_version'] = STYLE_RESEARCH_VERSION
+            if template:
+                job['enterprise_workflow_version']=5
+                job['outline_review_required']=os.getenv('MARKETING_RUNTIME', 'demo') != 'demo'
             if last and (retryable or last['status']=='failed' or last.get('pipeline_version')!=pipeline_version) and last['source_sha256']==fingerprint and last.get('style_id','auto')==style_id and last.get('options', {})==options:
                 for name in ('design-response-2.json','design-response-1.json','resumed-response.json'):
                     response=self.root/last['id']/name
@@ -188,6 +205,50 @@ class PresentationJobs:
                         job['resumed_from']=last['id']
                         break
             self._write(folder/'job.json', job)
+            self.pool.submit(self.execute, job_id)
+            return job
+
+    def outline(self, job_id):
+        job = self.get(job_id)
+        if job.get('enterprise_workflow_version') != 5:
+            raise ValueError('只有企业模板任务提供生成前大纲')
+        path = self.root / job_id / 'source-plan.json'
+        if not path.is_file():
+            raise ValueError('项目 Agent 尚未完成大纲规划')
+        source = json.loads(path.read_text())
+        blocks = {str(row.get('id')): row for row in source.get('blocks', [])}
+        pages = []
+        for number, item in enumerate(source.get('planned', []), 1):
+            block_ids = item.get('block_ids') or []
+            preview = ' '.join(str(blocks.get(str(block_id), {}).get('text') or '') for block_id in block_ids)
+            pages.append({'number': number, 'role': item.get('role'), 'title': item.get('title'),
+                          'template_page': item.get('template_page'), 'source_preview': preview[:180]})
+        approved = job.get('outline_approval') or {}
+        return {'job_id': job_id, 'title': source.get('title'), 'agenda': source.get('agenda') or [],
+                'planned_page_count': len(pages), 'approved_page_count': approved.get('page_count'),
+                'actual_page_count': job.get('page_count') if job.get('status') == 'completed' else None,
+                'pages': pages, 'status': job['status']}
+
+    def confirm_outline(self, job_id):
+        with self.lock:
+            job = self.get(job_id)
+            if job.get('enterprise_workflow_version') != 5 or not job.get('outline_review_required'):
+                raise ValueError('此任务不需要确认大纲')
+            if job['status'] != 'awaiting_outline_confirmation':
+                raise ValueError('当前任务不在等待确认大纲阶段')
+            if self.latest(job['run_id'])['id'] != job_id:
+                raise ValueError('这不是项目的最新 PPT 任务')
+            current = self.store.get(job['run_id'])['outputs'].get('assembly', '')
+            if hashlib.sha256(current.encode()).hexdigest() != job['source_sha256']:
+                raise ValueError('文稿已更新，请重新规划大纲')
+            path = self.root / job_id / 'source-plan.json'
+            source = json.loads(path.read_text())
+            count = len(source.get('planned') or [])
+            if not count:
+                raise ValueError('大纲没有页面，不能继续生成')
+            approval = {'source_plan_sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+                        'page_count': count, 'approved_at': time.time()}
+            job = self.update(job_id, outline_approval=approval, status='queued', stage='queued', error=None)
             self.pool.submit(self.execute, job_id)
             return job
 
@@ -221,6 +282,8 @@ class PresentationJobs:
             job.update(id=new_id,status='queued',stage='queued',created=time.time(),page_count=len(plan['pages']),error=None,
                        optimization_of=job_id,agent_owner='project_presentation_agent',visual_notice='项目Agent将在原稿基础上逐页审查与优化',
                        enterprise_workflow_version=5,pipeline_version=PIPELINE_VERSION+'-enterprise-html-v5')
+            if original.get('outline_approval'):
+                job['outline_approval'] = original['outline_approval']
             self._write(folder/'job.json',job)
             self.pool.submit(self.execute,new_id)
             return job
@@ -232,10 +295,22 @@ class PresentationJobs:
             resumable=job['status']=='failed' or (job['status']=='completed' and job.get('visual_status') in {'needs_review','incomplete'})
             if not resumable or (job.get('enterprise_workflow_version')!=5 and not (self.root/job_id/'refinement-input.json').exists()):
                 raise ValueError('只能继续中断或待复核的企业任务')
+            pending_chat = self.chat.pending_modifications(job_id)
+            if pending_chat and os.getenv('MARKETING_VISION_ENABLED', 'false').lower() == 'true':
+                from decimal import Decimal
+                from .presentation_budget import can_reserve
+                from .presentation_vision import review_reservation
+                price = review_reservation()
+                limit = max(0, min(1000, int(os.getenv('MARKETING_VISION_MAX_REQUESTS', '16'))))
+                if not can_reserve(self.root / 'vision-cache', Decimal(price) * pending_chat, limit,
+                                   requests=pending_chat):
+                    raise ValueError(f'项目图片/视觉预算不足 {pending_chat} 张指定页面各一次复查（当前模型每次预留 {price} 元）；修改意见已保留，调整预算后继续当前任务。')
             folder=self.root/job_id;history=folder/'resume-history'/str(time.time_ns());history.mkdir(parents=True)
             for name in ('job.json','agent-run.json','visual-review.json','plan.json'):
                 if (folder/name).exists():shutil.copyfile(folder/name,history/name)
-            job=self.update(job_id,status='queued',stage='queued',error=None,resume_requested_at=time.time())
+            retried = self.chat.retry_unverified(job_id) if pending_chat else 0
+            job=self.update(job_id,status='queued',stage='queued',error=None,resume_requested_at=time.time(),
+                chat_resume=bool(pending_chat or retried))
             self.pool.submit(self.execute,job_id)
             return job
 
@@ -262,6 +337,17 @@ class PresentationJobs:
             if os.getenv('MARKETING_RUNTIME','demo') != 'demo':
                 self.update(job_id,stage='reference_analysis',agent_owner='project_presentation_agent')
                 plan['style_reference']=agent.call('understand_reference',analyze_reference,folder,plan)
+                from .presentation_style_research import research_online_style
+                self.update(job_id,stage='online_style_research')
+                online=agent.call('research_online_style',research_online_style,folder,plan)
+                plan['style_reference']['online_inspiration']={
+                    'status':online['status'],
+                    'visual_analysis':online['analysis'],
+                    'case_descriptions':[{'id':item['id'],'description':item['summary'] or item['title']}
+                                         for item in online['references'][:3]],
+                }
+                (folder/'reference-analysis.json').write_text(json.dumps(plan['style_reference'],ensure_ascii=False,indent=2))
+                self.update(job_id,style_research_status=online['status'],style_reference_count=len(online['references']))
                 from .presentation_design import plan_design
                 self.update(job_id,stage='designing')
                 design=agent.call('plan_outline',plan_design,plan,folder)
@@ -316,3 +402,5 @@ class PresentationJobs:
         except Exception as exc:
             agent.finish('failed',error=type(exc).__name__)
             self.update(job_id,status='failed',stage='failed',error=str(exc)[:2200])
+        finally:
+            self.chat.finished(job_id)

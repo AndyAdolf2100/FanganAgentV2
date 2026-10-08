@@ -109,6 +109,20 @@ def html_calls(context):
     return [call for call in context.calls if call['name'] == 'enterprise_full_html']
 
 
+def test_new_enterprise_job_waits_for_approved_outline_before_layout(context):
+    context.jobs.data['outline_review_required'] = True
+    assert context.execute() is None
+    assert context.jobs.data['status'] == 'awaiting_outline_confirmation'
+    assert context.jobs.data['page_count'] == 3
+    assert not context.renders and not context.asset_preparations and not context.pipelines
+    path = context.folder / 'source-plan.json'
+    context.jobs.data['outline_approval'] = {
+        'page_count': 3, 'source_plan_sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+    result = context.execute()
+    assert result.groups[1]['title'] == '预算'
+    assert context.renders and context.asset_preparations and context.pipelines
+
+
 @pytest.mark.parametrize('version', [5, 4, None])
 def test_only_explicit_v5_jobs_enter_the_new_pipeline(context, version):
     if version is None:

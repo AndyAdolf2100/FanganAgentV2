@@ -20,13 +20,14 @@ before(async()=>{
 });
 after(async()=>{await browser?.close();server?.closeAllConnections();await new Promise(resolve=>server?.close(resolve));});
 const job=status=>({id:'job',status,stage:status==='running'?'visual_review':'completed',page_count:2,style_id:'editorial'});
-async function fixture(handler,{assembly=true}={}){
+async function fixture(handler,{assembly=true,extra}={}){
  const page=await browser.newPage(),errors=[],counts={alpha:0,beta:0};
  page.on('pageerror',e=>errors.push(e.message));await page.clock.install();
  const runs=['alpha','beta'].map(id=>({id,brief:id==='alpha'?'Alpha project':'Beta project',created:1,status:'completed',source_type:'brief',outputs:assembly?{assembly:'# Plan'}:{},index:0}));
  const json=(route,value,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(value)});
  await page.route('**/api/**',async route=>{
   const url=new URL(route.request().url()),p=url.pathname;
+  if(extra && await extra({route,p,json,page}))return;
   if(p==='/api/health')return json(route,{stages:[],tags:{},gates:{},runtime:'demo'});
   if(p==='/api/presentation-styles')return json(route,[{id:'auto',name:'Auto'},{id:'editorial',name:'Editorial'}]);
   if(p==='/api/enterprise-templates')return json(route,{templates:[]});
@@ -42,6 +43,25 @@ async function fixture(handler,{assembly=true}={}){
  return {page,counts,errors};
 }
 const pollAlert=page=>page.getByRole('alert').filter({hasText:/演示文稿进度/});
+
+test('enterprise outline is previewed before the same job resumes',async()=>{
+ let status='awaiting_outline_confirmation', confirmations=0;
+ const waiting=()=>({id:'enterprise-job',status,stage:status==='awaiting_outline_confirmation'?'outline_review':'page_generating',page_count:2,enterprise_workflow_version:5,options:{template_id:'template-one',template_revision:1},outline_review_required:true});
+ const outline={job_id:'enterprise-job',title:'规划测试',planned_page_count:2,agenda:[{id:'a1',number:1,text:'预算'}],pages:[{number:1,role:'cover',title:'规划测试',template_page:0},{number:2,role:'body',title:'预算',template_page:3,source_preview:'预算30万元。'}]};
+ const {page,errors}=await fixture(({route,json})=>json(route,waiting()),{extra:({route,p,json})=>{
+  if(p==='/api/presentations/enterprise-job/outline'){json(route,outline);return true;}
+  if(p==='/api/presentations/enterprise-job/confirm-outline'){confirmations++;status='running';json(route,waiting(),202);return true;}
+  return false;
+ }});
+ try{
+  await page.getByRole('heading',{name:'确认生成大纲'}).waitFor();
+  assert.equal(await page.getByText('预计 2 页').count(),1);
+  assert.equal(await page.getByText('预算30万元。').count(),1);
+  await page.getByRole('button',{name:'确认大纲并开始生成'}).click();
+  await page.getByRole('button',{name:'正在生成…',exact:true}).waitFor();
+  assert.equal(confirmations,1);assert.deepEqual(errors,[]);
+ }finally{await page.close();}
+});
 
 test('502 recovers, preserves independent business errors, and stops on completion',async()=>{
  const {page,counts,errors}=await fixture(({route,count,json})=>count===2?json(route,{detail:'Bad Gateway'},502):json(route,job(count>=4?'completed':'running')));
@@ -107,7 +127,7 @@ test('v5 group-local visual progress differs from final and legacy page progress
  const cases=[
   [{enterprise_workflow_version:5,page_progress:{current:15,total:52},visual_progress:{phase:'initial',current:1,total:1}},'页面组 15 / 52 · 本组截图 1 / 1'],
   [{enterprise_workflow_version:5,page_progress:{current:15,total:52},visual_progress:{phase:'candidate',current:0,total:1}},'页面组 15 / 52 · 本组截图 0 / 1'],
-  [{enterprise_workflow_version:5,page_progress:{current:15,total:52},visual_progress:{phase:'final',current:4,total:56}},'冻结版本独立终审 · 4 / 56'],
+  [{enterprise_workflow_version:5,page_progress:{current:15,total:52},visual_progress:{phase:'final',current:4,total:56}},'冻结版本视觉验收 · 4 / 56'],
   [{enterprise_workflow_version:4,visual_progress:{phase:'candidate',page:8,current:1,total:1}},'修复后逐页复查 · 正在看第 8 页 · 1 / 1'],
   [{enterprise_workflow_version:5,visual_progress:{phase:'initial'}},'页面组 — / — · 本组截图 — / —'],
  ];

@@ -11,6 +11,7 @@ dependencies = [
     "pyyaml>=6,<7",
     "pillow>=11,<13",
     "beautifulsoup4>=4.12,<5",
+    "ddgs>=9.10,<10",
 ]
 
 [project.optional-dependencies]

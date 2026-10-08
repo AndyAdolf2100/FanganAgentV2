@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 import re
+import threading
 import time
 import urllib.request
 from pathlib import Path
@@ -17,24 +18,35 @@ SKILL=Path(__file__).resolve().parents[1]/'presentation/skills/marketing-deck/re
 class PresentationAgent:
     def __init__(self,folder):
         self.folder=folder
+        # Concurrent single-image reviews call tools in parallel; only the
+        # bookkeeping is serialized. The tool itself runs outside the lock.
+        self.lock=threading.RLock()
         self.state={'owner':'project_presentation_agent','execution':'dependency_workflow_and_model_decisions',
                     'skill_sha256':hashlib.sha256(SKILL.read_bytes()).hexdigest(),'tools':[],'status':'running'}
         self.save()
 
     def save(self):
-        path=self.folder/'agent-run.json';tmp=path.with_suffix('.tmp')
-        tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2));tmp.replace(path)
+        with self.lock:
+            path=self.folder/'agent-run.json';tmp=path.with_suffix('.tmp')
+            tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2));tmp.replace(path)
 
     def call(self,name,fn,*args,**kwargs):
-        event={'tool':name,'status':'running','started':time.time()};self.state['tools'].append(event);self.save()
+        event={'tool':name,'status':'running','started':time.time()}
+        with self.lock:
+            self.state['tools'].append(event);self.save()
         try:
             result=fn(*args,**kwargs)
-            event.update(status='completed',finished=time.time());self.save();return result
         except Exception as exc:
-            event.update(status='failed',finished=time.time(),error=type(exc).__name__);self.save();raise
+            with self.lock:
+                event.update(status='failed',finished=time.time(),error=type(exc).__name__);self.save()
+            raise
+        with self.lock:
+            event.update(status='completed',finished=time.time());self.save()
+        return result
 
     def finish(self,status,**details):
-        self.state.update(status=status,**details);self.save()
+        with self.lock:
+            self.state.update(status=status,**details);self.save()
 
 
 def analyze_reference(folder,plan,reference=None,guidance=''):

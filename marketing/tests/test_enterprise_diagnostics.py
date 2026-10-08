@@ -79,6 +79,81 @@ def test_cache_keys_include_exact_image_version_rubric_and_context(scene):
     assert json.loads(record.read_text())['cache_hit'] is False
 
 
+def test_other_pages_probe_changes_keep_this_pages_final_review_cached(scene):
+    folder, plan, probe = scene
+    plan['pages'].append({'slide_id': 'slide-stable-8', 'role': 'body', 'title': '第二页', 'html': '<body>第二页正文</body>'})
+    Image.new('RGB', (320, 180), 'white').save(folder / 'previews' / '2.png')
+    probe['pages'].append({'page': 2, 'screenshot_sha': hashlib.sha256((folder / 'previews' / '2.png').read_bytes()).hexdigest(),
+        'html_sha256': hashlib.sha256(plan['pages'][1]['html'].encode()).hexdigest(), 'issues': []})
+    calls = []
+    def provider(payload):
+        calls.append(payload)
+        return answer()
+    kw = {'probe': probe, 'provider': provider, 'phase': 'final'}
+    first = d.diagnose_page(folder, plan, 1, **kw)
+    assert first['cache_hit'] is False
+    # A deck repair round changed the second page; only its probe row differs.
+    plan['pages'][1]['html'] = '<body>第二页修复后正文</body>'
+    probe['pages'][1].update(html_sha256=hashlib.sha256(plan['pages'][1]['html'].encode()).hexdigest(),
+                             layout_measurements={'titles': [{'font_size_px': 40}]})
+    second = d.diagnose_page(folder, plan, 1, **kw)
+    assert second['cache_hit'] is True and len(calls) == 1
+    assert second['context_id'] == first['context_id'] == f'enterprise-final-{d.RUBRIC_VERSION}'
+    assert second['request_sha256'] == first['request_sha256']
+
+
+@pytest.mark.parametrize('changed', ['probe', 'model', 'policy', 'schema', 'answer_schema', 'context', 'candidate_prior'])
+def test_review_input_fingerprint_changes_with_review_evidence_and_protocol(scene, monkeypatch, changed):
+    _, plan, probe = scene
+    page, measured = plan['pages'][0], probe['pages'][0]
+    kwargs = {'phase': 'candidate', 'context_id': 'review-1',
+              'prior_issues': [{'issue_id': 'prior-1', 'detail': '短标签断行'}]}
+    original = d.review_input_sha256(page, measured, **kwargs)
+    original_screenshot = measured['screenshot_sha']
+    if changed == 'probe':
+        measured['sources'][0]['line_count'] = 3
+    elif changed == 'model':
+        monkeypatch.setenv('MARKETING_VISION_MODEL', 'another-vision-model')
+    elif changed == 'policy':
+        monkeypatch.setattr(d, 'POLICY', d.POLICY + '\n追加文字清晰度要求。')
+    elif changed == 'schema':
+        monkeypatch.setattr(d, 'SCHEMA_VERSION', 'enterprise-diagnostics-next')
+    elif changed == 'answer_schema':
+        revised_schema = deepcopy(d.ANSWER_SCHEMA)
+        revised_schema['properties']['observed']['maxLength'] = 1000
+        monkeypatch.setattr(d, 'ANSWER_SCHEMA', revised_schema)
+    elif changed == 'context':
+        kwargs['context_id'] = 'review-2'
+    else:
+        kwargs['prior_issues'][0]['detail'] = '短标签被遮挡'
+    assert measured['screenshot_sha'] == original_screenshot
+    assert d.review_input_sha256(page, measured, **kwargs) != original
+
+
+def test_review_input_fingerprint_ignores_quality_state(scene):
+    _, plan, probe = scene
+    page, measured = plan['pages'][0], probe['pages'][0]
+    original = d.review_input_sha256(page, measured, phase='final')
+    for state in ('draft_needs_review', 'accepted'):
+        page['quality_state'] = state
+        assert d.review_input_sha256(page, measured, phase='final') == original
+
+
+@pytest.mark.parametrize(('phase', 'context_id'), [('initial', None), ('final', 'final-check'), ('candidate', 'candidate-check')])
+def test_diagnostic_row_carries_the_current_review_input_fingerprint(scene, phase, context_id):
+    folder, plan, probe = scene
+    prior = diagnose(scene)['issues'] if phase == 'candidate' else []
+    result = answer(False)
+    result['rechecks'] = [{'issue_id': issue['issue_id'], 'status': 'resolved', 'evidence': '短标签完整清晰。'}
+                         for issue in prior]
+    kwargs = {'phase': phase, 'prior_issues': prior, 'context_id': context_id}
+    row = diagnose(scene, result, **kwargs)
+    expected = d.review_input_sha256(plan['pages'][0], probe['pages'][0], **kwargs)
+    assert row['review_input_sha256'] == expected
+    record = folder / 'enterprise-diagnostics' / f"{row['request_sha256']}.json"
+    assert json.loads(record.read_text())['review_input_sha256'] == expected
+
+
 def test_layout_facts_reach_single_image_review_without_inventing_shape_safe_area(scene):
     folder, plan, probe = scene
     measurements = {'schema_version': 1,
@@ -193,7 +268,8 @@ def test_large_probe_request_is_bounded_preserves_ids_and_raw_sha(scene):
     assert list(summary['sources'])[0] == 'b7' and summary['sources']['b7']['source_id'] == 'b7'
     assert summary['summary']['sections']['sources']['omitted'] > 0
     assert summary['summary']['raw_probe_page_sha256'] == d._sha(p)
-    assert summary['summary']['raw_probe_artifact']['sha256'] == hashlib.sha256(raw_bytes).hexdigest()
+    assert summary['summary']['raw_probe_artifact'] == {'path': 'enterprise-probe.json#page-1',
+                                                        'sha256': d._sha(p), 'page': 1}
     assert {x['issue_id'] for x in brief['original_issues']} == {x['issue_id'] for x in prior}
     assert brief['original_issues'][0]['review_target'] == prior[0]['review_target']
     assert brief['original_issues'][0]['review_scope_instruction'] == prior[0]['review_scope_instruction']
