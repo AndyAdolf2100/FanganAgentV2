@@ -134,6 +134,11 @@ def test_html_model_receives_editable_template_elements_and_neighbor_context(con
     assert [element['index'] for element in editable] == [1]
     assert payload['deck_context']['position'] == 2
     assert [page['role'] for page in payload['deck_context']['nearby_pages']] == ['cover','body','ending']
+    assert payload['fixed_page_style_reference'] is None
+    captured.generate(captured.groups[0])
+    cover=html_calls(context)[1]['payload']['fixed_page_style_reference']
+    assert cover['text_frames'][0]['text_role']=='title'
+    assert cover['text_frames'][0]['font']=='Noto Sans CJK SC'
 
 
 @pytest.mark.parametrize('version', [5, 4, None])

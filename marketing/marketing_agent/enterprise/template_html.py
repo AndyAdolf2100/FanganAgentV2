@@ -17,7 +17,7 @@ RULES = {
     'preface': '仅用于文稿明确序言标题下的内容，位于封面之后、目录之前；无序言内容时跳过此模板，可按需续页。',
     'cover': '首页必须恰好一页且位于第一页面；只能改文字，保留文字样式和其他全部元素。',
     'ending': '尾页必须恰好一页且位于最后；只能改文字，保留文字样式和其他全部元素。',
-    'contents': '目录文字过多可复制同一目录模板续页；保留字号和固定元素，不压缩或遗漏目录项。',
+    'contents': '目录文字过多可连续复制同一目录模板续页；保留原模板的背景、图形、字号层级、配色和条目对齐，按顺序分配目录项，不缩小到难读、不重复或遗漏。',
     'section': '章节页只能改章节序号和标题，副标题、说明及其他元素全部保持原样。',
     'body': '正文文字可重新排版、调整字号和段落，可续页；只在文字区域内调整，不得改变非文字元素。',
 }
@@ -170,11 +170,16 @@ def validate_deck(pages, templates, complete=True):
     if any(p['role'] == 'cover' for p in pages[1:]) or any(p['role'] == 'ending' for p in pages[:-1]):
         raise ValueError('首页必须在第一位，尾页必须在最后一位')
     after_preface = False
+    after_contents = False
     for p in pages:
         if p['role'] == 'preface' and after_preface:
             raise ValueError('序言页须连续位于封面之后、目录及其他内容之前')
         if p['role'] not in {'cover', 'preface'}:
             after_preface = True
+        if p['role'] == 'contents' and after_contents:
+            raise ValueError('目录页须连续位于序言之后、正文和章节之前；放不下时复制目录模板续页')
+        if p['role'] not in {'cover', 'preface', 'contents'}:
+            after_contents = True
     allowed = {p['template_page']: p['role'] for p in templates}
     mismatches = [{'slide': i + 1, 'template_page': p.get('template_page'), 'requested_role': p.get('role'),
                    'required_role': allowed.get(p.get('template_page'))} for i, p in enumerate(pages)

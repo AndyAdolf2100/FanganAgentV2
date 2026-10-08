@@ -153,10 +153,39 @@ def test_confirmed_outline_page_count_is_checked_at_delivery(tmp_path, monkeypat
     h = Harness(tmp_path, monkeypatch)
     h.jobs.get = lambda job_id: {'outline_approval': {'page_count': 2}}
     quality = h.run()
-    assert quality['outline_page_count'] == {'approved': 2, 'actual': 1, 'matches': False}
+    assert quality['outline_page_count'] == {'approved': 2, 'actual': 1, 'matches': False,
+                                            'directory_continuation_verified': False}
     assert quality['checks']['outline_page_count_matches'] is False
+    assert quality['checks']['outline_page_count_valid'] is False
     assert quality['ready_for_delivery'] is False
     assert any(issue['type'] == 'outline_page_count_mismatch' for issue in quality['limitations'])
+
+
+def test_verified_directory_continuation_can_pass_approved_outline(tmp_path, monkeypatch):
+    h = Harness(tmp_path, monkeypatch, count=3)
+    for group, role in zip(h.groups, ('cover', 'contents', 'ending')):
+        group.update(role=role, template_page=group['group'])
+    h.jobs.get = lambda job_id: {'outline_approval': {'page_count': 3}}
+    h.generate_hook = lambda gi, attempt, feedback, current: [h.page(gi, f'group {gi}', part=part)
+        for part in (1, 2) if gi == 1] if gi == 1 else [h.page(gi, f'group {gi}')]
+    quality = h.run()
+    assert quality['ready_for_delivery'] is True
+    assert quality['outline_page_count'] == {'approved': 3, 'actual': 4, 'matches': False,
+                                             'directory_continuation_verified': True}
+    assert quality['checks']['outline_page_count_valid'] is True
+    assert not any(issue['type'] == 'outline_page_count_mismatch' for issue in quality['limitations'])
+
+
+def test_only_same_template_directory_pages_qualify_as_approved_continuation():
+    groups = [{'role': 'cover', 'template_page': 0}, {'role': 'contents', 'template_page': 1},
+              {'role': 'ending', 'template_page': 2}]
+    pages = [{'generation_group': gi, **group} for gi, group in enumerate(groups)]
+    pages.insert(2, {**pages[1]})
+    assert pipeline.verified_directory_continuations(3, groups, pages)
+    assert not pipeline.verified_directory_continuations(3, groups, [*pages[:2], {**pages[2], 'template_page': 9}, *pages[3:]])
+    assert not pipeline.verified_directory_continuations(3, groups, [pages[0], pages[0], *pages[1:]])
+    assert not pipeline.verified_directory_continuations(3, groups, [pages[0], pages[1], pages[3], pages[2]])
+    assert not pipeline.verified_directory_continuations(3, groups, pages[:-1])
 
 
 def test_candidate_uncertain_rechecks_keep_html_and_request_fresh_review(tmp_path, monkeypatch):

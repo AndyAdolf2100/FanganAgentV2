@@ -91,6 +91,27 @@ def editable_template_elements(page, contract, limit=36):
             'note': '仅列出合同允许改写的实际模板元素；未列出不表示不存在。选用前对照reference_html与截图，固定品牌节点不可改。'}
 
 
+def fixed_page_style_reference(page, contract, limit=24):
+    """Compact typography and geometry from the selected fixed-page template."""
+    if page['role']=='body':
+        return None
+    rows=[]
+    for index in contract.get('text_frames', []):
+        item=page['elements'][index]
+        paragraphs=item.get('paragraphs') or []
+        paragraph=next((p for p in paragraphs if p.get('runs')), {})
+        run=next((r for r in paragraph.get('runs', []) if str(r.get('text','')).strip()),
+                 (paragraph.get('runs') or [{}])[0])
+        rows.append({'index':index,'text_role':item.get('artworkTextRole') or item.get('textRole'),
+                     'frame':{key:item.get(key) for key in ('x','y','width','height')},
+                     'align':paragraph.get('align'),'font':run.get('font'),'size':run.get('size'),
+                     'color':run.get('color'),'bold':run.get('bold'),
+                     'sample_text':str(run.get('text',''))[:60]})
+    return {'text_frames':rows[:limit],
+            'total':len(rows),'truncated':len(rows)>limit,
+            'note':'只摘录当前固定页模板真实文字样式；先以reference_html和模板截图核对，续页沿用同一模板的固定构图、字号层级与配色。'}
+
+
 def catalog(template, *, contracts=None, cache_root=None):
     from .template_profile import profile_catalog, template_fingerprint
     profiles={p['template_page']:p['layout_profile'] for p in profile_catalog(template,
@@ -480,7 +501,7 @@ def plan_deck(folder, template, manuscript, call, require_design_intent=False):
     else:
         groups=batches(blocks);contents_index=0
         contents_batches[contents_index]=[a['id'] for a in agenda]
-    policy=skill_text()+'\n本步骤只规划页面，返回JSON {"slides":[{"template_page":0,"role":"cover","title":"标题","block_ids":["b0001"]},{"template_page":2,"role":"body","title":"标题","block_ids":["b0002"],"design_intent":{"focus":"本页最先让观众理解的具体内容","template_motif":"从所选模板layout_profile可见元素中借用的图形/文字结构及取舍"}}]}。每个正文页都须有具体design_intent；它是给后续HTML模型的内部设计说明，不作为可见文案。依来源关系选择匹配的正文模板：比较、时间线、数据表、场景图、步骤等应由实际内容和模板元素共同决定，不能随机套同一种卡片。目录后的第一张正文不要只是重述封面标题、汇报人和目录；若这些来源必须展示，尽量与实质内容同页组织，仍逐字保留来源。相邻正文页避免重复同一信息结构；固定页与章节页遵守模板原构图。只使用本批blocks，每块恰好分配一次。heading标题来源可放首页或章节页，其余段落/表格来源默认放body，contents_source_bindings中已匹配的目录来源必须放contents，不能省略任何block_ids。dedicated_preface_block_ids非空时，这些来源全部且仅放preface，其他正文不能放preface。序言只能位于封面后、目录前，可续页；无明确序言标题则禁止生成序言，也不能使用序言模板来排普通正文。没有序言模板时相关来源正常分配body。first_batch才有cover，contents_batch才有目录，目录须按contents_agenda_ids完整且顺序承接本批条目（长目录可跨批次，不能重复其他批条目），last_batch才有ending。目录页用agenda_ids，章节页用section_number。每批最多30页，正文每页尽量一个主题，允许后续完整HTML生成自行续页。模板role不可更改。'
+    policy=skill_text()+'\n本步骤只规划页面，返回JSON {"slides":[{"template_page":0,"role":"cover","title":"标题","block_ids":["b0001"]},{"template_page":2,"role":"body","title":"标题","block_ids":["b0002"],"design_intent":{"focus":"本页最先让观众理解的具体内容","template_motif":"从所选模板layout_profile可见元素中借用的图形/文字结构及取舍"}}]}。每个正文页都须有具体design_intent；它是给后续HTML模型的内部设计说明，不作为可见文案。整套PPT首页与尾页各且仅有一张，分别位于最前和最后，禁止因为内容放不下而复制；目录可按实际容量规划连续的多页，位于序言之后、正文和章节之前，所有条目顺序不变、各出现一次，优先复用同一目录模板。依来源关系选择匹配的正文模板：比较、时间线、数据表、场景图、步骤等应由实际内容和模板元素共同决定，不能随机套同一种卡片。目录后的第一张正文不要只是重述封面标题、汇报人和目录；若这些来源必须展示，尽量与实质内容同页组织，仍逐字保留来源。相邻正文页避免重复同一信息结构；固定页与章节页遵守模板原构图。只使用本批blocks，每块恰好分配一次。heading标题来源可放首页或章节页，其余段落/表格来源默认放body，contents_source_bindings中已匹配的目录来源必须放contents，不能省略任何block_ids。dedicated_preface_block_ids非空时，这些来源全部且仅放preface，其他正文不能放preface。序言只能位于封面后、目录前，可续页；无明确序言标题则禁止生成序言，也不能使用序言模板来排普通正文。没有序言模板时相关来源正常分配body。first_batch才有cover，contents_batch才有目录，目录须按contents_agenda_ids完整且顺序承接本批条目（长目录可跨批次，不能重复其他批条目），last_batch才有ending。目录页用agenda_ids，章节页用section_number。每批最多30页，正文每页尽量一个主题，允许后续完整HTML生成自行续页。模板role不可更改。'
     for i,batch in enumerate(groups):
         active_preface=[b['id'] for b in batch if b['id'] in preface_ids]
         available=[p for p in templates if p['role']!='preface' or active_preface]
@@ -708,6 +729,7 @@ def execute(jobs, job_id, agent):
                  'visual_analysis':visual_analysis[str(index)],'theme':theme,'metadata':source['metadata'],'blocks':blocks,'agenda':agenda,
                  'validation_feedback':feedback,'current_pages':current,'presentation_options':options,
                  'editable_template_elements':editable_template_elements(template['pages'][index],contract),
+                 'fixed_page_style_reference':fixed_page_style_reference(template['pages'][index],contract),
                  'deck_context':deck_context}
         if v5:
             payload.update(available_assets=asset_briefs,previous_result=last_answers.get(proposal['generation_group']),
@@ -724,7 +746,10 @@ def execute(jobs, job_id, agent):
             payload['contents_source_policy']='正式目录同时承接指定原稿目录来源，不再另列重复目录。标签不可嵌套，同一叶节点可同时标data-source-block与data-agenda-item；保留每个source_text的原编号和标点，编号可用单独source片段及data-agenda-number，编号标记仅数字。目录续页按本组全部来源及agenda各恰好覆盖一次校验。'
         def validate_pages(answer):
             result=answer.get('pages')
-            if not isinstance(result,list) or not 1<=len(result)<=10 or (proposal['role'] not in {'body','preface','contents'} and len(result)!=1):raise ValueError('页面数量无效；只有正文/序言/目录可续页')
+            if not isinstance(result,list) or not 1<=len(result)<=30:
+                raise ValueError('本组须返回1至30页；目录、序言和正文可按容量续页')
+            if proposal['role'] not in {'body','preface','contents'} and len(result)!=1:
+                raise ValueError('首页、尾页和章节页每组必须且只能返回一张，不能用续页复制固定页')
             if isinstance(feedback,dict) and feedback.get('required_page_count') and len(result)!=feedback['required_page_count']:
                 raise ValueError(f'本次修复必须返回{feedback["required_page_count"]}页，保持当前已锁定分页')
             if repair_policy.get('preserve_page_count') and original_count and len(result)!=original_count:
@@ -765,7 +790,7 @@ def execute(jobs, job_id, agent):
         def generation_error(record):
             corrections.append({'template_page':index+1,**record});log()
         if v5:
-            policy=skill_text()+'\n返回合法JSON对象，包含完整pages HTML及reason；不要代码围栏。HTML属性优先单引号；JSON字符串里的双引号必须转义。所有来源原文保留。正文先依据proposal.design_intent、editable_template_elements、reference_html和visual_analysis决定主视觉与层级：参考当前模板实际的形状、线条、底板、字号、配色和组件比例，选择能说明本页内容的元素重组，不能不看模板就套同一套通用卡片。design_intent不是可见文案；若规划意图与真实元素或来源冲突，以真实模板、完整来源和当前截图为准。deck_context用于避免相邻页同构或重复标题/说明；有大量文字时通过真正的分组、图表或续页保持阅读节奏，不把完整段落塞进等宽卡片，也不靠无意义大留白假装高级。顶部标题若已承接来源heading，不在正文再次重复显示同一标题。保留__PPT_PROTECTED_N__别名；新增素材只能使用available_assets里通过验收的别名，通过img src或正文节点内联background引用，不能放全局style。仅repair_policy允许时正文、目录放不下可续页；初次生成正常允许续页。根据具体反馈修复，不返回几何items。repair_policy限制本轮修改范围，协议/来源错误不允许重设计；local_repair_scope.enforced为true时，使用current_pages的只读别名保留非目标区域，局部只改标记组件，仍返回完整HTML。previous_result若存在，以最近候选为基础纠正，不回退已完成的修改。'
+            policy=skill_text()+'\n返回合法JSON对象，包含完整pages HTML及reason；不要代码围栏。HTML属性优先单引号；JSON字符串里的双引号必须转义。所有来源原文保留。整套只保留一张首页和一张尾页，固定页生成及修复不得复制首页、尾页或章节页。目录在放不下时可输出连续续页：每页沿用同一reference_html的背景、品牌、形状、目录序号与条目样式；根据fixed_page_style_reference保持模板原有字体、字号层级、颜色、对齐与间距，只将实际目录条目按原顺序分配到各页，清空未使用的示例槽位，不重复或遗漏。不能靠缩到难读、截断或遮挡来塞进一页。其他固定页也先对照fixed_page_style_reference和原模板截图，仅在保留外框及构图的前提下调整实际文字。正文先依据proposal.design_intent、editable_template_elements、reference_html和visual_analysis决定主视觉与层级：参考当前模板实际的形状、线条、底板、字号、配色和组件比例，选择能说明本页内容的元素重组，不能不看模板就套同一套通用卡片。design_intent不是可见文案；若规划意图与真实元素或来源冲突，以真实模板、完整来源和当前截图为准。deck_context用于避免相邻页同构或重复标题/说明；有大量文字时通过真正的分组、图表或续页保持阅读节奏，不把完整段落塞进等宽卡片，也不靠无意义大留白假装高级。顶部标题若已承接来源heading，不在正文再次重复显示同一标题。保留__PPT_PROTECTED_N__别名；新增素材只能使用available_assets里通过验收的别名，通过img src或正文节点内联background引用，不能放全局style。仅repair_policy允许时正文、目录放不下可续页；初次生成正常允许续页。根据具体反馈修复，不返回几何items。repair_policy限制本轮修改范围，协议/来源错误不允许重设计；local_repair_scope.enforced为true时，使用current_pages的只读别名保留非目标区域，局部只改标记组件，仍返回完整HTML。previous_result若存在，以最近候选为基础纠正，不回退已完成的修改。'
             try:answer=call('enterprise_full_html',policy,payload)
             except json.JSONDecodeError as exc:
                 last_answers[proposal['generation_group']]=exc.doc[:24000]

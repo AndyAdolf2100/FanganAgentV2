@@ -58,6 +58,32 @@ def actionable(rows):
                or any(check.get('status') != 'resolved' for check in row.get('rechecks', [])) for row in rows)
 
 
+def verified_directory_continuations(approved_count, groups, pages):
+    """Only extra pages copied from an approved directory group may raise its page count."""
+    if type(approved_count) is not int or approved_count != len(groups) or len(pages) <= approved_count:
+        return False
+    grouped = {index: [] for index in range(len(groups))}
+    order = []
+    for page in pages:
+        index = page.get('generation_group')
+        if type(index) is not int or index not in grouped:
+            return False
+        grouped[index].append(page)
+        order.append(index)
+    if order != sorted(order):
+        return False
+    for index, proposal in enumerate(groups):
+        produced = grouped[index]
+        if not produced or any(page.get('role') != proposal.get('role') for page in produced):
+            return False
+        if proposal.get('role') == 'contents':
+            if any(page.get('template_page') != proposal.get('template_page') for page in produced):
+                return False
+        elif len(produced) != 1:
+            return False
+    return True
+
+
 def browser_rows(probe):
     from .diagnostics import browser_evidence
     return [{'page': page['page'], 'slide_id': page.get('slide_id'), 'verdict': 'fix',
@@ -992,7 +1018,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
                 answer = call('enterprise_deck_critic',
                     '你是企业演示稿整册审查者。仅依据给定逐页观察、来源标题和实测摘要判断叙事重复、样式漂移、关键内容未突出。不要假装看过图片。'
                     '返回JSON {"issues":[{"slide_id":"给定ID","severity":"medium或high","detail":"具体证据","fix_hint":"建议"}]}。'
-                    '保留企业固定样式，不把正常章节留白当缺陷。比较相邻正文页的视觉节奏与信息重点；若多页重复同构卡片、标题重复或连续堆满段落，且有逐页观察支持，则指出具体slide_id及可修复依据。逐项审视aesthetics量表与证据：低分且有明确可修复缺陷时须反馈对应页面，'
+                    '保留企业固定样式，不把正常章节留白当缺陷。若目录跨页，结合每页观察比较相邻目录页的字号层级、颜色、序号与条目对齐及留白；只对有明确视觉证据的样式漂移、拥挤或漏读风险提出修复，不凭模板页码臆测原模板外观。比较相邻正文页的视觉节奏与信息重点；若多页重复同构卡片、标题重复或连续堆满段落，且有逐页观察支持，则指出具体slide_id及可修复依据。逐项审视aesthetics量表与证据：低分且有明确可修复缺陷时须反馈对应页面，'
                     '不能把“勉强可用”认定为完成高质量审查，也不能仅依据分数机械判坏或捏造截图事实；没有明确问题则空数组。'
                     + LAYOUT_REVIEW_POLICY,
                     {'theme': plan.get('theme', {}), 'pages': [_page_observation(p, by_id[p['slide_id']]) for p in plan['pages']]})
@@ -1077,7 +1103,9 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
     approval = jobs.get(job_id).get('outline_approval') if hasattr(jobs, 'get') else None
     approved_page_count = approval.get('page_count') if approval else None
     outline_page_count_matches = approved_page_count is None or approved_page_count == len(plan['pages'])
-    if not outline_page_count_matches:
+    directory_continuation_verified = verified_directory_continuations(approved_page_count, groups, plan['pages'])
+    outline_page_count_valid = outline_page_count_matches or directory_continuation_verified
+    if not outline_page_count_valid:
         limitations.append({'type': 'outline_page_count_mismatch', 'approved': approved_page_count,
                             'actual': len(plan['pages']),
                             'detail': '成品页数与已确认大纲不一致；保留完整草稿，请检查缺页或续页后重新确认'})
@@ -1090,7 +1118,7 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
     asset_issues = [*deepcopy((asset_manifest or {}).get('quality_issues', [])), *deepcopy(final_audit['asset_errors'])]
     if asset_issues:
         limitations.append({'type': 'asset_quality', 'issues': asset_issues})
-    accepted = (hard and enabled and outline_page_count_matches and len(final) == len(plan['pages']) and not actionable(final)
+    accepted = (hard and enabled and outline_page_count_valid and len(final) == len(plan['pages']) and not actionable(final)
         and deck_review['status'] == 'passed' and not asset_issues and not reviewer_unmapped
         and not human_pending and not seed_pending and not original_fallbacks)
 
@@ -1128,7 +1156,8 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
     quality = {'workflow_version': 5, 'visual_review_mode': 'changed_pages_only',
         'quality_status': status, 'ready_for_delivery': accepted, 'deck_revision': frozen,
         'outline_page_count': {'approved': approved_page_count, 'actual': len(plan['pages']),
-                               'matches': outline_page_count_matches},
+                               'matches': outline_page_count_matches,
+                               'directory_continuation_verified': directory_continuation_verified},
         'artifact_sha256': artifacts, 'artifact_formats': ['pptx' if name.endswith('.pptx') else 'html' for name in artifacts],
         'pages': [{'slide_id': p['slide_id'], 'slide_version': p['slide_version'],
             'screenshot_sha': probe_by_id.get(p['slide_id'], {}).get('screenshot_sha'),
@@ -1136,6 +1165,8 @@ def run(jobs, job_id, agent, plan, source, groups, generated, generate, check_de
             for p in plan['pages']],
         'checks': {'source_complete': not final_audit['missing_groups'] and not final_audit['source_validation_error'],
                    'outline_page_count_matches': outline_page_count_matches,
+                   'outline_page_count_valid': outline_page_count_valid,
+                   'outline_directory_continuation_verified': directory_continuation_verified,
                    'browser_passed': final_audit['browser_passed'], 'visual_complete': len(final) == len(plan['pages']),
                    'deck_review': deck_review['status'], 'assets_complete': not asset_issues,
                    'reviewer_feedback_complete': not human_pending and not reviewer_unmapped,

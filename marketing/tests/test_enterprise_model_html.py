@@ -3,6 +3,7 @@ import pytest
 from bs4 import BeautifulSoup
 from test_enterprise import fixture
 from marketing_agent.enterprise import model_html as m
+from marketing_agent.enterprise import template_html as html
 from marketing_agent.enterprise import uploaded_templates as library
 
 
@@ -45,6 +46,31 @@ def test_fixed_pages_preserve_geometry_but_allow_model_typography():
     assert m.document_check(str(soup),ref,c,p,[],[],metadata)==str(soup)
     with pytest.raises(ValueError,match='metadata'):m.document_check(ref,ref,c,p,[],[],metadata)
     with pytest.raises(ValueError,match='固定页'):m.contract_check({**c,'protected_elements':[]},t,0)
+
+
+def test_fixed_page_style_reference_uses_the_selected_template_text_frames():
+    t=fixture()
+    reference=m.fixed_page_style_reference(t['pages'][1],{'text_frames':[0,1]})
+    assert [row['text_role'] for row in reference['text_frames']]==['title','contentsItem']
+    assert reference['text_frames'][1]['font']=='Noto Sans CJK SC'
+    assert reference['text_frames'][1]['color']=='#223344'
+    assert m.fixed_page_style_reference(t['pages'][3],{'text_frames':[0]}) is None
+
+
+def test_deck_keeps_one_cover_and_ending_while_directory_may_continue():
+    templates=m.catalog(fixture())
+    pages=[{'role':'cover','template_page':0},
+           {'role':'contents','template_page':1},
+           {'role':'contents','template_page':1},
+           {'role':'body','template_page':3},
+           {'role':'ending','template_page':4}]
+    html.validate_deck(pages,templates)
+    with pytest.raises(ValueError,match='各且仅有一页'):
+        html.validate_deck([pages[0],*pages],templates)
+    with pytest.raises(ValueError,match='各且仅有一页'):
+        html.validate_deck([*pages,pages[-1]],templates)
+    with pytest.raises(ValueError,match='目录页须连续'):
+        html.validate_deck([pages[0],pages[1],pages[3],pages[2],pages[4]],templates)
 
 
 def widened_title():

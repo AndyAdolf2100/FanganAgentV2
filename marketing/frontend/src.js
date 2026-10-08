@@ -302,7 +302,8 @@ createApp({
           <p v-if="presentationPollError" role="alert" class="error">{{presentationPollError}}</p>
           <PresentationOutline v-if="presentation?.status==='awaiting_outline_confirmation'" :outline="presentationOutline" :busy="busy" @confirm="confirmPresentationOutline" />
           <PresentationOutline v-if="presentation?.status==='completed' && !presentation?.options?.template_id && showOutline" :outline="presentationOutline" read-only />
-          <p v-if="presentation?.checks?.outline_page_count_matches===false" role="status" class="error">成品 {{presentation.page_count}} 页，与已确认大纲 {{presentation.outline_approval?.page_count}} 页不一致；已保留草稿供复核。</p>
+          <p v-if="presentation?.checks?.outline_page_count_matches===false && !presentation?.checks?.outline_directory_continuation_verified" role="status" class="error">成品 {{presentation.page_count}} 页，与已确认大纲 {{presentation.outline_approval?.page_count}} 页不一致；已保留草稿供复核。</p>
+          <p v-else-if="presentation?.checks?.outline_directory_continuation_verified" role="status" class="muted">目录按容量续页：成品 {{presentation.page_count}} 页，已确认大纲 {{presentation.outline_approval?.page_count}} 页；最终质量仍以验收状态为准。</p>
           <p v-if="pptQuality.needsReview" role="status" class="error">当前为待复核草稿，尚未通过交付验收。可以预览已生成页面，并通过“继续修复草稿”处理未完成意见。</p>
           <p v-if="presentation?.optimization_of" class="muted">项目 Agent 正文与版式优化版本 · 保留文稿及企业主题 · <a :href="'/api/presentations/'+presentation.optimization_of+'/files/presentation.html'" target="_blank">查看优化前版本</a></p>
           <p v-if="presentation?.vision_model" class="muted">截图审查：{{presentation.vision_model}} · 每次一张成品图</p>
